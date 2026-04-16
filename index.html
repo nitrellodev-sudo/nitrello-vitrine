@@ -1,0 +1,2760 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelance No-Code — Nicolas Tinnirello | Nitrello</title>
+  <meta name="description" content="Freelance no-code, je crée vos applications web et mobile en quelques semaines. SaaS, marketplaces, MVP startup — sans code, sans délais interminables.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nitrello.com">
+  <link rel="icon" type="image/svg+xml" href="logo-nitrello.svg">
+  <link rel="apple-touch-icon" href="logo-nitrello.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nitrello.com">
+  <meta property="og:title" content="Freelance No-Code — Nicolas Tinnirello | Nitrello">
+  <meta property="og:description" content="Freelance no-code, je crée vos applications web et mobile en quelques semaines. SaaS, marketplaces, MVP startup — sans code, sans délais interminables.">
+  <meta property="og:image" content="https://nitrello.com/og-image.svg">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freelance No-Code — Nicolas Tinnirello | Nitrello">
+  <meta name="twitter:description" content="Freelance no-code, je crée vos applications web et mobile en quelques semaines.">
+  <meta name="twitter:image" content="https://nitrello.com/og-image.svg">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://nitrello.com/#nicolas",
+        "name": "Nicolas Tinnirello",
+        "url": "https://nitrello.com",
+        "jobTitle": "Freelance No-Code Developer",
+        "email": "contact@nitrello.com",
+        "knowsAbout": ["No-Code", "Bubble", "n8n", "MVP", "SaaS", "Application Web", "Application Mobile", "Automatisation"],
+        "sameAs": ["https://nitrello.com", "https://www.malt.fr/profile/nicolastinnirello"]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://nitrello.com/#service",
+        "name": "Nitrello",
+        "url": "https://nitrello.com",
+        "description": "Création d'applications web et mobile no-code. MVP rapide pour startups et entrepreneurs.",
+        "provider": { "@id": "https://nitrello.com/#nicolas" },
+        "areaServed": "FR",
+        "serviceType": ["Développement No-Code", "Création Application Web & Mobile", "MVP Startup", "Automatisation"],
+        "email": "contact@nitrello.com",
+        "priceRange": "€€"
+      }
+    ]
+  }
+
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       CSS VARIABLES & RESET
+    ============================================= */
+    :root {
+      --bg: #0A0A0F;
+      --bg-card: #111118;
+      --bg-alt: #0D0D15;
+      --accent-start: #00BFFF;
+      --accent-end: #7B2FFF;
+      --text: #FFFFFF;
+      --text-secondary: #8A8A9A;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(0,191,255,0.3);
+      --max-w: 1280px;
+      --pad-mobile: 24px;
+      --pad-tablet: 48px;
+      --pad-desktop: 64px;
+      --section-gap: 120px;
+      --section-gap-mobile: 80px;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-desktop);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+      color: #fff;
+      border: none;
+    }
+    .btn-gradient:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,191,255,0.25); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); transform: translateY(-1px); }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-start);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 560px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header .section-subtitle { margin: 0 auto; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease;
+    }
+
+    #header.scrolled {
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .header-logo {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00BFFF, #7B2FFF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0,191,255,0.3);
+    }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex: 1;
+      justify-content: center;
+      padding: 0 32px;
+    }
+
+    .header-nav a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .header-nav a:hover { color: var(--text); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-actions .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(10,10,15,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px var(--pad-mobile);
+      z-index: 99;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav .btn { width: 100%; justify-content: center; }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      padding-top: 160px;
+      padding-bottom: 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34,197,94,0.6);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-pills {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-pill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* =============================================
+       TECH LOGOS BANNER
+    ============================================= */
+    #tech-banner {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #tech-banner::before,
+    #tech-banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    #tech-banner::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg-alt), transparent);
+    }
+    #tech-banner::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg-alt), transparent);
+    }
+
+    .logos-track {
+      display: flex;
+      align-items: center;
+      gap: 120px;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.55;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .logo-item:hover { opacity: 0.9; }
+    .logo-name {
+      font-size: 12px;
+      color: #8A8A9A;
+      text-align: center;
+    }
+
+    /* =============================================
+       SERVICES
+    ============================================= */
+    #services {
+      padding: var(--section-gap) 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,191,255,0.2);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0,191,255,0.15), rgba(123,47,255,0.15));
+      border: 1px solid rgba(0,191,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .service-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* App mockups row */
+    .mockups-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .mockup-frame {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       WHY NO-CODE (Comparaison)
+    ============================================= */
+    #why-nocode {
+      padding: var(--section-gap) 0;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .comparison-card {
+      border-radius: var(--radius-lg);
+      padding: 36px;
+    }
+
+    .comparison-card.classic {
+      background: #0f0f17;
+      border: 1px solid rgba(255,80,80,0.15);
+    }
+
+    .comparison-card.nocode {
+      background: linear-gradient(135deg, rgba(0,191,255,0.06), rgba(123,47,255,0.06));
+      border: 1px solid rgba(0,191,255,0.2);
+    }
+
+    .comparison-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-card.classic h3 { color: #ff6b6b; }
+    .comparison-card.nocode h3 { color: var(--accent-start); }
+
+    .comparison-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .comparison-item:last-child { border-bottom: none; }
+
+    .comparison-item .icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .comparison-card.classic .icon { background: rgba(255,80,80,0.15); color: #ff6b6b; }
+    .comparison-card.nocode .icon { background: rgba(34,197,94,0.15); color: #22c55e; }
+
+    .comparison-item .label { color: var(--text-secondary); }
+    .comparison-item .value { font-weight: 600; }
+
+    /* =============================================
+       MÉTHODE
+    ============================================= */
+    #methode {
+      padding: var(--section-gap) 0;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      position: relative;
+    }
+
+    .process-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: transform 0.25s, border-color 0.25s;
+      position: relative;
+    }
+    .process-step:hover { transform: translateY(-4px); border-color: rgba(0,191,255,0.2); }
+
+    .process-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .process-step h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .process-step p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .process-connector {
+      position: absolute;
+      top: 36px;
+      right: -12px;
+      width: 24px;
+      height: 2px;
+      background: linear-gradient(to right, rgba(0,191,255,0.4), rgba(123,47,255,0.4));
+      z-index: 1;
+    }
+    .process-step:last-child .process-connector { display: none; }
+
+    /* =============================================
+       À PROPOS
+    ============================================= */
+    #about {
+      padding: var(--section-gap) 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-photo {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid transparent;
+      background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+                  linear-gradient(135deg, var(--accent-start), var(--accent-end)) border-box;
+    }
+
+    .about-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,191,255,0.12), transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .about-content h2 {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .about-content p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .about-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .about-badge {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* =============================================
+       POURQUOI MOI
+    ============================================= */
+    #why-me {
+      padding: var(--section-gap) 0;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .why-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,191,255,0.2);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+
+    .why-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0,191,255,0.12), rgba(123,47,255,0.12));
+      border: 1px solid rgba(0,191,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .why-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .why-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       TARIFS
+    ============================================= */
+    #tarifs {
+      padding: var(--section-gap) 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto 20px;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      position: relative;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,191,255,0.2);
+    }
+    .pricing-card.popular {
+      border-color: rgba(0,191,255,0.3);
+      background: linear-gradient(135deg, rgba(0,191,255,0.05), rgba(123,47,255,0.05)), var(--bg-card);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .pricing-name {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .pricing-price {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .pricing-price-note {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .pricing-features {
+      margin-bottom: 28px;
+    }
+
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-feature:last-child { border-bottom: none; }
+    .pricing-feature .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .btn { width: 100%; justify-content: center; }
+
+    .pricing-disclaimer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-style: italic;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       FAQ
+    ============================================= */
+    #faq {
+      padding: var(--section-gap) 0;
+    }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(0,191,255,0.2); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      background: var(--bg-card);
+      gap: 16px;
+    }
+
+    .faq-question h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .faq-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.3s;
+      color: var(--text-secondary);
+    }
+    .faq-item.open .faq-toggle {
+      background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+      border-color: transparent;
+      color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      background: var(--bg-card);
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* =============================================
+       CTA FINAL
+    ============================================= */
+    #cta-final {
+      padding: 60px 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(0,191,255,0.07), rgba(123,47,255,0.07));
+      border: 1px solid rgba(0,191,255,0.15);
+      border-radius: 24px;
+      padding: 80px 64px;
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    #contact {
+      padding: var(--section-gap) 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-size: clamp(24px, 2.5vw, 32px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .contact-info > p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+
+    .contact-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .contact-meta-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-start);
+    }
+
+    .contact-meta-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    .contact-meta-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* Contact form */
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(0,191,255,0.4);
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8A9A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: pointer;
+    }
+
+    .form-group select option { background: #1a1a28; }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-rgpd {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .form-rgpd input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--accent-start);
+      cursor: pointer;
+    }
+    .form-rgpd label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .form-submit-btn {
+      width: auto;
+      max-width: 280px;
+      display: inline-flex;
+      padding: 14px 32px;
+      font-size: 15px;
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      text-align: center;
+      color: #22c55e;
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 16px;
+    }
+
+    .form-error {
+      display: none;
+      background: rgba(255,80,80,0.08);
+      border: 1px solid rgba(255,80,80,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      text-align: center;
+      color: #ff6b6b;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    #footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .footer-logo { height: 44px; width: auto; }
+
+    .footer-nav {
+      display: flex;
+      gap: 28px;
+    }
+    .footer-nav a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* =============================================
+       MODAL DEVIS
+    ============================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: #13131c;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.open .modal { transform: none; }
+
+    .modal-header {
+      padding: 28px 32px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      font-size: 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .modal-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Progress bar */
+    .modal-progress {
+      padding: 24px 32px 0;
+    }
+
+    .progress-bar-track {
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--accent-start), var(--accent-end));
+      border-radius: 100px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Modal body */
+    .modal-body {
+      padding: 28px 32px 32px;
+    }
+
+    .modal-step { display: none; }
+    .modal-step.active { display: block; }
+
+    .step-question {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-card {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .option-card:hover {
+      border-color: rgba(0,191,255,0.3);
+      background: rgba(0,191,255,0.05);
+    }
+    .option-card.selected {
+      border-color: var(--accent-start);
+      background: rgba(0,191,255,0.08);
+    }
+
+    .option-card .opt-icon { font-size: 22px; margin-bottom: 8px; }
+    .option-card .opt-title { font-size: 14px; font-weight: 600; }
+    .option-card .opt-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .feature-toggle {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .feature-toggle:hover { border-color: rgba(0,191,255,0.3); }
+    .feature-toggle.selected {
+      border-color: var(--accent-start);
+      background: rgba(0,191,255,0.08);
+    }
+    .feature-toggle .ft-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+    .feature-toggle.selected .ft-check {
+      background: var(--accent-start);
+      border-color: var(--accent-start);
+    }
+
+    .modal-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+    .modal-input:focus { border-color: rgba(0,191,255,0.4); }
+    .modal-textarea { resize: vertical; min-height: 100px; }
+
+    .modal-rgpd {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .modal-rgpd input { accent-color: var(--accent-start); margin-top: 2px; }
+    .modal-rgpd label { font-size: 13px; color: var(--text-secondary); }
+
+    .estimate-box {
+      background: linear-gradient(135deg, rgba(0,191,255,0.07), rgba(123,47,255,0.07));
+      border: 1px solid rgba(0,191,255,0.2);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .estimate-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .estimate-value {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .estimate-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .estimate-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .modal-nav {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .modal-nav .btn {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .container { padding: 0 var(--pad-tablet); }
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-photo-wrap { justify-content: flex-start; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --section-gap: var(--section-gap-mobile); }
+      .container { padding: 0 var(--pad-mobile); }
+
+      .header-nav { display: none; }
+      .header-actions { display: none; }
+      .hamburger { display: flex; }
+
+      #hero { padding-top: 120px; padding-bottom: 80px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo-wrap { justify-content: center; }
+      .about-photo { width: 200px; height: 200px; }
+      .about-glow { width: 200px; height: 200px; }
+
+      .cta-box { padding: 48px 28px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 24px; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-nav { flex-wrap: wrap; gap: 16px; }
+
+      .mockups-row { flex-wrap: wrap; justify-content: center; }
+
+      .option-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 20px 20px 24px; }
+      .modal-header { padding: 20px 20px 0; }
+      .modal-progress { padding: 16px 20px 0; }
+
+      #header .container { padding: 0 20px; }
+      .service-card { padding: 24px; }
+      .process-grid { gap: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .hero-actions .btn { width: 100%; justify-content: center; max-width: 300px; }
+      .cta-actions { flex-direction: column; align-items: center; }
+    }
+
+    /* Particle canvas */
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    #tech-banner, #services, #realisations, #methode, #about, #why-me, #aussi, #faq, #cta-final, #contact, #footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Tech carousel logos */
+    .tech-logo {
+      height: 32px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+      transition: opacity 0.3s;
+    }
+    .tech-logo:hover { opacity: 1; }
+    .tech-logo-color {
+      filter: none;
+    }
+
+    /* Typewriter cursor */
+    .cursor {
+      color: #00BFFF;
+      animation: blink 0.8s infinite;
+      font-weight: 300;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Typewriter fixed height to prevent layout shift */
+    .typewriter-wrap {
+      display: block;
+      min-height: 80px;
+    }
+    @media (max-width: 768px) {
+      .typewriter-wrap { min-height: 120px; }
+    }
+
+    /* Services aussi section */
+    #aussi {
+      padding: var(--section-gap) 0;
+    }
+    .aussi-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .aussi-pill {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 28px;
+      flex: 1;
+      min-width: 200px;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .aussi-pill:hover {
+      border-color: rgba(0,191,255,0.2);
+      background: rgba(0,191,255,0.04);
+    }
+    .aussi-pill-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .aussi-pill-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(0,191,255,0.15), rgba(123,47,255,0.15));
+      border: 1px solid rgba(0,191,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .aussi-pill-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .aussi-pill-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .aussi-pill { min-width: 100%; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <!-- ==================== HEADER ==================== -->
+  <header id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="#" class="logo-link" aria-label="Nitrello - retour à l'accueil">
+          <img src="logo-nitrello.svg" alt="Nitrello - Applications No-Code" style="height: 36px; width: auto;">
+        </a>
+
+        <nav class="header-nav" aria-label="Navigation principale">
+          <a href="#services">Services</a>
+          <a href="#methode">Méthode</a>
+          <a href="#about">À propos</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn btn-gradient" onclick="openQuoteModal()">Obtenir un devis</button>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile nav -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Navigation mobile">
+    <a href="#services" onclick="closeMobileNav()">Services</a>
+    <a href="#methode" onclick="closeMobileNav()">Méthode</a>
+    <a href="#about" onclick="closeMobileNav()">À propos</a>
+    <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+    <a href="#contact" class="btn btn-outline" onclick="closeMobileNav()">Discuter de votre projet</a>
+    <button class="btn btn-gradient" onclick="closeMobileNav(); openQuoteModal();">Obtenir un devis</button>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero" style="background-image:url('pexels-divinetechygirl-1181359.jpg');background-size:cover;background-position:center;position:relative;">
+  <div style="position:absolute;inset:0;background:rgba(10,10,15,0.85);pointer-events:none;z-index:0;"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <h1 class="hero-title reveal reveal-delay-1">
+        Des applications web et mobile<br>
+        <span class="typewriter-wrap"><span id="typewriter" class="gradient-text"></span><span class="cursor">|</span></span>
+      </h1>
+
+      <p class="hero-subtitle reveal reveal-delay-2">
+        Je construis vos applications web et mobile rapidement, sans les coûts du développement traditionnel, grâce aux meilleurs outils No-Code du marché.
+      </p>
+
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#services" class="btn btn-outline">
+          Voir mes services
+        </a>
+      </div>
+
+      <div class="hero-pills reveal reveal-delay-4">
+        <span class="hero-pill">Applications Web</span>
+        <span class="hero-pill">Applications Mobile</span>
+        <span class="hero-pill">Design No-Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TECH BANNER ==================== -->
+  <div id="tech-banner" aria-hidden="true">
+    <div class="logos-track" id="logosTrack">
+      <!-- Logos set 1 -->
+      <div class="logo-item"><img src="n8n-color.svg" alt="n8n" class="tech-logo tech-logo-color"><span class="logo-name">n8n</span></div>
+      <div class="logo-item"><img src="stripe.svg" alt="Stripe" class="tech-logo tech-logo-color"><span class="logo-name">Stripe</span></div>
+      <div class="logo-item"><img src="bubble.svg" alt="Bubble" class="tech-logo"><span class="logo-name">Bubble</span></div>
+      <div class="logo-item"><img src="openai.svg" alt="OpenAI" class="tech-logo"><span class="logo-name">OpenAI</span></div>
+      <div class="logo-item"><img src="notion.svg" alt="Notion" class="tech-logo"><span class="logo-name">Notion</span></div>
+      <div class="logo-item"><img src="figma.svg" alt="Figma" class="tech-logo tech-logo-color"><span class="logo-name">Figma</span></div>
+      <div class="logo-item"><img src="claude-color.svg" alt="Claude" class="tech-logo tech-logo-color"><span class="logo-name">Claude</span></div>
+      <!-- Logos set 2 (duplicate for seamless loop) -->
+      <div class="logo-item"><img src="n8n-color.svg" alt="n8n" class="tech-logo tech-logo-color"><span class="logo-name">n8n</span></div>
+      <div class="logo-item"><img src="stripe.svg" alt="Stripe" class="tech-logo tech-logo-color"><span class="logo-name">Stripe</span></div>
+      <div class="logo-item"><img src="bubble.svg" alt="Bubble" class="tech-logo"><span class="logo-name">Bubble</span></div>
+      <div class="logo-item"><img src="openai.svg" alt="OpenAI" class="tech-logo"><span class="logo-name">OpenAI</span></div>
+      <div class="logo-item"><img src="notion.svg" alt="Notion" class="tech-logo"><span class="logo-name">Notion</span></div>
+      <div class="logo-item"><img src="figma.svg" alt="Figma" class="tech-logo tech-logo-color"><span class="logo-name">Figma</span></div>
+      <div class="logo-item"><img src="claude-color.svg" alt="Claude" class="tech-logo tech-logo-color"><span class="logo-name">Claude</span></div>
+    </div>
+  </div>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services" style="padding: var(--section-gap) 0;">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label reveal">Ce que je construis</p>
+        <h2 class="section-title reveal reveal-delay-1">Ce que je construis pour vous</h2>
+        <p class="section-subtitle reveal reveal-delay-2">Applications web, mobile ou automatisations, je conçois des produits digitaux complets du design à la mise en ligne.</p>
+      </div>
+
+      <div class="reveal" style="margin-bottom:40px;">
+        <img src="pexels-gabby-k-6289025.webp" alt="Design d'applications no-code sur mesure" loading="lazy" style="width:100%;max-height:300px;object-fit:cover;border-radius:16px;opacity:0.8;">
+      </div>
+
+      <div class="services-grid">
+        <!-- Card 1 -->
+        <div class="service-card reveal">
+          <div class="service-icon">🌐</div>
+          <h3>Application Web</h3>
+          <p>SaaS, marketplace, outil interne ou dashboard : je construis des applications web complètes et scalables, avec authentification, base de données et logique métier.</p>
+          <div class="service-tags">
+            <span class="service-tag">SaaS</span>
+            <span class="service-tag">Dashboard</span>
+            <span class="service-tag">Marketplace</span>
+            <span class="service-tag">Outil interne</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">📱</div>
+          <h3>Application Mobile</h3>
+          <p>Applications mobiles natives, disponibles en téléchargement sur l'App Store et Google Play. Interface soignée, performances optimisées, expérience mobile-first.</p>
+          <div class="service-tags">
+            <span class="service-tag">PWA</span>
+            <span class="service-tag">iOS</span>
+            <span class="service-tag">Android</span>
+            <span class="service-tag">Mobile-first</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mockups row -->
+      <div class="mockups-row reveal">
+        <!-- Mockup 1 : Dashboard -->
+        <div class="mockup-frame" style="width:220px;">
+          <svg viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:220px;">
+            <rect width="220" height="150" fill="#111118"/>
+            <rect x="0" y="0" width="220" height="36" fill="rgba(255,255,255,0.03)"/>
+            <rect x="12" y="12" width="70" height="12" rx="6" fill="url(#g1)"/>
+            <rect x="164" y="12" width="44" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
+            <rect x="12" y="48" width="90" height="44" rx="8" fill="rgba(255,255,255,0.05)"/>
+            <rect x="116" y="48" width="92" height="44" rx="8" fill="rgba(123,47,255,0.12)"/>
+            <rect x="20" y="60" width="28" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+            <rect x="20" y="70" width="48" height="14" rx="3" fill="url(#g1)" opacity="0.7"/>
+            <rect x="124" y="60" width="36" height="4" rx="2" fill="rgba(123,47,255,0.5)"/>
+            <rect x="124" y="70" width="52" height="14" rx="3" fill="rgba(123,47,255,0.3)"/>
+            <rect x="12" y="104" width="50" height="8" rx="4" fill="rgba(255,255,255,0.06)"/>
+            <rect x="72" y="104" width="30" height="8" rx="4" fill="rgba(255,255,255,0.04)"/>
+            <rect x="112" y="104" width="50" height="8" rx="4" fill="rgba(255,255,255,0.06)"/>
+            <rect x="12" y="120" width="196" height="20" rx="6" fill="rgba(255,255,255,0.03)"/>
+            <rect x="20" y="126" width="60" height="6" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00BFFF"/><stop offset="1" stop-color="#7B2FFF"/></linearGradient></defs>
+          </svg>
+        </div>
+
+        <!-- Mockup 2 : Mobile app -->
+        <div class="mockup-frame" style="width:100px;">
+          <svg viewBox="0 0 100 170" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100px;">
+            <rect width="100" height="170" fill="#0D0D15"/>
+            <rect x="35" y="8" width="30" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="8" y="20" width="84" height="60" rx="8" fill="rgba(0,191,255,0.08)" stroke="rgba(0,191,255,0.15)" stroke-width="1"/>
+            <rect x="16" y="28" width="36" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+            <rect x="16" y="38" width="56" height="34" rx="6" fill="url(#mg)"/>
+            <rect x="8" y="90" width="40" height="36" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <rect x="52" y="90" width="40" height="36" rx="8" fill="rgba(123,47,255,0.1)" stroke="rgba(123,47,255,0.15)" stroke-width="1"/>
+            <rect x="14" y="99" width="24" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="14" y="107" width="18" height="12" rx="3" fill="rgba(255,255,255,0.06)"/>
+            <rect x="58" y="99" width="24" height="4" rx="2" fill="rgba(123,47,255,0.4)"/>
+            <rect x="58" y="107" width="28" height="12" rx="3" fill="rgba(123,47,255,0.2)"/>
+            <rect x="8" y="134" width="84" height="28" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <rect x="16" y="142" width="40" height="4" rx="2" fill="rgba(255,255,255,0.07)"/>
+            <rect x="16" y="150" width="28" height="4" rx="2" fill="rgba(255,255,255,0.04)"/>
+            <defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="rgba(0,191,255,0.3)"/><stop offset="1" stop-color="rgba(123,47,255,0.3)"/></linearGradient></defs>
+          </svg>
+        </div>
+
+        <!-- Mockup 3 : List / CRM -->
+        <div class="mockup-frame" style="width:220px;">
+          <svg viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:220px;">
+            <rect width="220" height="150" fill="#111118"/>
+            <rect x="12" y="12" width="90" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
+            <rect x="170" y="12" width="38" height="12" rx="6" fill="url(#g2)" opacity="0.8"/>
+            <rect x="12" y="36" width="196" height="1" fill="rgba(255,255,255,0.05)"/>
+            <rect x="12" y="48" width="28" height="28" rx="14" fill="rgba(0,191,255,0.12)"/>
+            <rect x="48" y="52" width="80" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+            <rect x="48" y="62" width="56" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+            <rect x="172" y="52" width="36" height="18" rx="6" fill="rgba(34,197,94,0.15)"/>
+            <rect x="12" y="84" width="196" height="1" fill="rgba(255,255,255,0.05)"/>
+            <rect x="12" y="96" width="28" height="28" rx="14" fill="rgba(123,47,255,0.15)"/>
+            <rect x="48" y="100" width="64" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+            <rect x="48" y="110" width="44" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+            <rect x="172" y="100" width="36" height="18" rx="6" fill="rgba(255,165,0,0.15)"/>
+            <rect x="12" y="132" width="196" height="1" fill="rgba(255,255,255,0.05)"/>
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00BFFF"/><stop offset="1" stop-color="#7B2FFF"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MES RÉALISATIONS ==================== -->
+  <section id="realisations" style="padding:var(--section-gap) 0;">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label reveal">Réalisations</p>
+        <h2 class="section-title reveal reveal-delay-1">Ce que je construis au quotidien</h2>
+        <p class="section-subtitle reveal reveal-delay-2">Des applications modernes, performantes et sur mesure.</p>
+      </div>
+
+      <div class="reveal" style="margin-bottom:40px;border-radius:16px;overflow:hidden;border:1px solid var(--border);">
+        <img src="pexels-mateusz-dach-99805-5956083.webp" alt="Applications mobiles no-code sur mesure" loading="lazy" style="width:100%;max-height:420px;object-fit:cover;display:block;">
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">🌐</div>
+          <h3>Applications Web</h3>
+          <p>SaaS, marketplaces, outils internes, dashboards. Des applications complètes, livrées rapidement.</p>
+          <div class="service-tags"><span class="service-tag">No-Code</span><span class="service-tag">Stripe</span><span class="service-tag">API</span></div>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">🚀</div>
+          <h3>MVP Startup</h3>
+          <p>De l'idée au produit fonctionnel en quelques semaines. Validez votre concept rapidement.</p>
+          <div class="service-tags"><span class="service-tag">Prototype</span><span class="service-tag">Lancement</span><span class="service-tag">Itération</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MÉTHODE ==================== -->
+  <section id="methode">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label reveal">Comment ça marche</p>
+        <h2 class="section-title reveal reveal-delay-1">Ma méthode, étape par étape</h2>
+        <p class="section-subtitle reveal reveal-delay-2">Un processus clair et transparent, de la première discussion jusqu'au lancement.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step reveal" style="position:relative;">
+          <div class="process-number">1</div>
+          <h3>Découverte et préconception</h3>
+          <p>Brief complet, cadrage du projet, définition des objectifs et maquettes Figma.</p>
+          <div class="process-connector"></div>
+        </div>
+        <div class="process-step reveal reveal-delay-1" style="position:relative;">
+          <div class="process-number">2</div>
+          <h3>Conception</h3>
+          <p>Architecture technique et validation du parcours utilisateur.</p>
+          <div class="process-connector"></div>
+        </div>
+        <div class="process-step reveal reveal-delay-2" style="position:relative;">
+          <div class="process-number">3</div>
+          <h3>Développement</h3>
+          <p>Construction itérative avec points d'avancement réguliers.</p>
+          <div class="process-connector"></div>
+        </div>
+        <div class="process-step reveal reveal-delay-3" style="position:relative;">
+          <div class="process-number">4</div>
+          <h3>Tests</h3>
+          <p>Corrections, ajustements et validation finale sur tous les devices.</p>
+          <div class="process-connector"></div>
+        </div>
+        <div class="process-step reveal reveal-delay-4" style="position:relative;">
+          <div class="process-number">5</div>
+          <h3>Lancement</h3>
+          <p>Mise en ligne, formation et transfert de l'application.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== À PROPOS ==================== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo-wrap reveal">
+          <div class="about-glow"></div>
+          <img src="nicolas.png" alt="Nicolas Tinnirello, freelance no-code" class="about-photo" loading="lazy">
+        </div>
+
+        <div class="about-content reveal reveal-delay-1">
+          <p class="section-label">À propos</p>
+          <h2>Nicolas Tinnirello</h2>
+
+          <p>Freelance no-code, j'accompagne entrepreneurs et startups de l'idée au lancement.</p>
+
+          <p>Ce qui me différencie : avant de coder quoi que ce soit, je réalise une préconception complète : parcours utilisateurs, maquettes, cahier des charges et devis détaillé. Vous savez exactement ce que vous allez avoir, avant de vous engager.</p>
+
+          <p>Un seul interlocuteur, à l'écoute, disponible, qui construit sur mesure ce dont vous avez vraiment besoin.</p>
+
+          <div class="about-badges">
+            <span class="about-badge">⚡ Expert No-Code</span>
+            <span class="about-badge">🚀 MVP Lover</span>
+            <span class="about-badge">👤 Freelance Solo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== POURQUOI MOI ==================== -->
+  <section id="why-me">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label reveal">Pourquoi moi</p>
+        <h2 class="section-title reveal reveal-delay-1">Ce qui fait la différence</h2>
+        <p class="section-subtitle reveal reveal-delay-2">Pas une agence. Un expert dédié qui s'implique dans votre succès.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#wi1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              <defs><linearGradient id="wi1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00BFFF"/><stop offset="1" stop-color="#7B2FFF"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3>Réponse sous 24 à 48h ouvrées</h3>
+          <p>Je m'engage à vous répondre sous 24 à 48h ouvrées. Communication directe et réponses rapides.</p>
+        </div>
+
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#wi2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              <defs><linearGradient id="wi2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00BFFF"/><stop offset="1" stop-color="#7B2FFF"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3>Interlocuteur unique</h3>
+          <p>Vous parlez toujours à la même personne : celle qui construit votre application, votre interlocuteur unique.</p>
+        </div>
+
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#wi3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              <defs><linearGradient id="wi3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00BFFF"/><stop offset="1" stop-color="#7B2FFF"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3>Expertise No-Code & Web</h3>
+          <p>Bubble, n8n, Webflow, intégrations API, automatisations, apps mobiles : je maîtrise les meilleurs outils pour construire votre produit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AUSSI À VOTRE SERVICE ==================== -->
+  <section id="aussi">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label reveal">Aussi à votre service</p>
+        <h2 class="section-title reveal reveal-delay-1">Aussi à votre service</h2>
+      </div>
+      <div class="aussi-grid">
+        <div class="aussi-pill reveal">
+          <div class="aussi-pill-header">
+            <div class="aussi-pill-icon">⚙️</div>
+            <span class="aussi-pill-name">Automatisation n8n</span>
+          </div>
+          <p class="aussi-pill-desc">Connectez vos outils et automatisez vos processus</p>
+        </div>
+        <div class="aussi-pill reveal reveal-delay-1">
+          <div class="aussi-pill-header">
+            <div class="aussi-pill-icon">🤖</div>
+            <span class="aussi-pill-name">Intelligence artificielle</span>
+          </div>
+          <p class="aussi-pill-desc">Intégration d'IA dans vos applications</p>
+        </div>
+        <div class="aussi-pill reveal reveal-delay-2">
+          <div class="aussi-pill-header">
+            <div class="aussi-pill-icon">🔌</div>
+            <span class="aussi-pill-name">Intégrations API</span>
+          </div>
+          <p class="aussi-pill-desc">Stripe, Notion, et vos outils métier</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label reveal">FAQ</p>
+        <h2 class="section-title reveal reveal-delay-1">Questions fréquentes</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Combien de temps prend la création d'une application ?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Pour une application web simple à modérée, comptez 4 à 6 semaines de production. Un MVP complet prend généralement 6 à 8 semaines. Tout dépend de la complexité et de la réactivité dans les échanges. Je vous donne une estimation réaliste dès notre premier échange.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-1">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Combien coûte un projet ?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Les tarifs démarrent à 2 500€ HT pour une application web et 4 000€ HT pour un MVP startup. Le prix final dépend de la complexité, des fonctionnalités et du délai souhaité. Utilisez le simulateur de devis pour obtenir une estimation personnalisée en 2 minutes.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-2">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Quels outils utilisez-vous ?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              J'utilise les meilleurs outils no-code du marché selon les besoins du projet : Bubble pour les applications web complexes, n8n pour l'automatisation, Notion pour la gestion de données, Stripe pour les paiements, et OpenAI/Claude pour l'intelligence artificielle. Chaque outil est choisi pour maximiser la qualité et la rapidité de livraison.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-3">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Puis-je avoir une application mobile ?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Oui. Je construis des applications responsive qui fonctionnent sur mobile via le navigateur. Pour une expérience native, je développe des apps disponibles sur l'App Store et Google Play.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-4">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Comment se passe la collaboration au quotidien ?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              On commence par un appel découverte gratuit pour cadrer votre projet. Ensuite, je travaille de manière itérative avec des points d'avancement réguliers. Vous avez accès à l'application à tout moment. Je réponds sous 24 à 48h ouvrées à toutes vos questions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <p class="section-label">Contact</p>
+          <h2>Un projet en tête ?<br>Parlons-en.</h2>
+          <p>Décrivez votre projet et je vous réponds sous 24 à 48h ouvrées avec une première analyse et une estimation.</p>
+
+          <div class="contact-meta">
+            <div class="contact-meta-item">
+              <div class="contact-meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="contact-meta-label">Email</div>
+                <div class="contact-meta-value">contact@nitrello.com</div>
+              </div>
+            </div>
+
+            <div class="contact-meta-item">
+              <div class="contact-meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="contact-meta-label">Délai de réponse</div>
+                <div class="contact-meta-value">Sous 24 à 48h ouvrées</div>
+              </div>
+            </div>
+
+            <div class="contact-meta-item">
+              <div class="contact-meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div>
+                <div class="contact-meta-label">Disponibilité</div>
+                <div class="contact-meta-value" style="color:#22c55e;">Ouvert aux nouveaux projets</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-1">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-name">Prénom & Nom</label>
+                <input type="text" id="c-name" name="name" placeholder="Jean Dupont" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="c-email">Email</label>
+                <input type="email" id="c-email" name="email" placeholder="jean@exemple.com" required autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="c-phone">Téléphone <span style="color:var(--text-secondary);font-weight:400;">(optionnel)</span></label>
+              <input type="tel" id="c-phone" name="telephone" placeholder="+33 6 00 00 00 00" autocomplete="tel">
+            </div>
+
+            <div class="form-group">
+              <label for="c-type">Type de projet</label>
+              <select id="c-type" name="project_type" required>
+                <option value="" disabled selected>Sélectionnez un type</option>
+                <option value="Application Web">Application Web</option>
+                <option value="Application Mobile">Application Mobile</option>
+                <option value="MVP Startup">MVP Startup</option>
+                <option value="Automatisation">Automatisation / n8n</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="c-message">Description du projet</label>
+              <textarea id="c-message" name="message" placeholder="Décrivez votre projet en quelques lignes..." required></textarea>
+            </div>
+
+            <div class="form-rgpd">
+              <input type="checkbox" id="c-rgpd" name="rgpd" required>
+              <label for="c-rgpd">J'accepte que mes données soient utilisées pour traiter ma demande de contact, conformément au RGPD.</label>
+            </div>
+
+            <button type="submit" class="btn btn-gradient form-submit-btn" id="contactSubmitBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Envoyer le message
+            </button>
+
+            <div class="form-success" id="contactSuccess">
+              ✅ Message envoyé ! Je vous réponds sous 24 à 48h ouvrées.
+            </div>
+            <div class="form-error" id="contactError">
+              ❌ Une erreur est survenue. Réessayez ou écrivez à contact@nitrello.com
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#" class="logo-link" aria-label="Nitrello">
+          <img src="logo-nitrello.svg" alt="Nitrello" style="height: 28px; width: auto;">
+        </a>
+
+        <nav class="footer-nav" aria-label="Navigation footer">
+          <a href="#services">Services</a>
+          <a href="#methode">Méthode</a>
+          <a href="#about">À propos</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <p class="footer-copy">© Nitrello 2026 · Nicolas Tinnirello</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL DEVIS ==================== -->
+  <div class="modal-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" id="quoteModalContent">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modalTitle">Estimez votre projet</div>
+          <div class="modal-subtitle">Obtenez une fourchette de prix en 2 minutes</div>
+        </div>
+        <button class="modal-close" onclick="closeQuoteModal()" aria-label="Fermer">×</button>
+      </div>
+
+      <div class="modal-progress">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBar" style="width:17%;"></div>
+        </div>
+        <div class="progress-label">
+          <span id="progressStep">Étape 1 / 6</span>
+          <span id="progressPct">17%</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Step 1: Type de projet -->
+        <div class="modal-step active" id="step1">
+          <p class="step-question">Quel type de projet souhaitez-vous réaliser ?</p>
+          <div class="option-grid">
+            <div class="option-card" onclick="selectOption(this,'type','vitrine')">
+              <div class="opt-icon">🖥️</div>
+              <div class="opt-title">Site Vitrine</div>
+              <div class="opt-desc">Landing page, présentation...</div>
+            </div>
+            <div class="option-card" onclick="selectOption(this,'type','web')">
+              <div class="opt-icon">🌐</div>
+              <div class="opt-title">Application Web</div>
+              <div class="opt-desc">SaaS, marketplace, outil...</div>
+            </div>
+            <div class="option-card" onclick="selectOption(this,'type','mvp')">
+              <div class="opt-icon">🚀</div>
+              <div class="opt-title">MVP Startup</div>
+              <div class="opt-desc">Produit rapide à lancer...</div>
+            </div>
+            <div class="option-card" onclick="selectOption(this,'type','mobile')">
+              <div class="opt-icon">📱</div>
+              <div class="opt-title">Application Mobile</div>
+              <div class="opt-desc">PWA, iOS/Android...</div>
+            </div>
+            <div class="option-card" onclick="selectOption(this,'type','automation')">
+              <div class="opt-icon">⚙️</div>
+              <div class="opt-title">Automatisation</div>
+              <div class="opt-desc">n8n, intégrations...</div>
+            </div>
+            <div class="option-card" onclick="selectOption(this,'type','other')">
+              <div class="opt-icon">💡</div>
+              <div class="opt-title">Autre</div>
+              <div class="opt-desc">Autre type de projet</div>
+            </div>
+          </div>
+          <div class="modal-nav">
+            <button class="btn btn-gradient" onclick="nextStep()" id="step1Next" disabled>Suivant →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Fonctionnalités -->
+        <div class="modal-step" id="step2">
+          <p class="step-question">Quelles fonctionnalités souhaitez-vous inclure ?</p>
+          <div class="features-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="feature-toggle" onclick="toggleFeature(this,'auth')">
+              <span class="ft-check"></span> 🔐 Authentification
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'payment')">
+              <span class="ft-check"></span> 💳 Paiements Stripe
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'dashboard')">
+              <span class="ft-check"></span> 📊 Dashboard analytics
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'api')">
+              <span class="ft-check"></span> 🔌 API externe
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'notifications')">
+              <span class="ft-check"></span> 🔔 Notifications email
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'admin')">
+              <span class="ft-check"></span> 🛠️ Back-office admin
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'geo')">
+              <span class="ft-check"></span> 📍 Géolocalisation
+            </div>
+            <div class="feature-toggle" onclick="toggleFeature(this,'ai')">
+              <span class="ft-check"></span> 🤖 Intelligence artificielle
+            </div>
+          </div>
+          <div class="modal-nav">
+            <button class="btn btn-outline" onclick="prevStep()">← Retour</button>
+            <button class="btn btn-gradient" onclick="nextStep()">Suivant →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Délai -->
+        <div class="modal-step" id="step3">
+          <p class="step-question">Quel est votre délai souhaité ?</p>
+          <div class="option-grid">
+            <div class="option-card" onclick="selectOption(this,'urgency','standard')">
+              <div class="opt-icon">📅</div>
+              <div class="opt-title">Standard</div>
+              <div class="opt-desc">6 à 8 semaines</div>
+            </div>
+            <div class="option-card" onclick="selectOption(this,'urgency','urgent')">
+              <div class="opt-icon">⚡</div>
+              <div class="opt-title">Urgent</div>
+              <div class="opt-desc">Moins de 4 semaines (+25%)</div>
+            </div>
+          </div>
+          <div class="modal-nav">
+            <button class="btn btn-outline" onclick="prevStep()">← Retour</button>
+            <button class="btn btn-gradient" onclick="nextStep()" id="step3Next" disabled>Suivant →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Description -->
+        <div class="modal-step" id="step4">
+          <p class="step-question">Décrivez brièvement votre projet</p>
+          <textarea class="modal-input modal-textarea" id="quoteDescription" placeholder="Ex : Je veux créer une marketplace de services entre particuliers, avec profils, messagerie et paiement sécurisé..." rows="5"></textarea>
+          <div class="modal-nav">
+            <button class="btn btn-outline" onclick="prevStep()">← Retour</button>
+            <button class="btn btn-gradient" onclick="nextStep()">Suivant →</button>
+          </div>
+        </div>
+
+        <!-- Step 5: Coordonnées -->
+        <div class="modal-step" id="step5">
+          <p class="step-question">Vos coordonnées</p>
+          <input type="text" class="modal-input" id="quoteName" placeholder="Prénom & Nom" autocomplete="name">
+          <input type="email" class="modal-input" id="quoteEmail" placeholder="votre@email.com" autocomplete="email">
+          <input type="tel" class="modal-input" id="quotePhone" placeholder="+33 6 00 00 00 00 (optionnel)" autocomplete="tel">
+          <div class="modal-rgpd">
+            <input type="checkbox" id="quoteRgpd">
+            <label for="quoteRgpd">J'accepte que mes données soient utilisées pour traiter ma demande, conformément au RGPD.</label>
+          </div>
+          <div class="modal-nav">
+            <button class="btn btn-outline" onclick="prevStep()">← Retour</button>
+            <button class="btn btn-gradient" onclick="submitQuote()">Voir mon estimation →</button>
+          </div>
+        </div>
+
+        <!-- Step 6: Résultat -->
+        <div class="modal-step" id="step6">
+          <p class="step-question">Votre estimation de projet</p>
+          <div class="estimate-box">
+            <div class="estimate-label">Fourchette estimée</div>
+            <div class="estimate-value gradient-text" id="estimateValue">...</div>
+            <div class="estimate-note">HT · estimation personnalisée</div>
+          </div>
+          <div class="estimate-disclaimer">
+            ⚠️ Cette estimation est non-contractuelle. Elle est générée automatiquement sur la base des informations fournies. Le tarif définitif sera établi après analyse complète de votre projet lors d'un premier appel.
+          </div>
+          <div class="modal-nav" style="justify-content:center;gap:12px;flex-wrap:wrap;">
+            <a href="#contact" class="btn btn-gradient" onclick="closeQuoteModal()">Discuter de mon projet</a>
+            <button class="btn btn-outline" onclick="closeQuoteModal()">Fermer</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    let devisEmailsSent = [];
+
+    // ---- Header scroll ----
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // ---- Mobile nav ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    }
+
+    // ---- Scroll reveal ----
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ---- FAQ accordion ----
+    function toggleFaq(questionEl) {
+      const item = questionEl.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ---- Quote modal ----
+    const quoteModal = document.getElementById('quoteModal');
+    let currentStep = 1;
+    const totalSteps = 6;
+    const quoteData = { type: null, features: [], urgency: null };
+
+    function openQuoteModal() {
+      quoteModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeQuoteModal() {
+      quoteModal.classList.remove('open');
+      document.body.style.overflow = '';
+      // Réinitialisation complète du formulaire
+      quoteData.type = null;
+      quoteData.features = [];
+      quoteData.urgency = null;
+      currentStep = 1;
+      showStep(1);
+      document.getElementById('progressBar').style.width = '17%';
+      document.getElementById('progressStep').textContent = 'Étape 1 / 6';
+      document.getElementById('progressPct').textContent = '17%';
+      ['quoteName', 'quoteEmail', 'quotePhone', 'quoteDescription'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      const rgpd = document.getElementById('quoteRgpd');
+      if (rgpd) rgpd.checked = false;
+      document.querySelectorAll('.option-card.selected').forEach(el => el.classList.remove('selected'));
+      document.querySelectorAll('.feature-toggle.selected').forEach(el => {
+        el.classList.remove('selected');
+        const check = el.querySelector('.ft-check');
+        if (check) check.textContent = '';
+      });
+      document.getElementById('estimateValue').textContent = '...';
+      const step1Next = document.getElementById('step1Next');
+      if (step1Next) step1Next.disabled = true;
+      const step3Next = document.getElementById('step3Next');
+      if (step3Next) step3Next.disabled = true;
+    }
+    quoteModal.addEventListener('click', e => { if (e.target === quoteModal) closeQuoteModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuoteModal(); });
+
+    function updateProgress() {
+      const pct = Math.round((currentStep / totalSteps) * 100);
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressStep').textContent = `Étape ${currentStep} / ${totalSteps}`;
+      document.getElementById('progressPct').textContent = pct + '%';
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById('step' + n);
+      if (el) el.classList.add('active');
+      currentStep = n;
+      updateProgress();
+    }
+
+    function nextStep() { showStep(currentStep + 1); }
+    function prevStep() { showStep(currentStep - 1); }
+
+    function selectOption(el, field, value) {
+      const parent = el.closest('.option-grid') || el.parentElement;
+      parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      quoteData[field] = value;
+      // Enable next button
+      const nextBtn = document.getElementById('step' + currentStep + 'Next');
+      if (nextBtn) nextBtn.disabled = false;
+    }
+
+    function toggleFeature(el, feat) {
+      el.classList.toggle('selected');
+      const checkEl = el.querySelector('.ft-check');
+      if (el.classList.contains('selected')) {
+        if (!quoteData.features.includes(feat)) quoteData.features.push(feat);
+        checkEl.textContent = '✓';
+      } else {
+        quoteData.features = quoteData.features.filter(f => f !== feat);
+        checkEl.textContent = '';
+      }
+    }
+
+    function calculateEstimate() {
+      const basePrices = { vitrine: 1000, web: 4000, mvp: 5500, mobile: 6500, automation: 2000, other: 3000 };
+      const featurePrices = { auth: 650, payment: 1200, dashboard: 900, api: 650, notifications: 400, admin: 800, geo: 750, ai: 1500 };
+      const vitrineOverrides = { notifications: 200 };
+
+      const isVitrine = quoteData.type === 'vitrine';
+      const mult = isVitrine ? 1.2 : 1.3;
+      let total = (basePrices[quoteData.type] || 3000) * mult;
+      quoteData.features.forEach(f => {
+        const price = isVitrine && vitrineOverrides[f] !== undefined ? vitrineOverrides[f] : (featurePrices[f] || 0);
+        total += price;
+      });
+      if (quoteData.urgency === 'urgent') total *= 1.25;
+
+      const min = Math.round((total * 0.85) / 500) * 500;
+      const max = Math.round((total * 1.25) / 500) * 500;
+      return { min, max };
+    }
+
+    async function submitQuote() {
+      const name = document.getElementById('quoteName').value.trim();
+      const email = document.getElementById('quoteEmail').value.trim();
+      const telephone = document.getElementById('quotePhone').value.trim();
+      const rgpd = document.getElementById('quoteRgpd').checked;
+
+      if (!name || !email || !rgpd) {
+        alert('Veuillez remplir votre nom, email et accepter la politique de confidentialité.');
+        return;
+      }
+
+      const estimate = calculateEstimate();
+      document.getElementById('estimateValue').textContent =
+        estimate.min.toLocaleString('fr-FR') + ' – ' + estimate.max.toLocaleString('fr-FR') + ' €';
+
+      // Résumé lisible pour n8n
+      const typeLabel = { vitrine: 'Site Vitrine', web: 'Application Web', mvp: 'MVP Startup', mobile: 'Application Mobile', automation: 'Automatisation', other: 'Autre' };
+      const urgencyLabel = { standard: 'Standard (6-8 sem.)', urgent: 'Urgent (< 4 sem.)' };
+      const featuresLabel = { auth: 'Auth', payment: 'Stripe', dashboard: 'Dashboard', api: 'API externe', notifications: 'Notifications', admin: 'Admin', geo: 'Géolocalisation', ai: 'IA' };
+      const featuresSummary = quoteData.features.map(f => featuresLabel[f] || f).join(' + ') || 'Aucune';
+      const description = document.getElementById('quoteDescription').value.trim();
+
+      const messageSummary = [
+        `Devis - Type: ${typeLabel[quoteData.type] || quoteData.type}`,
+        `Features: ${featuresSummary}`,
+        `Délai: ${urgencyLabel[quoteData.urgency] || quoteData.urgency}`,
+        `Budget estimé: ${estimate.min.toLocaleString('fr-FR')} – ${estimate.max.toLocaleString('fr-FR')} €`,
+        description ? `Description: ${description}` : ''
+      ].filter(Boolean).join(' | ');
+
+      const n8nPayload = { nom: name, email, telephone, message: messageSummary };
+      const formspreePayload = {
+        name, email, telephone,
+        type: quoteData.type,
+        features: featuresSummary, urgency: quoteData.urgency,
+        description, estimate_min: estimate.min, estimate_max: estimate.max,
+        _subject: 'Nouveau devis - Nitrello'
+      };
+
+      try {
+        const n8nPromise = fetch('https://n8n-production-e8c8.up.railway.app/webhook/31cc1448-4536-4bd3-84a9-1131b09bf88f', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(n8nPayload)
+        }).catch(() => null);
+
+        const formspreePromise = fetch('https://formspree.io/f/meepeqqe', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(formspreePayload)
+        }).catch(() => null);
+
+        await Promise.all([formspreePromise, n8nPromise]);
+      } catch (e) { /* silent */ }
+
+      devisEmailsSent.push(email.toLowerCase().trim());
+
+
+      showStep(6);
+    }
+
+    // ---- Contact form ----
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('c-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+      const telephone = document.getElementById('c-phone').value.trim();
+      const type = document.getElementById('c-type').value;
+      const message = document.getElementById('c-message').value.trim();
+      const rgpd = document.getElementById('c-rgpd').checked;
+
+      if (!name || !email || !type || !message || !rgpd) {
+        document.getElementById('contactError').style.display = 'block';
+        document.getElementById('contactError').textContent = 'Veuillez remplir tous les champs et accepter la politique de confidentialité.';
+        return;
+      }
+
+      const btn = document.getElementById('contactSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours...';
+
+      document.getElementById('contactSuccess').style.display = 'none';
+      document.getElementById('contactError').style.display = 'none';
+
+      const formspreePayload = { name, email, telephone, project_type: type, message, _subject: 'Nouveau contact - Nitrello' };
+      const n8nPayload = { nom: name, email, telephone, message: `${type ? '[' + type + '] ' : ''}${message}` };
+
+      const isAlreadyInCRM = devisEmailsSent.includes(email.toLowerCase().trim());
+
+      try {
+        const formspreePromise = fetch('https://formspree.io/f/meepeqqe', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(formspreePayload)
+        });
+
+        let formspreeRes;
+        if (isAlreadyInCRM) {
+          // Email déjà envoyé via devis : Formspree uniquement, pas de doublon n8n
+          formspreeRes = await formspreePromise;
+        } else {
+          const n8nPromise = fetch('https://n8n-production-e8c8.up.railway.app/webhook/31cc1448-4536-4bd3-84a9-1131b09bf88f', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(n8nPayload)
+          }).catch(() => null);
+          [formspreeRes] = await Promise.all([formspreePromise, n8nPromise]);
+        }
+
+        if (formspreeRes.ok) {
+          document.getElementById('contactSuccess').style.display = 'block';
+          e.target.reset();
+        } else {
+          throw new Error('Formspree error');
+        }
+      } catch (err) {
+        document.getElementById('contactError').style.display = 'block';
+        document.getElementById('contactError').textContent = '❌ Une erreur est survenue. Réessayez ou écrivez à contact@nitrello.com';
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer le message';
+      }
+    });
+
+    // ---- Typewriter effect ----
+    const typewriterEl = document.getElementById('typewriter');
+    const phrases = [
+      'livrées en quelques semaines',
+      'sans écrire une ligne de code',
+      'qui font la différence',
+      'prêtes à scaler'
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typewrite() {
+      const current = phrases[phraseIndex];
+      if (!isDeleting) {
+        typewriterEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          isDeleting = true;
+          setTimeout(typewrite, 2000);
+          return;
+        }
+        setTimeout(typewrite, 50);
+      } else {
+        typewriterEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          setTimeout(typewrite, 500);
+          return;
+        }
+        setTimeout(typewrite, 30);
+      }
+    }
+    typewrite();
+
+    // ---- Particle background ----
+    (function() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const canvas = document.getElementById('particleCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      function hexToRgb(hex) {
+        return {
+          r: parseInt(hex.slice(1,3), 16),
+          g: parseInt(hex.slice(3,5), 16),
+          b: parseInt(hex.slice(5,7), 16)
+        };
+      }
+      const c1 = hexToRgb('#00BFFF');
+      const c2 = hexToRgb('#7B2FFF');
+
+      function randColor() {
+        const t = Math.random();
+        const r = Math.round(c1.r + (c2.r - c1.r) * t);
+        const g = Math.round(c1.g + (c2.g - c1.g) * t);
+        const b = Math.round(c1.b + (c2.b - c1.b) * t);
+        return `rgb(${r},${g},${b})`;
+      }
+      function rand(a, b) { return Math.random() * (b - a) + a; }
+
+      const particles = Array.from({ length: 40 }, () => {
+        const angle = rand(0, Math.PI * 2);
+        const speed = rand(0.2, 0.5);
+        return {
+          x: rand(0, canvas.width),
+          y: rand(0, canvas.height),
+          r: rand(1, 3),
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          color: randColor(),
+          opacity: rand(0.15, 0.4)
+        };
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -p.r) p.x = canvas.width + p.r;
+          else if (p.x > canvas.width + p.r) p.x = -p.r;
+          if (p.y < -p.r) p.y = canvas.height + p.r;
+          else if (p.y > canvas.height + p.r) p.y = -p.r;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.opacity;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // ---- Smooth scroll with header offset ----
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const headerOffset = 80;
+          const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
