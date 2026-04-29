@@ -2907,6 +2907,48 @@ a.contact-row:hover { color: var(--cyan); }
   .float-cta .float-cta-label-long { display: none; }
 }
 
+/* ============================================================
+   RESPONSIVE MOBILE — iPhone et petits écrans (< 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+  /* Typographie : titres moins grands sur petit écran */
+  .h-display { font-size: clamp(36px, 10vw, 56px); }
+  .h-section  { font-size: clamp(30px, 8vw, 48px); letter-spacing: -0.02em; }
+  .h-card     { font-size: 20px; }
+
+  /* Container : padding latéral réduit */
+  .container { padding-left: 20px; padding-right: 20px; }
+
+  /* FAQ : désactiver sticky sur mobile, corriger chevauchement */
+  .faq-side { position: static !important; }
+  .faq-side .faq-direct { margin-top: 20px; padding-top: 20px; }
+  .faq-side .faq-direct .label { margin-bottom: 12px; display: block; }
+  .faq-side .faq-direct a { font-size: 18px; display: block; }
+
+  /* FAQ questions : réduire taille */
+  .faq-q-text { font-size: 18px; }
+  .faq-q { padding: 20px 0; }
+
+  /* Contact : h-display plus petit */
+  #contact .h-display { font-size: clamp(32px, 9vw, 52px); }
+
+  /* Hero : espacements réduits */
+  .hero-copy { padding: 40px 0 32px; }
+
+  /* Section méthode : sticky désactivé sur mobile */
+  .method-title-wrap { position: static; }
+
+  /* Tarifs : padding réduit sur les cartes */
+  .price-card { padding: 28px 20px; }
+
+  /* Formulaire : padding réduit */
+  .contact-card { padding: 28px 20px; }
+
+  /* Bouton flottant : encore plus compact */
+  .float-cta { bottom: 16px; right: 16px; padding: 10px 14px; font-size: 13px; }
+}
+
 </style>
 <script>
   // Apply theme before paint to avoid flash
