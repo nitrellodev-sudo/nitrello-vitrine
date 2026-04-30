@@ -311,19 +311,19 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .h-display {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: clamp(48px, 7.4vw, 104px);
+  font-size: clamp(48px, 7vw, 92px);
   line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--ink);
   text-wrap: balance;
 }
 .h-display em { font-style: italic; font-weight: 300; color: var(--stone); }
-.hero-copy h1.h-display { font-size: clamp(44px, 6.6vw, 86px); line-height: 1.04; letter-spacing: -0.03em; }
+.hero-copy h1.h-display { font-size: clamp(44px, 6.4vw, 76px); line-height: 1.04; letter-spacing: -0.03em; }
 
 .h-section {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(40px, 6.4vw, 84px);
+  font-size: clamp(40px, 6vw, 76px);
   line-height: 1.04;
   letter-spacing: -0.035em;
 }
@@ -623,12 +623,12 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   position: relative;
   display: inline-block;
   min-height: 1em;
-  white-space: nowrap;
-  /* width set by JS to the widest word in the list — prevents jump */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  /* width set by JS to the widest phrase, plafonnée à la largeur du parent — prevents jump sans déborder */
 }
 #typed-text {
   display: inline-block;
-  white-space: nowrap;
 }
 .caret {
   display: inline-block;
@@ -2964,6 +2964,9 @@ a.contact-row:hover { color: var(--cyan); }
   /* Hero : espacements réduits */
   .hero-copy { padding: 40px 0 32px; }
 
+  /* Hero typewriter : annule le min-width JS (qui figerait à la largeur de la phrase la plus longue, débordement) */
+  .hero-copy h1 .accent { min-width: 0 !important; }
+
   /* Section méthode : sticky désactivé sur mobile */
   .method-title-wrap { position: static; }
 
@@ -4027,7 +4030,8 @@ Cal.ns["30min"]("ui", {
       'un site vitrine.',
       'une automatisation.',
     ];
-    // Mesure la largeur du mot le plus long et fige la largeur du parent .accent
+    // Mesure la largeur de la phrase la plus longue et fige .accent pour éviter le sautillement
+    // du caret. La min-width est plafonnée à la largeur du parent pour ne jamais déborder.
     const accentEl = typedEl.parentElement;
     if (accentEl) {
       const probe = document.createElement('span');
@@ -4036,8 +4040,10 @@ Cal.ns["30min"]("ui", {
       let maxW = 0;
       words.forEach(w => { probe.textContent = w; if (probe.offsetWidth > maxW) maxW = probe.offsetWidth; });
       probe.remove();
-      // ajoute la largeur du caret + petite marge
-      accentEl.style.minWidth = (maxW + 14) + 'px';
+      const parentEl = accentEl.parentElement; // le <h1>
+      const cap = parentEl ? parentEl.clientWidth : Infinity;
+      // Plafond : largeur du parent. Si la phrase déborde, on laisse wrap (cf. CSS)
+      accentEl.style.minWidth = Math.min(maxW + 14, cap) + 'px';
     }
     let wi = 0, ci = 0, deleting = false;
     function tick() {
