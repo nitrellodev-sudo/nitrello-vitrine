@@ -2,6 +2,18 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<script>
+  // Theme : sombre par défaut pour les nouveaux visiteurs, respecte le choix mémorisé sinon.
+  // Doit s'exécuter avant le CSS pour éviter le FOUC.
+  (function () {
+    try {
+      var saved = localStorage.getItem('nitrello-theme');
+      if (saved !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nitrello , Ton idée devient une application</title>
 <meta name="description" content="Nicolas Tinnirello, développeur freelance. Je conçois des applications web et mobile, des outils internes et des automatisations pour PME, indépendants et startups.">
@@ -2959,16 +2971,6 @@ a.contact-row:hover { color: var(--cyan); }
 }
 
 </style>
-<script>
-  // Apply theme before paint to avoid flash
-  // Défaut = mode clair. Le mode sombre n'est appliqué QUE si l'utilisateur l'a choisi explicitement.
-  (function () {
-    try {
-      var saved = localStorage.getItem('nitrello-theme');
-      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    } catch (e) {}
-  })();
-</script>
 
 <!-- Cal.com embed (popup) — pour la prise de RDV -->
 <script>
