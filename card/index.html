@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Carte de visite — Nicolas Tinnirello | Nitrello</title>
+<meta name="description" content="Développeur freelance — Apps Web & Mobile, SaaS, MVP, Automatisations IA. Contactez-moi directement.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0F0F14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nitrello">
+<meta property="og:title" content="Carte de visite — Nicolas Tinnirello | Nitrello">
+<meta property="og:description" content="Développeur freelance — Apps Web & Mobile, SaaS, MVP, Automatisations IA.">
+<meta property="og:image" content="https://nitrello.com/nicolas.png">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://nitrello.com/card">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="canonical" href="https://nitrello.com/card">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F0F14;
+    --ink-soft: #16161D;
+    --paper: #F5F1EA;
+    --cyan: #00BFFF;
+    --violet: #7B2FFF;
+    --stone: #B5B5AC;
+    --stone-dim: #6E6E66;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--ink);
+    color: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Fond ambiant : halo radial cyan/violet + trame de points */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 30% 20%, rgba(0,191,255,0.18), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 75% 85%, rgba(123,47,255,0.18), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(245,241,234,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Bouton retour */
+  .back {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    left: max(16px, env(safe-area-inset-left));
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(245,241,234,0.06);
+    border: 1px solid rgba(245,241,234,0.12);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .back:hover { background: rgba(245,241,234,0.1); border-color: rgba(245,241,234,0.22); }
+  .back svg { width: 14px; height: 14px; }
+
+  /* Mise en page principale */
+  .wrap {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px 40px;
+    gap: 28px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Carte 3D */
+  .card-stage {
+    width: 100%;
+    perspective: 1400px;
+    perspective-origin: 50% 30%;
+  }
+  .card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 85 / 55;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+    border-radius: 14px;
+    will-change: transform;
+  }
+  .card.is-flipped { transform: rotateY(180deg); }
+  .card:focus-visible { outline: 2px solid var(--cyan); outline-offset: 6px; }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--ink-soft);
+    box-shadow:
+      0 1px 0 rgba(245,241,234,0.05) inset,
+      0 30px 60px -20px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(245,241,234,0.06);
+  }
+
+  /* === RECTO === */
+  .face--front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .face--front::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(ellipse 50% 50% at 30% 40%, rgba(0,191,255,0.30), transparent 65%),
+      radial-gradient(ellipse 50% 50% at 75% 65%, rgba(123,47,255,0.32), transparent 65%);
+    filter: blur(8px);
+  }
+  .strip {
+    position: absolute;
+    left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    z-index: 2;
+  }
+  .strip--bottom { bottom: 0; }
+  .strip--top { top: 0; }
+  .recto {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-n { width: clamp(54px, 12vw, 72px); height: auto; display: block; }
+  .wordmark {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(24px, 6vw, 32px);
+    letter-spacing: -0.02em;
+    color: var(--paper);
+  }
+  .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(14px, 3.6vw, 18px);
+    color: var(--stone);
+    margin-top: 2px;
+  }
+
+  /* === VERSO === */
+  .face--back {
+    transform: rotateY(180deg);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: clamp(16px, 4.5vw, 22px);
+    align-items: center;
+  }
+  .face--back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,191,255,0.06), transparent 40%, rgba(123,47,255,0.08));
+    pointer-events: none;
+  }
+  .verso-info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .verso-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 4.6vw, 24px);
+    color: var(--paper);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .verso-role {
+    font-family: var(--mono);
+    font-size: clamp(8.5px, 2vw, 10px);
+    color: var(--cyan);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .verso-meta {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(9px, 2.2vw, 10.5px);
+    color: var(--stone-dim);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .verso-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-family: var(--sans);
+    font-size: clamp(10px, 2.4vw, 12px);
+    color: var(--stone);
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .verso-contact span { display: block; }
+  .verso-qr {
+    position: relative;
+    z-index: 1;
+    width: clamp(72px, 18vw, 92px);
+    aspect-ratio: 1;
+    background: var(--paper);
+    border-radius: 6px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .verso-qr svg { width: 100%; height: 100%; display: block; }
+
+  /* Indicateur "tape pour retourner" */
+  .flip-hint {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--stone-dim);
+    text-align: center;
+    transition: opacity 0.4s ease;
+    user-select: none;
+  }
+  .flip-hint.is-hidden { opacity: 0; pointer-events: none; }
+
+  /* === BOUTONS D'ACTION === */
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+  .action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--paper);
+    background: rgba(245,241,234,0.06);
+    border: 1px solid rgba(245,241,234,0.12);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .action:hover, .action:focus-visible {
+    background: rgba(245,241,234,0.10);
+    border-color: rgba(245,241,234,0.22);
+    outline: none;
+  }
+  .action:active { transform: scale(0.98); }
+  .action--primary {
+    background: linear-gradient(95deg, var(--cyan), var(--violet));
+    border-color: transparent;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .action--primary:hover, .action--primary:focus-visible {
+    background: linear-gradient(95deg, var(--cyan), var(--violet));
+    filter: brightness(1.1);
+    border-color: transparent;
+  }
+  .action svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* Toast partage */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: max(24px, env(safe-area-inset-bottom));
+    transform: translateX(-50%) translateY(20px);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 10px 30px -8px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 20;
+  }
+  .toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Adaptations layout */
+  @media (min-width: 520px) {
+    .actions { grid-template-columns: repeat(4, 1fr); }
+    .action { font-size: 13px; }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+    .toast { transition: opacity 0.2s; }
+  }
+</style>
+</head>
+<body>
+
+<a class="back" href="https://nitrello.com" aria-label="Retour au site nitrello.com">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  <span>nitrello.com</span>
+</a>
+
+<main class="wrap">
+
+  <div class="card-stage">
+    <div class="card" id="card" role="button" tabindex="0" aria-label="Carte de visite — appuyer pour retourner" aria-pressed="false">
+
+      <!-- RECTO -->
+      <div class="face face--front" aria-hidden="false">
+        <div class="recto">
+          <svg class="logo-n" viewBox="0 0 80 80" aria-hidden="true">
+            <defs>
+              <linearGradient id="card-grad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#00BFFF"/>
+                <stop offset="1" stop-color="#7B2FFF"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(8,8) scale(0.151)">
+              <path d="m51.23,344.11C5.58,291.62-12.74,217.37,9.33,146.18,35.46,61.87,110.73,6.07,193.93.45,198.67.13,203.44,0,208.23,0c8.73.19,35.69,2.11,55.78,18.17,37.69,31.8,53.73,83.53,38.47,132.75l-34.56,111.5c-1,3.22-3.41,4.06-5.27,4.22-1.84.15-4.35-.31-5.84-3.33l-63.93-128.84c-8.15-16.38-25.26-25.96-43.51-24.3-18.04,1.65-33.06,14.63-38.43,31.93l-59.56,201.04-.16.95Z" fill="#00BFFF"/>
+              <path d="m364.09,71.13c45.7,52.49,64.04,126.78,41.96,198.02-26.13,84.31-101.38,140.11-184.58,145.73-.5.03-1.01.07-1.51.09-39.59,2.4-77.62-17.8-96.88-52.47-.66-1.2-1.31-2.41-1.94-3.63-15.28-29.72-17.55-64.45-7.66-96.37l34.16-110.19c1-3.22,3.41-4.07,5.27-4.23,1.84-.14,4.36.32,5.86,3.33l63.93,128.84c8.06,16.23,24.93,25.78,42.99,24.34,18.08-1.45,33.22-13.58,38.59-30.9l59.8-202.56Z" fill="url(#card-grad)"/>
+            </g>
+          </svg>
+          <div class="wordmark">Nitrello</div>
+          <div class="tagline">Vos idées méritent d'exister.</div>
+        </div>
+        <div class="strip strip--bottom" aria-hidden="true"></div>
+      </div>
+
+      <!-- VERSO -->
+      <div class="face face--back" aria-hidden="true">
+        <div class="strip strip--top" aria-hidden="true"></div>
+        <div class="verso-info">
+          <div class="verso-name">Nicolas Tinnirello</div>
+          <div class="verso-role">Développeur freelance</div>
+          <div class="verso-meta">Apps Web &amp; Mobile · SaaS · MVP · Automatisations IA</div>
+          <div class="verso-contact">
+            <span>06 88 64 95 84</span>
+            <span>contact@nitrello.com</span>
+            <span>linkedin.com/in/nitrello</span>
+          </div>
+        </div>
+        <div class="verso-qr" aria-label="QR code vers nitrello.com">
+          <svg viewBox="0 0 33 33" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#F5F1EA" d="M0 0h33v33H0z"/>
+            <path stroke="#0F0F14" d="M4 4.5h7m1 0h1m1 0h1m2 0h4m1 0h7M4 5.5h1m5 0h1m3 0h1m3 0h1m3 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m5 0h1m1 0h1m3 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m1 0h1m1 0h5m1 0h1m1 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m1 0h4m2 0h2m2 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m3 0h1m3 0h1m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m2 0h1m2 0h1M4 12.5h1m3 0h1m1 0h7m2 0h1m1 0h5m2 0h1M4 13.5h1m1 0h2m1 0h1m2 0h2m4 0h3m3 0h2m1 0h1M4 14.5h1m2 0h1m1 0h2m1 0h1m1 0h3m1 0h5m1 0h3M4 15.5h2m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m3 0h2m1 0h2M6 16.5h1m3 0h1m3 0h1m2 0h3m1 0h3m1 0h4M4 17.5h2m1 0h3m6 0h1m1 0h4m2 0h1m2 0h1M7 18.5h1m2 0h2m1 0h8m2 0h4M8 19.5h1m2 0h1m3 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2M4 20.5h3m1 0h3m1 0h1m1 0h1m1 0h2m1 0h8M12 21.5h3m2 0h2m1 0h1m3 0h1M4 22.5h7m1 0h1m1 0h1m5 0h1m1 0h1m1 0h1M4 23.5h1m5 0h1m5 0h1m1 0h1m1 0h1m3 0h4M4 24.5h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m1 0h9M4 25.5h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m1 0h3m2 0h3M4 26.5h1m1 0h3m1 0h1m3 0h5m1 0h1m1 0h1m2 0h1m1 0h1M4 27.5h1m5 0h1m3 0h2m1 0h1m1 0h1m1 0h1m1 0h5M4 28.5h7m1 0h2m2 0h2m1 0h1m6 0h3"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="flip-hint" id="flip-hint" aria-hidden="true">Tape pour retourner</div>
+
+  <nav class="actions" aria-label="Actions de contact">
+    <a class="action action--primary" href="nicolas-tinnirello.vcf" download="nicolas-tinnirello.vcf" aria-label="Télécharger le fichier de contact (vCard)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+      <span>Ajouter</span>
+    </a>
+    <button class="action" id="share-btn" type="button" aria-label="Partager cette carte">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+      <span>Partager</span>
+    </button>
+    <a class="action" href="tel:+33688649584" aria-label="Appeler Nicolas Tinnirello">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>Appeler</span>
+    </a>
+    <a class="action" href="mailto:contact@nitrello.com" aria-label="Envoyer un email à contact@nitrello.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+      <span>Email</span>
+    </a>
+  </nav>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Lien copié</div>
+
+<script>
+  (function () {
+    var card = document.getElementById('card');
+    var hint = document.getElementById('flip-hint');
+    var shareBtn = document.getElementById('share-btn');
+    var toast = document.getElementById('toast');
+    var hasFlipped = false;
+
+    function flip() {
+      var flipped = card.classList.toggle('is-flipped');
+      card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+      var front = card.querySelector('.face--front');
+      var back = card.querySelector('.face--back');
+      if (front) front.setAttribute('aria-hidden', flipped ? 'true' : 'false');
+      if (back) back.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+      if (!hasFlipped) {
+        hasFlipped = true;
+        hint.classList.add('is-hidden');
+      }
+    }
+
+    card.addEventListener('click', flip);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        flip();
+      }
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('is-visible');
+      setTimeout(function () {
+        toast.classList.remove('is-visible');
+      }, 2200);
+    }
+
+    shareBtn.addEventListener('click', async function () {
+      var data = {
+        title: 'Nicolas Tinnirello — Nitrello',
+        text: 'Développeur freelance — Apps Web & Mobile, SaaS, MVP, Automatisations IA',
+        url: 'https://nitrello.com/card'
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(data);
+          return;
+        }
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(data.url);
+          showToast('Lien copié');
+          return;
+        }
+      } catch (err) { /* fallback ci-dessous */ }
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = data.url;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Lien copié');
+      } catch (err) {
+        showToast('Copie impossible');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
