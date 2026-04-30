@@ -2247,8 +2247,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   padding-top: 32px;
   border-top: 1px solid var(--border-inverse);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+}
+@media (max-width: 760px) {
+  .contact-meta { grid-template-columns: repeat(2, 1fr); }
 }
 .contact-meta-item .label {
   display: block;
@@ -2267,6 +2270,12 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   color: var(--fg-inverse);
   letter-spacing: -0.01em;
 }
+a.contact-meta-item-link,
+.contact-meta-item a.value {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-meta-item a.value:hover { color: var(--cyan); }
 .contact-direct {
   margin-top: 40px;
   padding-top: 32px;
@@ -3595,9 +3604,17 @@ Cal.ns["30min"]("ui", {
             <span class="label">Engagement</span>
             <span class="value">Aucun</span>
           </div>
+          <div class="contact-meta-item">
+            <span class="label">Téléphone</span>
+            <a class="value" href="tel:+33688649584">06 88 64 95 84</a>
+          </div>
         </div>
         <div class="contact-direct">
           <div class="contact-direct-label">Tu préfères en direct ?</div>
+          <a href="tel:+33688649584" class="contact-direct-row">
+            <span>06 88 64 95 84</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
           <a href="mailto:contact@nitrello.com" class="contact-direct-row">
             <span>contact@nitrello.com</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
