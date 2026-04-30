@@ -2259,11 +2259,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   padding-top: 32px;
   border-top: 1px solid var(--border-inverse);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-}
-@media (max-width: 760px) {
-  .contact-meta { grid-template-columns: repeat(2, 1fr); }
 }
 .contact-meta-item .label {
   display: block;
@@ -3185,7 +3182,7 @@ Cal.ns["30min"]("ui", {
     <div class="section-head reveal">
       <div class="eyebrow">Services</div>
       <h2 class="h-section">Ce que je fais, <em>concrètement.</em></h2>
-      <p class="lede">Trois types de projets reviennent souvent. Chaque mission est sur mesure , les lignes ci-dessous donnent l'idée, pas un menu fermé.</p>
+      <p class="lede">Trois formats de mission reviennent le plus souvent. Chaque projet reste sur mesure — les détails ci-dessous donnent un cadre, pas une grille fermée.</p>
     </div>
 
     <div class="services-grid">
@@ -3366,7 +3363,7 @@ Cal.ns["30min"]("ui", {
     <div class="pricing-foot reveal">
       <div class="pricing-foot-row">
         <span class="dot-mono">●</span>
-        <span><strong>Forfait fixe</strong>, pas de surprise. Devis précis après la phase de préconception.</span>
+        <span><strong>Tarifs indicatifs.</strong> Devis précis établi après la phase de préconception.</span>
       </div>
       <div class="pricing-foot-row">
         <span class="dot-mono">●</span>
@@ -3437,7 +3434,7 @@ Cal.ns["30min"]("ui", {
             <span class="work-tag">Projet en cours</span>
           </div>
           <h3 class="work-title">Le prochain <em>sera le tien ?</em></h3>
-          <p class="work-desc">J'ai volontairement peu de projets à montrer : je commence, je prends le temps de bien faire. Si tu veux être la deuxième réalisation publiée ici, on en parle.</p>
+          <p class="work-desc">Une sélection de projets récents. Pour discuter d'un cas similaire au tien ou voir d'autres réalisations en privé, contacte-moi.</p>
           <a href="#contact" class="work-link">
             Démarrer un projet
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -3529,7 +3526,7 @@ Cal.ns["30min"]("ui", {
           </button>
           <div class="faq-a">
             <div class="faq-a-spacer"></div>
-            <p class="faq-a-text">Ça dépend du projet. Un site vitrine démarre à <strong>1 200 €</strong>, une app web ou mobile à <strong>6 000 €</strong>, un MVP complet à partir de <strong>8 000 €</strong>. On cadre ensemble, je m'engage sur un forfait fixe, pas de surprise. Le devis précis arrive après la phase de préconception.</p>
+            <p class="faq-a-text">Ça dépend du projet. Un site vitrine démarre à <strong>1 200 €</strong>, une app web ou mobile à <strong>6 000 €</strong>, un MVP complet à partir de <strong>8 000 €</strong>. On cadre ensemble, je m'engage sur un budget précis, pas de surprise. Le devis précis arrive après la phase de préconception.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -3540,7 +3537,7 @@ Cal.ns["30min"]("ui", {
           </button>
           <div class="faq-a">
             <div class="faq-a-spacer"></div>
-            <p class="faq-a-text">Je choisis l'outil selon le projet, pas l'inverse. <strong>Next.js / React</strong>, <strong>Bubble</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L'important : que ton projet soit rapide à livrer, facile à faire évoluer, et qu'il n'y ait pas de dépendance forte à moi.</p>
+            <p class="faq-a-text">Je choisis l'outil selon le projet, pas l'inverse. <strong>Next.js / React</strong>, <strong>Bubble</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L'important : que ton projet soit rapide à livrer, facile à faire évoluer, et que tu puisses reprendre la main si besoin.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -3562,7 +3559,7 @@ Cal.ns["30min"]("ui", {
           </button>
           <div class="faq-a">
             <div class="faq-a-spacer"></div>
-            <p class="faq-a-text">Je suis basé à <strong>Saint-Marcellin (38)</strong>. Je me déplace volontiers pour la première rencontre et les points importants dans toute la région Auvergne-Rhône-Alpes. Pour le reste, visio et messagerie, souvent plus efficace.</p>
+            <p class="faq-a-text">Basé à <strong>Saint-Marcellin (38)</strong>. Je travaille en visio et messagerie pour la majorité des échanges — plus rapide et plus efficace. Déplacement possible en Auvergne-Rhône-Alpes pour les rencontres clés.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -3615,10 +3612,6 @@ Cal.ns["30min"]("ui", {
           <div class="contact-meta-item">
             <span class="label">Engagement</span>
             <span class="value">Aucun</span>
-          </div>
-          <div class="contact-meta-item">
-            <span class="label">Téléphone</span>
-            <a class="value" href="tel:+33688649584">06 88 64 95 84</a>
           </div>
         </div>
         <div class="contact-direct">
