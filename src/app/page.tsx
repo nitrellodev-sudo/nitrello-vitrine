@@ -1,6 +1,29 @@
+import CalEmbedScript from "@/components/CalEmbedScript";
+import ContactForm from "@/components/ContactForm";
+import FaqAccordion from "@/components/FaqAccordion";
+import FloatingCTA from "@/components/FloatingCTA";
+import HeaderScrollState from "@/components/HeaderScrollState";
+import HeroTypewriter from "@/components/HeroTypewriter";
+import HologramPortrait from "@/components/HologramPortrait";
+import MobileNav from "@/components/MobileNav";
+import RevealOnScroll from "@/components/RevealOnScroll";
+import ScrollProgress from "@/components/ScrollProgress";
+import ThemeToggle from "@/components/ThemeToggle";
+
+
 export default function Home() {
   return (
     <div>
+      {/* Composants invisibles : posent les listeners sur les éléments existants */}
+      <ScrollProgress />
+      <HeaderScrollState />
+      <MobileNav />
+      <RevealOnScroll />
+      <FaqAccordion />
+      <FloatingCTA />
+      <HologramPortrait />
+      <CalEmbedScript />
+
       <div className="scroll-progress" aria-hidden="true"></div>
       {/* ============================================================
            HEADER
@@ -32,15 +55,7 @@ export default function Home() {
               <li><a href="#faq">FAQ</a></li>
             </ul>
             <div className="nav-cta">
-              <button className="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème">
-                <svg className="theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-                </svg>
-                <svg className="theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
-                </svg>
-              </button>
+              <ThemeToggle />
               <a href="#contact" className="btn btn-ghost">En discuter</a>
               <button className="nav-toggle" aria-label="Menu" id="nav-toggle">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
@@ -65,7 +80,7 @@ export default function Home() {
               <div className="eyebrow reveal">Nicolas Tinnirello, Freelance</div>
               <h1 className="h-display reveal r-1">
                 Ton idée devient <br />
-                <span className="accent" id="typed"><span id="typed-text"></span><span className="caret"></span></span>
+                <HeroTypewriter />
               </h1>
               <p className="lede reveal r-2">
                 Je conçois des applications web et mobile, des outils internes et des automatisations pour des PME, indépendants et porteurs de projet. Chaque projet commence par une conversation.
@@ -637,271 +652,10 @@ export default function Home() {
               </div>
             </div>
 
-            <form className="contact-form reveal r-1" id="contact-form">
-              {/* Honeypot anti-spam : caché aux humains, rempli automatiquement par les bots */}
-              <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none' }} />
-              <div className="form-head">
-                <span className="form-num">/ FORMULAIRE</span>
-                <h3>Décris-moi ton projet en quelques mots.</h3>
-              </div>
-
-              <div className="form-field">
-                <label className="form-label">
-                  <span className="form-label-num">01</span>
-                  <span className="form-label-text">Type de projet</span>
-                </label>
-                <div className="form-radios">
-                  <label className="form-radio"><input type="radio" name="type" value="vitrine" required /><span>Site vitrine</span></label>
-                  <label className="form-radio"><input type="radio" name="type" value="webapp" /><span>App web ou mobile</span></label>
-                  <label className="form-radio"><input type="radio" name="type" value="tool" /><span>Outil interne</span></label>
-                  <label className="form-radio"><input type="radio" name="type" value="auto" /><span>Automatisation</span></label>
-                  <label className="form-radio"><input type="radio" name="type" value="other" /><span>Autre / je ne sais pas</span></label>
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-field">
-                  <label className="form-label" htmlFor="cf-name">
-                    <span className="form-label-num">02</span>
-                    <span className="form-label-text">Ton prénom</span>
-                  </label>
-                  <input id="cf-name" type="text" name="name" placeholder="Camille" required />
-                </div>
-                <div className="form-field">
-                  <label className="form-label" htmlFor="cf-email">
-                    <span className="form-label-num">03</span>
-                    <span className="form-label-text">Ton email</span>
-                  </label>
-                  <input id="cf-email" type="email" name="email" placeholder="camille@exemple.com" required />
-                </div>
-              </div>
-
-              <div className="form-field">
-                <label className="form-label" htmlFor="cf-company">
-                  <span className="form-label-num">04</span>
-                  <span className="form-label-text">Entreprise <span className="form-opt">(optionnel)</span></span>
-                </label>
-                <input id="cf-company" type="text" name="company" placeholder="Le nom de ta boîte, si tu en as une" />
-              </div>
-
-              <div className="form-field">
-                <label className="form-label" htmlFor="cf-msg">
-                  <span className="form-label-num">05</span>
-                  <span className="form-label-text">Ton message</span>
-                </label>
-                <textarea id="cf-msg" name="message" rows={5} placeholder="Raconte-moi en quelques lignes : le contexte, ce que tu veux faire, où tu en es, le délai si tu en as un." required></textarea>
-              </div>
-
-              <div className="form-field form-rgpd-field">
-                <label className="form-checkbox-label">
-                  <input type="checkbox" name="rgpd" id="cf-rgpd" required />
-                  <span className="form-checkbox-text">J&apos;accepte que mes données soient utilisées pour traiter ma demande.</span>
-                </label>
-              </div>
-
-              <div className="form-footer">
-                <button type="submit" className="btn btn-primary form-submit">
-                  Envoyer mon message
-                  <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-                </button>
-                <span className="form-foot-note">Je te réponds personnellement, sous 24h ouvrées.</span>
-              </div>
-            </form>
-
-            {/* Message de succès hors du form pour conserver la hauteur de la card */}
-            <div className="form-success" id="form-success" hidden>
-              <div className="form-success-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-              </div>
-              <p className="form-success-title">Message reçu.</p>
-              <p className="form-success-sub">Je te réponds sous 24h ouvrées.</p>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
-
-      {/* ============================================================
-           MODAL DEVIS , conversation guidée
-           ============================================================ */}
-      <div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div className="modal">
-          <div className="modal-header">
-            <div className="modal-header-title" id="modal-title">
-              <span className="dot"></span>
-              Conversation · Nitrello
-            </div>
-            <button className="modal-close" aria-label="Fermer">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
-            </button>
-          </div>
-          <div className="modal-progress"><div className="modal-progress-bar" id="progress-bar"></div></div>
-
-          <div className="modal-body" id="modal-body">
-            {/* Step 1: type of project */}
-            <div className="modal-step active" data-step="1">
-              <div className="modal-prompt">Question 1/4</div>
-              <div className="modal-q">Raconte-moi, <em>c&apos;est quoi ton projet ?</em></div>
-              <div className="modal-hint">Choisis ce qui s&apos;en rapproche le plus , on précisera ensuite.</div>
-              <div className="modal-options">
-                <button className="modal-option" data-field="type" data-value="site">
-                  <span className="opt-icon">01</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Un site vitrine</span>
-                    <span className="opt-desc">Présenter mon activité, attirer des clients</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="type" data-value="app">
-                  <span className="opt-icon">02</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Une app web ou mobile</span>
-                    <span className="opt-desc">Un produit avec comptes, données, interactions</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="type" data-value="tool">
-                  <span className="opt-icon">03</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Un outil interne</span>
-                    <span className="opt-desc">Pour mon équipe, remplacer un Excel, un process</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="type" data-value="auto">
-                  <span className="opt-icon">04</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Une automatisation</span>
-                    <span className="opt-desc">Connecter mes outils, gagner du temps</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="type" data-value="other">
-                  <span className="opt-icon">05</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Je ne sais pas encore</span>
-                    <span className="opt-desc">J&apos;ai une idée mais j&apos;ai besoin d&apos;en parler</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Step 2: timing */}
-            <div className="modal-step" data-step="2">
-              <div className="modal-prompt">Question 2/4</div>
-              <div className="modal-q">Pour <em>quand ?</em></div>
-              <div className="modal-hint">Le délai m&apos;aide à savoir si je peux m&apos;engager sérieusement.</div>
-              <div className="modal-options">
-                <button className="modal-option" data-field="timing" data-value="asap">
-                  <span className="opt-icon">!</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Le plus vite possible</span>
-                    <span className="opt-desc">Dans les 2-4 semaines</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="timing" data-value="1-3m">
-                  <span className="opt-icon">1-3</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Dans 1 à 3 mois</span>
-                    <span className="opt-desc">J&apos;ai un peu de temps devant moi</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="timing" data-value="3m+">
-                  <span className="opt-icon">3+</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Plus tard dans l&apos;année</span>
-                    <span className="opt-desc">Je veux cadrer maintenant, démarrer plus tard</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="timing" data-value="unknown">
-                  <span className="opt-icon">?</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Je ne sais pas encore</span>
-                    <span className="opt-desc">On en discute</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Step 3: budget */}
-            <div className="modal-step" data-step="3">
-              <div className="modal-prompt">Question 3/4</div>
-              <div className="modal-q">Ton <em>budget approximatif ?</em></div>
-              <div className="modal-hint">Pas besoin d&apos;un chiffre précis. Une fourchette m&apos;aide à calibrer la réponse.</div>
-              <div className="modal-options">
-                <button className="modal-option" data-field="budget" data-value="<3k">
-                  <span className="opt-icon">€</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Moins de 3 000 €</span>
-                    <span className="opt-desc">Un site vitrine ou un petit outil</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="budget" data-value="3-8k">
-                  <span className="opt-icon">€€</span>
-                  <span className="opt-main">
-                    <span className="opt-title">3 000 à 8 000 €</span>
-                    <span className="opt-desc">Une application simple, un MVP</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="budget" data-value="8-20k">
-                  <span className="opt-icon">€€€</span>
-                  <span className="opt-main">
-                    <span className="opt-title">8 000 à 20 000 €</span>
-                    <span className="opt-desc">Un produit plus ambitieux</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="budget" data-value="20k+">
-                  <span className="opt-icon">€+</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Plus de 20 000 €</span>
-                    <span className="opt-desc">Un projet sérieux, je sais où je vais</span>
-                  </span>
-                </button>
-                <button className="modal-option" data-field="budget" data-value="unknown">
-                  <span className="opt-icon">?</span>
-                  <span className="opt-main">
-                    <span className="opt-title">Je n&apos;en ai aucune idée</span>
-                    <span className="opt-desc">Tu m&apos;aideras à estimer</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Step 4: contact */}
-            <div className="modal-step" data-step="4">
-              <div className="modal-prompt">Dernière étape</div>
-              <div className="modal-q">Comment <em>je te recontacte ?</em></div>
-              <div className="modal-hint">Je te réponds personnellement sous 24h.</div>
-              <div className="modal-field">
-                <input className="modal-input" type="text" id="f-name" placeholder="Ton prénom" autoComplete="given-name" />
-              </div>
-              <div className="modal-field">
-                <input className="modal-input" type="email" id="f-email" placeholder="Ton email" autoComplete="email" />
-              </div>
-              <div className="modal-field">
-                <textarea className="modal-textarea" id="f-message" placeholder="Dis-moi en 2-3 phrases ce que tu veux faire (optionnel)"></textarea>
-              </div>
-            </div>
-
-            {/* Step 5: success */}
-            <div className="modal-step" data-step="5">
-              <div className="modal-summary">
-                <div className="success-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5" /></svg>
-                </div>
-                <h3>C&apos;est noté, <em>merci.</em></h3>
-                <p>Je reviens vers toi par mail sous 24h avec mes premières pistes et quelques questions pour préciser. En attendant, voici le récap de ce que tu m&apos;as dit :</p>
-                <div className="recap" id="recap"></div>
-                <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Parfait, à bientôt</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="modal-footer" id="modal-footer">
-            <button className="modal-back" id="modal-back" disabled>← Retour</button>
-            <span className="modal-step-count" id="step-count">1 / 4</span>
-            <button className="btn btn-primary" id="modal-next" style={{ fontSize: '13px', padding: '10px 18px' }}>
-              Continuer
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* ============================================================
            FOOTER
