@@ -1,28 +1,40 @@
 import type { MetadataRoute } from "next";
+import { getAllPublishedPosts } from "@/lib/blog";
 
-/**
- * Génère dynamiquement /sitemap.xml à partir de cette route Next.js.
- * Convention App Router : https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
- *
- * Note : les articles de blog seront ajoutés ici en Phase 1 SEO,
- * en lisant la table Supabase `blog_posts` (status=published).
- */
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 60;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://nitrello.com";
-  const lastModified = new Date();
+  const now = new Date();
 
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/`,
-      lastModified,
+      url: baseUrl + "/",
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/card/`,
-      lastModified,
+      url: baseUrl + "/blog",
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: baseUrl + "/card/",
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.5,
     },
   ];
+
+  const posts = await getAllPublishedPosts();
+  const articlePages: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: baseUrl + "/blog/" + post.slug,
+    lastModified: post.published_at ? new Date(post.published_at) : now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...articlePages];
 }
