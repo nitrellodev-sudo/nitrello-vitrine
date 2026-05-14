@@ -42,10 +42,11 @@ export const metadata: Metadata = {
     "Nicolas Tinnirello, développeur freelance. Je conçois des applications web et mobile, des outils internes et des automatisations pour PME, indépendants et startups.",
   keywords: [
     "développeur freelance",
-    "no-code",
-    "Bubble",
+    "développeur Next.js",
+    "développeur React Native",
+    "développement IA",
+    "SaaS sur-mesure",
     "automatisation",
-    "n8n",
     "applications web",
     "applications mobile",
     "Grenoble",
@@ -123,7 +124,7 @@ const jsonLd = {
       name: "Nicolas Tinnirello",
       url: "https://nitrello.com",
       image: "https://nitrello.com/nicolas.png",
-      jobTitle: "Développeur freelance no-code, IA et automatisation",
+      jobTitle: "Développeur freelance web, mobile et IA",
       worksFor: {
         "@id": "https://nitrello.com/#nitrello",
       },
