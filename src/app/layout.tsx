@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // ============================================
@@ -203,6 +204,7 @@ export default function RootLayout({
           {JSON.stringify(jsonLd)}
         </Script>
         {children}
+        <Analytics />
       </body>
     </html>
   );
