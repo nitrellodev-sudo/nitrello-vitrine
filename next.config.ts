@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
 
   // ============================================
   // Headers de securite (best practices 2026)
+  // + Content-Type explicite pour les fichiers .vcf
   // ============================================
   async headers() {
     return [
@@ -50,6 +51,19 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+      {
+        source: "/:path*.vcf",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/vcard; charset=utf-8",
+          },
+          {
+            key: "Content-Disposition",
+            value: "attachment",
           },
         ],
       },
