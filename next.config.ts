@@ -57,6 +57,22 @@ const nextConfig: NextConfig = {
   },
 
   // ============================================
+  // Rewrites - mapping /card et /card/ vers le HTML statique
+  // ============================================
+  async rewrites() {
+    return [
+      {
+        source: "/card",
+        destination: "/card/index.html",
+      },
+      {
+        source: "/card/",
+        destination: "/card/index.html",
+      },
+    ];
+  },
+
+  // ============================================
   // Redirections SEO (preservation referencement)
   // ============================================
   async redirects() {
