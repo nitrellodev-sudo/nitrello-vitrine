@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import HeaderScrollState from "@/components/HeaderScrollState";
 import MobileNav from "@/components/MobileNav";
 import ScrollProgress from "@/components/ScrollProgress";
+import ScrollRestoration from "@/components/ScrollRestoration";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
@@ -208,6 +209,7 @@ export default function RootLayout({
         >
           {JSON.stringify(jsonLd)}
         </Script>
+        <ScrollRestoration />
         <ScrollProgress />
         <HeaderScrollState />
         <MobileNav />
