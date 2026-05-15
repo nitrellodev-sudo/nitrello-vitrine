@@ -2989,3 +2989,231 @@ a.contact-row:hover { color: var(--cyan); }
   margin: 2.5rem 0;
 }
 
+/* ============================================================
+   BLOG ARTICLE — Breadcrumbs, Layout 2 colonnes, TOC sticky
+   Mobile-first. Breakpoints : 768px, 1280px.
+   ============================================================ */
+
+/* Compense le header fixe de 90px lors du scroll vers une ancre. */
+.blog-article__content h2,
+.blog-article__content h3 {
+  scroll-margin-top: 90px;
+}
+
+/* --- Breadcrumbs (fil d'Ariane) -------------------------------- */
+
+.blog-breadcrumbs {
+  margin: 0 0 2rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--stone);
+}
+
+.blog-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.blog-breadcrumbs__separator {
+  color: var(--stone-light);
+  user-select: none;
+}
+
+.blog-breadcrumbs__link {
+  color: var(--stone);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.blog-breadcrumbs__link:hover,
+.blog-breadcrumbs__link:focus-visible {
+  color: var(--ink);
+}
+
+.blog-breadcrumbs__link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.blog-breadcrumbs__current {
+  color: var(--ink);
+  display: inline-block;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+/* --- Layout (mobile-first : pile verticale) -------------------- */
+
+.blog-article__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blog-article__main {
+  min-width: 0;
+}
+
+/* TOC au-dessus du contenu sur mobile/tablette. */
+.blog-article__sidebar {
+  order: -1;
+}
+
+/* --- TOC mobile (collapsible) ---------------------------------- */
+
+.blog-toc {
+  border: 1px solid var(--mist);
+  background: var(--mist);
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.blog-toc__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-align: left;
+}
+
+.blog-toc__toggle:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.blog-toc__toggle-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--stone);
+  font-weight: 300;
+}
+
+.blog-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0 0.25rem;
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--stone-pale);
+  margin-top: 0.5rem;
+}
+
+.blog-toc__list[data-open="true"] {
+  display: flex;
+}
+
+.blog-toc__item {
+  margin: 0;
+}
+
+.blog-toc__item--h3 {
+  padding-left: 1rem;
+}
+
+.blog-toc__link {
+  display: block;
+  min-height: 44px;
+  padding: 0.6rem 0 0.6rem 0.75rem;
+  border-left: 2px solid transparent;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--stone);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.blog-toc__link:hover {
+  color: var(--ink);
+}
+
+.blog-toc__link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.blog-toc__link--active {
+  color: var(--ink);
+  border-left-color: var(--cyan);
+}
+
+/* --- Tablette ≥ 768px ------------------------------------------ */
+
+@media (min-width: 768px) {
+  .blog-toc {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .blog-breadcrumbs__current {
+    max-width: none;
+    white-space: normal;
+  }
+}
+
+/* --- Desktop ≥ 1280px : grid 2 colonnes + sidebar sticky ------- */
+
+@media (min-width: 1280px) {
+  .blog-article {
+    max-width: 1100px;
+  }
+
+  .blog-article__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .blog-article__sidebar {
+    order: 0;
+    position: sticky;
+    top: 90px;
+  }
+
+  /* Sur desktop, la TOC est toujours ouverte ; on cache le toggle. */
+  .blog-toc {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .blog-toc__toggle {
+    display: none;
+  }
+
+  .blog-toc__list {
+    display: flex;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
