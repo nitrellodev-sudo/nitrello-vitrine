@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllPublishedPosts } from "@/lib/blog";
+import { TAG_LABELS, formatDate } from "@/lib/blog-format";
 
 export const metadata: Metadata = {
   title: "Blog — Nitrello",
@@ -21,23 +22,6 @@ export const metadata: Metadata = {
 
 // ISR : revalidation toutes les 60 secondes
 export const revalidate = 60;
-
-// Mapping des tags vers des labels lisibles (les 4 piliers éditoriaux)
-const TAG_LABELS: Record<string, string> = {
-  "solutions-techniques": "Solutions techniques",
-  "collaboration-client": "Collaboration client",
-  "independance-projet": "Indépendance projet",
-  "vie-de-freelance": "Vie de freelance",
-};
-
-function formatDate(isoDate: string | null): string {
-  if (!isoDate) return "";
-  return new Date(isoDate).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 
 export default async function BlogIndexPage() {
   const posts = await getAllPublishedPosts();

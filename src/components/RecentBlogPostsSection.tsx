@@ -1,25 +1,6 @@
-// TODO: extraire TAG_LABELS et formatDate dans src/lib/blog-format.ts à la prochaine occasion
-// (actuellement dupliqués entre src/app/blog/page.tsx, src/app/blog/[slug]/page.tsx
-// et ce composant — single source of truth à créer).
-
 import Link from "next/link";
 import { getAllPublishedPosts } from "@/lib/blog";
-
-const TAG_LABELS: Record<string, string> = {
-  "solutions-techniques": "Solutions techniques",
-  "collaboration-client": "Collaboration client",
-  "independance-projet": "Indépendance projet",
-  "vie-de-freelance": "Vie de freelance",
-};
-
-function formatDate(isoDate: string | null): string {
-  if (!isoDate) return "";
-  return new Date(isoDate).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+import { TAG_LABELS, formatDate } from "@/lib/blog-format";
 
 export default async function RecentBlogPostsSection() {
   const posts = await getAllPublishedPosts(3);

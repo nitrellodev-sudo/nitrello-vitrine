@@ -13,26 +13,11 @@ import {
   stripInlineMarkdown,
   type FaqEntry,
 } from "@/lib/blog-utils";
-
-const TAG_LABELS: Record<string, string> = {
-  "solutions-techniques": "Solutions techniques",
-  "collaboration-client": "Collaboration client",
-  "independance-projet": "Indépendance projet",
-  "vie-de-freelance": "Vie de freelance",
-};
+import { TAG_LABELS, formatDate } from "@/lib/blog-format";
 
 const SITE_URL = "https://nitrello.com";
 
 // --- Helpers Markdown / SEO ---------------------------------------------
-
-function formatDate(isoDate: string | null): string {
-  if (!isoDate) return "";
-  return new Date(isoDate).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 
 // --- Marked configuration -----------------------------------------------
 
