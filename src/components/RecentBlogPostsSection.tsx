@@ -1,28 +1,10 @@
+// TODO: extraire TAG_LABELS et formatDate dans src/lib/blog-format.ts à la prochaine occasion
+// (actuellement dupliqués entre src/app/blog/page.tsx, src/app/blog/[slug]/page.tsx
+// et ce composant — single source of truth à créer).
+
 import Link from "next/link";
-import type { Metadata } from "next";
 import { getAllPublishedPosts } from "@/lib/blog";
 
-export const metadata: Metadata = {
-  title: "Blog — Nitrello",
-  description:
-    "Réflexions et retours d'expérience de Nicolas Tinnirello sur le développement web/mobile/IA, la collaboration client, et la vie de freelance.",
-  alternates: {
-    canonical: "https://nitrello.com/blog",
-  },
-  openGraph: {
-    title: "Blog Nitrello",
-    description:
-      "Le carnet de bord d'un freelance dev full-stack. Solutions techniques, collaboration client, indépendance projet, vie de freelance.",
-    url: "https://nitrello.com/blog",
-    type: "website",
-    locale: "fr_FR",
-  },
-};
-
-// ISR : revalidation toutes les 60 secondes
-export const revalidate = 60;
-
-// Mapping des tags vers des labels lisibles (les 4 piliers éditoriaux)
 const TAG_LABELS: Record<string, string> = {
   "solutions-techniques": "Solutions techniques",
   "collaboration-client": "Collaboration client",
@@ -39,32 +21,22 @@ function formatDate(isoDate: string | null): string {
   });
 }
 
-export default async function BlogIndexPage() {
-  const posts = await getAllPublishedPosts();
+export default async function RecentBlogPostsSection() {
+  const posts = await getAllPublishedPosts(3);
+
+  if (posts.length === 0) return null;
 
   return (
-    <main className="blog-page">
-      <header className="blog-page__header">
-        <p className="blog-page__kicker">— LE CARNET</p>
-        <h1 className="blog-page__title">Blog</h1>
-        <p className="blog-page__intro">
-          Mes réflexions, retours d&apos;expérience et coulisses de freelance
-          dev. Solutions techniques, collaboration client, indépendance projet,
-          vie de freelance.
-        </p>
-      </header>
+    <section id="recent-posts" className="recent-posts">
+      <div className="container">
+        <header className="recent-posts__header reveal">
+          <p className="recent-posts__kicker">— LE CARNET</p>
+          <h2 className="recent-posts__title">Articles récents</h2>
+        </header>
 
-      {posts.length === 0 ? (
-        <div className="blog-page__empty">
-          <p>
-            Aucun article publié pour l&apos;instant. Le premier arrive
-            bientôt.
-          </p>
-        </div>
-      ) : (
-        <ul className="blog-page__list">
+        <ul className="recent-posts__grid">
           {posts.map((post) => (
-            <li key={post.id} className="blog-card">
+            <li key={post.id} className="blog-card recent-posts__card">
               <Link
                 href={`/blog/${post.slug}`}
                 className="blog-card__link"
@@ -84,7 +56,7 @@ export default async function BlogIndexPage() {
                     </span>
                   )}
                 </div>
-                <h2 className="blog-card__title">{post.title}</h2>
+                <h3 className="blog-card__title">{post.title}</h3>
                 {post.excerpt && (
                   <p className="blog-card__excerpt">{post.excerpt}</p>
                 )}
@@ -101,7 +73,24 @@ export default async function BlogIndexPage() {
             </li>
           ))}
         </ul>
-      )}
-    </main>
+
+        <div className="recent-posts__footer">
+          <Link href="/blog" className="recent-posts__see-all">
+            Voir tous les articles
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

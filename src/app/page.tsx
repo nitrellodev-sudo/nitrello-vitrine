@@ -4,6 +4,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroTypewriter from "@/components/HeroTypewriter";
 import HologramPortrait from "@/components/HologramPortrait";
+import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
 
 
@@ -423,6 +424,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ============================================================
+           ARTICLES RÉCENTS (3 derniers articles du blog)
+           ============================================================ */}
+      <RecentBlogPostsSection />
 
       {/* ============================================================
            À PROPOS

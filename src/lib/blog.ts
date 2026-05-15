@@ -12,8 +12,10 @@ export type BlogPostPreview = Pick<
   | "published_at"
 >;
 
-export async function getAllPublishedPosts(): Promise<BlogPostPreview[]> {
-  const { data, error } = await supabase
+export async function getAllPublishedPosts(
+  limit?: number
+): Promise<BlogPostPreview[]> {
+  let query = supabase
     .from("blog_posts")
     .select(
       "id, slug, title, excerpt, cover_image_url, tags, reading_time_min, published_at"
@@ -21,6 +23,12 @@ export async function getAllPublishedPosts(): Promise<BlogPostPreview[]> {
     .eq("site_id", "nitrello")
     .eq("status", "published")
     .order("published_at", { ascending: false });
+
+  if (typeof limit === "number") {
+    query = query.limit(limit);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("[blog] Erreur getAllPublishedPosts:", error);
