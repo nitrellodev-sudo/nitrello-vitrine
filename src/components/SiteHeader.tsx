@@ -25,6 +25,7 @@ export default function SiteHeader() {
             <li><a href="/#method">Méthode</a></li>
             <li><a href="/#pricing">Tarifs</a></li>
             <li><a href="/#work">Réalisations</a></li>
+            <li><a href="/blog">Blog</a></li>
             <li><a href="/#about">À propos</a></li>
             <li><a href="/#faq">FAQ</a></li>
           </ul>
