@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import HeaderScrollState from "@/components/HeaderScrollState";
+import MobileNav from "@/components/MobileNav";
+import ScrollProgress from "@/components/ScrollProgress";
+import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
 // ============================================
@@ -186,7 +190,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
+    <html suppressHydrationWarning
       lang="fr"
       className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
@@ -204,6 +208,11 @@ export default function RootLayout({
         >
           {JSON.stringify(jsonLd)}
         </Script>
+        <ScrollProgress />
+        <HeaderScrollState />
+        <MobileNav />
+        <div className="scroll-progress" aria-hidden="true"></div>
+        <SiteHeader />
         {children}
         <Analytics />
       </body>
