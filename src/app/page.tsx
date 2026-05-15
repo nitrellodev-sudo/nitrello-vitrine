@@ -1,3 +1,4 @@
+import CalButton from "@/components/CalButton";
 import CalEmbedScript from "@/components/CalEmbedScript";
 import ContactForm from "@/components/ContactForm";
 import FaqAccordion from "@/components/FaqAccordion";
@@ -603,10 +604,10 @@ export default function Home() {
                   <span>contact@nitrello.com</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
                 </a>
-                <a href="https://cal.com/nicolas-2j0lvm/30min" className="contact-direct-row" data-cal-namespace="30min" data-cal-link="nicolas-2j0lvm/30min" data-cal-config={'{"layout":"month_view"}'}>
+                <CalButton href="https://cal.com/nicolas-2j0lvm/30min" className="contact-direct-row">
                   <span>Réserver un appel · 30 min</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-                </a>
+                </CalButton>
               </div>
             </div>
 
@@ -668,19 +669,16 @@ export default function Home() {
       </footer>
 
       {/* Floating CTA : reste visible pendant le scroll */}
-      <a
+      <CalButton
         href="https://cal.com/nicolas-2j0lvm/30min"
         className="float-cta"
         id="float-cta"
-        data-cal-namespace="30min"
-        data-cal-link="nicolas-2j0lvm/30min"
-        data-cal-config={'{"layout":"month_view"}'}
-        aria-label="Réserver un appel de 30 minutes"
+        ariaLabel="Réserver un appel de 30 minutes"
       >
         <span className="float-cta-dot" aria-hidden="true"></span>
         <span>Réserver un appel<span className="float-cta-label-long"> · 30 min</span></span>
         <svg className="float-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-      </a>
+      </CalButton>
     </div>
   );
 }
