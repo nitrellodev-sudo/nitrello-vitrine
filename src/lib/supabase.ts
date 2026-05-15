@@ -50,6 +50,7 @@ export type BlogPost = {
   excerpt: string | null;
   content_md: string;
   cover_image_url: string | null;
+  cover_image_alt: string | null;
   meta_title: string | null;
   meta_description: string | null;
   og_image_url: string | null;

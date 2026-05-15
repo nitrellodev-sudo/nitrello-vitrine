@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -16,6 +17,28 @@ import {
 import { TAG_LABELS, formatDate } from "@/lib/blog-format";
 
 const SITE_URL = "https://nitrello.com";
+
+// Crédits photo des covers d'articles. Conditionnel par slug, en dur.
+// Quand on aura 3+ articles avec crédit (Rule of Three), on évaluera un
+// pattern Map / colonne BDD selon la structure réelle observée.
+function renderCoverCredit(slug: string) {
+  if (slug === "methode-discovery-cahier-des-charges-actionnable") {
+    return (
+      <figcaption className="blog-article__cover-credit">
+        Photo&nbsp;:{" "}
+        <a
+          href="https://unsplash.com/@kellysikkema"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Kelly Sikkema
+        </a>{" "}
+        / Unsplash
+      </figcaption>
+    );
+  }
+  return null;
+}
 
 // --- Helpers Markdown / SEO ---------------------------------------------
 
@@ -238,49 +261,53 @@ export default async function BlogArticlePage({ params }: Props) {
           </ol>
         </nav>
 
-        <header className="blog-article__header">
-          {post.tags.length > 0 && (
-            <div className="blog-article__tags">
-              {post.tags.map((tag) => (
-                <span key={tag} className="blog-article__tag">
-                  {TAG_LABELS[tag] ?? tag}
-                </span>
-              ))}
-            </div>
-          )}
-
-          <h1 className="blog-article__title">{post.title}</h1>
-
-          {post.excerpt && (
-            <p className="blog-article__excerpt">{post.excerpt}</p>
-          )}
-
-          <div className="blog-article__meta">
-            <time
-              dateTime={post.published_at ?? ""}
-              className="blog-article__date"
-            >
-              {formatDate(post.published_at)}
-            </time>
-            <span className="blog-article__reading-time">
-              · {readingTime} min de lecture
-            </span>
-          </div>
-        </header>
-
-        {post.cover_image_url && (
-          <figure className="blog-article__cover">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.cover_image_url}
-              alt={post.title}
-              className="blog-article__cover-img"
-            />
-          </figure>
-        )}
-
         <div className="blog-article__layout">
           <article className="blog-article__main">
+            <header className="blog-article__header">
+              {post.tags.length > 0 && (
+                <div className="blog-article__tags">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="blog-article__tag">
+                      {TAG_LABELS[tag] ?? tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <h1 className="blog-article__title">{post.title}</h1>
+
+              {post.excerpt && (
+                <p className="blog-article__excerpt">{post.excerpt}</p>
+              )}
+
+              <div className="blog-article__meta">
+                <time
+                  dateTime={post.published_at ?? ""}
+                  className="blog-article__date"
+                >
+                  {formatDate(post.published_at)}
+                </time>
+                <span className="blog-article__reading-time">
+                  · {readingTime} min de lecture
+                </span>
+              </div>
+            </header>
+
+            {post.cover_image_url && (
+              <figure className="blog-article__cover">
+                <Image
+                  src={post.cover_image_url}
+                  alt={post.cover_image_alt ?? post.title}
+                  width={1600}
+                  height={900}
+                  priority
+                  sizes="(max-width: 768px) 100vw, 760px"
+                  className="blog-article__cover-img"
+                />
+                {renderCoverCredit(post.slug)}
+              </figure>
+            )}
+
             <div
               className="blog-article__content prose"
               dangerouslySetInnerHTML={{ __html: contentHtml }}

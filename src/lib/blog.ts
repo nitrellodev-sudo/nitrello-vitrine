@@ -7,6 +7,7 @@ export type BlogPostPreview = Pick<
   | "title"
   | "excerpt"
   | "cover_image_url"
+  | "cover_image_alt"
   | "tags"
   | "reading_time_min"
   | "published_at"
@@ -18,7 +19,7 @@ export async function getAllPublishedPosts(
   let query = supabase
     .from("blog_posts")
     .select(
-      "id, slug, title, excerpt, cover_image_url, tags, reading_time_min, published_at"
+      "id, slug, title, excerpt, cover_image_url, cover_image_alt, tags, reading_time_min, published_at"
     )
     .eq("site_id", "nitrello")
     .eq("status", "published")

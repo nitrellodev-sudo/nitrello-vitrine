@@ -2932,6 +2932,27 @@ a.contact-row:hover { color: var(--cyan); }
   display: block;
 }
 
+.blog-article__cover-credit {
+  margin-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--stone);
+  text-align: right;
+}
+
+.blog-article__cover-credit a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-article__cover-credit a:hover {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+
 .blog-article__content {
   font-size: 1.0625rem;
   line-height: 1.75;
@@ -3367,4 +3388,42 @@ a.contact-row:hover { color: var(--cyan); }
 .recent-posts__see-all:hover svg {
   transform: translateX(2px);
 }
+
+/* ============================================================
+   BlogCard — cover image (16:9 strict) + variantes list/card
+   Additif : aucune classe existante n'est modifiée ou supprimée.
+   ============================================================ */
+.blog-card__cover {
+  position: relative;
+  margin: 0 0 1rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--mist);
+}
+
+.blog-card__cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Variante list (/blog) : desktop ≥768px → image à gauche 38 %, texte à droite.
+   Mobile : layout par défaut (block) → image stackée au-dessus du texte. */
+@media (min-width: 768px) {
+  .blog-card--list .blog-card__link:has(.blog-card__cover) {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+
+  .blog-card--list .blog-card__cover {
+    margin-bottom: 0;
+  }
+}
+
+/* Variante card (home, RecentBlogPostsSection) : layout par défaut (block).
+   L'image s'empile naturellement au-dessus du body sur toutes les tailles. */
 

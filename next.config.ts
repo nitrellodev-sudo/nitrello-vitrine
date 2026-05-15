@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+const supabaseHostname = new URL(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!
+).hostname;
+
 const nextConfig: NextConfig = {
   // ============================================
   // Reactivite stricte - aide a detecter les bugs
@@ -17,6 +21,13 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 an
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: supabaseHostname,
+        pathname: "/storage/v1/object/public/blog-images/**",
+      },
+    ],
   },
 
   // ============================================

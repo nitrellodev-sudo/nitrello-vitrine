@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getAllPublishedPosts } from "@/lib/blog";
-import { TAG_LABELS, formatDate } from "@/lib/blog-format";
+import BlogCard from "@/components/blog/BlogCard";
 
 export default async function RecentBlogPostsSection() {
   const posts = await getAllPublishedPosts(3);
@@ -17,57 +17,7 @@ export default async function RecentBlogPostsSection() {
 
         <ul className="recent-posts__grid">
           {posts.map((post) => (
-            <li key={post.id} className="blog-card recent-posts__card">
-              <Link
-                href={`/blog/${post.slug}`}
-                className="blog-card__link"
-                prefetch={true}
-                scroll={true}
-              >
-                <div className="blog-card__meta">
-                  <time
-                    dateTime={post.published_at ?? ""}
-                    className="blog-card__date"
-                  >
-                    {formatDate(post.published_at)}
-                  </time>
-                  {post.reading_time_min !== null && (
-                    <span className="blog-card__reading-time">
-                      · {post.reading_time_min} min de lecture
-                    </span>
-                  )}
-                </div>
-                <h3 className="blog-card__title">{post.title}</h3>
-                {post.excerpt && (
-                  <p className="blog-card__excerpt">{post.excerpt}</p>
-                )}
-                {post.tags.length > 0 && (
-                  <div className="blog-card__tags">
-                    {post.tags.map((tag) => (
-                      <span key={tag} className="blog-card__tag">
-                        {TAG_LABELS[tag] ?? tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <span className="blog-card__read-more">
-                  Lire l&apos;article
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
-            </li>
+            <BlogCard key={post.id} post={post} variant="card" />
           ))}
         </ul>
 
