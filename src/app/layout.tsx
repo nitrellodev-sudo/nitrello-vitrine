@@ -151,8 +151,6 @@ const jsonLd = {
       areaServed: { "@type": "Country", name: "France" },
       founder: { "@id": "https://nitrello.com/#nicolas" },
       sameAs: [
-        "https://www.linkedin.com/in/nitrello",
-        "https://www.malt.fr/profile/nicolastinnirello",
         "https://www.instagram.com/nitrello",
         "https://www.facebook.com/share/1DhpLQ9SKR/",
       ],
