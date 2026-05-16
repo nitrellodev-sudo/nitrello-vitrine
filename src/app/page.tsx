@@ -539,7 +539,7 @@ export default function Home() {
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Basé à <strong>Saint-Marcellin (38)</strong>. Je travaille en visio et messagerie pour la majorité des échanges — plus rapide et plus efficace. Déplacement possible en Auvergne-Rhône-Alpes pour les rencontres clés.</p>
+                  <p className="faq-a-text">Basé à <strong>Saint-Sauveur (38)</strong>, à côté de Grenoble. Je travaille en visio et messagerie pour la majorité des échanges — plus rapide et plus efficace. Déplacement possible en Auvergne-Rhône-Alpes pour les rencontres clés.</p>
                 </div>
               </div>
               <div className="faq-item">
@@ -615,58 +615,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ============================================================
-           FOOTER
-           ============================================================ */}
-      <footer id="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <a href="#" className="nav-logo" style={{ color: 'var(--fg-inverse)' }}>
-                <svg viewBox="0 0 85 80" aria-hidden="true" style={{ width: '26px', height: '26px' }}>
-                  <defs>
-                    <linearGradient id="logo-grad-f" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0" stopColor="#00BFFF" />
-                      <stop offset="1" stopColor="#7B2FFF" />
-                    </linearGradient>
-                  </defs>
-                  <g transform="scale(0.19277)">
-                    <path d="m51.23,344.11C5.58,291.62-12.74,217.37,9.33,146.18,35.46,61.87,110.73,6.07,193.93.45,198.67.13,203.44,0,208.23,0c8.73.19,35.69,2.11,55.78,18.17,37.69,31.8,53.73,83.53,38.47,132.75l-34.56,111.5c-1,3.22-3.41,4.06-5.27,4.22-1.84.15-4.35-.31-5.84-3.33l-63.93-128.84c-8.15-16.38-25.26-25.96-43.51-24.3-18.04,1.65-33.06,14.63-38.43,31.93l-59.56,201.04-.16.95Z" fill="#00BFFF" />
-                    <path d="m364.09,71.13c45.7,52.49,64.04,126.78,41.96,198.02-26.13,84.31-101.38,140.11-184.58,145.73-.5.03-1.01.07-1.51.09-39.59,2.4-77.62-17.8-96.88-52.47-.66-1.2-1.31-2.41-1.94-3.63-15.28-29.72-17.55-64.45-7.66-96.37l34.16-110.19c1-3.22,3.41-4.07,5.27-4.23,1.84-.14,4.36.32,5.86,3.33l63.93,128.84c8.06,16.23,24.93,25.78,42.99,24.34,18.08-1.45,33.22-13.58,38.59-30.9l59.8-202.56Z" fill="url(#logo-grad-f)" />
-                  </g>
-                </svg>
-                <span>Nitrello</span>
-              </a>
-              <p>Nicolas Tinnirello · Freelance développeur. Applications web et mobile, outils internes, automatisations.</p>
-            </div>
-            <div className="footer-col">
-              <h5>Site</h5>
-              <a href="#services">Services</a>
-              <a href="#method">Méthode</a>
-              <a href="#pricing">Tarifs</a>
-              <a href="#work">Réalisations</a>
-              <a href="#about">À propos</a>
-            </div>
-            <div className="footer-col">
-              <h5>Contact</h5>
-              <a href="mailto:contact@nitrello.com">contact@nitrello.com</a>
-              <a href="#contact">Formulaire</a>
-            </div>
-            <div className="footer-col">
-              <h5>Ailleurs</h5>
-              <a href="https://www.linkedin.com/in/nitrello" target="_blank" rel="noopener">LinkedIn</a>
-              <a href="https://www.malt.fr/profile/nicolastinnirello" target="_blank" rel="noopener">Malt</a>
-              <a href="https://www.instagram.com/nitrello" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="https://www.facebook.com/share/1DhpLQ9SKR/" target="_blank" rel="noopener noreferrer">Facebook</a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <div>© 2025 Nitrello · Nicolas Tinnirello</div>
-            <div>Saint-Marcellin, 38160</div>
-          </div>
-        </div>
-      </footer>
 
       {/* Floating CTA : reste visible pendant le scroll */}
       <CalButton

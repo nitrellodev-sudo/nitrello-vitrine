@@ -6,6 +6,7 @@ import HeaderScrollState from "@/components/HeaderScrollState";
 import MobileNav from "@/components/MobileNav";
 import ScrollProgress from "@/components/ScrollProgress";
 import ScrollRestoration from "@/components/ScrollRestoration";
+import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
@@ -55,8 +56,10 @@ export const metadata: Metadata = {
     "applications web",
     "applications mobile",
     "Grenoble",
-    "Saint-Marcellin",
+    "Saint-Sauveur",
     "Isère",
+    "Voiron",
+    "Pays Voironnais",
   ],
   authors: [{ name: "Nicolas Tinnirello", url: "https://nitrello.com" }],
   creator: "Nicolas Tinnirello",
@@ -118,11 +121,42 @@ export const viewport: Viewport = {
 };
 
 // ============================================
-// JSON-LD SCHEMA.ORG - structure pour Google E-E-A-T
+// JSON-LD SCHEMA.ORG — LocalBusiness + Person
+// LocalBusiness : meilleur signal pour le SEO local que ProfessionalService
+// Sans streetAddress (réservé aux mentions légales, à venir)
+// Sans geo (sur-précision inutile pour activité freelance distribuée)
 // ============================================
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://nitrello.com/#business",
+      name: "Nitrello",
+      alternateName: "Nitrello — Nicolas Tinnirello",
+      description:
+        "Freelance dev web, mobile et IA. Sites internet, applications, outils internes et automatisations IA pour les PME et indépendants à Grenoble et partout en France.",
+      url: "https://nitrello.com",
+      image: "https://nitrello.com/nicolas.png",
+      logo: "https://nitrello.com/favicon.svg",
+      telephone: "+33688649584",
+      email: "contact@nitrello.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Saint-Sauveur",
+        postalCode: "38160",
+        addressRegion: "Isère",
+        addressCountry: "FR",
+      },
+      areaServed: { "@type": "Country", name: "France" },
+      founder: { "@id": "https://nitrello.com/#nicolas" },
+      sameAs: [
+        "https://www.linkedin.com/in/nitrello",
+        "https://www.malt.fr/profile/nicolastinnirello",
+        "https://www.instagram.com/nitrello",
+        "https://www.facebook.com/share/1DhpLQ9SKR/",
+      ],
+    },
     {
       "@type": "Person",
       "@id": "https://nitrello.com/#nicolas",
@@ -130,39 +164,20 @@ const jsonLd = {
       url: "https://nitrello.com",
       image: "https://nitrello.com/nicolas.png",
       jobTitle: "Développeur freelance web, mobile et IA",
-      worksFor: {
-        "@id": "https://nitrello.com/#nitrello",
-      },
+      worksFor: { "@id": "https://nitrello.com/#business" },
+      knowsAbout: [
+        "Développement web",
+        "Développement mobile",
+        "Intelligence artificielle",
+        "Automatisation",
+        "Next.js",
+        "Supabase",
+        "TypeScript",
+      ],
       sameAs: [
         "https://www.linkedin.com/in/nitrello",
         "https://www.malt.fr/profile/nicolastinnirello",
-        "https://www.instagram.com/nitrello",
       ],
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": "https://nitrello.com/#nitrello",
-      name: "Nitrello",
-      url: "https://nitrello.com",
-      logo: "https://nitrello.com/favicon.svg",
-      image: "https://nitrello.com/nicolas.png",
-      description:
-        "Développement freelance d'applications web et mobile, outils internes et automatisations IA pour PME, indépendants et startups.",
-      founder: { "@id": "https://nitrello.com/#nicolas" },
-      areaServed: { "@type": "Country", name: "France" },
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Saint-Marcellin",
-        addressRegion: "Isère",
-        addressCountry: "FR",
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        email: "contact@nitrello.com",
-        telephone: "+33688649584",
-        availableLanguage: ["French"],
-      },
     },
   ],
 };
@@ -216,6 +231,7 @@ export default function RootLayout({
         <div className="scroll-progress" aria-hidden="true"></div>
         <SiteHeader />
         {children}
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

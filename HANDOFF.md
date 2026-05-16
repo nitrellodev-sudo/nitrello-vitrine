@@ -1,5 +1,34 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-05-16
+
+### Réalisé
+- **Correction adresse Saint-Marcellin → Saint-Sauveur** sur l'ensemble du repo (5 occurrences corrigées dans `src/app/layout.tsx` × 2, `src/app/page.tsx` × 2, `public/card/nicolas-tinnirello.vcf`). L'occurrence dans `src/app/page.tsx:393` (client Esprit Auto) a été volontairement laissée intacte — c'est l'adresse d'un client, pas la nôtre.
+- **Footer refondu en composant `src/components/SiteFooter.tsx`** monté dans `src/app/layout.tsx` → s'affiche désormais sur **toutes** les pages, y compris `/blog` et `/blog/[slug]` qui n'avaient aucun footer auparavant.
+- **NAP exposé** : Nicolas Tinnirello · Saint-Sauveur 38160 · Isère + email `contact@nitrello.com` + téléphone `06 88 64 95 84` cliquable (`href="tel:+33688649584"` en E.164, affichage humain au format FR).
+- **Phrase géo SEO local** : « Freelance dev web, mobile et IA en Isère. Pour les PME et indépendants à Grenoble et partout en France. »
+- **JSON-LD refondu** : remplacement `ProfessionalService + Person` → `LocalBusiness + Person` (LocalBusiness = meilleur signal SEO local pour Google). `@id` Person conservé à `#nicolas` pour préserver l'entité déjà indexée. Sans `streetAddress` (volontaire, à compléter quand les mentions légales seront en place) ni `geo` (sur-précision inutile pour freelance distribué).
+- **Keywords élargis** : ajout `Voiron`, `Pays Voironnais` à la liste existante (Grenoble + Isère gardés, Saint-Marcellin remplacé par Saint-Sauveur).
+- **vCard mise à jour** : `public/card/nicolas-tinnirello.vcf` reflète la correction d'adresse.
+- **FAQ enrichie** : la réponse "Où es-tu basé ?" précise maintenant "Saint-Sauveur (38), à côté de Grenoble" pour ancrer le repère géographique côté lecteur (Saint-Sauveur seul n'évoque rien à 99 % des visiteurs).
+- **CSS** : ancienne convention `#footer / .footer-grid / .footer-col` remplacée par BEM `.site-footer__*`. Utility `.sr-only` ajoutée pour les headings de section accessibles.
+
+### Dette technique consciente notée
+- **Pages `/mentions-legales` et `/politique-confidentialite`** : liens présents dans le footer mais pages **inexistantes** → 404 attendue jusqu'à création. À traiter en session ultérieure (probable Chantier E2 — pages légales).
+- **`streetAddress` du JSON-LD** : volontairement omis. À ajouter lors de la création des mentions légales (adresse exacte : `36 Impasse du Domaine du Mûrier`, à confirmer).
+- **SIRET** : non mentionné dans le copyright du footer (absent du repo). À intégrer aussi quand on fera les mentions légales.
+
+### Pièges identifiés / Notes techniques
+- **Footer désormais global** : monter `<SiteFooter />` dans `layout.tsx` impacte toutes les routes. Validé volontairement comme correction de regression (les pages blog n'avaient aucun footer). À surveiller si on ajoute des routes "tunnel" (checkout, onboarding) où le footer pourrait gêner — auquel cas il faudra un layout dédié pour ces routes.
+- **Stabilité `@id` JSON-LD** : on a conservé `https://nitrello.com/#nicolas` pour la Person malgré le passage de ProfessionalService → LocalBusiness, pour ne pas signaler à Google un changement d'entité côté Person. Le LocalBusiness, lui, change d'`@id` (`#nitrello` → `#business`) ET de `@type` simultanément — c'est cohérent puisque c'est sémantiquement une nouvelle entité.
+
+### Prochaine étape probable
+Au choix :
+- **Chantier E2** — Pages mentions légales + politique de confidentialité (résorbe la dette technique footer).
+- **Chantier B Phase 2** — Module Blog dans le CRM (UI éditoriale, comme noté en session précédente).
+
+---
+
 ## Session du 2026-05-15
 
 ### Réalisé
@@ -35,6 +64,4 @@
 - À surveiller en prod : vérifier que `cover_image_url` charge bien depuis l'URL Supabase (notamment que `next/image` optimization Vercel respecte le `remotePatterns`).
 
 ### Prochaine étape probable
-Au choix de Nicolas en début de prochaine session :
-- **Chantier E** — Footer SEO local (NAP, structured data LocalBusiness, etc.).
-- **Chantier B Phase 2** — Module Blog dans le CRM (UI éditoriale : créer/éditer un article avec preview, ce qui activerait pleinement la colonne `cover_image_alt` ajoutée aujourd'hui).
+*(Décision prise en session 2026-05-16 : Chantier E livré — footer SEO local + correction adresse Saint-Sauveur. Voir section du 2026-05-16 ci-dessus.)*
