@@ -1,5 +1,29 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-05-16 (suite, Chantier E2)
+
+### Réalisé
+- **Pages `/mentions-legales` et `/politique-confidentialite` créées** (Server Components, 760px réutilisant les classes `.blog-page` + `.blog-article__content` existantes, zéro nouvelle classe CSS).
+- **Mentions légales** (LCEN art. 6) : identité éditeur, hébergeurs Vercel Inc. (USA) + Supabase Pte. Ltd. (Singapour, données AWS Dublin UE), propriété intellectuelle avec mention marque NITRELLO™ déposée INPI n° 5244582 le 03/04/2026, droit applicable français, juridiction Tribunal judiciaire de Grenoble.
+- **Politique de confidentialité** (RGPD art. 13-14) : 4 traitements documentés (Vercel Analytics cookieless, localStorage thème, formulaire contact, Cal.com), 6 sous-traitants listés (Vercel, Supabase, Cal.com, Railway, Brevo, Notion) avec mécanismes de transfert (DPF + CCT), conservation prospects 3 ans, droits RGPD complets.
+- **JSON-LD LocalBusiness mis à jour** : ajout de `streetAddress` `"36 Impasse du Domaine du Mûrier"` → résorbe le warning "streetAddress manquant" du Google Rich Results Test.
+
+### Dette technique résorbée
+- ✅ Pages `/mentions-legales` et `/politique-confidentialite` : ne renvoient plus 404, le footer pointe désormais vers du contenu réel.
+- ✅ `streetAddress` manquant dans JSON-LD : ajouté.
+
+### Vérifications attendues avant push
+- [ ] `npm run build` passe green
+- [ ] Visite des 2 nouvelles pages en dev local (`/mentions-legales` et `/politique-confidentialite`)
+- [ ] Vérification que le footer continue d'afficher les liens (logique standard)
+- [ ] Re-test Google Rich Results après push pour vérifier disparition du warning `streetAddress`
+- [ ] Pas de régression sur les pages existantes
+
+### Prochaine étape probable
+**Chantier B Phase 2** — Module Blog dans le CRM Nitrello (active enfin la colonne `cover_image_alt` créée le 15 mai, libère Nico du SQL Editor Supabase pour éditer ses articles).
+
+---
+
 ## Session du 2026-05-16
 
 ### Réalisé
@@ -23,9 +47,7 @@
 - **Stabilité `@id` JSON-LD** : on a conservé `https://nitrello.com/#nicolas` pour la Person malgré le passage de ProfessionalService → LocalBusiness, pour ne pas signaler à Google un changement d'entité côté Person. Le LocalBusiness, lui, change d'`@id` (`#nitrello` → `#business`) ET de `@type` simultanément — c'est cohérent puisque c'est sémantiquement une nouvelle entité.
 
 ### Prochaine étape probable
-Au choix :
-- **Chantier E2** — Pages mentions légales + politique de confidentialité (résorbe la dette technique footer).
-- **Chantier B Phase 2** — Module Blog dans le CRM (UI éditoriale, comme noté en session précédente).
+*(Décision prise en session 2026-05-16 (suite) : Chantier E2 livré — pages légales + streetAddress JSON-LD. Voir section "Chantier E2" en haut du document.)*
 
 ---
 

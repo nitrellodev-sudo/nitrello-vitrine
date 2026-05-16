@@ -143,6 +143,7 @@ const jsonLd = {
       email: "contact@nitrello.com",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "36 Impasse du Domaine du Mûrier",
         addressLocality: "Saint-Sauveur",
         postalCode: "38160",
         addressRegion: "Isère",
