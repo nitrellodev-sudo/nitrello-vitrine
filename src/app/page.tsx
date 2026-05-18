@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import FaqAccordion from "@/components/FaqAccordion";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroTypewriter from "@/components/HeroTypewriter";
+import PricingInteractive from "@/components/PricingInteractive";
 import HologramPortrait from "@/components/HologramPortrait";
 import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -192,80 +193,7 @@ export default function Home() {
             <p className="pricing-intro">Des points de départ pour situer un projet. Le prix exact se définit après la préconception, en fonction de tes besoins réels.</p>
           </div>
 
-          <div className="pricing-grid">
-
-            <article className="price-card reveal">
-              <div className="price-head">
-                <div className="price-num">01</div>
-                <h3 className="price-title">Vitrine <em>sur mesure</em></h3>
-                <p className="price-desc">Pour les indépendants et PME qui veulent un site qui leur ressemble, pas un template parmi d&apos;autres.</p>
-              </div>
-              <div className="price-amount">
-                <span className="price-from">à partir de</span>
-                <span className="price-value">1{' '}200<span className="price-unit"> € HT</span></span>
-              </div>
-              <ul className="price-list">
-                <li>Design personnalisé</li>
-                <li>3 à 6 pages</li>
-                <li>Formulaire intelligent</li>
-                <li>Hébergement &amp; mise en ligne</li>
-                <li>Livré en 1 à 2 semaines</li>
-              </ul>
-              <a href="#contact" className="price-cta">
-                En parler
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </a>
-            </article>
-
-            <article className="price-card price-featured reveal r-1">
-              <div className="price-tag">Le plus demandé</div>
-              <div className="price-head">
-                <div className="price-num">02</div>
-                <h3 className="price-title">Application <em>web ou mobile</em></h3>
-                <p className="price-desc">Plateforme métier, SaaS, marketplace, espace client, configurateur, app iOS / Android. Côté utilisateur comme côté admin.</p>
-              </div>
-              <div className="price-amount">
-                <span className="price-from">à partir de</span>
-                <span className="price-value">6{' '}000<span className="price-unit"> € HT</span></span>
-              </div>
-              <ul className="price-list">
-                <li>Cadrage UX &amp; maquettes</li>
-                <li>Authentification &amp; rôles</li>
-                <li>Base de données dédiée</li>
-                <li>Back-office sur mesure</li>
-                <li>Intégrations API</li>
-                <li>1 mois de suivi inclus</li>
-              </ul>
-              <a href="#contact" className="price-cta price-cta-primary">
-                Démarrer le projet
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </a>
-            </article>
-
-            <article className="price-card reveal r-2">
-              <div className="price-head">
-                <div className="price-num">03</div>
-                <h3 className="price-title">MVP <em>startup</em></h3>
-                <p className="price-desc">Pour valider une idée vite. On livre une V1 utilisable et on ajuste avec les premiers retours.</p>
-              </div>
-              <div className="price-amount">
-                <span className="price-from">à partir de</span>
-                <span className="price-value">8{' '}000<span className="price-unit"> € HT</span></span>
-              </div>
-              <ul className="price-list">
-                <li>Cadrage produit &amp; user-flow</li>
-                <li>Design produit complet</li>
-                <li>Front + back + admin</li>
-                <li>Onboarding utilisateurs</li>
-                <li>Paiement / abonnement</li>
-                <li>Suivi après lancement</li>
-              </ul>
-              <a href="#contact" className="price-cta">
-                En parler
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </a>
-            </article>
-          </div>
+          <PricingInteractive />
 
           <div className="pricing-foot reveal">
             <div className="pricing-foot-row">
@@ -283,22 +211,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ============================================================
-           BAND DIVIDER
-           ============================================================ */}
-      <div className="band-divider" aria-hidden="true">
-        <div className="band-track">
-          <div className="band-item">Sites sur mesure <em>livrés vite</em></div>
-          <div className="band-item">Apps web &amp; mobile <em>qui tiennent</em></div>
-          <div className="band-item">Outils internes <em>pour tes équipes</em></div>
-          <div className="band-item">Automatisations <em>qui font gagner du temps</em></div>
-          <div className="band-item">Sites sur mesure <em>livrés vite</em></div>
-          <div className="band-item">Apps web &amp; mobile <em>qui tiennent</em></div>
-          <div className="band-item">Outils internes <em>pour tes équipes</em></div>
-          <div className="band-item">Automatisations <em>qui font gagner du temps</em></div>
-        </div>
-      </div>
 
       {/* ============================================================
            RÉALISATIONS
@@ -334,26 +246,9 @@ export default function Home() {
               </a>
             </article>
 
-            {/* Placeholder 2 */}
-            <article className="work-item reveal r-1">
-              <div className="work-meta">
-                <div className="work-tags">
-                  <span className="work-tag">Projet en cours</span>
-                </div>
-                <h3 className="work-title">Le prochain <em>sera le tien ?</em></h3>
-                <p className="work-desc">Une sélection de projets récents. Pour discuter d&apos;un cas similaire au tien ou voir d&apos;autres réalisations en privé, contacte-moi.</p>
-                <a href="#contact" className="work-link">
-                  Démarrer un projet
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-                </a>
-              </div>
-              <div className="work-visual placeholder">
-                <div className="ph-content">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M12 5v14M5 12h14" /></svg>
-                  <div className="ph-label">Espace disponible</div>
-                </div>
-              </div>
-            </article>
+            <p className="work-cta-line reveal">
+              D&apos;autres projets en cours, en discussion privée. Pour en discuter, <a href="#contact">c&apos;est ici &rarr;</a>
+            </p>
           </div>
         </div>
       </section>
