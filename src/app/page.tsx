@@ -28,6 +28,7 @@ export default function Home() {
           <div className="blob blob-2"></div>
           <div className="blob blob-3"></div>
         </div>
+        <div className="hero-mark" aria-hidden="true"></div>
         <div className="container">
           <div className="hero-inner">
             <div className="hero-copy">
@@ -46,75 +47,6 @@ export default function Home() {
                 </a>
                 <a href="#work" className="btn btn-ghost">Voir les réalisations</a>
               </div>
-            </div>
-            <div className="hero-visual reveal r-2" aria-hidden="true">
-              {/* Hero Flow motif , idée qui devient application */}
-              <svg viewBox="0 0 520 546" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                  <linearGradient id="hero-grad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#00BFFF" />
-                    <stop offset="1" stopColor="#7B2FFF" />
-                  </linearGradient>
-                  <linearGradient id="hero-grad-soft" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#00BFFF" stopOpacity="0.08" />
-                    <stop offset="1" stopColor="#7B2FFF" stopOpacity="0.08" />
-                  </linearGradient>
-                </defs>
-
-                {/* grid */}
-                <g stroke="#111" strokeOpacity="0.06" strokeWidth="1">
-                  <line x1="0" y1="136" x2="520" y2="136" />
-                  <line x1="0" y1="273" x2="520" y2="273" />
-                  <line x1="0" y1="410" x2="520" y2="410" />
-                  <line x1="130" y1="0" x2="130" y2="546" />
-                  <line x1="260" y1="0" x2="260" y2="546" />
-                  <line x1="390" y1="0" x2="390" y2="546" />
-                </g>
-
-                {/* Left : idea node (handwritten-ish) */}
-                <g transform="translate(50,60)">
-                  <rect x="0" y="0" width="180" height="130" fill="#FFFFFF" stroke="#111" strokeWidth="1.5" rx="2" />
-                  <text x="16" y="28" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#888880" letterSpacing="2">01 · IDÉE</text>
-                  <text x="16" y="60" fontFamily="Fraunces, serif" fontStyle="italic" fontWeight="300" fontSize="22" fill="#111">« On pourrait</text>
-                  <text x="16" y="88" fontFamily="Fraunces, serif" fontStyle="italic" fontWeight="300" fontSize="22" fill="#111">faire un outil</text>
-                  <text x="16" y="116" fontFamily="Fraunces, serif" fontStyle="italic" fontWeight="300" fontSize="22" fill="#111">pour... »</text>
-                </g>
-
-                {/* Middle: crafting / lines */}
-                <g transform="translate(180,240)">
-                  <circle cx="0" cy="0" r="68" fill="none" stroke="url(#hero-grad)" strokeWidth="1.5" strokeDasharray="3 6" />
-                  <circle cx="0" cy="0" r="44" fill="none" stroke="url(#hero-grad)" strokeWidth="1" />
-                  <circle cx="0" cy="0" r="8" fill="url(#hero-grad)" />
-                </g>
-
-                {/* Right : application card */}
-                <g transform="translate(280,290)">
-                  <rect x="0" y="0" width="200" height="220" fill="#111" rx="10" />
-                  <rect x="12" y="12" width="176" height="22" fill="#1a1a1a" rx="4" />
-                  <circle cx="22" cy="23" r="3" fill="#00BFFF" />
-                  <circle cx="32" cy="23" r="3" fill="#7B2FFF" />
-                  <circle cx="42" cy="23" r="3" fill="#888880" />
-                  <rect x="12" y="46" width="120" height="8" fill="#FAFAF7" opacity="0.9" rx="2" />
-                  <rect x="12" y="62" width="80" height="6" fill="#888880" rx="2" />
-                  <rect x="12" y="86" width="176" height="42" fill="url(#hero-grad)" opacity="0.85" rx="6" />
-                  <text x="22" y="112" fontFamily="Inter, sans-serif" fontSize="13" fill="#fff" fontWeight="500">Nouveau projet</text>
-                  <rect x="12" y="140" width="84" height="36" fill="#1a1a1a" stroke="#2a2a2a" rx="4" />
-                  <rect x="104" y="140" width="84" height="36" fill="#1a1a1a" stroke="#2a2a2a" rx="4" />
-                  <rect x="12" y="184" width="176" height="24" fill="#1a1a1a" rx="4" />
-                </g>
-
-                {/* Connecting curve */}
-                <path d="M230,125 Q 260,180 180,240" fill="none" stroke="#111" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.3" />
-                <path d="M246,240 Q 300,200 280,310" fill="none" stroke="url(#hero-grad)" strokeWidth="1.5" opacity="0.7" />
-
-                {/* Small floating labels */}
-                <g transform="translate(380,50)" opacity="0.75">
-                  <text fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#888880" letterSpacing="2">CONVERSATION</text>
-                </g>
-                <g transform="translate(40,460)" opacity="0.75">
-                  <text fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#888880" letterSpacing="2">CONCEPTION · BUILD · LIVRAISON</text>
-                </g>
-              </svg>
             </div>
           </div>
         </div>
