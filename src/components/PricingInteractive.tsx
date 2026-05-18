@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 type Tier = {
@@ -82,6 +82,19 @@ function getPosition(tierId: number, activeId: number, total: number): Position 
 
 export default function PricingInteractive() {
   const [activeId, setActiveId] = useState<number>(1);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 600);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const goNext = () => setActiveId((activeId + 1) % TIERS.length);
+  const goPrev = () => setActiveId((activeId - 1 + TIERS.length) % TIERS.length);
+
+  const lateralOffset = isMobile ? "100vw" : "55%";
 
   return (
     <div className="pricing-carousel">
@@ -103,12 +116,19 @@ export default function PricingInteractive() {
               aria-label={`Offre ${tier.title} ${tier.subtitle}, à partir de ${tier.price} euros HT${isCenter ? "" : ", cliquer pour sélectionner"}`}
               tabIndex={0}
               animate={{
-                x: position === "prev" ? "-55%" : position === "next" ? "55%" : "0%",
+                x: position === "prev" ? `-${lateralOffset}` : position === "next" ? lateralOffset : "0%",
                 scale: isCenter ? 1 : 0.85,
                 opacity: isCenter ? 1 : 0.5,
                 zIndex: isCenter ? 10 : 1,
               }}
               transition={{ duration: 0.4, ease: EASE }}
+              drag={isMobile && isCenter ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.3}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -50) goNext();
+                else if (info.offset.x > 50) goPrev();
+              }}
             >
               {tier.featured && (
                 <span className="pricing-card-c__tag">Le plus demandé</span>

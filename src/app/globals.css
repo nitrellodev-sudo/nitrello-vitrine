@@ -936,7 +936,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-family: var(--sans);
   font-size: 14px;
   line-height: 1.55;
-  color: #B5B5AC;
+  color: var(--stone-inverse);
 }
 
 .site-footer__heading {
@@ -944,7 +944,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #888880;
+  color: var(--stone-inverse-soft);
   margin: 0 0 18px;
   font-weight: 500;
 }
@@ -991,7 +991,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-family: var(--mono);
   font-size: 13px;
   line-height: 1.5;
-  color: #D4D4CE;
+  color: var(--stone-inverse);
   text-decoration: none;
 }
 .site-footer__nap-line--name {
@@ -1013,7 +1013,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.03em;
-  color: #888880;
+  color: var(--stone-inverse-soft);
   margin: 0;
 }
 .site-footer__legal {
@@ -1027,7 +1027,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.03em;
-  color: #888880;
+  color: var(--stone-inverse-soft);
   text-decoration: none;
 }
 .site-footer__legal a:hover,
@@ -1230,6 +1230,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   position: relative;
   width: 100%;
   margin-bottom: 56px;
+  overflow: hidden;
   isolation: isolate;
 }
 
@@ -1461,7 +1462,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   justify-content: space-between;
   gap: 8px;
   padding: 14px 20px;
-  border: 1px solid var(--ink);
+  background: #111111 !important;
+  color: #FAFAF7 !important;
+  border: 1px solid #111111 !important;
   border-radius: var(--radius-md);
   font-family: var(--sans);
   font-size: 14px;
@@ -1538,14 +1541,29 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 /* Responsive mobile : carrousel devient plus compact */
 @media (max-width: 900px) {
   .pricing-carousel__track {
-    height: 520px;
+    height: 600px;
   }
   .pricing-card-c {
     width: 320px;
     margin-left: -160px;
-    height: 520px;
-    padding: 20px 18px;
+    height: 600px;
+    padding: 22px 20px;
   }
+}
+
+/* Carrousel ajustement small mobile : 1 card visible, swipe natif */
+@media (max-width: 600px) {
+  .pricing-carousel__track {
+    height: 620px;
+  }
+  .pricing-card-c {
+    width: 320px;
+    margin-left: -160px;
+    height: 620px;
+    padding: 22px 20px;
+  }
+  .pricing-card-c__title { font-size: clamp(22px, 5.5vw, 28px); }
+  .pricing-card-c__value { font-size: clamp(34px, 8vw, 44px); }
 }
 
 .pricing-foot {
@@ -1831,7 +1849,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: #888880;
+  color: var(--stone);
   margin-top: 2px;
 }
 
@@ -3568,3 +3586,7 @@ a.contact-row:hover { color: var(--cyan); }
 /* Variante card (home, RecentBlogPostsSection) : layout par défaut (block).
    L'image s'empile naturellement au-dessus du body sur toutes les tailles. */
 
+/* Hero H1 ajustement mobile (anti-debordement "automatisation") */
+@media (max-width: 600px) {
+  .hero-copy h1.h-display { font-size: clamp(36px, 11vw, 56px); }
+}
