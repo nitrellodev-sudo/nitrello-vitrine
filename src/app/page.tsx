@@ -483,7 +483,7 @@ export default function Home() {
               <p className="lede" style={{ marginTop: '20px' }}>Six réponses honnêtes pour cadrer ton projet.</p>
               <div className="faq-direct">
                 <div className="label">Pas trouvé ta question ?</div>
-                <a href="mailto:contact@nicolastinnirello.fr">Écris-moi directement →</a>
+                <a href="mailto:contact@nitrello.com">Écris-moi directement →</a>
               </div>
             </div>
             <div className="faq-list reveal r-1">
@@ -517,7 +517,7 @@ export default function Home() {
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Je choisis l&apos;outil selon le projet, pas l&apos;inverse. <strong>Next.js / React</strong>, <strong>Bubble</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L&apos;important : que ton projet soit rapide à livrer, facile à faire évoluer, et que tu puisses reprendre la main si besoin.</p>
+                  <p className="faq-a-text">Je choisis l&apos;outil selon le projet, pas l&apos;inverse. <strong>Next.js / React</strong>, <strong>Expo / React Native</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L&apos;important : que ton projet soit rapide à livrer, facile à faire évoluer, et que tu puisses reprendre la main si besoin.</p>
                 </div>
               </div>
               <div className="faq-item">
