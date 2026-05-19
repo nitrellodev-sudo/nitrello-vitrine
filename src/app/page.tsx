@@ -188,7 +188,7 @@ export default function Home() {
           <div className="pricing-head reveal">
             <div>
               <div className="eyebrow">Tarifs</div>
-              <h2 className="h-section" style={{ marginTop: '24px' }}>Trois besoins, <em>trois bases de prix.</em></h2>
+              <h2 className="h-section">Trois projets-types. Trois budgets.</h2>
             </div>
             <p className="pricing-intro">Des points de départ pour situer un projet. Le prix exact se définit après la préconception, en fonction de tes besoins réels.</p>
           </div>
@@ -216,11 +216,12 @@ export default function Home() {
            RÉALISATIONS
            ============================================================ */}
       <section id="work">
+        <div className="work-mark" aria-hidden="true" />
         <div className="container">
           <div className="work-head reveal">
             <div>
               <div className="eyebrow">Réalisations</div>
-              <h2 className="h-section" style={{ marginTop: '24px' }}>Des projets, <em>en ligne, en production.</em></h2>
+              <h2 className="h-section">En ligne. En production. Pas dans un portfolio.</h2>
               <p className="lede">Chaque projet répond à un contexte précis. Voici ce qui tourne actuellement chez mes clients.</p>
             </div>
           </div>
@@ -288,7 +289,7 @@ export default function Home() {
             </div>
             <div className="about-body reveal r-1">
               <div className="eyebrow">À propos</div>
-              <h2 className="h-section">Salut, <em>moi c&apos;est Nicolas.</em></h2>
+              <h2 className="h-section">Nicolas Tinnirello. <em>Freelance, à Lyon.</em></h2>
               <p>Je suis développeur freelance. Je construis des applications web et mobile, des outils sur mesure pour des PME, des indépendants et des porteurs de projet qui veulent avancer vite et bien.</p>
               <p>J&apos;avance mieux quand un projet part d&apos;une vraie discussion : ton contexte, ton problème, tes utilisateurs. C&apos;est là qu&apos;on trouve le bon outil.</p>
               <p>Je travaille seul, en proximité. Tu as un interlocuteur, pas une agence. <em>Un projet unique, une relation directe.</em></p>
@@ -306,8 +307,8 @@ export default function Home() {
           <div className="faq-grid">
             <div className="faq-side reveal">
               <div className="eyebrow">Questions</div>
-              <h2 className="h-section" style={{ marginTop: '24px' }}>Ce qu&apos;on <em>me demande<br />souvent.</em></h2>
-              <p className="lede" style={{ marginTop: '20px' }}>Six réponses honnêtes pour cadrer ton projet.</p>
+              <h2 className="h-section">Les questions <em>qui reviennent.</em></h2>
+              <p className="lede">Six réponses honnêtes pour cadrer ton projet.</p>
               <div className="faq-direct">
                 <div className="label">Pas trouvé ta question ?</div>
                 <a href="mailto:contact@nitrello.com">Écris-moi directement →</a>
@@ -405,7 +406,7 @@ export default function Home() {
           <div className="contact-inner">
             <div className="reveal contact-intro">
               <div className="eyebrow">On en parle ?</div>
-              <h2 className="h-display" style={{ marginTop: '28px' }}>Ton projet, <em>notre première conversation.</em></h2>
+              <h2 className="h-display">Ton projet, <em>notre première conversation.</em></h2>
               <p className="lede">30 minutes au téléphone, sans engagement. Je t&apos;écoute, je pose des questions, je te dis honnêtement si je peux t&apos;aider, et comment.</p>
               <div className="contact-meta">
                 <div className="contact-meta-item">

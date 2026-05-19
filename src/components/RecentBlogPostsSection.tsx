@@ -12,7 +12,7 @@ export default async function RecentBlogPostsSection() {
       <div className="container">
         <header className="recent-posts__header reveal">
           <p className="recent-posts__kicker">— LE CARNET</p>
-          <h2 className="recent-posts__title">Articles récents</h2>
+          <h2 className="recent-posts__title">Articles, <em>récemment publiés.</em></h2>
         </header>
 
         <ul className="recent-posts__grid">

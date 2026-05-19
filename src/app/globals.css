@@ -832,6 +832,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: flex;
   flex-direction: column;
   gap: 4px;
+  position: relative;
+}
+.method-steps::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+  opacity: 0.4;
+  pointer-events: none;
 }
 .method-step {
   display: grid;
@@ -1605,6 +1617,29 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   padding: var(--gap-section) 0;
   background: var(--paper);
   border-top: 1px solid rgba(17,17,17,0.06);
+  position: relative;
+  overflow: hidden;
+}
+#work > .container {
+  position: relative;
+  z-index: 1;
+}
+.work-mark {
+  position: absolute;
+  top: 60px;
+  right: -40px;
+  width: 280px;
+  height: 280px;
+  background-image: url('/mark-nitrello.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .work-mark { display: none; }
 }
 .work-head {
   display: grid;
@@ -3467,6 +3502,10 @@ a.contact-row:hover { color: var(--cyan); }
   letter-spacing: -0.035em;
   color: var(--ink);
   margin: 0;
+}
+.recent-posts__title em {
+  font-weight: 300;
+  color: var(--stone);
 }
 
 .recent-posts__grid {
