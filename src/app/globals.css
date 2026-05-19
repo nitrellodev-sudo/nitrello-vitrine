@@ -647,7 +647,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    SERVICES
    ============================================================ */
 #services {
-  background: var(--paper);
+  background: var(--stone-pale);
   padding: var(--gap-section) 0;
   border-top: 1px solid rgba(17,17,17,0.06);
   border-bottom: 1px solid rgba(17,17,17,0.06);
@@ -1615,7 +1615,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    ============================================================ */
 #work {
   padding: var(--gap-section) 0;
-  background: var(--paper);
+  background: var(--stone-pale);
   border-top: 1px solid rgba(17,17,17,0.06);
   position: relative;
   overflow: hidden;
@@ -1898,7 +1898,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    ============================================================ */
 #about {
   padding: var(--gap-section) 0;
-  background: var(--mist);
+  background: var(--stone-pale);
   position: relative;
   overflow: hidden;
 }
@@ -2244,7 +2244,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    ============================================================ */
 #faq {
   padding: var(--gap-section) 0;
-  background: var(--paper);
+  background: var(--mist);
   border-top: 1px solid rgba(17,17,17,0.06);
   position: relative;
   overflow: hidden;
