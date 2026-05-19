@@ -552,10 +552,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   height: 70vw;
   max-width: 800px;
   max-height: 800px;
-  background-image: url('/mark-nitrello.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background-color: var(--ink);
+  mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
   opacity: 0.07;
   pointer-events: none;
   z-index: 0;
@@ -647,7 +646,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    SERVICES
    ============================================================ */
 #services {
-  background: var(--paper);
+  background: var(--stone-pale);
   padding: var(--gap-section) 0;
   border-top: 1px solid rgba(17,17,17,0.06);
   border-bottom: 1px solid rgba(17,17,17,0.06);
@@ -817,6 +816,23 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   opacity: 0.6;
 }
 #method .container { position: relative; z-index: 1; }
+.method-mark {
+  position: absolute;
+  bottom: 40px;
+  left: -30px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--ink);
+  mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  opacity: 0.025;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .method-mark { display: none; }
+}
 .method-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
@@ -1615,7 +1631,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    ============================================================ */
 #work {
   padding: var(--gap-section) 0;
-  background: var(--paper);
+  background: var(--stone-pale);
   border-top: 1px solid rgba(17,17,17,0.06);
   position: relative;
   overflow: hidden;
@@ -1630,10 +1646,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   right: -40px;
   width: 280px;
   height: 280px;
-  background-image: url('/mark-nitrello.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background-color: var(--ink);
+  mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
   opacity: 0.04;
   pointer-events: none;
   z-index: 0;
@@ -1898,7 +1913,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    ============================================================ */
 #about {
   padding: var(--gap-section) 0;
-  background: var(--mist);
+  background: var(--stone-pale);
   position: relative;
   overflow: hidden;
 }
@@ -2244,7 +2259,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    ============================================================ */
 #faq {
   padding: var(--gap-section) 0;
-  background: var(--paper);
+  background: var(--mist);
   border-top: 1px solid rgba(17,17,17,0.06);
   position: relative;
   overflow: hidden;
@@ -2263,6 +2278,24 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   opacity: 0.5;
 }
 #faq .container { position: relative; z-index: 1; }
+.faq-mark {
+  position: absolute;
+  top: 50%;
+  right: -60px;
+  width: 280px;
+  height: 280px;
+  background-color: var(--ink);
+  mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  opacity: 0.025;
+  transform: translateY(-50%) rotate(25deg);
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .faq-mark { display: none; }
+}
 .faq-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
