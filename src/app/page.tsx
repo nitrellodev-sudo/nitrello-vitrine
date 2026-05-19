@@ -290,7 +290,7 @@ export default function Home() {
             </div>
             <div className="about-body reveal r-1">
               <div className="eyebrow">À propos</div>
-              <h2 className="h-section">Nicolas Tinnirello. <em>Freelance, à Lyon.</em></h2>
+              <h2 className="h-section">Nicolas Tinnirello. <em>Freelance, côté Grenoble.</em></h2>
               <p>Je suis développeur freelance. Je construis des applications web et mobile, des outils sur mesure pour des PME, des indépendants et des porteurs de projet qui veulent avancer vite et bien.</p>
               <p>J&apos;avance mieux quand un projet part d&apos;une vraie discussion : ton contexte, ton problème, tes utilisateurs. C&apos;est là qu&apos;on trouve le bon outil.</p>
               <p>Je travaille seul, en proximité. Tu as un interlocuteur, pas une agence. <em>Un projet unique, une relation directe.</em></p>
