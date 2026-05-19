@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import FaqAccordion from "@/components/FaqAccordion";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroTypewriter from "@/components/HeroTypewriter";
+import PricingInteractive from "@/components/PricingInteractive";
 import HologramPortrait from "@/components/HologramPortrait";
 import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -28,6 +29,7 @@ export default function Home() {
           <div className="blob blob-2"></div>
           <div className="blob blob-3"></div>
         </div>
+        <div className="hero-mark" aria-hidden="true"></div>
         <div className="container">
           <div className="hero-inner">
             <div className="hero-copy">
@@ -46,75 +48,6 @@ export default function Home() {
                 </a>
                 <a href="#work" className="btn btn-ghost">Voir les réalisations</a>
               </div>
-            </div>
-            <div className="hero-visual reveal r-2" aria-hidden="true">
-              {/* Hero Flow motif , idée qui devient application */}
-              <svg viewBox="0 0 520 546" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                  <linearGradient id="hero-grad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#00BFFF" />
-                    <stop offset="1" stopColor="#7B2FFF" />
-                  </linearGradient>
-                  <linearGradient id="hero-grad-soft" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#00BFFF" stopOpacity="0.08" />
-                    <stop offset="1" stopColor="#7B2FFF" stopOpacity="0.08" />
-                  </linearGradient>
-                </defs>
-
-                {/* grid */}
-                <g stroke="#111" strokeOpacity="0.06" strokeWidth="1">
-                  <line x1="0" y1="136" x2="520" y2="136" />
-                  <line x1="0" y1="273" x2="520" y2="273" />
-                  <line x1="0" y1="410" x2="520" y2="410" />
-                  <line x1="130" y1="0" x2="130" y2="546" />
-                  <line x1="260" y1="0" x2="260" y2="546" />
-                  <line x1="390" y1="0" x2="390" y2="546" />
-                </g>
-
-                {/* Left : idea node (handwritten-ish) */}
-                <g transform="translate(50,60)">
-                  <rect x="0" y="0" width="180" height="130" fill="#FFFFFF" stroke="#111" strokeWidth="1.5" rx="2" />
-                  <text x="16" y="28" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#888880" letterSpacing="2">01 · IDÉE</text>
-                  <text x="16" y="60" fontFamily="Fraunces, serif" fontStyle="italic" fontWeight="300" fontSize="22" fill="#111">« On pourrait</text>
-                  <text x="16" y="88" fontFamily="Fraunces, serif" fontStyle="italic" fontWeight="300" fontSize="22" fill="#111">faire un outil</text>
-                  <text x="16" y="116" fontFamily="Fraunces, serif" fontStyle="italic" fontWeight="300" fontSize="22" fill="#111">pour... »</text>
-                </g>
-
-                {/* Middle: crafting / lines */}
-                <g transform="translate(180,240)">
-                  <circle cx="0" cy="0" r="68" fill="none" stroke="url(#hero-grad)" strokeWidth="1.5" strokeDasharray="3 6" />
-                  <circle cx="0" cy="0" r="44" fill="none" stroke="url(#hero-grad)" strokeWidth="1" />
-                  <circle cx="0" cy="0" r="8" fill="url(#hero-grad)" />
-                </g>
-
-                {/* Right : application card */}
-                <g transform="translate(280,290)">
-                  <rect x="0" y="0" width="200" height="220" fill="#111" rx="10" />
-                  <rect x="12" y="12" width="176" height="22" fill="#1a1a1a" rx="4" />
-                  <circle cx="22" cy="23" r="3" fill="#00BFFF" />
-                  <circle cx="32" cy="23" r="3" fill="#7B2FFF" />
-                  <circle cx="42" cy="23" r="3" fill="#888880" />
-                  <rect x="12" y="46" width="120" height="8" fill="#FAFAF7" opacity="0.9" rx="2" />
-                  <rect x="12" y="62" width="80" height="6" fill="#888880" rx="2" />
-                  <rect x="12" y="86" width="176" height="42" fill="url(#hero-grad)" opacity="0.85" rx="6" />
-                  <text x="22" y="112" fontFamily="Inter, sans-serif" fontSize="13" fill="#fff" fontWeight="500">Nouveau projet</text>
-                  <rect x="12" y="140" width="84" height="36" fill="#1a1a1a" stroke="#2a2a2a" rx="4" />
-                  <rect x="104" y="140" width="84" height="36" fill="#1a1a1a" stroke="#2a2a2a" rx="4" />
-                  <rect x="12" y="184" width="176" height="24" fill="#1a1a1a" rx="4" />
-                </g>
-
-                {/* Connecting curve */}
-                <path d="M230,125 Q 260,180 180,240" fill="none" stroke="#111" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.3" />
-                <path d="M246,240 Q 300,200 280,310" fill="none" stroke="url(#hero-grad)" strokeWidth="1.5" opacity="0.7" />
-
-                {/* Small floating labels */}
-                <g transform="translate(380,50)" opacity="0.75">
-                  <text fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#888880" letterSpacing="2">CONVERSATION</text>
-                </g>
-                <g transform="translate(40,460)" opacity="0.75">
-                  <text fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#888880" letterSpacing="2">CONCEPTION · BUILD · LIVRAISON</text>
-                </g>
-              </svg>
             </div>
           </div>
         </div>
@@ -255,85 +188,12 @@ export default function Home() {
           <div className="pricing-head reveal">
             <div>
               <div className="eyebrow">Tarifs</div>
-              <h2 className="h-section" style={{ marginTop: '24px' }}>Trois besoins, <em>trois bases de prix.</em></h2>
+              <h2 className="h-section">Trois projets-types. Trois budgets.</h2>
             </div>
             <p className="pricing-intro">Des points de départ pour situer un projet. Le prix exact se définit après la préconception, en fonction de tes besoins réels.</p>
           </div>
 
-          <div className="pricing-grid">
-
-            <article className="price-card reveal">
-              <div className="price-head">
-                <div className="price-num">01</div>
-                <h3 className="price-title">Vitrine <em>sur mesure</em></h3>
-                <p className="price-desc">Pour les indépendants et PME qui veulent un site qui leur ressemble, pas un template parmi d&apos;autres.</p>
-              </div>
-              <div className="price-amount">
-                <span className="price-from">à partir de</span>
-                <span className="price-value">1{' '}200<span className="price-unit"> € HT</span></span>
-              </div>
-              <ul className="price-list">
-                <li>Design personnalisé</li>
-                <li>3 à 6 pages</li>
-                <li>Formulaire intelligent</li>
-                <li>Hébergement &amp; mise en ligne</li>
-                <li>Livré en 1 à 2 semaines</li>
-              </ul>
-              <a href="#contact" className="price-cta">
-                En parler
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </a>
-            </article>
-
-            <article className="price-card price-featured reveal r-1">
-              <div className="price-tag">Le plus demandé</div>
-              <div className="price-head">
-                <div className="price-num">02</div>
-                <h3 className="price-title">Application <em>web ou mobile</em></h3>
-                <p className="price-desc">Plateforme métier, SaaS, marketplace, espace client, configurateur, app iOS / Android. Côté utilisateur comme côté admin.</p>
-              </div>
-              <div className="price-amount">
-                <span className="price-from">à partir de</span>
-                <span className="price-value">6{' '}000<span className="price-unit"> € HT</span></span>
-              </div>
-              <ul className="price-list">
-                <li>Cadrage UX &amp; maquettes</li>
-                <li>Authentification &amp; rôles</li>
-                <li>Base de données dédiée</li>
-                <li>Back-office sur mesure</li>
-                <li>Intégrations API</li>
-                <li>1 mois de suivi inclus</li>
-              </ul>
-              <a href="#contact" className="price-cta price-cta-primary">
-                Démarrer le projet
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </a>
-            </article>
-
-            <article className="price-card reveal r-2">
-              <div className="price-head">
-                <div className="price-num">03</div>
-                <h3 className="price-title">MVP <em>startup</em></h3>
-                <p className="price-desc">Pour valider une idée vite. On livre une V1 utilisable et on ajuste avec les premiers retours.</p>
-              </div>
-              <div className="price-amount">
-                <span className="price-from">à partir de</span>
-                <span className="price-value">8{' '}000<span className="price-unit"> € HT</span></span>
-              </div>
-              <ul className="price-list">
-                <li>Cadrage produit &amp; user-flow</li>
-                <li>Design produit complet</li>
-                <li>Front + back + admin</li>
-                <li>Onboarding utilisateurs</li>
-                <li>Paiement / abonnement</li>
-                <li>Suivi après lancement</li>
-              </ul>
-              <a href="#contact" className="price-cta">
-                En parler
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </a>
-            </article>
-          </div>
+          <PricingInteractive />
 
           <div className="pricing-foot reveal">
             <div className="pricing-foot-row">
@@ -353,30 +213,15 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-           BAND DIVIDER
-           ============================================================ */}
-      <div className="band-divider" aria-hidden="true">
-        <div className="band-track">
-          <div className="band-item">Sites sur mesure <em>livrés vite</em></div>
-          <div className="band-item">Apps web &amp; mobile <em>qui tiennent</em></div>
-          <div className="band-item">Outils internes <em>pour tes équipes</em></div>
-          <div className="band-item">Automatisations <em>qui font gagner du temps</em></div>
-          <div className="band-item">Sites sur mesure <em>livrés vite</em></div>
-          <div className="band-item">Apps web &amp; mobile <em>qui tiennent</em></div>
-          <div className="band-item">Outils internes <em>pour tes équipes</em></div>
-          <div className="band-item">Automatisations <em>qui font gagner du temps</em></div>
-        </div>
-      </div>
-
-      {/* ============================================================
            RÉALISATIONS
            ============================================================ */}
       <section id="work">
+        <div className="work-mark" aria-hidden="true" />
         <div className="container">
           <div className="work-head reveal">
             <div>
               <div className="eyebrow">Réalisations</div>
-              <h2 className="h-section" style={{ marginTop: '24px' }}>Des projets, <em>en ligne, en production.</em></h2>
+              <h2 className="h-section">En ligne. En production. Pas dans un portfolio.</h2>
               <p className="lede">Chaque projet répond à un contexte précis. Voici ce qui tourne actuellement chez mes clients.</p>
             </div>
           </div>
@@ -402,26 +247,9 @@ export default function Home() {
               </a>
             </article>
 
-            {/* Placeholder 2 */}
-            <article className="work-item reveal r-1">
-              <div className="work-meta">
-                <div className="work-tags">
-                  <span className="work-tag">Projet en cours</span>
-                </div>
-                <h3 className="work-title">Le prochain <em>sera le tien ?</em></h3>
-                <p className="work-desc">Une sélection de projets récents. Pour discuter d&apos;un cas similaire au tien ou voir d&apos;autres réalisations en privé, contacte-moi.</p>
-                <a href="#contact" className="work-link">
-                  Démarrer un projet
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-                </a>
-              </div>
-              <div className="work-visual placeholder">
-                <div className="ph-content">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M12 5v14M5 12h14" /></svg>
-                  <div className="ph-label">Espace disponible</div>
-                </div>
-              </div>
-            </article>
+            <p className="work-cta-line reveal">
+              D&apos;autres projets en cours, en discussion privée. Pour en discuter, <a href="#contact">c&apos;est ici &rarr;</a>
+            </p>
           </div>
         </div>
       </section>
@@ -461,7 +289,7 @@ export default function Home() {
             </div>
             <div className="about-body reveal r-1">
               <div className="eyebrow">À propos</div>
-              <h2 className="h-section">Salut, <em>moi c&apos;est Nicolas.</em></h2>
+              <h2 className="h-section">Nicolas Tinnirello. <em>Freelance, à Lyon.</em></h2>
               <p>Je suis développeur freelance. Je construis des applications web et mobile, des outils sur mesure pour des PME, des indépendants et des porteurs de projet qui veulent avancer vite et bien.</p>
               <p>J&apos;avance mieux quand un projet part d&apos;une vraie discussion : ton contexte, ton problème, tes utilisateurs. C&apos;est là qu&apos;on trouve le bon outil.</p>
               <p>Je travaille seul, en proximité. Tu as un interlocuteur, pas une agence. <em>Un projet unique, une relation directe.</em></p>
@@ -479,11 +307,11 @@ export default function Home() {
           <div className="faq-grid">
             <div className="faq-side reveal">
               <div className="eyebrow">Questions</div>
-              <h2 className="h-section" style={{ marginTop: '24px' }}>Ce qu&apos;on <em>me demande<br />souvent.</em></h2>
-              <p className="lede" style={{ marginTop: '20px' }}>Six réponses honnêtes pour cadrer ton projet.</p>
+              <h2 className="h-section">Les questions <em>qui reviennent.</em></h2>
+              <p className="lede">Six réponses honnêtes pour cadrer ton projet.</p>
               <div className="faq-direct">
                 <div className="label">Pas trouvé ta question ?</div>
-                <a href="mailto:contact@nicolastinnirello.fr">Écris-moi directement →</a>
+                <a href="mailto:contact@nitrello.com">Écris-moi directement →</a>
               </div>
             </div>
             <div className="faq-list reveal r-1">
@@ -517,7 +345,7 @@ export default function Home() {
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Je choisis l&apos;outil selon le projet, pas l&apos;inverse. <strong>Next.js / React</strong>, <strong>Bubble</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L&apos;important : que ton projet soit rapide à livrer, facile à faire évoluer, et que tu puisses reprendre la main si besoin.</p>
+                  <p className="faq-a-text">Je choisis l&apos;outil selon le projet, pas l&apos;inverse. <strong>Next.js / React</strong>, <strong>Expo / React Native</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L&apos;important : que ton projet soit rapide à livrer, facile à faire évoluer, et que tu puisses reprendre la main si besoin.</p>
                 </div>
               </div>
               <div className="faq-item">
@@ -578,7 +406,7 @@ export default function Home() {
           <div className="contact-inner">
             <div className="reveal contact-intro">
               <div className="eyebrow">On en parle ?</div>
-              <h2 className="h-display" style={{ marginTop: '28px' }}>Ton projet, <em>notre première conversation.</em></h2>
+              <h2 className="h-display">Ton projet, <em>notre première conversation.</em></h2>
               <p className="lede">30 minutes au téléphone, sans engagement. Je t&apos;écoute, je pose des questions, je te dis honnêtement si je peux t&apos;aider, et comment.</p>
               <div className="contact-meta">
                 <div className="contact-meta-item">
