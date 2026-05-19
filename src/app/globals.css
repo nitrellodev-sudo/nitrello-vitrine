@@ -1459,17 +1459,16 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .pricing-card-c__cta {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
   padding: 14px 20px;
-  background: #111111 !important;
-  color: #FAFAF7 !important;
-  border: 1px solid #111111 !important;
+  background: var(--ink);
+  color: var(--mist);
+  border: 1px solid var(--ink);
   border-radius: var(--radius-md);
   font-family: var(--sans);
   font-size: 14px;
   font-weight: 500;
-  color: var(--ink);
   text-decoration: none;
   margin-top: auto;
   cursor: pointer;
@@ -1477,21 +1476,24 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 .pricing-card-c.is-center .pricing-card-c__cta:hover {
-  background: var(--ink);
-  color: var(--mist);
+  background: var(--ink-soft);
   transform: translateX(2px);
 }
 
+/* Card featured : bouton inversé par rapport au fond crème de la card */
 .pricing-card-c.is-featured .pricing-card-c__cta {
+  background: var(--fg-inverse);
+  color: var(--bg-inverse);
   border-color: var(--fg-inverse);
-  color: var(--fg-inverse);
 }
 
 .pricing-card-c.is-featured.is-center .pricing-card-c__cta:hover {
-  background: var(--fg-inverse);
-  color: var(--bg-inverse);
+  background: var(--ink);
+  color: var(--mist);
+  border-color: var(--ink);
 }
 
+/* CTA primary (gradient brand) — utilisé uniquement sur la card featured */
 .pricing-card-c__cta.is-primary {
   background: linear-gradient(95deg, var(--cyan), var(--violet));
   border-color: transparent;
