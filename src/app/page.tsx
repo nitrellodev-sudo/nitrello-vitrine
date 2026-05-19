@@ -134,6 +134,7 @@ export default function Home() {
            MÉTHODE
            ============================================================ */}
       <section id="method">
+        <div className="method-mark" aria-hidden="true" />
         <div className="container">
           <div className="method-grid">
             <div className="section-head reveal">
@@ -303,6 +304,7 @@ export default function Home() {
            FAQ
            ============================================================ */}
       <section id="faq">
+        <div className="faq-mark" aria-hidden="true" />
         <div className="container">
           <div className="faq-grid">
             <div className="faq-side reveal">
