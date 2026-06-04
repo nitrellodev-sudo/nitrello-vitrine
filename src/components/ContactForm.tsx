@@ -2,8 +2,7 @@
 
 import { type FormEvent, useState } from "react";
 
-const N8N_WEBHOOK_URL =
-  "https://n8n-production-e8c8.up.railway.app/webhook/31cc1448-4536-4bd3-84a9-1131b09bf88f";
+const CONTACT_API_URL = "/api/contact";
 
 type SubmitStatus = "idle" | "sending" | "success" | "error";
 
@@ -66,7 +65,7 @@ export default function ContactForm() {
     setStatus("sending");
 
     try {
-      const response = await fetch(N8N_WEBHOOK_URL, {
+      const response = await fetch(CONTACT_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,13 +79,21 @@ export default function ContactForm() {
           raw_message: rawMessage,
           source: "formulaire-contact-nitrello",
           submitted_at: new Date().toISOString(),
+          // Honeypot transmis au serveur pour validation côté API.
+          website_url: typeof honeypot === "string" ? honeypot : "",
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+      // Succès UNIQUEMENT si la réponse HTTP est OK ET que le corps confirme
+      // explicitement {success:true}. Tout le reste bascule en erreur.
+      const result = (await response.json().catch(() => null)) as
+        | { success?: boolean }
+        | null;
+      if (response.ok && result?.success === true) {
+        setStatus("success");
+      } else {
+        setStatus("error");
       }
-      setStatus("success");
     } catch {
       setStatus("error");
     }
