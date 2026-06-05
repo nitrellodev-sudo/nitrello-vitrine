@@ -28,6 +28,9 @@ export const runtime = "nodejs";
 /** Expéditeur des emails. DOIT être un sender validé dans Brevo. */
 const SENDER = { name: "Nitrello", email: "contact@nitrello.com" } as const;
 
+/** Template Brevo de l'accusé de réception (Transactionnel → Templates → #2). Sujet et expéditeur sont définis DANS le template. */
+const ACK_TEMPLATE_ID = 2;
+
 /** Destinataire de la notification interne (boîte de Nico). */
 const NOTIFICATION_TO = "nitrello.dev@gmail.com";
 
@@ -155,6 +158,36 @@ async function sendBrevoEmail(params: {
   }
 }
 
+/**
+ * Envoie un email via un template Brevo (sujet/expéditeur portés par le template,
+ * non surchargés ici). Lève si la réponse n'est pas OK.
+ */
+async function sendBrevoTemplateEmail(params: {
+  apiKey: string;
+  to: { email: string; name?: string };
+  templateId: number;
+  params: Record<string, string>;
+}): Promise<void> {
+  const response = await fetch(BREVO_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "api-key": params.apiKey,
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify({
+      templateId: params.templateId,
+      to: [params.to],
+      params: params.params,
+    }),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text().catch(() => "");
+    throw new Error(`Brevo HTTP ${response.status} : ${detail.slice(0, 500)}`);
+  }
+}
+
 /** Corps HTML de la notification interne (vers Nico). */
 function buildNotificationHtml(data: ContactPayload): string {
   const projet = data.type_label || data.type || "—";
@@ -178,27 +211,6 @@ function buildNotificationHtml(data: ContactPayload): string {
       <div style="color:#111;font-size:14px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(data.message)}</div>
     </div>
     <p style="color:#aaa;font-size:12px;margin:16px 0 0;">Envoyé via le formulaire de contact nitrello.com</p>
-  </div>`;
-}
-
-/** Corps HTML de l'accusé de réception (vers le demandeur). */
-function buildAckHtml(data: ContactPayload): string {
-  const prenom = escapeHtml(data.nom.split(" ")[0] || data.nom);
-  return `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;color:#111;">
-    <p style="font-size:16px;line-height:1.6;margin:0 0 16px;">Salut ${prenom},</p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">
-      Merci pour ton message — il est bien arrivé. 🙌 Je lis chaque demande personnellement
-      et je te réponds <strong>sous 24 à 48h ouvrées</strong>.
-    </p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">
-      En attendant, si tu penses à un détail utile (contexte, délai, budget, lien d'inspiration),
-      réponds simplement à cet email : tout ce que tu m'envoies m'aide à mieux cadrer ton projet.
-    </p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 24px;">À très vite,</p>
-    <div style="border-top:1px solid #eee;padding-top:16px;">
-      <p style="font-size:14px;margin:0;color:#111;"><strong>Nitrello</strong></p>
-      <p style="font-size:13px;margin:2px 0 0;color:#888;">Nicolas — Développeur freelance &middot; nitrello.com</p>
-    </div>
   </div>`;
 }
 
@@ -317,11 +329,16 @@ export async function POST(request: Request): Promise<NextResponse> {
   //    réputation d'envoi du domaine).
   if (!isSuspect) {
     try {
-      await sendBrevoEmail({
+      await sendBrevoTemplateEmail({
         apiKey: brevoApiKey,
         to: { email: data.email, name: data.nom },
-        subject: "On a bien reçu ton message — Nitrello",
-        htmlContent: buildAckHtml(data),
+        templateId: ACK_TEMPLATE_ID,
+        params: {
+          PRENOM: escapeHtml(data.nom.split(" ")[0] || data.nom),
+          MESSAGE: escapeHtml(data.message),
+          // Laissé vide (falsy) si aucun type — préserve le {% if params.PROJET %} du template.
+          PROJET: escapeHtml(data.type_label || data.type || ""),
+        },
       });
     } catch (error) {
       console.error("[api/contact] Échec envoi accusé de réception :", error);
