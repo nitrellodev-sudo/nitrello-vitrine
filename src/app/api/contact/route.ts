@@ -258,14 +258,19 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  // 2. Honeypot anti-spam : si le champ caché est rempli, c'est un bot.
-  //    On répond un faux succès sans rien envoyer (ne pas révéler le blocage).
+  // 2. Honeypot : le champ field_misc ne bloque PLUS l'envoi. S'il est rempli,
+  //    on tague la soumission "suspecte" mais on la traite quand même (un faux
+  //    positif autofill ne doit jamais coûter un lead). Conséquences plus bas :
+  //    sujet de notif préfixé [Suspect spam] + accusé de réception NON envoyé.
   const honeypot =
-    typeof (body as Record<string, unknown>)?.website_url === "string"
-      ? ((body as Record<string, unknown>).website_url as string).trim()
+    typeof (body as Record<string, unknown>)?.field_misc === "string"
+      ? ((body as Record<string, unknown>).field_misc as string).trim()
       : "";
-  if (honeypot !== "") {
-    return NextResponse.json({ success: true }, { status: 200 });
+  const isSuspect = honeypot !== "";
+  if (isSuspect) {
+    console.error(
+      "[api/contact] field_misc rempli — lead tagué suspect, ack non envoyé",
+    );
   }
 
   // 3. Validation serveur
@@ -285,11 +290,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ success: false }, { status: 500 });
   }
 
+  const notificationSubject = isSuspect
+    ? `[Suspect spam] [Nitrello] Nouveau contact — ${data.nom}`
+    : `[Nitrello] Nouveau contact — ${data.nom}`;
+
   try {
     await sendBrevoEmail({
       apiKey: brevoApiKey,
       to: { email: NOTIFICATION_TO, name: "Nitrello" },
-      subject: `[Nitrello] Nouveau contact — ${data.nom}`,
+      subject: notificationSubject,
       htmlContent: buildNotificationHtml(data),
       // Permet de répondre directement au demandeur depuis la notification.
       replyTo: { email: data.email, name: data.nom },
@@ -302,16 +311,21 @@ export async function POST(request: Request): Promise<NextResponse> {
   // À partir d'ici, le lead est sauvé. Les effets de bord ci-dessous sont
   // best-effort : on logge mais on ne fait jamais échouer la réponse.
 
-  // 5. Accusé de réception au demandeur (best-effort)
-  try {
-    await sendBrevoEmail({
-      apiKey: brevoApiKey,
-      to: { email: data.email, name: data.nom },
-      subject: "On a bien reçu ton message — Nitrello",
-      htmlContent: buildAckHtml(data),
-    });
-  } catch (error) {
-    console.error("[api/contact] Échec envoi accusé de réception :", error);
+  // 5. Accusé de réception au demandeur (best-effort).
+  //    Jamais envoyé pour une soumission suspecte : on ne veut pas écrire vers
+  //    une adresse potentiellement usurpée par un bot (protection de la
+  //    réputation d'envoi du domaine).
+  if (!isSuspect) {
+    try {
+      await sendBrevoEmail({
+        apiKey: brevoApiKey,
+        to: { email: data.email, name: data.nom },
+        subject: "On a bien reçu ton message — Nitrello",
+        htmlContent: buildAckHtml(data),
+      });
+    } catch (error) {
+      console.error("[api/contact] Échec envoi accusé de réception :", error);
+    }
   }
 
   // 6. Ligne CRM Notion (best-effort)
