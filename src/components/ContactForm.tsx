@@ -146,7 +146,7 @@ export default function ContactForm() {
         id="contact-form"
         onSubmit={handleSubmit}
         noValidate
-        hidden={isSuccess}
+        style={{ display: isSuccess ? "none" : undefined }}
       >
         {/* Honeypot anti-spam : caché aux humains, rempli automatiquement par les bots.
             display:none (mieux évité par Chrome moderne que le hors-écran). Nom neutre
