@@ -248,6 +248,26 @@ export default function Home() {
               </a>
             </article>
 
+            {/* Projet 2 : Team Solution Garage */}
+            <article className="work-item reveal">
+              <div className="work-meta">
+                <div className="work-tags">
+                  <span className="work-tag">Site asso</span>
+                  <span className="work-tag">Club moto</span>
+                  <span className="work-tag">Sur-mesure</span>
+                </div>
+                <h3 className="work-title">Team Solution Garage <em>, Le Pont-de-Claix</em></h3>
+                <p className="work-desc">Site vitrine pour une association de roulage moto sur circuit. Présentation du club et de l&apos;esprit paddock, formulaire d&apos;adhésion en ligne avec confirmation automatique par email, espace sponsors et partenaires. Pensé pour accueillir débutants comme pilotes confirmés.</p>
+                <a href="https://teamsolutiongarage.fr" target="_blank" rel="noopener" className="work-link">
+                  Voir le site en ligne
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                </a>
+              </div>
+              <a href="https://teamsolutiongarage.fr" target="_blank" rel="noopener" className="work-visual">
+                <img src="tsgpreview.webp" alt="Aperçu du site Team Solution Garage" loading="lazy" />
+              </a>
+            </article>
+
             <p className="work-cta-line reveal">
               D&apos;autres projets en cours, en discussion privée. Pour en discuter, <a href="#contact">c&apos;est ici &rarr;</a>
             </p>
