@@ -55,7 +55,10 @@
 /* ============================================================
    DARK THEME — inversion de la palette
    ============================================================ */
-[data-theme="dark"] {
+/* html:not([data-theme]) : filet de sécurité — applique le thème sombre par défaut
+   tant qu'aucun attribut data-theme n'est posé (JS désactivé/lent, script non joué).
+   Dès que data-theme="light" est posé, la base :root (claire) reprend la main. */
+[data-theme="dark"], html:not([data-theme]) {
   /* Texte */
   --ink: #F2F0EA;        /* texte principal en mode sombre = crème légèrement plus douce */
   --ink-soft: #DDDAD0;
@@ -92,7 +95,7 @@
 }
 
 /* Effets premium spécifiques au mode sombre */
-[data-theme="dark"] body {
+[data-theme="dark"] body, html:not([data-theme]) body {
   /* Fond légèrement texturé avec un grain subtil pour la profondeur */
   background: var(--mist);
   background-image:

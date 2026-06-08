@@ -209,13 +209,13 @@ export default function RootLayout({
       lang="fr"
       className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        {/* Anti-FOUC : doit s'exécuter en tout premier, avant la moindre peinture.
+            Balise <script> HTML native (bloquante) placée comme premier enfant du
+            <head> — surtout pas next/script, qui s'injecterait trop tard. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-        >
-          {themeInitScript}
-        </Script>
         <Script
           id="json-ld"
           type="application/ld+json"
