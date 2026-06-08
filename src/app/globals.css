@@ -279,7 +279,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   text-wrap: balance;
 }
 .h-display em { font-style: italic; font-weight: 300; color: var(--stone); }
-.hero-copy h1.h-display { font-size: clamp(60px, 9vw, 120px); line-height: 1.04; letter-spacing: -0.03em; }
+.hero-copy h1.h-display { font-size: clamp(72px, 9vw, 120px); line-height: 1.04; letter-spacing: -0.03em; }
 
 .h-section {
   font-family: var(--serif);
@@ -607,6 +607,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   min-height: 1em;
   max-width: 100%;
   overflow-wrap: anywhere;
+  /* Empêche un mot long (ex. "une automatisation.") de passer sur 2 lignes
+     et de faire varier la hauteur du H1 pendant l'animation. */
+  white-space: nowrap;
   /* width set by JS to the widest phrase, plafonnée à la largeur du parent — prevents jump sans déborder */
 }
 #typed-text {
