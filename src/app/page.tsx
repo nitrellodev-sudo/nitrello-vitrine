@@ -336,7 +336,7 @@ export default function Home() {
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Ça dépend du projet. Un site vitrine démarre à <strong>1 200 €</strong>, une app web ou mobile à <strong>6 000 €</strong>, un MVP complet à partir de <strong>8 000 €</strong>. On cadre ensemble, je m&apos;engage sur un budget précis, pas de surprise. Le devis précis arrive après la phase de préconception.</p>
+                  <p className="faq-a-text">Ça dépend du projet. Un site vitrine démarre à <strong>1 200 €</strong>, un MVP complet à partir de <strong>4 000 €</strong>, une app web ou mobile à <strong>6 000 €</strong>. On cadre ensemble, je m&apos;engage sur un budget précis, pas de surprise. Le devis précis arrive après la phase de préconception.</p>
                 </div>
               </div>
               <div className="faq-item">

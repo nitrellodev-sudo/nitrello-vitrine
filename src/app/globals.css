@@ -1322,6 +1322,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     0 12px 32px -8px rgba(0, 0, 0, 0.45);
 }
 
+/* Thème clair — lisibilité des cards non-featured (latérales surtout).
+   Bordure renforcée (~16 % vs 8 %) + élévation grise douce pour les détacher
+   du fond blanc. Scoped hors dark via :not([data-theme="dark"]) : le thème clair
+   n'a pas toujours l'attribut data-theme (défaut = absence d'attribut).
+   .is-featured exclu pour ne pas altérer le rendu crème de la Vitrine. */
+:root:not([data-theme="dark"]) .pricing-card-c:not(.is-featured) {
+  border-color: var(--border-strong);
+  box-shadow:
+    0 6px 20px -8px rgba(17, 17, 17, 0.12),
+    0 1px 3px rgba(17, 17, 17, 0.06);
+}
+
 /* Card featured (style inversé crème) */
 .pricing-card-c.is-featured {
   background: var(--bg-inverse);

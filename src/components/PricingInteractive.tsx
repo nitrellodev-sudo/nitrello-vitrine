@@ -31,10 +31,27 @@ const TIERS: readonly Tier[] = [
       "Livré en 1 à 2 semaines",
     ],
     cta: "En parler",
+    featured: true,
   },
   {
     id: 1,
     num: "02",
+    title: "MVP",
+    subtitle: "startup",
+    desc: "Pour valider une idée vite. On livre une V1 utilisable et on ajuste avec les premiers retours.",
+    price: "4 000",
+    features: [
+      "Cadrage produit & user-flow",
+      "Périmètre réduit à l'essentiel",
+      "Front + back + admin simple",
+      "V1 en ligne, testable",
+      "Suivi des premiers retours",
+    ],
+    cta: "En parler",
+  },
+  {
+    id: 2,
+    num: "03",
     title: "Application",
     subtitle: "web ou mobile",
     desc: "Plateforme métier, SaaS, marketplace, espace client, configurateur, app iOS / Android. Côté utilisateur comme côté admin.",
@@ -44,28 +61,9 @@ const TIERS: readonly Tier[] = [
       "Authentification & rôles",
       "Base de données dédiée",
       "Back-office sur mesure",
-      "Intégrations API",
-      "1 mois de suivi inclus",
+      "Intégrations API · 1 mois de suivi",
     ],
     cta: "Démarrer le projet",
-    featured: true,
-  },
-  {
-    id: 2,
-    num: "03",
-    title: "MVP",
-    subtitle: "startup",
-    desc: "Pour valider une idée vite. On livre une V1 utilisable et on ajuste avec les premiers retours.",
-    price: "8 000",
-    features: [
-      "Cadrage produit & user-flow",
-      "Design produit complet",
-      "Front + back + admin",
-      "Onboarding utilisateurs",
-      "Paiement / abonnement",
-      "Suivi après lancement",
-    ],
-    cta: "En parler",
   },
 ];
 
@@ -81,7 +79,7 @@ function getPosition(tierId: number, activeId: number, total: number): Position 
 }
 
 export default function PricingInteractive() {
-  const [activeId, setActiveId] = useState<number>(1);
+  const [activeId, setActiveId] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
