@@ -302,7 +302,7 @@ export default function Home() {
 
               <div className="about-photo" id="hologram-portrait">
                 <div className="hologram-frame">
-                  <img src="nicolas.png" alt="Nicolas Tinnirello, développeur freelance" loading="lazy" />
+                  <img src="nicolas.webp" alt="Nicolas Tinnirello, développeur freelance" loading="lazy" />
                   <div className="hologram-shine" aria-hidden="true"></div>
                   <div className="hologram-grid" aria-hidden="true"></div>
                 </div>
