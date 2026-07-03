@@ -112,6 +112,22 @@ export default function Home() {
       </section>
 
       {/* ============================================================
+           CTA INTERMÉDIAIRE
+           ============================================================ */}
+      <section className="cta-mid">
+        <div className="container">
+          <div className="cta-mid-copy reveal">
+            <h2>On regarde ensemble ce que tu peux <em>automatiser</em> ?</h2>
+            <p>30 minutes, gratuit, sans engagement. On parle de ton activité, je te dis franchement ce qui vaut le coup.</p>
+          </div>
+          <CalButton href="https://cal.com/nicolas-2j0lvm/30min" className="btn btn-primary reveal r-1">
+            Réserver un échange
+            <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+          </CalButton>
+        </div>
+      </section>
+
+      {/* ============================================================
            SERVICES
            ============================================================ */}
       <section id="services">
