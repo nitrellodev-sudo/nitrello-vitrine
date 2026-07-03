@@ -549,7 +549,7 @@ export default function AutomatisationIaPage() {
               rel="noopener"
               className="btn btn-primary"
             >
-              Discutons de ton cas · 30 min, gratuit
+              Discutons de ton cas · 30{" "}min, gratuit
               <svg
                 className="arrow"
                 width="16"
