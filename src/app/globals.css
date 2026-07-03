@@ -4281,3 +4281,31 @@ a.contact-row:hover { color: var(--cyan); }
    d'ouverture de l'accordéon (600px → 700px). */
 .faq-item.is-open .faq-a { max-height: 700px; }
 /* ═══ FIN FAQ ═══ */
+
+/* ═══ NAVBAR · POINT NOUVEAUTÉ ═══ */
+/* Petit point cyan pulsant à côté de "Automatisation IA" dans la navbar.
+   Discret en light, halo néon en dark uniquement. */
+.nav-link-ia {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.nav-dot-new {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  flex-shrink: 0;
+  animation: nav-dot-pulse 2.2s ease-in-out infinite;
+}
+@keyframes nav-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+[data-theme="dark"] .nav-dot-new {
+  box-shadow: 0 0 8px rgba(0,191,255,0.7), 0 0 16px rgba(0,191,255,0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dot-new { animation: none; }
+}
+/* ═══ FIN NAVBAR · POINT NOUVEAUTÉ ═══ */

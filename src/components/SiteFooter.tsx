@@ -3,7 +3,7 @@ import Link from "next/link";
 const NAV_LINKS = [
   { label: "Services", href: "/#services" },
   { label: "Méthode", href: "/#method" },
-  { label: "Tarifs", href: "/#pricing" },
+  { label: "Chiffrage", href: "/#pricing" },
   { label: "Réalisations", href: "/#work" },
   { label: "Blog", href: "/blog" },
   { label: "À propos", href: "/#about" },
@@ -15,7 +15,7 @@ const SOCIALS = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/nitrello",
-    ariaLabel: "LinkedIn de Nicolas Tinnirello — ouverture dans un nouvel onglet",
+    ariaLabel: "LinkedIn de Nicolas Tinnirello · ouverture dans un nouvel onglet",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
         <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.34 18.34V9.83H5.67v8.51h2.67ZM7 8.67a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1Zm11.33 9.67v-4.66c0-2.5-1.34-3.66-3.13-3.66a2.7 2.7 0 0 0-2.45 1.35V9.83h-2.67c.04.75 0 8.51 0 8.51h2.67v-4.75c0-.24.02-.48.09-.66.2-.48.63-.97 1.36-.97.97 0 1.36.74 1.36 1.81v4.57h2.77Z" />
@@ -25,7 +25,7 @@ const SOCIALS = [
   {
     label: "Malt",
     href: "https://www.malt.fr/profile/nicolastinnirello",
-    ariaLabel: "Profil Malt de Nicolas Tinnirello — ouverture dans un nouvel onglet",
+    ariaLabel: "Profil Malt de Nicolas Tinnirello · ouverture dans un nouvel onglet",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
         <path d="M5 4h2.6v9.6L12 4l4.4 9.6V4H19v16h-2.6l-4.4-9.6L7.6 20H5V4Z" />
@@ -35,7 +35,7 @@ const SOCIALS = [
   {
     label: "Instagram",
     href: "https://www.instagram.com/nitrello",
-    ariaLabel: "Instagram de Nicolas Tinnirello — ouverture dans un nouvel onglet",
+    ariaLabel: "Instagram de Nicolas Tinnirello · ouverture dans un nouvel onglet",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -47,7 +47,7 @@ const SOCIALS = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/share/1DhpLQ9SKR/",
-    ariaLabel: "Facebook de Nicolas Tinnirello — ouverture dans un nouvel onglet",
+    ariaLabel: "Facebook de Nicolas Tinnirello · ouverture dans un nouvel onglet",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
         <path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.24-1.46 1.49-1.46H16.6V4.43A21.1 21.1 0 0 0 14.4 4.3c-2.2 0-3.7 1.34-3.7 3.8V10.5H8.1v3h2.6V21h2.8Z" />

@@ -59,27 +59,27 @@ export default function Home() {
            ============================================================ */}
       <div className="ticker" aria-hidden="true">
         <div className="ticker-track">
+          <span className="ticker-item">Automatisation IA</span><span className="ticker-dot"></span>
+          <span className="ticker-item">Agents &amp; assistants</span><span className="ticker-dot"></span>
+          <span className="ticker-item">Outil de gestion</span><span className="ticker-dot"></span>
+          <span className="ticker-item">CRM sur-mesure</span><span className="ticker-dot"></span>
           <span className="ticker-item">Site vitrine</span><span className="ticker-dot"></span>
-          <span className="ticker-item">App web &amp; mobile</span><span className="ticker-dot"></span>
-          <span className="ticker-item">Outil interne</span><span className="ticker-dot"></span>
-          <span className="ticker-item">Automatisation n8n</span><span className="ticker-dot"></span>
           <span className="ticker-item">Tableau de bord</span><span className="ticker-dot"></span>
-          <span className="ticker-item">MVP startup</span><span className="ticker-dot"></span>
           <span className="ticker-item">Espace client</span><span className="ticker-dot"></span>
-          <span className="ticker-item">Refonte produit</span><span className="ticker-dot"></span>
+          <span className="ticker-item">App web &amp; mobile</span><span className="ticker-dot"></span>
           <span className="ticker-item">Intégration API</span><span className="ticker-dot"></span>
-          <span className="ticker-item">SEO &amp; performance</span><span className="ticker-dot"></span>
+          <span className="ticker-item">Gain de temps</span><span className="ticker-dot"></span>
           {/* Duplicate for seamless loop */}
+          <span className="ticker-item">Automatisation IA</span><span className="ticker-dot"></span>
+          <span className="ticker-item">Agents &amp; assistants</span><span className="ticker-dot"></span>
+          <span className="ticker-item">Outil de gestion</span><span className="ticker-dot"></span>
+          <span className="ticker-item">CRM sur-mesure</span><span className="ticker-dot"></span>
           <span className="ticker-item">Site vitrine</span><span className="ticker-dot"></span>
-          <span className="ticker-item">App web &amp; mobile</span><span className="ticker-dot"></span>
-          <span className="ticker-item">Outil interne</span><span className="ticker-dot"></span>
-          <span className="ticker-item">Automatisation n8n</span><span className="ticker-dot"></span>
           <span className="ticker-item">Tableau de bord</span><span className="ticker-dot"></span>
-          <span className="ticker-item">MVP startup</span><span className="ticker-dot"></span>
           <span className="ticker-item">Espace client</span><span className="ticker-dot"></span>
-          <span className="ticker-item">Refonte produit</span><span className="ticker-dot"></span>
+          <span className="ticker-item">App web &amp; mobile</span><span className="ticker-dot"></span>
           <span className="ticker-item">Intégration API</span><span className="ticker-dot"></span>
-          <span className="ticker-item">SEO &amp; performance</span><span className="ticker-dot"></span>
+          <span className="ticker-item">Gain de temps</span><span className="ticker-dot"></span>
         </div>
       </div>
 
@@ -90,7 +90,7 @@ export default function Home() {
         <div className="phare-mark" aria-hidden="true"></div>
         <div className="container">
           <div className="phare-inner">
-            <div className="eyebrow reveal">Automatisation par l&apos;IA</div>
+            <div className="eyebrow reveal">Automatisation · IA</div>
             <h2 className="phare-title reveal r-1">
               Économise du temps.<br />
               <span className="phare-grad">Gagne en productivité.</span>
@@ -101,7 +101,7 @@ export default function Home() {
             </p>
             <div className="phare-actions reveal r-3">
               <Link href="/automatisation-ia" className="btn btn-primary">
-                Découvrir l&apos;offre IA
+                Découvrir l&apos;offre
                 <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
               </Link>
               <Link href="/automatisation-ia#wf-anchor" className="btn btn-ghost">Voir un exemple concret</Link>
