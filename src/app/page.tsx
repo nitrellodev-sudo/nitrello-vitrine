@@ -6,7 +6,6 @@ import FaqAccordion from "@/components/FaqAccordion";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroTypewriter from "@/components/HeroTypewriter";
 import PhareTypewriter from "@/components/PhareTypewriter";
-import PricingInteractive from "@/components/PricingInteractive";
 import HologramPortrait from "@/components/HologramPortrait";
 import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -133,43 +132,34 @@ export default function Home() {
       <section id="services">
         <div className="container">
           <div className="section-head reveal">
-            <div className="eyebrow">Services</div>
-            <h2 className="h-section">Ce que je fais, <em>concrètement.</em></h2>
-            <p className="lede">Trois formats de mission reviennent le plus souvent. Chaque projet reste sur mesure — les détails ci-dessous donnent un cadre, pas une grille fermée.</p>
+            <div className="eyebrow">Aussi au catalogue</div>
+            <h2 className="h-section">Pas que de l&apos;IA. <em>Des outils qui durent.</em></h2>
+            <p className="lede">L&apos;automatisation, c&apos;est la partie visible. En dessous, il y a le socle : les outils de gestion et les sites que je construis depuis le début, sur mesure.</p>
           </div>
 
-          <div className="services-grid">
-            <article className="service-card reveal">
-              <div className="service-num">01</div>
-              <h3 className="h-card">Applications <em>web &amp; mobile</em></h3>
-              <p>Des interfaces soignées pour des besoins précis : SaaS, marketplace, espace client, configurateur, app iOS / Android. Côté utilisateur comme côté admin.</p>
-              <ul className="service-list">
-                <li>MVP pour startup</li>
-                <li>Outils métier</li>
-                <li>Sites vitrines premium</li>
-              </ul>
-            </article>
-
-            <article className="service-card reveal r-1">
-              <div className="service-num">02</div>
-              <h3 className="h-card">Outils internes<em>pour équipes</em></h3>
-              <p>Des dashboards, des formulaires intelligents, des back-offices qui remplacent vos fichiers Excel partagés. L&apos;outil que votre équipe attendait depuis 3 ans.</p>
-              <ul className="service-list">
+          <div className="svc-grid">
+            <article className="svc-card reveal">
+              <div className="svc-num">Gestion</div>
+              <h3 className="h-card">Outils de gestion<em>sur mesure</em></h3>
+              <p>CRM, tableaux de bord, back-offices, formulaires intelligents. L&apos;outil qui remplace tes fichiers Excel partagés et fait tourner ton activité au quotidien.</p>
+              <ul className="svc-list">
+                <li>CRM &amp; suivi client</li>
                 <li>Dashboards sur mesure</li>
-                <li>Gestion commerciale</li>
-                <li>Suivi de production</li>
+                <li>Apps internes métier</li>
               </ul>
+              <p className="svc-proof">En production · <strong>CRM Nitrello</strong> · <strong>CRM Esprit Auto</strong></p>
             </article>
 
-            <article className="service-card reveal r-2">
-              <div className="service-num">03</div>
-              <h3 className="h-card">Automatisations<em>&amp; intégrations</em></h3>
-              <p>Connecter vos outils entre eux, automatiser les tâches répétitives, brancher un agent conversationnel. Moins de copier-coller, plus de temps utile.</p>
-              <ul className="service-list">
-                <li>Workflows n8n / Make</li>
-                <li>Intégrations API</li>
-                <li>Agents &amp; assistants</li>
+            <article className="svc-card reveal r-1">
+              <div className="svc-num">Vitrine</div>
+              <h3 className="h-card">Site vitrine<em>qui te ressemble</em></h3>
+              <p>Un site pensé pour toi, pas un template parmi d&apos;autres. Rapide, soigné, pensé pour convertir. Souvent le premier pas d&apos;une collaboration.</p>
+              <ul className="svc-list">
+                <li>Design personnalisé</li>
+                <li>Rapide &amp; optimisé SEO</li>
+                <li>Livré en 1 à 2 semaines</li>
               </ul>
+              <p className="svc-proof">En ligne · <strong>Esprit Auto</strong> · <strong>TSG</strong></p>
             </article>
           </div>
         </div>
@@ -223,36 +213,57 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-           TARIFS
+           CHIFFRAGE (remplace Tarifs · id "pricing" conservé pour les
+           liens /#pricing de la navbar et du footer)
            ============================================================ */}
-      <section id="pricing">
-        <div className="pricing-bg" aria-hidden="true">
-          <div className="p-blob p-blob-1"></div>
-          <div className="p-blob p-blob-2"></div>
-        </div>
+      <section id="pricing" className="chiffrage">
         <div className="container">
-          <div className="pricing-head reveal">
-            <div>
-              <div className="eyebrow">Tarifs</div>
-              <h2 className="h-section">Trois projets-types. Trois budgets.</h2>
-            </div>
-            <p className="pricing-intro">Des points de départ pour situer un projet. Le prix exact se définit après la préconception, en fonction de tes besoins réels.</p>
+          <div className="chiffrage-head reveal">
+            <div className="eyebrow">Comment ça se passe</div>
+            <h2 className="h-section">Je ne te vends pas un prix. <em>Je te montre ce que tu <span className="chiffrage-grad">économises.</span></em></h2>
+            <p className="lede">Chaque projet est chiffré au cas par cas, après étude de ton fonctionnement. Pas de grille toute faite : le montant dépend de ce que tu vas récupérer en temps et en argent.</p>
           </div>
 
-          <PricingInteractive />
+          <div className="principes">
+            <div className="principe reveal">
+              <div className="principe-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+              </div>
+              <h3>Aucun prix au hasard</h3>
+              <p>J&apos;étudie d&apos;abord ton activité, tes tâches, tes outils. Le chiffrage vient après, adapté à ton cas précis.</p>
+            </div>
+            <div className="principe reveal r-1">
+              <div className="principe-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" /><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" /><path d="M7 21h10" /><path d="M12 3v18" /><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" /></svg>
+              </div>
+              <h3>Le gain avant le coût</h3>
+              <p>Avant que tu t&apos;engages, je te montre combien de temps et d&apos;argent l&apos;outil va te faire récupérer. Tu décides en connaissance de cause.</p>
+            </div>
+            <div className="principe reveal r-2">
+              <div className="principe-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
+              </div>
+              <h3>Tu ne paies que si c&apos;est rentable</h3>
+              <p>Si le calcul ne penche pas nettement en ta faveur, je te le dis. Tu n&apos;investis que quand ça vaut clairement le coup pour toi.</p>
+            </div>
+          </div>
 
-          <div className="pricing-foot reveal">
-            <div className="pricing-foot-row">
+          <div className="roi-line reveal">
+            <p>Deux heures par jour récupérées, c&apos;est <em>plus d&apos;une journée par semaine</em> que tu ne paies pas.</p>
+          </div>
+
+          <div className="chiffrage-cta reveal">
+            <CalButton href="https://cal.com/nicolas-2j0lvm/30min" className="btn btn-primary">
+              Réserver un échange de 30 min
+              <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+            </CalButton>
+            <p>Gratuit, sans engagement. <strong>C&apos;est le seul chemin vers un devis.</strong></p>
+          </div>
+
+          <div className="chiffrage-foot reveal">
+            <div className="chiffrage-foot-row">
               <span className="dot-mono">●</span>
-              <span><strong>Tarifs indicatifs.</strong> Devis précis établi après la phase de préconception.</span>
-            </div>
-            <div className="pricing-foot-row">
-              <span className="dot-mono">●</span>
-              <span>Pour les <strong>automatisations &amp; intégrations</strong> seules : tarif sur mesure, à partir de <strong>500{' '}€{' '}HT</strong>.</span>
-            </div>
-            <div className="pricing-foot-row">
-              <span className="dot-mono">●</span>
-              <span><strong>Maintenance &amp; évolutions</strong> : forfait mensuel ou tickets à la demande, selon ce qui te va.</span>
+              <span><strong>À prévoir</strong> : un contrat de maintenance mensuel est à privilégier pour ce type d&apos;outil · je reste disponible pour les évolutions, les modifications et le SAV.</span>
             </div>
           </div>
         </div>
@@ -375,7 +386,7 @@ export default function Home() {
             <div className="faq-side reveal">
               <div className="eyebrow">Questions</div>
               <h2 className="h-section">Les questions <em>qui reviennent.</em></h2>
-              <p className="lede">Six réponses honnêtes pour cadrer ton projet.</p>
+              <p className="lede">Des réponses honnêtes pour cadrer ton projet, l&apos;automatisation comme le reste.</p>
               <div className="faq-direct">
                 <div className="label">Pas trouvé ta question ?</div>
                 <a href="mailto:contact@nitrello.com">Écris-moi directement →</a>
@@ -385,67 +396,89 @@ export default function Home() {
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.01</span>
-                  <span className="faq-q-text">Combien de temps pour un projet ?</span>
+                  <span className="faq-q-text">Pourquoi pas juste utiliser ChatGPT moi-même ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text"><strong>Site vitrine</strong> : 1 à 2 semaines. <strong>App web ou mobile</strong> : 2 à 6 semaines selon la complexité. <strong>MVP startup</strong> : 2 à 4 semaines. Je donne un planning précis au moment du cadrage, et je m&apos;y tiens.</p>
+                  <p className="faq-a-text">ChatGPT répond à une question. Une automatisation, elle, <strong>travaille pour toi sans que tu lèves le petit doigt</strong>. C&apos;est un outil sur-mesure branché à tes vrais outils · mails, agenda, CRM, facturation · avec toute une mécanique en coulisses qui déclenche les bonnes actions au bon moment. Toi, tu poserais la question et tu recopierais la réponse. Là, c&apos;est le système qui lit, décide et agit tout seul. C&apos;est un autre métier, que je construis et j&apos;installe pour toi.</p>
                 </div>
               </div>
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.02</span>
-                  <span className="faq-q-text">Combien ça coûte ?</span>
+                  <span className="faq-q-text">L&apos;IA va remplacer mes salariés ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Ça dépend du projet. Un site vitrine démarre à <strong>1 200 €</strong>, un MVP complet à partir de <strong>4 000 €</strong>, une app web ou mobile à <strong>6 000 €</strong>. On cadre ensemble, je m&apos;engage sur un budget précis, pas de surprise. Le devis précis arrive après la phase de préconception.</p>
+                  <p className="faq-a-text"><strong>Non.</strong> L&apos;idée n&apos;est pas de virer du monde, c&apos;est de retirer à tes équipes les tâches répétitives et sans valeur pour qu&apos;elles se concentrent sur ce qui compte vraiment. En pratique, ça t&apos;évite souvent d&apos;embaucher un renfort sur tes pics d&apos;activité · l&apos;automatisation encaisse la surcharge. Tes salariés ne sont pas remplacés, <strong>ils sont plus efficaces là où ils font la différence</strong>.</p>
                 </div>
               </div>
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.03</span>
-                  <span className="faq-q-text">Tu utilises quelles technos ?</span>
+                  <span className="faq-q-text">Combien de temps avant qu&apos;une automatisation tourne ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Je choisis l&apos;outil selon le projet, pas l&apos;inverse. <strong>Next.js / React</strong>, <strong>Expo / React Native</strong>, <strong>Supabase</strong>, <strong>n8n</strong> pour les automatisations. L&apos;important : que ton projet soit rapide à livrer, facile à faire évoluer, et que tu puisses reprendre la main si besoin.</p>
+                  <p className="faq-a-text">Ça dépend de la complexité, mais la plupart sont en place <strong>en quelques semaines</strong>. On avance par étapes : je te livre vite quelque chose d&apos;utilisable, puis on affine. Tu n&apos;attends pas six mois pour voir le premier résultat.</p>
                 </div>
               </div>
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.04</span>
-                  <span className="faq-q-text">Et après la livraison ?</span>
+                  <span className="faq-q-text">Et si mon activité change, l&apos;automatisation suit ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text"><strong>Un mois de suivi inclus</strong> : je corrige, j&apos;ajuste, je réponds à tes questions. Ensuite, on peut partir sur un forfait maintenance, ou tu reprends la main toi-même. Toute la doc t&apos;est livrée.</p>
+                  <p className="faq-a-text">Oui. Un outil qui tourne, ça se fait vivre · ton activité évolue, l&apos;automatisation doit suivre. C&apos;est tout l&apos;intérêt d&apos;un <strong>contrat de maintenance mensuel</strong> : je garde un œil sur l&apos;outil, je l&apos;ajuste quand ton besoin bouge, et tu n&apos;es jamais seul face à une machine qui déraille. Tu restes autonome au quotidien, je reste joignable pour le reste.</p>
                 </div>
               </div>
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.05</span>
-                  <span className="faq-q-text">Tu travailles en présentiel ?</span>
+                  <span className="faq-q-text">Mes données partent où ? C&apos;est sécurisé ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text">Basé à <strong>Saint-Sauveur (38)</strong>, à côté de Grenoble. Je travaille en visio et messagerie pour la majorité des échanges — plus rapide et plus efficace. Déplacement possible en Auvergne-Rhône-Alpes pour les rencontres clés.</p>
+                  <p className="faq-a-text"><strong>Tes données restent les tiennes.</strong> Je conçois les automatisations pour qu&apos;elles traitent tes informations de la façon la plus sûre possible, sans les exposer inutilement. On regarde ensemble quels outils sont impliqués et où transitent les données · la sécurité fait partie de la conception, pas d&apos;une case cochée après coup.</p>
                 </div>
               </div>
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.06</span>
+                  <span className="faq-q-text">Combien ça coûte ?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </button>
+                <div className="faq-a">
+                  <div className="faq-a-spacer"></div>
+                  <p className="faq-a-text">Ça dépend entièrement de ton projet · c&apos;est pour ça que je ne mets pas de prix ici. Je chiffre <strong>au cas par cas</strong>, après avoir étudié ton fonctionnement, en fonction de ce que tu vas récupérer en temps et en argent. Le principe est simple : <strong>tu ne t&apos;engages que si le calcul penche clairement en ta faveur</strong>. On en parle lors de l&apos;échange, et c&apos;est là que part le devis.</p>
+                </div>
+              </div>
+              <div className="faq-item">
+                <button className="faq-q" type="button" aria-expanded="false">
+                  <span className="faq-num">Q.07</span>
+                  <span className="faq-q-text">Et après la livraison ?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </button>
+                <div className="faq-a">
+                  <div className="faq-a-spacer"></div>
+                  <p className="faq-a-text"><strong>Je ne disparais pas une fois l&apos;outil livré.</strong> Formation, documentation, support : tu sais t&apos;en servir et tu n&apos;es jamais seul. Pour les outils qui évoluent · comme les automatisations · un contrat de maintenance mensuel prend le relais. Sinon, toute la doc t&apos;est livrée et tu reprends la main.</p>
+                </div>
+              </div>
+              <div className="faq-item">
+                <button className="faq-q" type="button" aria-expanded="false">
+                  <span className="faq-num">Q.08</span>
                   <span className="faq-q-text">Tu prends tous les projets ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
                 <div className="faq-a">
                   <div className="faq-a-spacer"></div>
-                  <p className="faq-a-text"><strong>Non.</strong> Je préfère dire honnêtement que je ne suis pas le bon interlocuteur plutôt que de mal faire. Lors du premier appel, si le projet ne me correspond pas, je te le dis et je t&apos;oriente vers quelqu&apos;un de mieux placé.</p>
+                  <p className="faq-a-text"><strong>Non.</strong> Je préfère dire honnêtement que je ne suis pas le bon interlocuteur plutôt que de mal faire. Lors du premier échange, si ton projet ne me correspond pas, je te le dis et je t&apos;oriente vers quelqu&apos;un de mieux placé.</p>
                 </div>
               </div>
             </div>
