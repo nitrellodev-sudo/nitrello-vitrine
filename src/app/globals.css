@@ -3828,3 +3828,131 @@ a.contact-row:hover { color: var(--cyan); }
   .ia-method-line-fill { transition: none; }
 }
 /* ═══ FIN page IA ═══ */
+
+/* ═══ BLOC PHARE IA ═══ */
+/* Bloc phare "Automatisation par l'IA" sur la home, entre Ticker et Services.
+   Réf. maquette : bloc-phare-ia-v2.html · classes préfixées phare-* */
+.phare {
+  position: relative;
+  padding: var(--gap-section) 0;
+  overflow: hidden;
+}
+.phare::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 45% 55% at 12% 25%, rgba(0,191,255,0.10), transparent 60%),
+    radial-gradient(ellipse 50% 60% at 90% 75%, rgba(123,47,255,0.13), transparent 62%);
+}
+[data-theme="dark"] .phare::before {
+  background:
+    radial-gradient(ellipse 45% 55% at 12% 25%, rgba(0,191,255,0.16), transparent 60%),
+    radial-gradient(ellipse 50% 60% at 90% 75%, rgba(123,47,255,0.20), transparent 62%);
+}
+.phare-mark {
+  position: absolute;
+  top: 50%;
+  right: -8%;
+  transform: translateY(-50%);
+  width: 60vw;
+  height: 60vw;
+  max-width: 700px;
+  max-height: 700px;
+  background-color: var(--ink);
+  mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .phare-mark { display: none; }
+}
+.phare-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+}
+.phare .eyebrow {
+  margin-bottom: 28px;
+  color: var(--cyan);
+}
+[data-theme="dark"] .phare .eyebrow {
+  text-shadow: 0 0 16px rgba(0,191,255,0.4);
+}
+.phare-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 6.5vw, 80px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+}
+.phare-grad {
+  background: linear-gradient(95deg, var(--cyan) 10%, var(--violet) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+/* Typewriter : taille entre le titre et le texte courant */
+.phare-typed-line {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.8vw, 48px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ink-soft);
+  margin-bottom: 48px;
+  max-width: 100%;
+}
+/* La 2e ligne (texte + mot animé) ne se recasse jamais : 2 niveaux garantis */
+.phare-nowrap { white-space: nowrap; }
+/* Le slot réserve la largeur du mot le plus long (minWidth posé par JS sur le
+   WRAPPER, jamais sur le mot) ; mot + caret restent collés à gauche */
+.phare-slot {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.phare-typed {
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(95deg, var(--cyan) 10%, var(--violet) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+.phare-caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.75em;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+  margin-left: 3px;
+  vertical-align: -0.02em;
+  animation: blink 0.9s steps(1) infinite; /* réutilise @keyframes blink existant */
+  border-radius: 2px;
+}
+.phare-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+@media (max-width: 600px) {
+  /* "tes outils s'occupent de [mot le plus long]" tient sans scroll latéral */
+  .phare-typed-line {
+    font-size: clamp(24px, 6.4vw, 34px);
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
+@media (max-width: 380px) {
+  .phare-typed-line { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phare-caret { animation: none; }
+}
+/* ═══ FIN BLOC PHARE IA ═══ */

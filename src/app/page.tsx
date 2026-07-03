@@ -1,9 +1,11 @@
+import Link from "next/link";
 import CalButton from "@/components/CalButton";
 import CalEmbedScript from "@/components/CalEmbedScript";
 import ContactForm from "@/components/ContactForm";
 import FaqAccordion from "@/components/FaqAccordion";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroTypewriter from "@/components/HeroTypewriter";
+import PhareTypewriter from "@/components/PhareTypewriter";
 import PricingInteractive from "@/components/PricingInteractive";
 import HologramPortrait from "@/components/HologramPortrait";
 import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
@@ -81,6 +83,33 @@ export default function Home() {
           <span className="ticker-item">SEO &amp; performance</span><span className="ticker-dot"></span>
         </div>
       </div>
+
+      {/* ============================================================
+           BLOC PHARE IA
+           ============================================================ */}
+      <section className="phare">
+        <div className="phare-mark" aria-hidden="true"></div>
+        <div className="container">
+          <div className="phare-inner">
+            <div className="eyebrow reveal">Automatisation par l&apos;IA</div>
+            <h2 className="phare-title reveal r-1">
+              Économise du temps.<br />
+              <span className="phare-grad">Gagne en productivité.</span>
+            </h2>
+            <p className="phare-typed-line reveal r-2">
+              Pendant que tu fais ton métier,<br />
+              <span className="phare-nowrap">tes outils s&apos;occupent de <PhareTypewriter /></span>
+            </p>
+            <div className="phare-actions reveal r-3">
+              <Link href="/automatisation-ia" className="btn btn-primary">
+                Découvrir l&apos;offre IA
+                <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </Link>
+              <Link href="/automatisation-ia#wf-anchor" className="btn btn-ghost">Voir un exemple concret</Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ============================================================
            SERVICES
