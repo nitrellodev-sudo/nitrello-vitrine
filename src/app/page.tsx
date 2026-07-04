@@ -261,7 +261,7 @@ export default function Home() {
           <div className="chiffrage-foot reveal">
             <div className="chiffrage-foot-row">
               <span className="dot-mono">●</span>
-              <span><strong>À prévoir</strong> : un contrat de maintenance mensuel est à privilégier pour ce type d&apos;outil · je reste disponible pour les évolutions, les modifications et le SAV.</span>
+              <span><strong>Un contrat de maintenance</strong> mensuel est à privilégier pour les outils qui vivent · je surveille, j&apos;ajuste et je reste joignable quand ton besoin évolue.</span>
             </div>
           </div>
         </div>
