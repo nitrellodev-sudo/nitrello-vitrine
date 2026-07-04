@@ -494,8 +494,17 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   background-size: 56px 56px;
   color: var(--ink);
   opacity: 0.06;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+  /* 2 couches composées en intersection : le wash radial d'origine, plus une
+     zone percée (transparente) sous le bloc titre pour qu'aucune ligne de
+     grille ne croise le mot "gagner" */
+  mask-image:
+    radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%),
+    radial-gradient(ellipse 45% 32% at 48% 42%, transparent 55%, black 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%),
+    radial-gradient(ellipse 45% 32% at 48% 42%, transparent 55%, black 100%);
+  -webkit-mask-composite: source-in;
   pointer-events: none;
   z-index: 0;
 }
@@ -4282,30 +4291,49 @@ a.contact-row:hover { color: var(--cyan); }
 .faq-item.is-open .faq-a { max-height: 700px; }
 /* ═══ FIN FAQ ═══ */
 
-/* ═══ NAVBAR · POINT NOUVEAUTÉ ═══ */
-/* Petit point cyan pulsant à côté de "Automatisation IA" dans la navbar.
-   Discret en light, halo néon en dark uniquement. */
-.nav-link-ia {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
+/* ═══ HERO REFONTE ═══ */
+/* H1 fixe (typewriter retiré du hero). Deux correctifs :
+   1. jambage du "g" de "gagner" : avec background-clip: text + fill
+      transparent, le dégradé n'est peint QUE dans la boîte de l'inline-block
+      .accent ; le jambage d'Instrument Serif italique (~0.2em) descend sous
+      cette boîte et devient invisible. Fix : line-height 1.2 sur la ligne
+      accent + padding-bottom 0.18em pour étendre la zone peinte sous le
+      jambage, margin-bottom négatif équivalent pour ne rien décaler ;
+   2. hiérarchie mobile : H1 toujours nettement plus grand que le lede. */
+/* Sélecteur préfixé #hero : spécificité (1,2,1), gagne durablement sur
+   .h-display (l.272, lh 1.02) et .hero-copy h1.h-display (l.282, lh 1.04)
+   sans !important. C'est le PARENT qui doit loger la descendante : sa
+   line-box coupait le "g" malgré le padding du span .accent. */
+#hero .hero-copy h1.h-display {
+  font-size: clamp(60px, 8vw, 108px);
+  line-height: 1.3;
+  min-height: 0;
+  overflow: visible;
 }
-.nav-dot-new {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan);
-  flex-shrink: 0;
-  animation: nav-dot-pulse 2.2s ease-in-out infinite;
+/* VRAI FIX du "g" coupé : la règle de base (l.598) demande font-weight 300
+   alors qu'Instrument Serif n'est chargée qu'en 400 (layout.tsx, next/font).
+   Le navigateur synthétisait un faux light qui cassait le rendu du jambage.
+   Sélecteur préfixé #hero (1,2,2) : gagne durablement sur la règle de base. */
+#hero .hero-copy h1 .accent {
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.3;
+  -webkit-background-clip: text;
+  background-clip: text;
+  white-space: normal;
+  overflow-wrap: normal;
 }
-@keyframes nav-dot-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.8); }
+@media (max-width: 600px) {
+  /* même spécificité (1,2,1) que la règle desktop, déclarée après : gagne */
+  #hero .hero-copy h1.h-display {
+    font-size: clamp(44px, 12vw, 64px);
+    /* même logique que desktop : la line-box loge la descendante */
+    line-height: 1.3;
+  }
+  /* le lede reste nettement plus petit que le H1 */
+  .hero-copy .lede { font-size: 15px; line-height: 1.55; }
 }
-[data-theme="dark"] .nav-dot-new {
-  box-shadow: 0 0 8px rgba(0,191,255,0.7), 0 0 16px rgba(0,191,255,0.35);
+@media (max-width: 380px) {
+  .hero-copy .lede { font-size: 14px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .nav-dot-new { animation: none; }
-}
-/* ═══ FIN NAVBAR · POINT NOUVEAUTÉ ═══ */
+/* ═══ FIN HERO ═══ */

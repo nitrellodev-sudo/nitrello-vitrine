@@ -79,8 +79,8 @@ export default function SiteFooter() {
               </svg>
               <span>Nitrello</span>
             </Link>
-            <p className="site-footer__tagline">Ton idée devient une application. Plus vite que tu ne l&apos;imagines.</p>
-            <p className="site-footer__geo">Freelance dev web, mobile et IA en Isère. Pour les PME et indépendants à Grenoble et partout en France.</p>
+            <p className="site-footer__tagline">Je construis les outils qui te font gagner du temps.</p>
+            <p className="site-footer__geo">Automatisation par l&apos;IA, outils de gestion et sites sur mesure. Pour les PME et indépendants, en Isère et partout en France.</p>
           </section>
 
           <nav className="site-footer__nav" aria-labelledby="footer-nav-heading">

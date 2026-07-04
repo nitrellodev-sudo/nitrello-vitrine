@@ -29,8 +29,8 @@ export default function ContactForm() {
 
   // UX post-succès : après 6 s, on réinitialise les champs (reset natif) et on
   // repasse en "idle". Le formulaire n'est JAMAIS démonté (il est seulement
-  // masqué pendant le succès), donc sa classe d'animation `.in` — posée une
-  // seule fois par RevealOnScroll — persiste : pas de zone vide au retour.
+  // masqué pendant le succès), donc sa classe d'animation `.in` · posée une
+  // seule fois par RevealOnScroll · persiste : pas de zone vide au retour.
   // Le cleanup annule le timer si le composant se démonte ou si le statut change.
   useEffect(() => {
     if (status !== "success") return;
@@ -50,7 +50,7 @@ export default function ContactForm() {
 
     // Honeypot : on relève la valeur mais on NE bloque JAMAIS l'envoi côté
     // client. Le champ est transmis tel quel au serveur, qui décide du
-    // traitement (tag suspect, pas d'accusé de réception) — voir /api/contact.
+    // traitement (tag suspect, pas d'accusé de réception) · voir /api/contact.
     const honeypot = formData.get("field_misc");
 
     const typeValue = (formData.get("type") as string | null) ?? "";
@@ -171,7 +171,11 @@ export default function ContactForm() {
         </label>
         <div className="form-radios">
           <label className="form-radio">
-            <input type="radio" name="type" value="vitrine" required />
+            <input type="radio" name="type" value="auto" required />
+            <span>Automatisation</span>
+          </label>
+          <label className="form-radio">
+            <input type="radio" name="type" value="vitrine" />
             <span>Site vitrine</span>
           </label>
           <label className="form-radio">
@@ -181,10 +185,6 @@ export default function ContactForm() {
           <label className="form-radio">
             <input type="radio" name="type" value="tool" />
             <span>Outil interne</span>
-          </label>
-          <label className="form-radio">
-            <input type="radio" name="type" value="auto" />
-            <span>Automatisation</span>
           </label>
           <label className="form-radio">
             <input type="radio" name="type" value="other" />

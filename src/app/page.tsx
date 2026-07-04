@@ -4,7 +4,6 @@ import CalEmbedScript from "@/components/CalEmbedScript";
 import ContactForm from "@/components/ContactForm";
 import FaqAccordion from "@/components/FaqAccordion";
 import FloatingCTA from "@/components/FloatingCTA";
-import HeroTypewriter from "@/components/HeroTypewriter";
 import PhareTypewriter from "@/components/PhareTypewriter";
 import HologramPortrait from "@/components/HologramPortrait";
 import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
@@ -35,12 +34,23 @@ export default function Home() {
           <div className="hero-inner">
             <div className="hero-copy">
               <div className="eyebrow reveal">Nicolas Tinnirello, Freelance</div>
+              {/* ═══ ANCIEN HERO (étape 10) · revert rapide : décommenter ce bloc,
+                   supprimer le H1 + lede ci-dessous, ré-ajouter l'import
+                   HeroTypewriter en tête de fichier, retirer le bloc CSS
+                   "HERO REFONTE" en fin de globals.css.
               <h1 className="h-display reveal r-1">
                 Ton idée devient <br />
                 <HeroTypewriter />
               </h1>
               <p className="lede reveal r-2">
                 Je conçois des applications web et mobile, des outils internes et des automatisations pour des PME, indépendants et porteurs de projet. Chaque projet commence par une conversation.
+              </p>
+              ═══ FIN ANCIEN HERO ═══ */}
+              <h1 className="h-display reveal r-1">
+                Je transforme ton temps perdu en <span className="accent">argent</span> gagné.
+              </h1>
+              <p className="lede reveal r-2">
+                Automatisation, outils de gestion, sites sur-mesure. Chaque projet commence par une conversation.
               </p>
               <div className="hero-actions reveal r-3">
                 <a href="#contact" className="btn btn-primary">
@@ -366,9 +376,9 @@ export default function Home() {
             </div>
             <div className="about-body reveal r-1">
               <div className="eyebrow">À propos</div>
-              <h2 className="h-section">Nicolas Tinnirello. <em>Freelance, côté Grenoble.</em></h2>
-              <p>Je suis développeur freelance. Je construis des applications web et mobile, des outils sur mesure pour des PME, des indépendants et des porteurs de projet qui veulent avancer vite et bien.</p>
-              <p>J&apos;avance mieux quand un projet part d&apos;une vraie discussion : ton contexte, ton problème, tes utilisateurs. C&apos;est là qu&apos;on trouve le bon outil.</p>
+              <h2 className="h-section">Nicolas Tinnirello. <em>Freelance en automatisation &amp; IA.</em></h2>
+              <p>Je suis développeur freelance. Je construis des outils qui font gagner du temps : automatisations intelligentes, outils de gestion sur mesure, sites qui convertissent. Pour des PME, des indépendants et des porteurs de projet qui veulent avancer vite et bien.</p>
+              <p>Un bon outil part toujours d&apos;une vraie discussion. Prendre le temps de comprendre ton activité, ton fonctionnement et tes contraintes, c&apos;est ce qui me permet de construire quelque chose qui colle vraiment à tes besoins, plutôt qu&apos;une solution générique. Plus je cerne ton contexte, plus le résultat est précis, utile et personnalisé.</p>
               <p>Je travaille seul, en proximité. Tu as un interlocuteur, pas une agence. <em>Un projet unique, une relation directe.</em></p>
               <div className="about-sign">Nicolas</div>
             </div>
