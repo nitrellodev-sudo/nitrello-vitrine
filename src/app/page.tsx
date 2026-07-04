@@ -34,18 +34,6 @@ export default function Home() {
           <div className="hero-inner">
             <div className="hero-copy">
               <div className="eyebrow reveal">Nicolas Tinnirello, Freelance</div>
-              {/* ═══ ANCIEN HERO (étape 10) · revert rapide : décommenter ce bloc,
-                   supprimer le H1 + lede ci-dessous, ré-ajouter l'import
-                   HeroTypewriter en tête de fichier, retirer le bloc CSS
-                   "HERO REFONTE" en fin de globals.css.
-              <h1 className="h-display reveal r-1">
-                Ton idée devient <br />
-                <HeroTypewriter />
-              </h1>
-              <p className="lede reveal r-2">
-                Je conçois des applications web et mobile, des outils internes et des automatisations pour des PME, indépendants et porteurs de projet. Chaque projet commence par une conversation.
-              </p>
-              ═══ FIN ANCIEN HERO ═══ */}
               <h1 className="h-display reveal r-1">
                 Je transforme ton temps perdu en <span className="accent">argent</span> gagné.
               </h1>
