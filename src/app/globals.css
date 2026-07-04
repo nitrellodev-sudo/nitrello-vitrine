@@ -3374,6 +3374,7 @@ a.contact-row:hover { color: var(--cyan); }
 
 /* pourquoi moi */
 .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.why-grid.is-duo { grid-template-columns: repeat(2, 1fr); max-width: 900px; }
 .why-card { padding: 8px 0; }
 .why-num { font-family: var(--serif); font-style: italic; font-size: 44px; line-height: 1; margin-bottom: 16px; display: inline-block; background: linear-gradient(95deg, var(--cyan) 10%, var(--violet) 90%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .why-card h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(21px, 2.3vw, 25px); letter-spacing: -0.01em; margin-bottom: 10px; line-height: 1.25; }
@@ -3395,7 +3396,9 @@ a.contact-row:hover { color: var(--cyan); }
 
 /* responsive */
 @media (max-width: 900px) {
-  .cost-grid, .cap-grid, .why-grid { grid-template-columns: 1fr; }
+  /* .why-grid.is-duo listé explicitement : sa règle de base (0,2,0) battrait
+     le .why-grid seul (0,1,0) de cette media query */
+  .cost-grid, .cap-grid, .why-grid, .why-grid.is-duo { grid-template-columns: 1fr; }
   .wf-track { flex-direction: column; align-items: stretch; }
   .wf-node-box { max-width: 100%; }
   .wf-connector { width: 3px; height: clamp(22px, 5vw, 40px); margin: 0 auto; align-self: center; }

@@ -566,6 +566,42 @@ export default function AutomatisationIaPage() {
         </div>
       </section>
 
+      {/* MAINTENANCE */}
+      <section className="ia-section">
+        <div className="container">
+          <div className="ia-head reveal">
+            <div className="eyebrow">Après la livraison</div>
+            <h2 className="h-section">Un outil qui vit, ça s&apos;entretient.</h2>
+            <p className="lede">
+              Une automatisation tourne tous les jours, branchée à tes outils.
+              Pour qu&apos;elle reste fiable dans le temps, je propose un contrat
+              de maintenance mensuel · tu sais exactement ce qu&apos;il couvre.
+            </p>
+          </div>
+          <div className="why-grid is-duo">
+            <div className="why-card reveal">
+              <div className="why-num">✓</div>
+              <h3>Compris dans le forfait</h3>
+              <p>
+                Surveillance de l&apos;outil, correction des bugs, petits
+                ajustements de l&apos;existant et mises à jour techniques. Je
+                garde un œil dessus et je reste joignable, avec un délai de
+                réponse défini.
+              </p>
+            </div>
+            <div className="why-card reveal r-1">
+              <div className="why-num">+</div>
+              <h3>Facturé à part</h3>
+              <p>
+                Une nouvelle fonctionnalité, une nouvelle automatisation, une
+                refonte : ça, c&apos;est un nouveau chantier. Je te fais un devis
+                séparé, tu décides en connaissance de cause.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA FINAL */}
       <section className="ia-final">
         <div className="container">
