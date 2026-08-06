@@ -1,5 +1,34 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-06 (audit complet + correctifs sécurité/UX)
+
+### Réalisé
+- **Audit complet code/UI/UX** de nitrello.com (rapport dans la conversation, audit SEO dans `audit-seo-2026-08-06.md`). Verdict global : site sain, code propre, aucun constat critique réel.
+- **Fausse alerte élucidée** : la "navigation par ancres morte" diagnostiquée en cours d'audit était un artefact d'environnement (fenêtre Chrome pilotée occultée → `requestAnimationFrame` gelé → tout scroll smooth mort). Fenêtre visible, tout fonctionne. Leçon mémorisée côté Claude.
+- **Commit `4c22cc4` poussé et vérifié en prod** (11 correctifs) :
+  - deps : Next 16.2.6→16.3.0, postcss, sharp (0 vulnérabilité npm), framer-motion (morte) supprimée
+  - ESLint réparé : `eslint.config.mjs` réécrit sur les exports flat natifs (FlatCompat incompatible ESLint 9)
+  - `/api/contact` : rate limiting en mémoire par IP (5 req/10 min, avant tout appel externe) · honeypot non bloquant conservé (choix produit)
+  - blog `[slug]` : barrière XSS (HTML brut échappé via renderer marked + protocoles javascript:/data:/vbscript: bloqués dans les liens)
+  - `next.config.ts` : garde explicite `NEXT_PUBLIC_SUPABASE_URL`
+  - home : 3 `<img>` → `next/image` avec dimensions (fin du risque CLS)
+  - header : `<a>` → `<Link>` partout · `ThemeToggle` sans état React redondant
+  - skip-link "Aller au contenu" (layout + `.skip-link` dans globals.css, wrapper `#contenu`)
+  - `/automatisation-ia` : FloatingCTA + CalEmbedScript montés (même chemin de conversion que la home)
+
+### Reste à faire (priorisé)
+1. **Test mobile réel** du déploiement (`npm run build && npm start -- --hostname 0.0.0.0`) — Nico, depuis le téléphone
+2. **Manuel Nico (SEO)** : certificat www sur Vercel (Settings→Domains, ajouter www.nitrello.com), Search Console (sitemap + couverture), fiche Google Business Profile
+3. **Meta description `/automatisation-ia`** : 215 caractères, à raccourcir vers 150-160
+4. **Canonical home** : uniformiser avec/sans slash final (layout.tsx alternates)
+5. **Découpage `globals.css`** (3 920 lignes) : chantier à part, plan de découpage à produire avant exécution, re-test visuel complet obligatoire
+6. **Décision business** : adresse postale complète dans le JSON-LD de toutes les pages (garder pour le SEO local ou restreindre aux mentions légales)
+7. Rangement maquettes HTML de la racine vers `design/` (fait localement le 06/08, à commiter)
+
+### Pièges notés
+- Audit navigateur automatisé : toujours vérifier `document.visibilityState` avant de conclure sur du scroll/animation.
+- Tester le 429 du rate limiting uniquement en local (en prod ça bloque l'IP du testeur 10 min).
+
 ## Session du 2026-05-16 (suite, Chantier E2)
 
 ### Réalisé

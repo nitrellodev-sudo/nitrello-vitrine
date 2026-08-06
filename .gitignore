@@ -70,8 +70,5 @@ yarn-error.log*
 # ============================================
 *.pem
 .turbo/
-page-automatisation-ia-v2.html
-bloc-phare-ia-v2.html
-cta-services.html
-chiffrage-v4.html
-faq.html
+# Maquettes de travail locales
+design/
