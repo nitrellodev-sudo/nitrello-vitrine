@@ -21,7 +21,7 @@
 2. **Manuel Nico (SEO)** : certificat www sur Vercel (Settings→Domains, ajouter www.nitrello.com), Search Console (sitemap + couverture), fiche Google Business Profile
 3. **Meta description `/automatisation-ia`** : 215 caractères, à raccourcir vers 150-160
 4. **Canonical home** : uniformiser avec/sans slash final (layout.tsx alternates)
-5. **Découpage `globals.css`** (3 920 lignes) : chantier à part, plan de découpage à produire avant exécution, re-test visuel complet obligatoire
+5. **Découpage `globals.css`** (3 939 lignes) : **plan complet prêt dans `design/plan-decoupage-globals-css.md`** (28 fichiers cibles, ~375 lignes de CSS mort identifiées, 3 risques de cascade documentés, exécution en 3 commits avec preuve par concaténation-diff). Session dédiée recommandée.
 6. **Décision business** : adresse postale complète dans le JSON-LD de toutes les pages (garder pour le SEO local ou restreindre aux mentions légales)
 7. Rangement maquettes HTML de la racine vers `design/` (fait localement le 06/08, à commiter)
 
