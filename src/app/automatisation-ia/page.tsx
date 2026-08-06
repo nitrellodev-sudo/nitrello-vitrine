@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     absolute: "Automatisation par l'IA · Nitrello",
   },
   description:
-    "J'analyse ton quotidien, je repère les tâches répétitives, je chiffre ce qu'elles te coûtent, puis je construis l'outil sur mesure qui s'en occupe à ta place. Installation et formation comprises.",
+    "J'analyse ton quotidien, je repère les tâches répétitives et je construis l'outil sur mesure qui s'en occupe à ta place. Installation et formation comprises.",
   alternates: {
     canonical: "https://nitrello.com/automatisation-ia",
   },
