@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité | Nitrello",
+  title: "Politique de confidentialité",
   description:
     "Politique de confidentialité du site nitrello.com — Traitement de vos données personnelles, sous-traitants, cookies et droits RGPD.",
   alternates: {

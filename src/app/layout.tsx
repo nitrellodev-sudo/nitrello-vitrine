@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import HeaderScrollState from "@/components/HeaderScrollState";
 import MobileNav from "@/components/MobileNav";
@@ -41,20 +40,20 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nitrello.com"),
   title: {
-    default: "Nitrello, Ton idée devient une application",
-    template: "%s | Nitrello",
+    default: "Automatisation IA et outils sur mesure pour TPE et PME · Nitrello",
+    template: "%s · Nitrello",
   },
   description:
-    "Nicolas Tinnirello, développeur freelance. Je conçois des applications web et mobile, des outils internes et des automatisations pour PME, indépendants et startups.",
+    "Nicolas Tinnirello, développeur freelance en Isère. J'automatise par l'IA et je construis les outils de gestion qui font gagner du temps aux TPE et PME.",
   keywords: [
     "développeur freelance",
+    "automatisation IA",
+    "automatisation des tâches",
+    "outils de gestion sur mesure",
+    "CRM sur mesure",
     "développeur Next.js",
-    "développeur React Native",
-    "développement IA",
-    "SaaS sur-mesure",
-    "automatisation",
-    "applications web",
-    "applications mobile",
+    "site vitrine",
+    "TPE PME",
     "Grenoble",
     "Saint-Sauveur",
     "Isère",
@@ -72,25 +71,15 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://nitrello.com",
     siteName: "Nitrello",
-    title: "Nitrello, Ton idée devient une application",
+    title: "Je transforme ton temps perdu en argent gagné.",
     description:
-      "Nicolas Tinnirello, développeur freelance. Applications web et mobile, outils internes, automatisations IA pour PME et startups.",
-    images: [
-      {
-        url: "/nicolas.png",
-        width: 1200,
-        height: 630,
-        alt: "Nicolas Tinnirello, développeur freelance Nitrello",
-      },
-    ],
+      "Automatisation par l'IA, outils de gestion, sites sur-mesure. Je construis les outils qui travaillent pendant que tu fais ton métier.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nitrello, Ton idée devient une application",
+    title: "Je transforme ton temps perdu en argent gagné.",
     description:
-      "Développeur freelance. Applications web et mobile, automatisations IA pour PME et startups.",
-    images: ["/nicolas.png"],
-    creator: "@nitrello",
+      "Automatisation par l'IA, outils de gestion, sites sur-mesure. Les outils travaillent, tu fais ton métier.",
   },
   robots: {
     index: true,
@@ -214,15 +203,15 @@ export default function RootLayout({
             Balise <script> HTML native (bloquante) placée comme premier enfant du
             <head> — surtout pas next/script, qui s'injecterait trop tard. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* JSON-LD inliné en balise native : présent dans le HTML brut pour tous
+            les robots (Bing, IA), pas seulement ceux qui exécutent le JS.
+            next/script l'injecterait côté client uniquement. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
-        <Script
-          id="json-ld"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-        >
-          {JSON.stringify(jsonLd)}
-        </Script>
         <ScrollRestoration />
         <ScrollProgress />
         <HeaderScrollState />

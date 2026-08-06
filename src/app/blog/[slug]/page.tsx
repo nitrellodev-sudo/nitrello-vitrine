@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: "Article introuvable — Nitrello",
+      title: "Article introuvable",
     };
   }
 
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogImage = post.og_image_url ?? post.cover_image_url ?? undefined;
 
   return {
-    title: `${title} — Nitrello`,
+    title,
     description,
     alternates: {
       canonical: canonicalUrl,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions légales | Nitrello",
+  title: "Mentions légales",
   description:
     "Mentions légales du site nitrello.com — Nicolas Tinnirello, freelance dev web, mobile et IA basé à Saint-Sauveur (Isère).",
   alternates: {

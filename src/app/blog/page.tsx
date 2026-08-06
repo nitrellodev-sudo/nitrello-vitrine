@@ -3,7 +3,7 @@ import { getAllPublishedPosts } from "@/lib/blog";
 import BlogCard from "@/components/blog/BlogCard";
 
 export const metadata: Metadata = {
-  title: "Blog — Nitrello",
+  title: "Blog",
   description:
     "Réflexions et retours d'expérience de Nicolas Tinnirello sur le développement web/mobile/IA, la collaboration client, et la vie de freelance.",
   alternates: {
