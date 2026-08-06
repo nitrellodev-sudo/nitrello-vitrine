@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   creator: "Nicolas Tinnirello",
   publisher: "Nitrello",
   alternates: {
-    canonical: "https://nitrello.com/",
+    canonical: "https://nitrello.com",
   },
   openGraph: {
     type: "website",

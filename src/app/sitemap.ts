@@ -9,7 +9,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl + "/",
+      // Sans slash final : aligné sur le canonical émis par Next (qui
+      // normalise et retire le slash quoi qu'on déclare dans metadata).
+      url: baseUrl,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 1.0,
