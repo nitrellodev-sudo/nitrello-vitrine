@@ -1,5 +1,26 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (chantier refonte stratégique · lots 1 et 2)
+
+### Contexte
+Chantier validé par Nico : réaligner le site sur sa hiérarchie commerciale · offre phare = automatisation et IA pour TPE/PME, offres secondaires = outils de gestion et sites vitrine. Plan en 4 lots validé après analyse des incohérences (nav sans lien vers /automatisation-ia, hero générique, preuve sociale 100 % vitrine, wording blog sur l'ancien positionnement, JSON-LD inversé, Hn sans mots-clés). Ordre des chantiers arrêté : refonte d'abord, puis 2e article de blog, puis découpage globals.css.
+
+### Réalisé
+- **Lot 1 (commit `352866d`)** : lien "Automatisation IA" en tête du header et du footer · hero : eyebrow "Automatisation et outils sur mesure pour TPE et PME" et CTA secondaire redirigé de #work vers /automatisation-ia · CSS nav : compactage sous 1240px (police 13px, paddings réduits) et burger remonté de 880 à 1080px. La nav à 8 entrées exige ~1190px en taille normale, mesuré au pixel : défaut préexistant (7 entrées demandaient déjà ~1050px), retirer FAQ n'aurait pas suffi. Marge après correction : 46px au point le plus étroit (1034px requis, burger à 1080).
+- **Lot 2 (commit `116c9cb`)** : `blog/page.tsx` repositionné cible TPE/PME (meta description 147 car., OG, intro, kicker sans tiret long) · `layout.tsx` : description LocalBusiness réordonnée automatisation d'abord, jobTitle et knowsAbout alignés.
+- `audit-seo-2026-08-06.md` versionné (commit `0d258a8`).
+
+### Reste à faire (priorisé · remplace la liste du 06/08)
+1. **Lot 3 · restructuration home** (session dédiée) : fusion hero + bloc Phare musclé (teaser des 3 cost-cards de /automatisation-ia sur la home), Hn retravaillés avec automatisation/tâches répétitives/TPE PME. Ordre des sections inchangé.
+2. **Lot 4 · preuve automatisation dans Réalisations** : 5 captures n8n de Nico sur le Bureau (07/08 vers 00h18, workflows de prospection). NE JAMAIS publier telles quelles : URL du webhook Unipile en clair dans un post-it, angle "automatisation LinkedIn" en zone grise des CGU. Recadrer le canvas "Alimenter le pipeline" (angle registre/Pappers) sans les post-its, et cadrer par le résultat, pas la technologie.
+3. **Chantier 2 · 2e article de blog** (automatisation + IA pour dirigeants de TPE/PME), après le lot 3 pour capitaliser sur le wording final.
+4. **Découpage globals.css** : plan dans `design/plan-decoupage-globals-css.md`, à faire APRÈS le lot 3 (la refonte modifie le CSS de la home).
+5. **Manuel Nico** : test mobile réel, certificat www Vercel, Search Console, fiche Google Business.
+
+### Pièges notés
+- Entre 880 et 1080px le bouton "En discuter" du header est masqué (comportement burger, étendu par le lot 1) et le menu burger n'a aucune entrée Contact (préexistant). Le FloatingCTA couvre la conversion · à reconsidérer au lot 3.
+- `resize_window` Chrome inopérant sur fenêtre occultée (outerWidth 0, viewport figé) : mesurer les largeurs au DOM et calculer le point de rupture, plutôt que de croire un resize.
+
 ## Session du 2026-08-06 (audit complet + correctifs sécurité/UX)
 
 ### Réalisé
