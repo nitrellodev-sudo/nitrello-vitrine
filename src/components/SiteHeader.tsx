@@ -22,6 +22,7 @@ export default function SiteHeader() {
             <span>Nitrello</span>
           </Link>
           <ul className="nav-links" id="nav-links">
+            <li><Link href="/automatisation-ia">Automatisation IA</Link></li>
             <li><Link href="/#services">Services</Link></li>
             <li><Link href="/#method">Méthode</Link></li>
             <li><Link href="/#pricing">Chiffrage</Link></li>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const NAV_LINKS = [
+  { label: "Automatisation IA", href: "/automatisation-ia" },
   { label: "Services", href: "/#services" },
   { label: "Méthode", href: "/#method" },
   { label: "Chiffrage", href: "/#pricing" },

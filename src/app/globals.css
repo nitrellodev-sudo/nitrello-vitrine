@@ -464,7 +464,15 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   transition: width 0.08s linear;
 }
 
-@media (max-width: 880px) {
+/* Nav compacte : 8 entrées + logo + CTA exigent ~1190px en taille normale.
+   On resserre sous 1240px pour tenir jusqu'au passage en burger à 1080px. */
+@media (max-width: 1240px) {
+  .nav { gap: 16px; }
+  .nav-links { gap: 2px; }
+  .nav-links a { font-size: 13px; padding: 8px 10px; }
+}
+
+@media (max-width: 1080px) {
   .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--mist); padding: 16px var(--pad); border-top: 1px solid rgba(17,17,17,0.06); gap: 4px; }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px 14px; font-size: 16px; }

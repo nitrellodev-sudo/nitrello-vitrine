@@ -34,7 +34,7 @@ export default function Home() {
         <div className="container">
           <div className="hero-inner">
             <div className="hero-copy">
-              <div className="eyebrow reveal">Nicolas Tinnirello, Freelance</div>
+              <div className="eyebrow reveal">Automatisation et outils sur mesure pour TPE et PME</div>
               <h1 className="h-display reveal r-1">
                 Je transforme ton temps perdu en <span className="accent">argent</span> gagné.
               </h1>
@@ -46,7 +46,7 @@ export default function Home() {
                   En discuter
                   <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
                 </a>
-                <a href="#work" className="btn btn-ghost">Voir les réalisations</a>
+                <Link href="/automatisation-ia" className="btn btn-ghost">Découvrir l&apos;automatisation</Link>
               </div>
             </div>
           </div>
