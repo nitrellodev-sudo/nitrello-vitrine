@@ -5,14 +5,14 @@ import BlogCard from "@/components/blog/BlogCard";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Réflexions et retours d'expérience de Nicolas Tinnirello sur le développement web/mobile/IA, la collaboration client, et la vie de freelance.",
+    "Automatisation, outils de gestion, retours de projets réels : des conseils concrets pour faire gagner du temps aux TPE et PME. Le blog de Nitrello.",
   alternates: {
     canonical: "https://nitrello.com/blog",
   },
   openGraph: {
-    title: "Blog Nitrello",
+    title: "Le blog Nitrello",
     description:
-      "Le carnet de bord d'un freelance dev full-stack. Solutions techniques, collaboration client, indépendance projet, vie de freelance.",
+      "Automatisation, outils de gestion, retours de projets réels : des conseils concrets pour faire gagner du temps aux TPE et PME.",
     url: "https://nitrello.com/blog",
     type: "website",
     locale: "fr_FR",
@@ -28,12 +28,12 @@ export default async function BlogIndexPage() {
   return (
     <main className="blog-page">
       <header className="blog-page__header">
-        <p className="blog-page__kicker">— LE CARNET</p>
+        <p className="blog-page__kicker">LE CARNET</p>
         <h1 className="blog-page__title">Blog</h1>
         <p className="blog-page__intro">
-          Mes réflexions, retours d&apos;expérience et coulisses de freelance
-          dev. Solutions techniques, collaboration client, indépendance projet,
-          vie de freelance.
+          Automatisation, outils de gestion, cadrage de projet : des conseils
+          concrets pour faire gagner du temps à ton entreprise, tirés de
+          projets réels.
         </p>
       </header>
 
