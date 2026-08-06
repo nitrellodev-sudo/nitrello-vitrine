@@ -1,5 +1,19 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (lot 3 · fusion hero + bloc phare)
+
+### Réalisé (local, NON COMMITÉ · en attente de validation Nico)
+- **Fusion hero + bloc phare** dans `src/app/page.tsx` : la section `.phare` a disparu, le hero porte l'offre phare. **H1 : Nico a tranché en revue, la signature « Je transforme ton temps perdu en argent gagné. » reste** (une variante mots-clés « Je rends aux TPE et PME le temps perdu dans les tâches répétitives. » a été proposée puis retirée à sa demande) · les mots-clés tâches répétitives/TPE vivent dans le H2 du teaser, automatiser/automatisation dans les H2 de cta-mid et À propos. Avantage collatéral : le H1 reste cohérent avec les og:title/twitter:title et les visuels OG. Typewriter (`PhareTypewriter`, classes phare-* conservées) remonté sous le H1. Eyebrow du lot 1 inchangé. Les CTA du phare ("Découvrir l'offre", "Voir un exemple concret") disparaissent, remplacés par le lien du teaser.
+- **v2 après 2e retour design de Nico ("hero trop chargé, pas assez aéré", skill frontend-design chargé)** : le typewriter passe de co-vedette (28-48px) à ligne d'appui du H1 (20-30px) et **remplace le lede** (les 3 offres sont déjà déroulées par le ticker juste dessous et détaillées dans Services) · le teaser du constat n'est plus les 3 cost-cards recopiées mais une **bande de stats légère** `.hero-cost-strip` (filet `border-top`, gros mot serif « 110 h par an » / « Des ventes perdues » / « Une charge mentale », description 15px muted), kicker = h2 stylé `.eyebrow` qui garde les mots-clés (« Ce que les tâches répétitives coûtent à une TPE »), lien `.work-link` « Voir comment je récupère ces heures » vers /automatisation-ia · vraie respiration copy→bande (~104px, marges adjacentes 56/104 qui fusionnent). Mesuré à 1280px : copy 520px, hero total 1094px (1254px en v1), zéro débordement.
+- **Ticker réparé après retour design de Nico** (la fusion l'avait mis en voisin direct du cta-mid, deux bandeaux inversés collés avec voiles sombres aux extrémités) : 1. le fade des côtés est porté par un nouveau wrapper `.ticker-viewport` et plus par `.ticker` entier (le mask faisait fondre le fond inversé du bandeau vers le fond de page, d'où les voiles · il ne peut pas non plus vivre sur `.ticker-track` qui défile) · 2. `.cta-mid` prend `margin-top: clamp(72px, 10vw, 120px)`, symétrique du padding bas du hero, pour que la frise flotte entre deux zones aérées comme avant la fusion.
+- **CSS** (`globals.css`) : #hero sans min-height 80vh ni flex (la section s'allonge), wash de grille et zone percée remontés avec le titre (ellipses à 28 %/24 % au lieu de 40 %/42 %), styles `.hero-cost`/`.hero-cost-title`/`.hero-cost-link` ajoutés. Coquille `.phare` morte supprimée (section, mark, title, grad, actions) · les classes typewriter phare-* restent. Règles mortes `#typed-text`/`.caret` de l'ancien H1 animé supprimées, `@keyframes blink` conservé (utilisé par `.phare-caret`).
+- **Conversion 880-1080px traitée** (piège noté au lot 1) : entrée « Contact » ajoutée au menu burger (`SiteHeader.tsx`, `li.nav-link-contact`, visible uniquement ≤1080px) · le bouton "En discuter" du header n'est plus masqué qu'en dessous de 480px (mesuré ~400px requis en mode burger) au lieu de 1080px.
+- Vérifié : build vert, ESLint silencieux, HTML pré-rendu conforme (H1, 3 cartes, phare absent, Contact présent), aucun débordement horizontal à 920px (mesures DOM, fenêtre Chrome occultée donc rendu visuel non fiable, cf. piège).
+
+### Décisions laissées à Nico
+- **Second contrôle visuel réel** (desktop + mobile) après les correctifs H1/ticker : premier retour donné (H1 et ticker), wash de grille du hero réglé au jugé toujours à confirmer, fenêtre Chrome occultée oblige.
+- Puis commit du lot 3 (git status avant add, add ciblé : page.tsx, globals.css, SiteHeader.tsx, HANDOFF.md).
+
 ## Session du 2026-08-07 (chantier refonte stratégique · lots 1 et 2)
 
 ### Contexte
