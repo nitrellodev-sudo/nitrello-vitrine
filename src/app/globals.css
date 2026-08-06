@@ -1112,6 +1112,25 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   border: 0;
 }
 
+/* Skip-link : hors écran jusqu'au focus clavier, premier élément atteignable */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 10px 18px;
+  background: var(--ink);
+  color: var(--mist);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 24px));
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* ============================================================
    REVEAL
    ============================================================ */

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import CalButton from "@/components/CalButton";
 import CalEmbedScript from "@/components/CalEmbedScript";
@@ -298,7 +299,7 @@ export default function Home() {
                 </a>
               </div>
               <a href="https://espritauto38.com/" target="_blank" rel="noopener" className="work-visual">
-                <img src="espritautopreview.webp" alt="Aperçu du site Esprit Auto" loading="lazy" />
+                <Image src="/espritautopreview.webp" alt="Aperçu du site Esprit Auto" width={1280} height={624} sizes="(max-width: 900px) 100vw, 50vw" />
               </a>
             </article>
 
@@ -318,7 +319,7 @@ export default function Home() {
                 </a>
               </div>
               <a href="https://teamsolutiongarage.fr" target="_blank" rel="noopener" className="work-visual">
-                <img src="tsgpreview.webp" alt="Aperçu du site Team Solution Garage" loading="lazy" />
+                <Image src="/tsgpreview.webp" alt="Aperçu du site Team Solution Garage" width={1280} height={620} sizes="(max-width: 900px) 100vw, 50vw" />
               </a>
             </article>
 
@@ -356,7 +357,7 @@ export default function Home() {
 
               <div className="about-photo" id="hologram-portrait">
                 <div className="hologram-frame">
-                  <img src="nicolas.webp" alt="Nicolas Tinnirello, développeur freelance" loading="lazy" />
+                  <Image src="/nicolas.webp" alt="Nicolas Tinnirello, développeur freelance" width={1122} height={1402} sizes="(max-width: 900px) 80vw, 420px" />
                   <div className="hologram-shine" aria-hidden="true"></div>
                   <div className="hologram-grid" aria-hidden="true"></div>
                 </div>

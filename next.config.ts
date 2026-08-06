@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
 
-const supabaseHostname = new URL(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!
-).hostname;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+if (!supabaseUrl) {
+  throw new Error(
+    "NEXT_PUBLIC_SUPABASE_URL manquante au build. Vérifier .env.local en local ou les variables d'environnement du projet sur Vercel.",
+  );
+}
+const supabaseHostname = new URL(supabaseUrl).hostname;
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["192.168.1.28"],
   // ============================================
   // Reactivite stricte - aide a detecter les bugs
   // ============================================

@@ -212,13 +212,14 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <a href="#contenu" className="skip-link">Aller au contenu</a>
         <ScrollRestoration />
         <ScrollProgress />
         <HeaderScrollState />
         <MobileNav />
         <div className="scroll-progress" aria-hidden="true"></div>
         <SiteHeader />
-        {children}
+        <div id="contenu">{children}</div>
         <SiteFooter />
         <Analytics />
       </body>

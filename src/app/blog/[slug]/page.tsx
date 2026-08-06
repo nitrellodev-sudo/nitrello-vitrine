@@ -12,7 +12,6 @@ import {
   extractTableOfContents,
   slugifyHeading,
   stripInlineMarkdown,
-  type FaqEntry,
 } from "@/lib/blog-utils";
 import { TAG_LABELS, formatDate } from "@/lib/blog-format";
 
@@ -44,7 +43,37 @@ function renderCoverCredit(slug: string) {
 
 // --- Marked configuration -----------------------------------------------
 
+const escapeHtml = (value: string): string =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+// Protocoles interdits dans les liens : neutralisés en texte simple.
+const DANGEROUS_PROTOCOL = /^\s*(javascript|data|vbscript):/i;
+
 const renderer = new Renderer();
+
+// Barrière XSS : le HTML brut présent dans le Markdown est affiché comme
+// texte, jamais interprété. Le contenu vient de Supabase : sans cette
+// barrière, une policy RLS défaillante ou un compte compromis suffirait
+// à injecter du script chez tous les visiteurs.
+renderer.html = function (token: Tokens.HTML | Tokens.Tag): string {
+  return escapeHtml(token.text);
+};
+
+renderer.link = function (this: Renderer, token: Tokens.Link): string {
+  const href = token.href ?? "";
+  const label = this.parser.parseInline(token.tokens);
+  if (DANGEROUS_PROTOCOL.test(href)) {
+    return label;
+  }
+  const title = token.title ? ` title="${escapeHtml(token.title)}"` : "";
+  return `<a href="${escapeHtml(href)}"${title}>${label}</a>`;
+};
+
 renderer.heading = function (
   this: Renderer,
   token: Tokens.Heading

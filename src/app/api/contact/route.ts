@@ -55,6 +55,50 @@ const NOTION_RICH_TEXT_MAX = 2000;
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// ── Rate limiting ─────────────────────────────────────────────────────────
+//
+// Limiteur en mémoire par IP, fenêtre glissante. Sur Vercel chaque instance
+// de fonction a sa propre mémoire : ce n'est pas une garantie absolue
+// multi-instance, mais les rafales d'un même bot retombent sur l'instance
+// chaude et sont coupées, sans dépendance externe (Upstash, etc.).
+// Chaque requête acceptée coûte 1 à 3 appels externes (Brevo ×2, Notion) :
+// c'est le quota qu'on protège ici.
+
+const RATE_LIMIT = { maxRequests: 5, windowMs: 10 * 60 * 1000 } as const;
+const rateLimitHits = new Map<string, number[]>();
+
+function clientIp(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0].trim();
+  }
+  return request.headers.get("x-real-ip") ?? "inconnue";
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT.windowMs;
+  const hits = (rateLimitHits.get(ip) ?? []).filter((t) => t > cutoff);
+
+  if (hits.length >= RATE_LIMIT.maxRequests) {
+    rateLimitHits.set(ip, hits);
+    return true;
+  }
+
+  hits.push(now);
+  rateLimitHits.set(ip, hits);
+
+  // Nettoyage opportuniste : borne la mémoire de l'instance.
+  if (rateLimitHits.size > 1000) {
+    for (const [key, timestamps] of rateLimitHits) {
+      if (timestamps.every((t) => t <= cutoff)) {
+        rateLimitHits.delete(key);
+      }
+    }
+  }
+  return false;
+}
+
 // ── Types ─────────────────────────────────────────────────────────────────
 
 type ContactPayload = {
@@ -259,6 +303,17 @@ async function createNotionLead(
 // ── Handler ───────────────────────────────────────────────────────────────
 
 export async function POST(request: Request): Promise<NextResponse> {
+  // 0. Rate limiting : avant tout traitement, aucune requête au-delà du quota
+  //    ne doit déclencher d'appel externe.
+  const ip = clientIp(request);
+  if (isRateLimited(ip)) {
+    console.error(`[api/contact] Rate limit dépassé (${ip}).`);
+    return NextResponse.json(
+      { success: false, error: "Trop de demandes. Réessaie dans quelques minutes." },
+      { status: 429 },
+    );
+  }
+
   // 1. Parse JSON
   let body: unknown;
   try {
@@ -269,15 +324,16 @@ export async function POST(request: Request): Promise<NextResponse> {
       { status: 400 },
     );
   }
+  const raw = (
+    typeof body === "object" && body !== null ? body : {}
+  ) as Record<string, unknown>;
 
   // 2. Honeypot : le champ field_misc ne bloque PLUS l'envoi. S'il est rempli,
   //    on tague la soumission "suspecte" mais on la traite quand même (un faux
   //    positif autofill ne doit jamais coûter un lead). Conséquences plus bas :
   //    sujet de notif préfixé [Suspect spam] + accusé de réception NON envoyé.
   const honeypot =
-    typeof (body as Record<string, unknown>)?.field_misc === "string"
-      ? ((body as Record<string, unknown>).field_misc as string).trim()
-      : "";
+    typeof raw.field_misc === "string" ? raw.field_misc.trim() : "";
   const isSuspect = honeypot !== "";
   if (isSuspect) {
     console.error(

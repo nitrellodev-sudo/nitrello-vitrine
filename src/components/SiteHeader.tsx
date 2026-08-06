@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function SiteHeader() {
@@ -5,7 +6,7 @@ export default function SiteHeader() {
     <header id="header">
       <div className="container">
         <nav className="nav">
-          <a href="/" className="nav-logo" aria-label="Nitrello">
+          <Link href="/" className="nav-logo" aria-label="Nitrello">
             <svg viewBox="0 0 85 80" aria-hidden="true">
               <defs>
                 <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="0">
@@ -19,19 +20,19 @@ export default function SiteHeader() {
               </g>
             </svg>
             <span>Nitrello</span>
-          </a>
+          </Link>
           <ul className="nav-links" id="nav-links">
-            <li><a href="/#services">Services</a></li>
-            <li><a href="/#method">Méthode</a></li>
-            <li><a href="/#pricing">Chiffrage</a></li>
-            <li><a href="/#work">Réalisations</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/#about">À propos</a></li>
-            <li><a href="/#faq">FAQ</a></li>
+            <li><Link href="/#services">Services</Link></li>
+            <li><Link href="/#method">Méthode</Link></li>
+            <li><Link href="/#pricing">Chiffrage</Link></li>
+            <li><Link href="/#work">Réalisations</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
+            <li><Link href="/#about">À propos</Link></li>
+            <li><Link href="/#faq">FAQ</Link></li>
           </ul>
           <div className="nav-cta">
             <ThemeToggle />
-            <a href="/#contact" className="btn btn-ghost">En discuter</a>
+            <Link href="/#contact" className="btn btn-ghost">En discuter</Link>
             <button className="nav-toggle" aria-label="Menu" id="nav-toggle">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
             </button>

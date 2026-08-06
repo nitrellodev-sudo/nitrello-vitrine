@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import CalButton from "@/components/CalButton";
+import CalEmbedScript from "@/components/CalEmbedScript";
+import FloatingCTA from "@/components/FloatingCTA";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import WorkflowAnimation from "@/components/WorkflowAnimation";
 import MethodProgress from "@/components/MethodProgress";
@@ -31,6 +35,8 @@ export default function AutomatisationIaPage() {
       <RevealOnScroll />
       <WorkflowAnimation />
       <MethodProgress />
+      <FloatingCTA />
+      <CalEmbedScript />
 
       {/* Sprite d'icônes de la page (référencé via <use href="#i-..."/>) */}
       <svg
@@ -99,12 +105,12 @@ export default function AutomatisationIaPage() {
         </div>
         <div className="container">
           <div className="ia-hero-content">
-            <a href="/" className="ia-back reveal">
+            <Link href="/" className="ia-back reveal">
               <svg className="ia-icon" aria-hidden="true">
                 <use href="#i-arrow-left" />
               </svg>
               Retour à l&apos;accueil
-            </a>
+            </Link>
             <div className="eyebrow reveal">Automatisation sur mesure</div>
             <h1 className="reveal r-1">
               Le temps que tu perds sur des tâches répétitives,{" "}
@@ -637,6 +643,19 @@ export default function AutomatisationIaPage() {
           </div>
         </div>
       </section>
+
+      {/* Floating CTA : reste visible pendant le scroll, même chemin de
+          conversion que la home (modal Cal.com, fallback lien direct) */}
+      <CalButton
+        href="https://cal.com/nicolas-2j0lvm/30min"
+        className="float-cta"
+        id="float-cta"
+        ariaLabel="Réserver un appel de 30 minutes"
+      >
+        <span className="float-cta-dot" aria-hidden="true"></span>
+        <span>Réserver un appel<span className="float-cta-label-long"> · 30 min</span></span>
+        <svg className="float-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+      </CalButton>
     </>
   );
 }

@@ -1,36 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 // ============================================
 // THEME TOGGLE - Bouton dark/light mode
 // ============================================
 // Logique :
-// 1. Au montage, lire data-theme sur <html> (deja set par le script anti-FOUC du layout)
-// 2. Au clic, toggler entre dark et light
-// 3. Persister le choix dans localStorage (cle 'nitrello-theme')
-// 4. Le CSS gere l'affichage soleil/lune via les variables et data-theme
+// 1. data-theme sur <html> est la seule source de vérité (posé par le
+//    script anti-FOUC du layout avant le premier rendu)
+// 2. Au clic, on lit l'attribut, on le bascule, on persiste
+// 3. Le CSS gère l'affichage soleil/lune via data-theme : aucun état React
 // ============================================
 
 type Theme = "dark" | "light";
 
 export default function ThemeToggle() {
-  // Etat initial : on lit le theme actuel applique sur <html>
-  // (initialise par le script anti-FOUC du layout avant le rendu)
-  const [theme, setTheme] = useState<Theme>("dark");
-
-  // Au montage cote client, on synchronise l'etat avec ce qui est dans le DOM
-  useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    if (currentTheme === "light" || currentTheme === "dark") {
-      setTheme(currentTheme);
-    }
-  }, []);
-
-  // Fonction de bascule
   const toggleTheme = () => {
-    const newTheme: Theme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
+    const current = document.documentElement.getAttribute("data-theme");
+    const newTheme: Theme = current === "dark" ? "light" : "dark";
 
     // Applique sur <html> pour que le CSS reagisse
     document.documentElement.setAttribute("data-theme", newTheme);
