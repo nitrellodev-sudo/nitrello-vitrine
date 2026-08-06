@@ -30,6 +30,9 @@ export default function SiteHeader() {
             <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/#about">À propos</Link></li>
             <li><Link href="/#faq">FAQ</Link></li>
+            {/* Visible uniquement dans le menu burger (CSS .nav-link-contact) :
+                en nav horizontale le bouton "En discuter" couvre déjà Contact */}
+            <li className="nav-link-contact"><Link href="/#contact">Contact</Link></li>
           </ul>
           <div className="nav-cta">
             <ThemeToggle />

@@ -411,6 +411,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   transition: background 0.2s, color 0.2s;
 }
 .nav-links a:hover { background: rgba(17,17,17,0.05); color: var(--ink); }
+/* Entrée Contact du menu burger : masquée en nav horizontale (voir la
+   media query 1080px qui la réaffiche en mode burger) */
+.nav-link-contact { display: none; }
 .nav-cta { display: flex; align-items: center; gap: 12px; }
 .nav-toggle { display: none; padding: 8px; border-radius: 8px; }
 .nav-toggle svg { width: 24px; height: 24px; }
@@ -477,6 +480,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px 14px; font-size: 16px; }
   .nav-toggle { display: inline-flex; }
+  /* L'entrée Contact n'existe que dans le menu burger : en nav horizontale
+     le bouton "En discuter" joue ce rôle (et une 9e entrée ferait déborder
+     la nav avant le point de bascule à 1080px). */
+  .nav-link-contact { display: list-item; }
+}
+
+/* En mode burger la barre n'a plus que logo + toggle + bouton + burger :
+   la place ne manque qu'en dessous de ~480px (mesuré : ~400px requis).
+   Avant le lot 3, "En discuter" disparaissait dès 1080px et le burger
+   n'avait aucune entrée Contact : entre 880 et 1080px la conversion ne
+   tenait qu'au FloatingCTA. */
+@media (max-width: 480px) {
   .nav-cta .btn-ghost { display: none; }
 }
 
@@ -484,12 +499,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
    HERO
    ============================================================ */
 #hero {
-  padding: clamp(120px, 16vh, 180px) 0 clamp(80px, 12vw, 140px);
+  /* Fusion hero + bloc phare (lot 3) : la section contient copy + teaser
+     cost-cards, elle dépasse l'écran. Plus de centrage vertical 80vh. */
+  padding: clamp(120px, 16vh, 180px) 0 clamp(72px, 10vw, 120px);
   position: relative;
   overflow: hidden;
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
 }
 /* Subtle grid wash */
 #hero::after {
@@ -504,14 +518,16 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   opacity: 0.06;
   /* 2 couches composées en intersection : le wash radial d'origine, plus une
      zone percée (transparente) sous le bloc titre pour qu'aucune ligne de
-     grille ne croise le mot "gagner" */
+     grille ne croise l'accent du H1. Fusion lot 3 : la section est plus
+     haute (copy + cost-cards), le titre vit dans le tiers haut, le wash et
+     la zone percée remontent avec lui. */
   mask-image:
-    radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%),
-    radial-gradient(ellipse 45% 32% at 48% 42%, transparent 55%, black 100%);
+    radial-gradient(ellipse 80% 45% at 50% 28%, black 30%, transparent 80%),
+    radial-gradient(ellipse 45% 22% at 46% 24%, transparent 55%, black 100%);
   mask-composite: intersect;
   -webkit-mask-image:
-    radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%),
-    radial-gradient(ellipse 45% 32% at 48% 42%, transparent 55%, black 100%);
+    radial-gradient(ellipse 80% 45% at 50% 28%, black 30%, transparent 80%),
+    radial-gradient(ellipse 45% 22% at 46% 24%, transparent 55%, black 100%);
   -webkit-mask-composite: source-in;
   pointer-events: none;
   z-index: 0;
@@ -629,23 +645,46 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   white-space: nowrap;
   /* width set by JS to the widest phrase, plafonnée à la largeur du parent — prevents jump sans déborder */
 }
-#typed-text {
-  display: inline-block;
-}
-.caret {
-  display: inline-block;
-  width: 3px;
-  height: 0.85em;
-  background: linear-gradient(180deg, var(--cyan), var(--violet));
-  margin-left: 6px;
-  vertical-align: -0.05em;
-  animation: blink 0.9s steps(1) infinite;
-  border-radius: 2px;
-  -webkit-text-fill-color: initial;
-}
+/* blink : utilisé par .phare-caret (le typewriter du hero). Les règles
+   #typed-text et .caret de l'ancien H1 animé ont été retirées (lot 3),
+   ainsi que le lede du hero (le typewriter est sa ligne d'appui, le
+   ticker déroule déjà les 3 offres). */
 @keyframes blink { 50% { opacity: 0; } }
-.hero-copy .lede { margin-bottom: 40px; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+
+/* ── Teaser du constat (fusion lot 3 · v2 après retour design) ──
+   Bande de stats légère, pas les cost-cards recopiées : les cartes
+   complètes vivent sur /automatisation-ia, le hero doit respirer.
+   Kicker = h2 stylé .eyebrow (les mots-clés SEO restent dans un Hn).
+   Le gap avec la copy vient du margin-top (fusionne avec le
+   margin-bottom 56px de .hero-actions, marges adjacentes). */
+.hero-cost { margin-top: clamp(56px, 9vw, 104px); }
+h2.hero-cost-kicker { margin-bottom: 28px; }
+.hero-cost-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+}
+.hero-cost-item {
+  border-top: 1px solid var(--border-strong);
+  padding-top: 18px;
+}
+.hero-cost-num {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.hero-cost-item p {
+  font-size: 15px;
+  color: var(--fg-muted);
+  line-height: 1.55;
+  max-width: 34ch;
+}
+.hero-cost-link { margin-top: 32px; }
+@media (max-width: 760px) {
+  .hero-cost-strip { grid-template-columns: 1fr; gap: 18px; }
+}
 
 
 .dot {
@@ -1194,8 +1233,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   to   { background-position: 200% 0; }
 }
 
-/* Fade gradient sur les côtés pour un effet plus pro */
-.ticker {
+/* Fade gradient sur les côtés, appliqué au VIEWPORT (statique) et pas au
+   bandeau : sur .ticker entier, le fond inversé fondait aussi vers le fond
+   de page et dessinait un voile sombre à chaque extrémité de la frise.
+   Pas sur .ticker-track non plus : la piste défile, le fade suivrait. */
+.ticker-viewport {
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
           mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
@@ -3446,83 +3488,21 @@ a.contact-row:hover { color: var(--cyan); }
 }
 /* ═══ FIN page IA ═══ */
 
-/* ═══ BLOC PHARE IA ═══ */
-/* Bloc phare "Automatisation par l'IA" sur la home, entre Ticker et Services.
+/* ═══ TYPEWRITER PHARE (dans le hero depuis le lot 3) ═══ */
+/* La section .phare de la home a fusionné dans #hero (lot 3) : la coquille
+   (.phare, .phare-mark, .phare-inner, .phare-title, .phare-grad,
+   .phare-actions) a été retirée. Restent les classes du composant
+   PhareTypewriter et de sa ligne, rendues dans .hero-copy.
    Réf. maquette : bloc-phare-ia-v2.html · classes préfixées phare-* */
-.phare {
-  position: relative;
-  padding: var(--gap-section) 0;
-  overflow: hidden;
-}
-.phare::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 45% 55% at 12% 25%, rgba(0,191,255,0.10), transparent 60%),
-    radial-gradient(ellipse 50% 60% at 90% 75%, rgba(123,47,255,0.13), transparent 62%);
-}
-[data-theme="dark"] .phare::before {
-  background:
-    radial-gradient(ellipse 45% 55% at 12% 25%, rgba(0,191,255,0.16), transparent 60%),
-    radial-gradient(ellipse 50% 60% at 90% 75%, rgba(123,47,255,0.20), transparent 62%);
-}
-.phare-mark {
-  position: absolute;
-  top: 50%;
-  right: -8%;
-  transform: translateY(-50%);
-  width: 60vw;
-  height: 60vw;
-  max-width: 700px;
-  max-height: 700px;
-  background-color: var(--ink);
-  mask: url('/mark-nitrello.svg') no-repeat center / contain;
-  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 0;
-}
-@media (max-width: 900px) {
-  .phare-mark { display: none; }
-}
-.phare-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1000px;
-}
-.phare .eyebrow {
-  margin-bottom: 28px;
-  color: var(--cyan);
-}
-[data-theme="dark"] .phare .eyebrow {
-  text-shadow: 0 0 16px rgba(0,191,255,0.4);
-}
-.phare-title {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(44px, 6.5vw, 80px);
-  line-height: 1.04;
-  letter-spacing: -0.025em;
-  margin-bottom: 32px;
-}
-.phare-grad {
-  background: linear-gradient(95deg, var(--cyan) 10%, var(--violet) 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
-}
-/* Typewriter : taille entre le titre et le texte courant */
+/* Typewriter : ligne d'appui du H1 depuis la v2 du lot 3 (taille de
+   lede animé, plus une co-vedette du H1 comme dans l'ancien bloc phare) */
 .phare-typed-line {
   font-family: var(--serif);
-  font-size: clamp(28px, 3.8vw, 48px);
-  line-height: 1.25;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.35;
   letter-spacing: -0.015em;
   color: var(--ink-soft);
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   max-width: 100%;
 }
 /* La 2e ligne (texte + mot animé) ne se recasse jamais : 2 niveaux garantis */
@@ -3553,34 +3533,34 @@ a.contact-row:hover { color: var(--cyan); }
   animation: blink 0.9s steps(1) infinite; /* réutilise @keyframes blink existant */
   border-radius: 2px;
 }
-.phare-actions {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
 @media (max-width: 600px) {
   /* "tes outils s'occupent de [mot le plus long]" tient sans scroll latéral */
   .phare-typed-line {
-    font-size: clamp(24px, 6.4vw, 34px);
+    font-size: clamp(16px, 4.8vw, 22px);
     overflow-wrap: normal;
     word-break: keep-all;
   }
 }
 @media (max-width: 380px) {
-  .phare-typed-line { font-size: 22px; }
+  .phare-typed-line { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .phare-caret { animation: none; }
 }
-/* ═══ FIN BLOC PHARE IA ═══ */
+/* ═══ FIN TYPEWRITER PHARE ═══ */
 
 /* ═══ CTA INTERMÉDIAIRE ═══ */
-/* CTA court sur fond inversé, entre le bloc phare IA et Services.
+/* CTA court sur fond inversé, entre le ticker et Services (le bloc phare
+   a fusionné dans le hero au lot 3).
    Réf. maquette : cta-services.html (section #4) · sombre en light,
    clair en dark (effet d'inversion, comme ticker/contact/footer) */
 .cta-mid {
   background: var(--bg-inverse);
   color: var(--fg-inverse);
+  /* Depuis la fusion du lot 3 le cta-mid suit directement le ticker : deux
+     bandeaux inversés collés. Respiration symétrique au padding bas du hero
+     pour que la frise flotte entre deux zones aérées, comme avant. */
+  margin-top: clamp(72px, 10vw, 120px);
   padding: clamp(56px, 8vw, 96px) 0;
   position: relative;
   overflow: hidden;
@@ -3938,10 +3918,5 @@ a.contact-row:hover { color: var(--cyan); }
     /* même logique que desktop : la line-box loge la descendante */
     line-height: 1.3;
   }
-  /* le lede reste nettement plus petit que le H1 */
-  .hero-copy .lede { font-size: 15px; line-height: 1.55; }
-}
-@media (max-width: 380px) {
-  .hero-copy .lede { font-size: 14px; }
 }
 /* ═══ FIN HERO ═══ */

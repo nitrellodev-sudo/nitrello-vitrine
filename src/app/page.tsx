@@ -22,7 +22,14 @@ export default function Home() {
       <CalEmbedScript />
 
       {/* ============================================================
-           HERO
+           HERO · fusion hero + bloc phare (lot 3, v2 après retour design)
+           Un seul moment display : H1 signature (choix Nico), typewriter
+           en ligne d'appui (il remplace le lede, le ticker déroule déjà
+           les 3 offres), CTA. Puis, séparé par une vraie respiration, le
+           teaser du constat de /automatisation-ia en bande de stats
+           légère (filets + gros mots serif), pas en cartes recopiées.
+           Les mots-clés SEO (tâches répétitives, TPE) vivent dans le H2
+           kicker de la bande.
            ============================================================ */}
       <section id="hero">
         <div className="hero-flow" aria-hidden="true">
@@ -38,8 +45,9 @@ export default function Home() {
               <h1 className="h-display reveal r-1">
                 Je transforme ton temps perdu en <span className="accent">argent</span> gagné.
               </h1>
-              <p className="lede reveal r-2">
-                Automatisation, outils de gestion, sites sur-mesure. Chaque projet commence par une conversation.
+              <p className="phare-typed-line reveal r-2">
+                Pendant que tu fais ton métier,<br />
+                <span className="phare-nowrap">tes outils s&apos;occupent de <PhareTypewriter /></span>
               </p>
               <div className="hero-actions reveal r-3">
                 <a href="#contact" className="btn btn-primary">
@@ -49,6 +57,28 @@ export default function Home() {
                 <Link href="/automatisation-ia" className="btn btn-ghost">Découvrir l&apos;automatisation</Link>
               </div>
             </div>
+
+            <div className="hero-cost">
+              <h2 className="eyebrow hero-cost-kicker reveal">Ce que les tâches répétitives coûtent à une TPE</h2>
+              <div className="hero-cost-strip">
+                <div className="hero-cost-item reveal">
+                  <div className="hero-cost-num">110 h par an</div>
+                  <p>à recopier des informations d&apos;un outil à un autre</p>
+                </div>
+                <div className="hero-cost-item reveal r-1">
+                  <div className="hero-cost-num">Des ventes perdues</div>
+                  <p>des relances de clients et de devis oubliées, faute de temps</p>
+                </div>
+                <div className="hero-cost-item reveal r-2">
+                  <div className="hero-cost-num">Une charge mentale</div>
+                  <p>les mails à trier, classer et traiter, qui ne s&apos;arrêtent jamais</p>
+                </div>
+              </div>
+              <Link href="/automatisation-ia" className="work-link hero-cost-link reveal">
+                Voir comment je récupère ces heures
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M9 7h8v8" /></svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -57,6 +87,10 @@ export default function Home() {
            TICKER , marquee de spécialités (densité éditoriale)
            ============================================================ */}
       <div className="ticker" aria-hidden="true">
+        {/* Le viewport porte le fade des côtés (mask) : appliqué au bandeau
+            entier, le fond inversé fondait aussi et créait des voiles sombres
+            de chaque côté de la frise */}
+        <div className="ticker-viewport">
         <div className="ticker-track">
           <span className="ticker-item">Automatisation IA</span><span className="ticker-dot"></span>
           <span className="ticker-item">Agents &amp; assistants</span><span className="ticker-dot"></span>
@@ -80,34 +114,8 @@ export default function Home() {
           <span className="ticker-item">Intégration API</span><span className="ticker-dot"></span>
           <span className="ticker-item">Gain de temps</span><span className="ticker-dot"></span>
         </div>
-      </div>
-
-      {/* ============================================================
-           BLOC PHARE IA
-           ============================================================ */}
-      <section className="phare">
-        <div className="phare-mark" aria-hidden="true"></div>
-        <div className="container">
-          <div className="phare-inner">
-            <div className="eyebrow reveal">Automatisation · IA</div>
-            <h2 className="phare-title reveal r-1">
-              Économise du temps.<br />
-              <span className="phare-grad">Gagne en productivité.</span>
-            </h2>
-            <p className="phare-typed-line reveal r-2">
-              Pendant que tu fais ton métier,<br />
-              <span className="phare-nowrap">tes outils s&apos;occupent de <PhareTypewriter /></span>
-            </p>
-            <div className="phare-actions reveal r-3">
-              <Link href="/automatisation-ia" className="btn btn-primary">
-                Découvrir l&apos;offre
-                <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-              </Link>
-              <Link href="/automatisation-ia#wf-anchor" className="btn btn-ghost">Voir un exemple concret</Link>
-            </div>
-          </div>
         </div>
-      </section>
+      </div>
 
       {/* ============================================================
            CTA INTERMÉDIAIRE
