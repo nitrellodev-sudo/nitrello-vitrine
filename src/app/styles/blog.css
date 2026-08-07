@@ -149,6 +149,19 @@
 
 /* Article individuel */
 
+.blog-article__cta {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--mist);
+}
+
+.blog-article__cta-text {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--stone);
+}
+
 .blog-article__footer {
   margin: 2rem 0;
 }

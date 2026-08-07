@@ -7,6 +7,7 @@
  */
 
 export const TAG_LABELS: Record<string, string> = {
+  "automatisation-ia": "Automatisation IA",
   "solutions-techniques": "Solutions techniques",
   "collaboration-client": "Collaboration client",
   "independance-projet": "Indépendance projet",

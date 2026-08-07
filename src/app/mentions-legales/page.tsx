@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description:
-    "Mentions légales du site nitrello.com — Nicolas Tinnirello, freelance dev web, mobile et IA basé à Saint-Sauveur (Isère).",
+    "Mentions légales du site nitrello.com · Nicolas Tinnirello, automatisation IA et outils sur mesure, basé à Saint-Sauveur (Isère).",
   alternates: {
     canonical: "https://nitrello.com/mentions-legales",
   },
@@ -39,7 +39,8 @@ export default function MentionsLegalesPage() {
           <li>SIRET (établissement principal)&nbsp;: 51511765300045</li>
           <li>Code APE&nbsp;: 6201Z — Programmation informatique</li>
           <li>
-            Activité&nbsp;: développement d&apos;applications web et mobile
+            Activité&nbsp;: automatisation par l&apos;IA, outils de gestion et
+            sites sur mesure
           </li>
           <li>
             TVA non applicable, article 293&nbsp;B du Code général des impôts

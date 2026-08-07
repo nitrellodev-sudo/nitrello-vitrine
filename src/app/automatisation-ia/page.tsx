@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-const CAL_URL = "https://cal.com/nicolas-2j0lvm/30min";
+const CAL_URL = "https://cal.com/nicolas-2j0lvm/echange";
 
 export default function AutomatisationIaPage() {
   return (
@@ -420,8 +420,9 @@ export default function AutomatisationIaPage() {
               </div>
               <h3>Saisie et transfert de données</h3>
               <p>
-                Fini le copier-coller entre tes outils. Les informations
-                circulent toutes seules.
+                Fini le copier-coller entre tes outils. La demande d&apos;un
+                client atterrit toute seule dans ton suivi de chantiers ou
+                d&apos;interventions.
               </p>
             </div>
             <div className="cap-card reveal r-1">
@@ -432,8 +433,8 @@ export default function AutomatisationIaPage() {
               </div>
               <h3>Relances automatiques</h3>
               <p>
-                Clients, devis, factures impayées : plus rien ne passe à la
-                trappe.
+                Devis de chantier sans réponse, factures impayées, clients sans
+                nouvelles : plus rien ne passe à la trappe.
               </p>
             </div>
             <div className="cap-card reveal r-2">
@@ -444,7 +445,8 @@ export default function AutomatisationIaPage() {
               </div>
               <h3>Tri et réponse aux mails</h3>
               <p>
-                Les demandes qui reviennent sont traitées sans que tu t&apos;en
+                Demandes de devis, questions sur un planning, réclamations :
+                les mails qui reviennent sont traités sans que tu t&apos;en
                 occupes.
               </p>
             </div>
@@ -456,8 +458,8 @@ export default function AutomatisationIaPage() {
               </div>
               <h3>Génération de documents</h3>
               <p>
-                Devis, comptes-rendus, factures produits automatiquement, prêts
-                à envoyer.
+                Devis, comptes rendus de chantier ou d&apos;intervention,
+                factures : produits automatiquement, prêts à envoyer.
               </p>
             </div>
             <div className="cap-card reveal r-1">
@@ -480,8 +482,8 @@ export default function AutomatisationIaPage() {
               </div>
               <h3>Connexion de tes outils</h3>
               <p>
-                Ton CRM, ta boîte mail et ta compta qui se parlent enfin entre
-                eux.
+                Ton CRM, ta boîte mail, ton planning et ta compta qui se
+                parlent enfin entre eux.
               </p>
             </div>
           </div>
@@ -617,7 +619,7 @@ export default function AutomatisationIaPage() {
               <span className="accent">récupérer</span> ?
             </h2>
             <p>
-              Un échange de 30 minutes suffit pour identifier tes premières
+              Un échange de 45 minutes suffit pour identifier tes premières
               pistes. Gratuit, sans engagement. Tu repars avec des idées
               concrètes, que tu travailles avec moi ou non.
             </p>
@@ -647,13 +649,13 @@ export default function AutomatisationIaPage() {
       {/* Floating CTA : reste visible pendant le scroll, même chemin de
           conversion que la home (modal Cal.com, fallback lien direct) */}
       <CalButton
-        href="https://cal.com/nicolas-2j0lvm/30min"
+        href="https://cal.com/nicolas-2j0lvm/echange"
         className="float-cta"
         id="float-cta"
-        ariaLabel="Réserver un appel de 30 minutes"
+        ariaLabel="Réserver un appel de 45 minutes"
       >
         <span className="float-cta-dot" aria-hidden="true"></span>
-        <span>Réserver un appel<span className="float-cta-label-long"> · 30 min</span></span>
+        <span>Réserver un appel<span className="float-cta-label-long"> · 45 min</span></span>
         <svg className="float-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
       </CalButton>
     </>

@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { marked, Renderer, type Tokens } from "marked";
 import { getPublishedPostBySlug, getAllPublishedSlugs } from "@/lib/blog";
+import CalButton from "@/components/CalButton";
+import CalEmbedScript from "@/components/CalEmbedScript";
 import TableOfContents from "@/components/TableOfContents";
 import {
   calculateReadingTime,
@@ -239,6 +241,7 @@ export default async function BlogArticlePage({ params }: Props) {
 
   return (
     <>
+      <CalEmbedScript />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
@@ -341,6 +344,19 @@ export default async function BlogArticlePage({ params }: Props) {
               className="blog-article__content prose"
               dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
+
+            <div className="blog-article__cta">
+              <p className="blog-article__cta-text">
+                Envie de voir ce que ça donnerait chez toi ? On en parle,
+                gratuitement et sans engagement.
+              </p>
+              <CalButton
+                href="https://cal.com/nicolas-2j0lvm/echange"
+                className="btn btn-primary"
+              >
+                Réserver un échange
+              </CalButton>
+            </div>
           </article>
 
           {showToc && (

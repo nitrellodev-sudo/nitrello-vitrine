@@ -29,10 +29,10 @@ export default function CalButton({
   children,
 }: CalButtonProps) {
   const handleClick = (e: MouseEvent<HTMLAnchorElement>): void => {
-    // Si Cal.com est chargé et le namespace "30min" initialisé → popup
-    if (typeof window !== "undefined" && window.Cal?.ns?.["30min"]) {
+    // Si Cal.com est chargé et le namespace "echange" initialisé → popup
+    if (typeof window !== "undefined" && window.Cal?.ns?.["echange"]) {
       e.preventDefault();
-      window.Cal.ns["30min"]("modal", { calLink: "nicolas-2j0lvm/30min" });
+      window.Cal.ns["echange"]("modal", { calLink: "nicolas-2j0lvm/echange" });
     }
     // Sinon, on laisse le clic suivre l'href (fallback redirection vers cal.com)
   };

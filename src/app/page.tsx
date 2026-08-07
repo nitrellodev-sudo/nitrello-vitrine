@@ -124,9 +124,9 @@ export default function Home() {
         <div className="container">
           <div className="cta-mid-copy reveal">
             <h2>On regarde ensemble ce que tu peux <em>automatiser</em> ?</h2>
-            <p>30 minutes, gratuit, sans engagement. On parle de ton activité, je te dis franchement ce qui vaut le coup.</p>
+            <p>45 minutes, gratuit, sans engagement. On parle de ton activité, je te dis franchement ce qui vaut le coup.</p>
           </div>
-          <CalButton href="https://cal.com/nicolas-2j0lvm/30min" className="btn btn-primary reveal r-1">
+          <CalButton href="https://cal.com/nicolas-2j0lvm/echange" className="btn btn-primary reveal r-1">
             Réserver un échange
             <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
           </CalButton>
@@ -190,7 +190,7 @@ export default function Home() {
                 <div className="method-num">01 · Contact</div>
                 <div className="method-body">
                   <h4>On se parle, <em>sans engagement.</em></h4>
-                  <p>Un appel de 30 minutes pour comprendre ton besoin, ton contexte, ton budget. Je te dis honnêtement si je suis le bon interlocuteur.</p>
+                  <p>Un appel de 45 minutes pour comprendre ton besoin, ton contexte, ton budget. Je te dis honnêtement si je suis le bon interlocuteur.</p>
                 </div>
               </div>
               <div className="method-step reveal r-1">
@@ -260,8 +260,8 @@ export default function Home() {
           </div>
 
           <div className="chiffrage-cta reveal">
-            <CalButton href="https://cal.com/nicolas-2j0lvm/30min" className="btn btn-primary">
-              Réserver un échange de 30 min
+            <CalButton href="https://cal.com/nicolas-2j0lvm/echange" className="btn btn-primary">
+              Réserver un échange de 45 min
               <svg className="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
             </CalButton>
             <p>Gratuit, sans engagement. <strong>C&apos;est le seul chemin vers un devis.</strong></p>
@@ -500,6 +500,17 @@ export default function Home() {
               <div className="faq-item">
                 <button className="faq-q" type="button" aria-expanded="false">
                   <span className="faq-num">Q.08</span>
+                  <span className="faq-q-text">Un freelance seul, c&apos;est fiable ?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </button>
+                <div className="faq-a">
+                  <div className="faq-a-spacer"></div>
+                  <p className="faq-a-text">Plus qu&apos;on ne le croit. Tu parles toujours à la même personne : <strong>celle qui a construit ton outil et qui le connaît par cœur</strong>, sans standard ni dossier qui passe de main en main. Et je construis tout pour que tu ne dépendes jamais de moi : outils standards, documentation livrée, accès qui t&apos;appartiennent. Si demain quelqu&apos;un d&apos;autre reprend, tout est transmissible sans casse.</p>
+                </div>
+              </div>
+              <div className="faq-item">
+                <button className="faq-q" type="button" aria-expanded="false">
+                  <span className="faq-num">Q.09</span>
                   <span className="faq-q-text">Tu prends tous les projets ?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </button>
@@ -534,7 +545,7 @@ export default function Home() {
             <div className="reveal contact-intro">
               <div className="eyebrow">On en parle ?</div>
               <h2 className="h-display">Ton projet, <em>notre première conversation.</em></h2>
-              <p className="lede">30 minutes au téléphone, sans engagement. Je t&apos;écoute, je pose des questions, je te dis honnêtement si je peux t&apos;aider, et comment.</p>
+              <p className="lede">45 minutes au téléphone, sans engagement. Je t&apos;écoute, je pose des questions, je te dis honnêtement si je peux t&apos;aider, et comment.</p>
               <div className="contact-meta">
                 <div className="contact-meta-item">
                   <span className="label">Réponse</span>
@@ -559,8 +570,8 @@ export default function Home() {
                   <span>contact@nitrello.com</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
                 </a>
-                <CalButton href="https://cal.com/nicolas-2j0lvm/30min" className="contact-direct-row">
-                  <span>Réserver un appel · 30 min</span>
+                <CalButton href="https://cal.com/nicolas-2j0lvm/echange" className="contact-direct-row">
+                  <span>Réserver un appel · 45 min</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
                 </CalButton>
               </div>
@@ -573,13 +584,13 @@ export default function Home() {
 
       {/* Floating CTA : reste visible pendant le scroll */}
       <CalButton
-        href="https://cal.com/nicolas-2j0lvm/30min"
+        href="https://cal.com/nicolas-2j0lvm/echange"
         className="float-cta"
         id="float-cta"
-        ariaLabel="Réserver un appel de 30 minutes"
+        ariaLabel="Réserver un appel de 45 minutes"
       >
         <span className="float-cta-dot" aria-hidden="true"></span>
-        <span>Réserver un appel<span className="float-cta-label-long"> · 30 min</span></span>
+        <span>Réserver un appel<span className="float-cta-label-long"> · 45 min</span></span>
         <svg className="float-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
       </CalButton>
     </div>

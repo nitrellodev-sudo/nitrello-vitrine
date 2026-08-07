@@ -1,5 +1,38 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (propagation du positionnement · revue Nico faite, EN ATTENTE DE COMMIT)
+
+### Arbitrage Nico (07/08, en revue)
+**Le site reste généraliste TPE/PME** : la sectorisation bâtiment + nettoyage vit dans la prospection et les réseaux sociaux, PAS sur le site. Exception validée : les exemples d'automatisation peuvent être sectoriels. Une première passe avait sectorisé hero + metas : **annulée en session** (eyebrow, title, descriptions, JSON-LD revenus aux versions généralistes). Seuls survivent 3 keywords SEO sectoriels dans `layout.tsx` (invisibles, doctrine « BTP toléré en metas SEO », à retirer si Nico le demande).
+
+### Modifications locales (build vert 16 routes, ESLint 0 erreur, AUCUN COMMIT)
+1. `src/lib/blog-format.ts` : tag `automatisation-ia` ajouté à TAG_LABELS (« Automatisation IA ») · le tag de l'article 2 s'affichait en slug brut.
+2. `src/app/layout.tsx` : 3 keywords sectoriels ajoutés (« automatisation bâtiment », « automatisation BTP », « automatisation entreprise de nettoyage »), tout le reste identique à la prod.
+3. `src/app/page.tsx` : nouvelle FAQ Q.08 « Un freelance seul, c'est fiable ? » (ancienne Q.08 « Tu prends tous les projets ? » renumérotée Q.09, 9 faq-items au total). Eyebrow inchangé (généraliste).
+4. `src/app/automatisation-ia/page.tsx` : exemples métier dans 4 des 6 cap-cards **validés par Nico** (suivi de chantiers/interventions, devis de chantier sans réponse, comptes rendus de chantier ou d'intervention, planning) · metas inchangées (généralistes).
+5. `src/app/blog/[slug]/page.tsx` : bloc CTA Cal.com en fin d'article (texte d'invite + CalButton « Réserver un échange », URL actuelle `/30min`) + `<CalEmbedScript />` monté pour le modal.
+6. `src/app/styles/blog.css` : 2 règles ajoutées (`.blog-article__cta`, `.blog-article__cta-text`), filet `var(--mist)`, via le manifeste globals.css.
+7. `src/app/mentions-legales/page.tsx` : activité « développement d'applications web et mobile » (périmée) → « automatisation par l'IA, outils de gestion et sites sur mesure » · meta description alignée. **Validé par Nico.**
+
+### Piège élucidé en revue : « je ne vois pas le CTA en fin d'article »
+Le CTA est bien rendu sur le build local (DOM 748×122 px, bouton stylé, opacité 1, vérifié au computed style). Nico regardait selon toute vraisemblance la **prod nitrello.com**, qui n'a pas le code tant que rien n'est commité/déployé. À la revalidation : bien vérifier sur **localhost:3000** (ou l'IP LAN).
+
+### Chantier connexe découvert : article 2 en base (blog_posts, id `98983192-…`)
+- Le lien `[rendez-vous de 30 minutes](https://nitrello.com/automatisation-ia)` (section prix) ne mène pas à Cal.com : Nico le veut vers Cal.com.
+- Incohérence de durée entre articles : article 1 dit 45 min (réécrit le 07/08), article 2 dit 30 min (2 occurrences RDV : le lien ci-dessus + « prenons 30 minutes » dans la chute). Les « 30 minutes par jour » (stat) et « 20 à 30 minutes de tri » (veille) ne sont PAS des durées de RDV : ne pas y toucher.
+- Correctif à faire par PATCH PostgREST service_role (méthode de l'article 1), en attente de décision : idéalement APRÈS création de l'évènement Cal.com 45 min pour tout basculer d'un coup.
+
+### Bascule Cal.com 45 min FAITE le 07/08 (après-midi)
+- **Évènement créé par Nico** : `https://cal.com/nicolas-2j0lvm/echange`, titre « Échange », 45 min (vérifié `"length":45`). Premier slug auto-généré `appelle-decouverte` corrigé en `echange` à ma demande AVANT propagation. **L'ancien `/30min` reste actif : Nico ne le désactive qu'après déploiement du site.**
+- **Code (local, non commité)** : toutes les URL passées à `/echange` (home ×3 CTA + FloatingCTA, automatisation-ia CAL_URL + FloatingCTA, CTA blog), tous les textes RDV 30→45 min, namespace embed « 30min »→« echange » dans `CalButton.tsx` + `CalEmbedScript.tsx`. Seul « 30 min » restant : la stat « 30 min par jour » (volontaire). Build vert, ESLint 0 erreur, vérifié servi en local.
+- **Article 2 PATCHÉ en base** (blog_posts, service_role via CLI, jamais affichée) : `[rendez-vous de 45 minutes](https://cal.com/nicolas-2j0lvm/echange)` + « prenons 45 minutes ». Vérifié en base et via ISR locale. ⚠️ Effet immédiat en prod aussi (même base) : cohérent, le nouvel évènement est actif. Article 1 : rien à faire (aucun lien cal.com, durées déjà 45, son « appel de 30 minutes » est une pique rhétorique à laisser).
+- **Voix Nitrello (Notion) à jour** : « Obtenir quarante-cinq minutes », les 2 placeholders {Cal.com} du pitch/email remplacés par le lien réel, avertissement final remplacé par la note ✅ évènement créé.
+
+### Prochaines étapes
+1. Feu vert Nico sur les 10 fichiers modifiés → commit (git status avant add, add ciblé, + HANDOFF.md). La home est statique : le déploiement Vercel du push suffit.
+2. Après déploiement vérifié : **Nico désactive l'ancien évènement `/30min`** dans Cal.com.
+3. Hors repo, backlog restant : profil LinkedIn (contenus prêts dans la page Notion « Profil LinkedIn — audit et corrections », attention aux affirmations invalidées de cette page d'audit), vault Obsidian en retard (4 fichiers).
+
 ## Session du 2026-08-07 (fin de journée · SEO manuel + carte de visite)
 
 ### Fait par Nico (guidé en session)
@@ -12,7 +45,7 @@
 3. **Carte de visite `public/card/`** : vrai problème de code, jamais touchée par la refonte. **Corrigé en local** : title/meta/og alignés sur le jobTitle du JSON-LD, og:image passe de nicolas.png (488 Ko) au visuel OG 1200×630 signature (+ dimensions + twitter:card), tagline recto = signature H1, verso = les 3 offres, texte navigator.share, **vCard TITLE et NOTE** (ce qui entre dans les répertoires), tirets longs retirés. Build vert, zéro occurrence restante du jargon banni (grep SaaS/MVP/Apps Web vide).
 
 ### En attente
-- **Commit + push du correctif carte** (add ciblé : `public/card/index.html`, `public/card/nicolas-tinnirello.vcf`, `HANDOFF.md`) : validation Nico requise. Tant que ce n'est pas poussé, la carte en ligne reste sur l'ancien wording. Après déploiement : purger l'aperçu de nitrello.com/card (Post Inspector / Sharing Debugger).
+- ~~Commit + push du correctif carte~~ : **fait, poussé et vérifié en prod le 07/08 (`70cc905`)**. Reste à Nico : purger les aperçus de nitrello.com/card (LinkedIn Post Inspector, Facebook Sharing Debugger, WhatsApp `?v=2`).
 
 ## Session du 2026-08-07 (découpage globals.css · phases 1 et 2)
 
