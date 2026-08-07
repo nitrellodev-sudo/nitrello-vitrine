@@ -1,0 +1,65 @@
+/* ═══ CTA INTERMÉDIAIRE ═══ */
+/* CTA court sur fond inversé, entre le ticker et Services (le bloc phare
+   a fusionné dans le hero au lot 3).
+   Réf. maquette : cta-services.html (section #4) · sombre en light,
+   clair en dark (effet d'inversion, comme ticker/contact/footer) */
+.cta-mid {
+  background: var(--bg-inverse);
+  color: var(--fg-inverse);
+  /* Depuis la fusion du lot 3 le cta-mid suit directement le ticker : deux
+     bandeaux inversés collés. Respiration symétrique au padding bas du hero
+     pour que la frise flotte entre deux zones aérées, comme avant. */
+  margin-top: clamp(72px, 10vw, 120px);
+  padding: clamp(56px, 8vw, 96px) 0;
+  position: relative;
+  overflow: hidden;
+}
+.cta-mid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 40% 80% at 80% 50%, rgba(0,191,255,0.14), transparent 60%),
+    radial-gradient(ellipse 40% 80% at 15% 50%, rgba(123,47,255,0.16), transparent 60%);
+  pointer-events: none;
+}
+.cta-mid .container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.cta-mid-copy { max-width: 620px; }
+.cta-mid h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.cta-mid h2 em {
+  font-style: italic;
+  background: linear-gradient(95deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cta-mid p {
+  font-size: 16px;
+  color: var(--stone-inverse);
+}
+.cta-mid .btn-primary {
+  background: var(--fg-inverse);
+  color: var(--bg-inverse);
+  flex-shrink: 0;
+}
+.cta-mid .btn-primary:hover {
+  background: linear-gradient(95deg, var(--cyan), var(--violet));
+  color: #fff;
+}
+/* ═══ FIN CTA INTERMÉDIAIRE ═══ */
+

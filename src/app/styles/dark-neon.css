@@ -1,0 +1,95 @@
+/* ============================================================
+   EFFETS NÉON — exclusivement en mode sombre
+   On profite de l'obscurité pour faire briller cyan/violet
+   ============================================================ */
+
+/* Bouton primaire : glow violet intense au hover */
+[data-theme="dark"] .btn-primary:hover {
+  box-shadow:
+    0 0 0 1px rgba(123, 47, 255, 0.6),
+    0 8px 24px -4px rgba(123, 47, 255, 0.55),
+    0 0 40px -8px rgba(0, 191, 255, 0.45);
+}
+
+/* Bouton ghost : bordure cyan néon au hover */
+[data-theme="dark"] .btn-ghost:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow:
+    0 0 0 1px rgba(0, 191, 255, 0.35),
+    0 0 24px -4px rgba(0, 191, 255, 0.40);
+  text-shadow: 0 0 8px rgba(0, 191, 255, 0.50);
+}
+
+/* CTA flottant : néon cyan plus intense */
+[data-theme="dark"] .float-cta:hover {
+  box-shadow:
+    0 0 0 1px rgba(0, 191, 255, 0.5),
+    0 12px 32px -8px rgba(0, 191, 255, 0.55),
+    0 0 50px -10px rgba(0, 191, 255, 0.50);
+}
+
+/* Liens nav : text-shadow néon léger au hover */
+[data-theme="dark"] .nav-links a:hover {
+  color: var(--cyan);
+  background: transparent;
+  text-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
+}
+
+/* Theme toggle : glow cyan au hover */
+[data-theme="dark"] .theme-toggle:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow:
+    0 0 0 1px rgba(0, 191, 255, 0.35),
+    0 0 24px -4px rgba(0, 191, 255, 0.40);
+}
+
+/* Cartes services : bordure néon cyan */
+[data-theme="dark"] .service-card:hover {
+  border-color: rgba(0, 191, 255, 0.45);
+  box-shadow:
+    0 16px 40px -12px rgba(0, 191, 255, 0.30),
+    0 0 30px -10px rgba(0, 191, 255, 0.25);
+}
+
+/* Cartes projets : alternance cyan/violet pour variété */
+[data-theme="dark"] .work-card:hover {
+  box-shadow:
+    0 18px 44px -12px rgba(0, 191, 255, 0.35),
+    0 0 32px -10px rgba(123, 47, 255, 0.25);
+}
+
+
+/* Items du ticker : glow cyan au hover */
+[data-theme="dark"] .ticker-item:hover {
+  text-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
+}
+
+/* Step méthode : trait gradient qui pulse plus fort */
+[data-theme="dark"] .method-step:hover::before {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.55));
+}
+
+/* FAQ : items au hover */
+[data-theme="dark"] .faq-item:hover .faq-q {
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.30);
+}
+
+/* Step dots dans le simulateur de devis */
+[data-theme="dark"] .step-dot.active {
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
+}
+
+/* Inputs de formulaire : focus néon en dark */
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+  outline: none;
+  border-color: var(--cyan) !important;
+  box-shadow:
+    0 0 0 1px rgba(0, 191, 255, 0.35),
+    0 0 20px -4px rgba(0, 191, 255, 0.40);
+}
+

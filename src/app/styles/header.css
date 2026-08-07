@@ -1,0 +1,129 @@
+/* ============================================================
+   HEADER
+   ============================================================ */
+#header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 0;
+  transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+#header.scrolled {
+  background: color-mix(in oklab, var(--mist) 82%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom-color: rgba(17,17,17,0.06);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.nav-logo svg { width: 26px; height: 26px; }
+.nav-links {
+  display: flex;
+  gap: 6px;
+}
+.nav-links a {
+  font-size: 14px;
+  color: var(--fg-muted);
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover { background: rgba(17,17,17,0.05); color: var(--ink); }
+/* Entrée Contact du menu burger : masquée en nav horizontale (voir la
+   media query 1080px qui la réaffiche en mode burger) */
+.nav-link-contact { display: none; }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.nav-toggle { display: none; padding: 8px; border-radius: 8px; }
+.nav-toggle svg { width: 24px; height: 24px; }
+
+/* Theme toggle */
+.theme-toggle {
+  position: relative;
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.theme-toggle:hover {
+  background: var(--paper);
+  border-color: var(--ink);
+}
+.theme-toggle svg {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: transform 0.55s cubic-bezier(0.45, 1.6, 0.32, 0.95), opacity 0.4s ease;
+}
+.theme-toggle .theme-icon-sun  { transform: translateY(120%) rotate(-90deg); opacity: 0; }
+.theme-toggle .theme-icon-moon { transform: translateY(0)    rotate(0);     opacity: 1; }
+[data-theme="dark"] .theme-toggle .theme-icon-sun  { transform: translateY(0)     rotate(0);       opacity: 1; }
+[data-theme="dark"] .theme-toggle .theme-icon-moon { transform: translateY(-120%) rotate(90deg);  opacity: 0; }
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 100;
+  pointer-events: none;
+  background: transparent;
+}
+.scroll-progress::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--p, 0%);
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  transform-origin: left;
+  transition: width 0.08s linear;
+}
+
+/* Nav compacte : 8 entrées + logo + CTA exigent ~1190px en taille normale.
+   On resserre sous 1240px pour tenir jusqu'au passage en burger à 1080px. */
+@media (max-width: 1240px) {
+  .nav { gap: 16px; }
+  .nav-links { gap: 2px; }
+  .nav-links a { font-size: 13px; padding: 8px 10px; }
+}
+
+@media (max-width: 1080px) {
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--mist); padding: 16px var(--pad); border-top: 1px solid rgba(17,17,17,0.06); gap: 4px; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 14px; font-size: 16px; }
+  .nav-toggle { display: inline-flex; }
+  /* L'entrée Contact n'existe que dans le menu burger : en nav horizontale
+     le bouton "En discuter" joue ce rôle (et une 9e entrée ferait déborder
+     la nav avant le point de bascule à 1080px). */
+  .nav-link-contact { display: list-item; }
+}
+
+/* En mode burger la barre n'a plus que logo + toggle + bouton + burger :
+   la place ne manque qu'en dessous de ~480px (mesuré : ~400px requis).
+   Avant le lot 3, "En discuter" disparaissait dès 1080px et le burger
+   n'avait aucune entrée Contact : entre 880 et 1080px la conversion ne
+   tenait qu'au FloatingCTA. */
+@media (max-width: 480px) {
+  .nav-cta .btn-ghost { display: none; }
+}
+

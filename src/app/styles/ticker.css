@@ -1,0 +1,82 @@
+/* ============================================================
+   TICKER (marquee de spécialités)
+   ============================================================ */
+.ticker {
+  position: relative;
+  background: var(--bg-inverse);
+  color: var(--fg-inverse);
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 1px solid var(--border-inverse);
+  border-bottom: 1px solid var(--border-inverse);
+}
+
+/* Band-dividers gradient cyan→violet en haut et en bas (comme la 2e frise) */
+.ticker::before,
+.ticker::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--cyan) 20%, var(--violet) 50%, var(--cyan) 80%, transparent 100%);
+  background-size: 200% 100%;
+  animation: tickerBandFlow 8s linear infinite;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+}
+.ticker::before { top: 0; }
+.ticker::after  { bottom: 0; animation-direction: reverse; }
+@keyframes tickerBandFlow {
+  from { background-position: 0% 0; }
+  to   { background-position: 200% 0; }
+}
+
+/* Fade gradient sur les côtés, appliqué au VIEWPORT (statique) et pas au
+   bandeau : sur .ticker entier, le fond inversé fondait aussi vers le fond
+   de page et dessinait un voile sombre à chaque extrémité de la frise.
+   Pas sur .ticker-track non plus : la piste défile, le fade suivrait. */
+.ticker-viewport {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  width: max-content;
+  animation: tickerScroll 80s linear infinite;
+}
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-item {
+  font-family: var(--mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-inverse);
+  opacity: 0.78;
+  flex-shrink: 0;
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+.ticker-item:hover {
+  color: var(--cyan);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+.ticker-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+

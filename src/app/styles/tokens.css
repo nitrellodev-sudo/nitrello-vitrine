@@ -1,0 +1,106 @@
+/* ============================================================
+   DESIGN TOKENS , Nitrello Brand Guide
+   ============================================================ */
+:root {
+  /* Brand tokens — invariants (jamais retouchés par le thème) */
+  --cyan: #00BFFF;
+  --cyan-dark: #0090C0;
+  --cyan-pale: #E5F7FF;
+  --violet: #7B2FFF;
+  --violet-dark: #5A1FC8;
+  --violet-pale: #EFE7FF;
+
+  /* Semantic tokens — réécrits par [data-theme="dark"] */
+  --ink: #111111;
+  --ink-soft: #1a1a1a;
+  --paper: #FFFFFF;
+  --mist: #FAFAF7;
+  --stone: #888880;
+  --stone-light: #D4D4CE;
+  --stone-pale: #EFEFEA;
+
+  /* Surfaces inversées : utilisées sur les sections "on-dark" (ticker, contact, footer)
+     En dark mode, ces sections passent en clair par contraste — effet d'inversion */
+  --bg-inverse: #111111;
+  --fg-inverse: #FAFAF7;
+  --stone-inverse: #B5B5AC;
+  --stone-inverse-soft: #9A9A92;
+  --stone-inverse-dim: #6E6E66;
+  --border-inverse: rgba(250,250,247,0.08);
+  --border-inverse-strong: rgba(250,250,247,0.18);
+  --form-bg: #1a1a1a;
+
+  /* Fades & overlays — pilotés par le thème (cyan/violet glows) */
+  --glow-cyan: rgba(0,191,255,0.12);
+  --glow-violet: rgba(123,47,255,0.14);
+  --glow-cyan-strong: rgba(0,191,255,0.18);
+  --glow-violet-strong: rgba(123,47,255,0.22);
+
+  /* Borders */
+  --border: rgba(17,17,17,0.08);
+  --border-strong: rgba(17,17,17,0.16);
+  --fg-muted: #4a4a4a;
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --max: 1240px;
+  --pad: clamp(20px, 4vw, 56px);
+  --gap-section: clamp(80px, 12vw, 160px);
+  --radius: 6px;
+  --radius-lg: 18px;
+}
+
+/* ============================================================
+   DARK THEME — inversion de la palette
+   ============================================================ */
+/* html:not([data-theme]) : filet de sécurité — applique le thème sombre par défaut
+   tant qu'aucun attribut data-theme n'est posé (JS désactivé/lent, script non joué).
+   Dès que data-theme="light" est posé, la base :root (claire) reprend la main. */
+[data-theme="dark"], html:not([data-theme]) {
+  /* Texte */
+  --ink: #F2F0EA;        /* texte principal en mode sombre = crème légèrement plus douce */
+  --ink-soft: #DDDAD0;
+  --fg-muted: #B8B5AB;   /* gris-crème mieux contrasté pour la lisibilité */
+
+  /* Surfaces (3 niveaux de profondeur, légère teinte violet nuit) */
+  --paper: #08080F;      /* fond le plus profond - presque noir avec hint violet */
+  --mist: #0E0E18;       /* surface principale - anthracite légèrement teinté */
+  --stone-pale: #16161F; /* surface élevée - cards, sections en relief */
+  --stone-light: #232331;
+  --stone: #9A988E;      /* gris pour textes secondaires, mieux contrasté */
+
+  /* Sections inversées : passent en clair par contraste éditorial */
+  --bg-inverse: #F1EFE7;
+  --fg-inverse: #14140F;
+  --stone-inverse: #5a5a52;
+  --stone-inverse-soft: #6E6E66;
+  --stone-inverse-dim: #8B8B82;
+  --border-inverse: rgba(20,20,15,0.10);
+  --border-inverse-strong: rgba(20,20,15,0.22);
+  --form-bg: #F8F6EE;
+
+  /* Glow cyan/violet : plus présents en mode sombre pour briller dans la nuit */
+  --glow-cyan: rgba(0,191,255,0.28);
+  --glow-violet: rgba(123,47,255,0.32);
+  --glow-cyan-strong: rgba(0,191,255,0.45);
+  --glow-violet-strong: rgba(123,47,255,0.48);
+
+  /* Borders : plus visibles avec une légère teinte */
+  --border: rgba(244,242,236,0.08);
+  --border-strong: rgba(244,242,236,0.18);
+
+  color-scheme: dark;
+}
+
+/* Effets premium spécifiques au mode sombre */
+[data-theme="dark"] body, html:not([data-theme]) body {
+  /* Fond légèrement texturé avec un grain subtil pour la profondeur */
+  background: var(--mist);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(123, 47, 255, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+

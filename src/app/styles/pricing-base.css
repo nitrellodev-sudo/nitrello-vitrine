@@ -1,0 +1,20 @@
+/* ============================================================
+   TARIFS
+   ============================================================ */
+#pricing {
+  padding: var(--gap-section) 0;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+/* règle de base conservée hors du bloc carrousel pricing supprimé :
+   .dot-mono est utilisé par la section chiffrage (page.tsx, .chiffrage-foot-row) */
+.dot-mono {
+  font-size: 10px;
+  color: var(--cyan-dark);
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+

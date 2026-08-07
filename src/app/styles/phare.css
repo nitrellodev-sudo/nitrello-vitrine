@@ -1,0 +1,61 @@
+/* ═══ TYPEWRITER PHARE (dans le hero depuis le lot 3) ═══ */
+/* La section .phare de la home a fusionné dans #hero (lot 3) : la coquille
+   (.phare, .phare-mark, .phare-inner, .phare-title, .phare-grad,
+   .phare-actions) a été retirée. Restent les classes du composant
+   PhareTypewriter et de sa ligne, rendues dans .hero-copy.
+   Réf. maquette : bloc-phare-ia-v2.html · classes préfixées phare-* */
+/* Typewriter : ligne d'appui du H1 depuis la v2 du lot 3 (taille de
+   lede animé, plus une co-vedette du H1 comme dans l'ancien bloc phare) */
+.phare-typed-line {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+  max-width: 100%;
+}
+/* La 2e ligne (texte + mot animé) ne se recasse jamais : 2 niveaux garantis */
+.phare-nowrap { white-space: nowrap; }
+/* Le slot réserve la largeur du mot le plus long (minWidth posé par JS sur le
+   WRAPPER, jamais sur le mot) ; mot + caret restent collés à gauche */
+.phare-slot {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.phare-typed {
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(95deg, var(--cyan) 10%, var(--violet) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+.phare-caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.75em;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+  margin-left: 3px;
+  vertical-align: -0.02em;
+  animation: blink 0.9s steps(1) infinite; /* réutilise @keyframes blink existant */
+  border-radius: 2px;
+}
+@media (max-width: 600px) {
+  /* "tes outils s'occupent de [mot le plus long]" tient sans scroll latéral */
+  .phare-typed-line {
+    font-size: clamp(16px, 4.8vw, 22px);
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
+@media (max-width: 380px) {
+  .phare-typed-line { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phare-caret { animation: none; }
+}
+/* ═══ FIN TYPEWRITER PHARE ═══ */
+

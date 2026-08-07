@@ -1,0 +1,346 @@
+/* ============================================================
+   À PROPOS
+   ============================================================ */
+#about {
+  padding: var(--gap-section) 0;
+  background: var(--stone-pale);
+  position: relative;
+  overflow: hidden;
+}
+#about::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: -15%;
+  width: 40%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(123,47,255,0.14), transparent 65%);
+  filter: blur(30px);
+  pointer-events: none;
+  animation: drift 24s ease-in-out infinite alternate-reverse;
+}
+#about .container { position: relative; z-index: 1; }
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 7vw, 110px);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+.about-portrait {
+  position: relative;
+  isolation: isolate;
+  padding: 24px 0 32px;
+}
+
+/* ============================================================
+   PORTRAIT — direction "hologramme premium"
+   Tilt 3D, reflet brillant, bordure gradient animée
+   ============================================================ */
+
+/* Halo ambiant en arrière-plan (aurore) */
+.about-portrait::before {
+  content: "";
+  position: absolute;
+  inset: -8% -12% -8% -12%;
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 30%, rgba(0, 191, 255, 0.20), transparent 60%),
+    radial-gradient(ellipse 65% 55% at 80% 75%, rgba(123, 47, 255, 0.18), transparent 60%);
+  filter: blur(40px);
+  z-index: -1;
+  opacity: 0.85;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.about-portrait:hover::before { opacity: 1; }
+
+/* Custom property pour anim de la bordure gradient */
+@property --hologram-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Conteneur de la photo : porte la perspective 3D */
+.about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  perspective: 1400px;
+  z-index: 1;
+  --mx: 50%;
+  --my: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+}
+
+/* Cadre qui se transforme en 3D */
+.hologram-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: transparent;
+  /* Mask radial : adoucit les coins, le rectangle noir s'estompe vers les bords */
+  -webkit-mask-image: radial-gradient(ellipse 95% 92% at 50% 50%, #000 55%, rgba(0,0,0,0.7) 80%, transparent 100%);
+          mask-image: radial-gradient(ellipse 95% 92% at 50% 50%, #000 55%, rgba(0,0,0,0.7) 80%, transparent 100%);
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow:
+    0 24px 48px -16px rgba(17, 17, 17, 0.30);
+  will-change: transform;
+}
+
+.about-photo.is-tilting .hologram-frame {
+  transition: box-shadow 0.4s ease; /* on ne transitionne plus le transform pendant le drag */
+  box-shadow:
+    0 36px 72px -20px rgba(0, 191, 255, 0.35),
+    -28px 28px 80px -28px rgba(123, 47, 255, 0.40),
+    0 18px 40px -12px rgba(17, 17, 17, 0.40);
+}
+
+/* L'image elle-même */
+.hologram-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 41%; /* centre du cercle bleu de la photo source */
+  display: block;
+  transform: translateZ(0); /* force un layer GPU */
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.about-photo:hover .hologram-frame img {
+  transform: translateZ(0) scale(1.03);
+}
+
+/* Reflet brillant qui suit la souris (le "shine" hologramme) */
+.hologram-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background:
+    radial-gradient(
+      circle 280px at var(--mx) var(--my),
+      rgba(255, 255, 255, 0.30) 0%,
+      rgba(0, 191, 255, 0.18) 25%,
+      rgba(123, 47, 255, 0.15) 45%,
+      transparent 70%
+    );
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+.about-photo:hover .hologram-shine { opacity: 1; }
+
+/* Grille subtile façon hologramme (effet techno) */
+.hologram-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background-image:
+    linear-gradient(rgba(0, 191, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 191, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mix-blend-mode: screen;
+  z-index: 3;
+}
+.about-photo:hover .hologram-grid { opacity: 0.8; }
+
+/* Bordure gradient animée (cyan→violet→cyan tournant) */
+.hologram-frame::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 6px;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--hologram-angle),
+    var(--cyan),
+    var(--violet),
+    var(--cyan),
+    var(--violet),
+    var(--cyan)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: hologram-rotate 6s linear infinite;
+}
+.about-photo:hover .hologram-frame::before { opacity: 1; }
+
+@keyframes hologram-rotate {
+  to { --hologram-angle: 360deg; }
+}
+
+/* "Orbite" pointillée qui tourne en arrière-plan */
+.portrait-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  height: 130%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 191, 255, 0.18);
+  animation: portrait-orbit-rotate 60s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+.portrait-orbit::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  border: 1px dashed rgba(123, 47, 255, 0.12);
+  animation: portrait-orbit-rotate 90s linear infinite reverse;
+}
+
+@keyframes portrait-orbit-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Petits points qui orbitent sur le cercle */
+.orbit-dot {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-left: -3px;
+  box-shadow: 0 0 12px currentColor;
+}
+.orbit-dot-1 {
+  background: var(--cyan);
+  color: var(--cyan);
+}
+.orbit-dot-2 {
+  background: var(--violet);
+  color: var(--violet);
+  top: auto;
+  bottom: -3px;
+}
+.orbit-dot-3 {
+  background: var(--cyan);
+  color: var(--cyan);
+  top: 50%;
+  left: -3px;
+  margin-left: 0;
+  margin-top: -3px;
+  width: 4px;
+  height: 4px;
+  opacity: 0.7;
+}
+
+/* Constellation de petites étoiles qui scintillent */
+.portrait-constellation {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  opacity: 0;
+  animation: star-twinkle 5s ease-in-out infinite;
+}
+.star-1 { top: 12%; left: -8%; animation-delay: 0s; }
+.star-2 { top: 28%; right: -12%; background: var(--violet); box-shadow: 0 0 8px var(--violet); animation-delay: 1.2s; width: 5px; height: 5px; }
+.star-3 { top: 65%; left: -6%; animation-delay: 2.4s; width: 3px; height: 3px; }
+.star-4 { top: 78%; right: -10%; background: var(--violet); box-shadow: 0 0 8px var(--violet); animation-delay: 0.6s; }
+.star-5 { top: 8%; right: 8%; animation-delay: 3.6s; width: 3px; height: 3px; }
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+[data-theme="dark"] .hologram-frame {
+  box-shadow:
+    0 24px 48px -16px rgba(0, 0, 0, 0.50);
+}
+[data-theme="dark"] .about-photo.is-tilting .hologram-frame {
+  box-shadow:
+    0 40px 80px -20px rgba(0, 191, 255, 0.50),
+    -32px 32px 80px -28px rgba(123, 47, 255, 0.50),
+    0 20px 40px -12px rgba(0, 0, 0, 0.60);
+}
+
+/* Accessibilité : pas de tilt si l'utilisateur préfère réduire les anims */
+@media (prefers-reduced-motion: reduce) {
+  .hologram-frame { transform: none !important; transition: box-shadow 0.4s ease; }
+  .hologram-frame::before { animation: none; }
+  .hologram-frame img { transform: translateZ(0) !important; }
+}
+
+@media (max-width: 1100px) {
+  .portrait-orbit { width: 120%; height: 120%; }
+  .star { transform: scale(0.85); }
+}
+@media (max-width: 900px) {
+  .about-portrait { padding: 40px 0 20px; }
+  .about-photo { max-width: 380px; }
+  .portrait-orbit { width: 115%; height: 115%; }
+}
+.about-body .eyebrow { margin-bottom: 24px; }
+.about-body h2 { margin-bottom: 28px; }
+.about-body p { margin-bottom: 20px; font-size: 17px; color: var(--fg-muted); }
+.about-body p em { font-family: var(--serif); font-style: italic; font-weight: 300; }
+.about-sign {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink);
+  margin-top: 16px;
+}
+
+.about-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(17,17,17,0.12);
+}
+.about-fact .v {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+}
+.about-fact .l {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-top: 8px;
+}
+

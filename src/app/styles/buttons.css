@@ -1,0 +1,54 @@
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.25s, color 0.25s, box-shadow 0.25s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--mist);
+}
+.btn-primary:hover {
+  background: linear-gradient(95deg, var(--cyan), var(--violet));
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -10px rgba(123,47,255,0.45);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(17,17,17,0.15);
+}
+.btn-ghost:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.btn .arrow {
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* On dark sections */
+.on-dark .btn-primary {
+  background: var(--mist);
+  color: var(--ink);
+}
+.on-dark .btn-primary:hover {
+  background: linear-gradient(95deg, var(--cyan), var(--violet));
+  color: var(--mist);
+}
+.on-dark .btn-ghost {
+  color: var(--fg-inverse);
+  border-color: var(--border-inverse-strong);
+}
+.on-dark .btn-ghost:hover { border-color: var(--fg-inverse); }
+

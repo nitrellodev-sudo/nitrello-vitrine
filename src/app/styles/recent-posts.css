@@ -1,0 +1,166 @@
+/* ============================================================
+   ARTICLES RÉCENTS (section home → teaser blog)
+   Réutilise .blog-card* pour la cohérence visuelle avec /blog.
+   ============================================================ */
+.recent-posts {
+  padding: clamp(64px, 10vw, 120px) 0;
+}
+
+.recent-posts__header {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.recent-posts__kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--stone);
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+
+.recent-posts__title {
+  font-family: var(--font-instrument-serif, serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin: 0;
+}
+.recent-posts__title em {
+  font-weight: 300;
+  color: var(--stone);
+}
+
+.recent-posts__grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .recent-posts__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .recent-posts__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Dans la grille, on neutralise le border-top hérité de .blog-card
+   (pensé pour une liste verticale sur /blog) au profit d'un border
+   complet plus adapté à un layout en cartes. */
+.recent-posts__card {
+  border: 1px solid var(--mist);
+  border-radius: 12px;
+  background: var(--paper);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.recent-posts__card:last-child {
+  border-bottom: 1px solid var(--mist);
+}
+
+.recent-posts__card:hover {
+  border-color: var(--stone-light);
+}
+
+.recent-posts__card .blog-card__link {
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.recent-posts__card .blog-card__title {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+.recent-posts__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.recent-posts__see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 12px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 9999px;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.recent-posts__see-all:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  transform: translateX(2px);
+}
+
+.recent-posts__see-all svg {
+  transition: transform 0.2s ease;
+}
+
+.recent-posts__see-all:hover svg {
+  transform: translateX(2px);
+}
+
+/* ============================================================
+   BlogCard — cover image (16:9 strict) + variantes list/card
+   Additif : aucune classe existante n'est modifiée ou supprimée.
+   ============================================================ */
+.blog-card__cover {
+  position: relative;
+  margin: 0 0 1rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--mist);
+}
+
+.blog-card__cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Variante list (/blog) : desktop ≥768px → image à gauche 38 %, texte à droite.
+   Mobile : layout par défaut (block) → image stackée au-dessus du texte. */
+@media (min-width: 768px) {
+  .blog-card--list .blog-card__link:has(.blog-card__cover) {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+
+  .blog-card--list .blog-card__cover {
+    margin-bottom: 0;
+  }
+}
+
+/* Variante card (home, RecentBlogPostsSection) : layout par défaut (block).
+   L'image s'empile naturellement au-dessus du body sur toutes les tailles. */
+
+/* Hero H1 ajustement mobile (anti-debordement "automatisation") */
+@media (max-width: 600px) {
+  .hero-copy h1.h-display { font-size: clamp(36px, 11vw, 56px); }
+}
+

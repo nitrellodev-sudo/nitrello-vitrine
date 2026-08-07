@@ -1,0 +1,135 @@
+/* ============================================================
+   MÉTHODE
+   ============================================================ */
+#method {
+  padding: var(--gap-section) 0;
+  background: var(--mist);
+  position: relative;
+  overflow: clip; /* clip au lieu de hidden : préserve le sticky des descendants */
+}
+#method::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--glow-cyan) 0%, transparent 60%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+#method::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  left: -8%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--glow-violet) 0%, transparent 60%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+#method .container { position: relative; z-index: 1; }
+.method-mark {
+  position: absolute;
+  bottom: 40px;
+  left: -30px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--ink);
+  mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  -webkit-mask: url('/mark-nitrello.svg') no-repeat center / contain;
+  opacity: 0.025;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .method-mark { display: none; }
+}
+.method-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(40px, 6vw, 100px);
+  align-items: start;
+}
+.method-grid > .section-head {
+  position: sticky;
+  top: 110px; /* hauteur du header fixe + marge respiration */
+  align-self: start;
+}
+.method-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+.method-steps::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+  opacity: 0.4;
+  pointer-events: none;
+}
+.method-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+  padding: 28px 0 28px 60px; /* réserve l'espace en permanence, pas de décalage au hover */
+  border-top: 1px solid rgba(17,17,17,0.1);
+  align-items: start;
+  transition: background 0.4s;
+  position: relative;
+}
+.method-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  transition: width 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.4s;
+  transform: translateY(-50%);
+  opacity: 0.35;
+}
+.method-step:hover::before { width: 48px; opacity: 1; }
+.method-steps .method-step:last-child { border-bottom: 1px solid rgba(17,17,17,0.1); }
+.method-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--cyan-dark);
+  padding-top: 6px;
+  font-weight: 600;
+}
+.method-step:nth-child(2) .method-num { color: var(--violet); }
+.method-step:nth-child(3) .method-num { color: var(--cyan-dark); }
+.method-step:nth-child(4) .method-num { color: var(--violet); }
+.method-body h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+.method-body h4 em { font-style: italic; font-weight: 300; color: var(--stone); }
+.method-body p {
+  font-size: 15px;
+  color: var(--fg-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .method-grid { grid-template-columns: 1fr; }
+  .method-grid > .section-head { position: static; top: auto; }
+}
+

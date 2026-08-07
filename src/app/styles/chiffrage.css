@@ -1,0 +1,136 @@
+/* ═══ CHIFFRAGE ═══ */
+/* Remplace la section Tarifs (aucun montant). L'id #pricing est conservé sur
+   la section pour les liens /#pricing de la navbar et du footer.
+   Réf. maquette : chiffrage-v4.html */
+#pricing.chiffrage { background: var(--mist); }
+.chiffrage::before {
+  content: "";
+  position: absolute;
+  bottom: 5%;
+  left: -8%;
+  width: 32%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(123,47,255,0.12), transparent 65%);
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+.chiffrage-head { max-width: 780px; margin-bottom: 64px; }
+.chiffrage-head .eyebrow { margin-bottom: 24px; }
+.chiffrage-head .lede { margin-top: 22px; }
+/* mot-clé en dégradé Nitrello, par-dessus le gris du em */
+.chiffrage-grad {
+  background: linear-gradient(95deg, var(--cyan) 10%, var(--violet) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-style: italic;
+}
+.principes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.principe {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+.principe:hover { transform: translateY(-3px); border-color: rgba(0,191,255,0.3); }
+[data-theme="dark"] .principe:hover {
+  border-color: rgba(0,191,255,0.4);
+  box-shadow: 0 14px 36px -14px rgba(0,191,255,0.28);
+}
+.principe-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,191,255,0.14), rgba(123,47,255,0.16));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: var(--cyan);
+}
+[data-theme="dark"] .principe-icon {
+  color: var(--cyan);
+  box-shadow: inset 0 0 20px -6px rgba(0,191,255,0.4);
+}
+.principe h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 27px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.principe p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+@media (max-width: 820px) {
+  .principes { grid-template-columns: 1fr; }
+}
+/* phrase ROI · respiration, barre dégradée à gauche */
+.roi-line {
+  border-left: 2px solid;
+  border-image: linear-gradient(180deg, var(--cyan), var(--violet)) 1;
+  padding: 8px 0 8px 28px;
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+.roi-line p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(24px, 3.2vw, 34px);
+  line-height: 1.3;
+  color: var(--ink);
+}
+.roi-line em {
+  font-style: italic;
+  background: linear-gradient(95deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* clôture RDV */
+.chiffrage-cta {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.chiffrage-cta p { font-size: 16px; color: var(--fg-muted); }
+.chiffrage-cta strong { color: var(--ink); font-weight: 600; }
+/* note maintenance · discrète, pattern .pricing-foot */
+.chiffrage-foot {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.chiffrage-foot-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--fg-muted);
+  line-height: 1.55;
+  max-width: 720px;
+}
+.chiffrage-foot-row strong { color: var(--ink); font-weight: 500; }
+.chiffrage-foot-row .dot-mono {
+  font-size: 10px;
+  color: var(--cyan);
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+/* ═══ FIN CHIFFRAGE ═══ */
+
