@@ -36,23 +36,6 @@
   margin-bottom: 72px;
 }
 .work-head .lede { margin-top: 24px; }
-.work-counter {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--stone);
-  text-transform: uppercase;
-}
-.work-counter strong {
-  display: block;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 52px;
-  color: var(--ink);
-  letter-spacing: -0.03em;
-  margin-top: 4px;
-  line-height: 1;
-}
 @media (max-width: 760px) {
   .work-head { grid-template-columns: 1fr; align-items: start; }
 }

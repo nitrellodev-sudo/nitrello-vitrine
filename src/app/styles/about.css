@@ -319,28 +319,3 @@
   margin-top: 16px;
 }
 
-.about-facts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 40px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(17,17,17,0.12);
-}
-.about-fact .v {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 32px;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  line-height: 1;
-}
-.about-fact .l {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--stone);
-  margin-top: 8px;
-}
-

@@ -37,13 +37,6 @@
   /* Hero typewriter : annule le min-width JS (qui figerait à la largeur de la phrase la plus longue, débordement) */
   .hero-copy h1 .accent { min-width: 0 !important; }
 
-  /* Section méthode : sticky désactivé sur mobile */
-  .method-title-wrap { position: static; }
-
-
-  /* Formulaire : padding réduit */
-  .contact-card { padding: 28px 20px; }
-
   /* Bouton flottant : encore plus compact */
   .float-cta { bottom: 16px; right: 16px; padding: 10px 14px; font-size: 13px; }
 }

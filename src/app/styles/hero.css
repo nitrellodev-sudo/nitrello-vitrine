@@ -190,17 +190,6 @@ h2.hero-cost-kicker { margin-bottom: 28px; }
 }
 
 
-.dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #3CCF7B;
-  box-shadow: 0 0 0 4px rgba(60,207,123,0.18);
-  animation: pulse 2.4s infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(60,207,123,0.18); }
-  50% { box-shadow: 0 0 0 8px rgba(60,207,123,0.06); }
-}
-
 /* Hero visual , flow motif */
 
 @media (max-width: 900px) {

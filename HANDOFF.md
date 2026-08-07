@@ -1,5 +1,20 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (découpage globals.css · phases 1 et 2)
+
+### Réalisé (validé par Nico le 07/08, contrôle visuel light/dark desktop + mobile sur serveur de prod local)
+- **Phase 1** : `globals.css` (3 922 lignes) découpé en **28 fichiers** dans `src/app/styles/`, `globals.css` = manifeste d'`@import` dans l'ordre exact des blocs source, `layout.tsx` intouché. Les plages de lignes du plan (`design/plan-decoupage-globals-css.md`, daté du 06/08) étaient périmées après les lots 3 et 4 : redécoupage sur les bannières du fichier réel, mêmes 28 sections. **Preuves** : recomposition concaténée identique octet pour octet (SHA-256 égaux) · CSS compilé par Turbopack identique règle à règle et dans le même ordre (seul delta : la règle FAQ 600px que le minifieur dédupliquait dans le monolithe survit, toujours écrasée par la 700px d'overrides.css — contrainte C intacte).
+- **Phase 2** : **356 lignes de CSS mort supprimées** (3 922 → 3 566), chaque candidat du plan re-vérifié par grep sur le code actuel avant retrait (`#typed-text` et `.caret` étaient déjà partis au lot 3). Retirés : ancien grid services, section témoignages entière (`testimonials-legacy.css` supprimé, 27 imports restants), `.work-card`, `.step-dot`, `.theme-instant`, `.grad-text`, `.on-dark`, `.dot`+`@keyframes pulse`, `.r-4`, `.work-counter`, `.about-facts`, `.contact-actions`/`.contact-card`/`.contact-row`/vieux liens meta, `.method-title-wrap`, sélecteurs `.blog-article__nav`/`__back` morts (groupes réduits à `__footer`/`__back-bottom`), MQ 600 hero toujours perdante. **Preuve** : diff du CSS compilé = 85 règles retirées toutes identifiées mortes (dont frames internes de `pulse`/`pulse-dot`), 3 règles « ajoutées » = les groupes blog réduits, ordre des règles vivantes préservé, `blink`/700px/`.section-head`/`.dot-mono`/`.sr-only` tous vivants.
+- Exécution en 2 commits séparés (phase 1 puis phase 2) pour la bisectabilité, conformément au plan.
+
+### Règles à respecter désormais (cascade)
+- **Aucun composant ne doit importer un fichier de `styles/` directement** : `globals.css` est l'unique point d'entrée, les `@import` ses seules lignes, leur ordre EST la cascade.
+- Les contraintes d'ordre du plan (A : dark-neon avant contact · B : responsive-mobile après ses bases · C : overrides.css dernier · G : blog avant recent-posts) sont documentées en section 2 du plan, à relire avant tout réordonnancement.
+
+### Reste à faire (phase 3, optionnelle, non faite exprès)
+- Regroupements de confort du plan (fusion overrides dans faq/hero, `@keyframes blink` vers base.css, `.section-head` vers utilities.css, pricing-base dans chiffrage).
+- **Bug `--ash` (FAQ)** : `var(--ash)` n'existe pas, la couleur des réponses FAQ est un accident qui rend `var(--ink)`. Le corriger en `var(--fg-muted)` CHANGERAIT la couleur visible : décision visuelle de Nico requise.
+
 ## Session du 2026-08-07 (chantier 2 · 2e article de blog, publié)
 
 ### Réalisé

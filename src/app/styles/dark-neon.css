@@ -45,22 +45,6 @@
     0 0 24px -4px rgba(0, 191, 255, 0.40);
 }
 
-/* Cartes services : bordure néon cyan */
-[data-theme="dark"] .service-card:hover {
-  border-color: rgba(0, 191, 255, 0.45);
-  box-shadow:
-    0 16px 40px -12px rgba(0, 191, 255, 0.30),
-    0 0 30px -10px rgba(0, 191, 255, 0.25);
-}
-
-/* Cartes projets : alternance cyan/violet pour variété */
-[data-theme="dark"] .work-card:hover {
-  box-shadow:
-    0 18px 44px -12px rgba(0, 191, 255, 0.35),
-    0 0 32px -10px rgba(123, 47, 255, 0.25);
-}
-
-
 /* Items du ticker : glow cyan au hover */
 [data-theme="dark"] .ticker-item:hover {
   text-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
@@ -75,11 +59,6 @@
 /* FAQ : items au hover */
 [data-theme="dark"] .faq-item:hover .faq-q {
   text-shadow: 0 0 10px rgba(0, 191, 255, 0.30);
-}
-
-/* Step dots dans le simulateur de devis */
-[data-theme="dark"] .step-dot.active {
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
 }
 
 /* Inputs de formulaire : focus néon en dark */

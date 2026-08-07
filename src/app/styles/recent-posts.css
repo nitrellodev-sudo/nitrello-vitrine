@@ -159,8 +159,3 @@
 /* Variante card (home, RecentBlogPostsSection) : layout par défaut (block).
    L'image s'empile naturellement au-dessus du body sur toutes les tailles. */
 
-/* Hero H1 ajustement mobile (anti-debordement "automatisation") */
-@media (max-width: 600px) {
-  .hero-copy h1.h-display { font-size: clamp(36px, 11vw, 56px); }
-}
-

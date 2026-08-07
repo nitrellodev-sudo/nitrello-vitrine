@@ -149,12 +149,10 @@
 
 /* Article individuel */
 
-.blog-article__nav,
 .blog-article__footer {
   margin: 2rem 0;
 }
 
-.blog-article__back,
 .blog-article__back-bottom {
   font-family: var(--font-mono, monospace);
   font-size: 0.85rem;
@@ -163,7 +161,6 @@
   transition: color 0.2s ease;
 }
 
-.blog-article__back:hover,
 .blog-article__back-bottom:hover {
   color: var(--ink);
 }

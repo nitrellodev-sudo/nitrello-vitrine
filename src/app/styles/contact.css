@@ -21,13 +21,6 @@
 #contact .h-display { color: var(--fg-inverse); font-size: clamp(44px, 6.5vw, 84px); }
 #contact .h-display em { color: var(--stone-inverse); }
 #contact .lede { color: var(--stone-inverse); margin-top: 20px; opacity: 0.85; }
-.contact-actions {
-  margin-top: 40px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 /* === Refonte contact : intro + formulaire === */
 .contact-inner { align-items: stretch; }
 .contact-intro { padding-right: clamp(0px, 4vw, 40px); }
@@ -56,12 +49,6 @@
   color: var(--fg-inverse);
   letter-spacing: -0.01em;
 }
-a.contact-meta-item-link,
-.contact-meta-item a.value {
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.contact-meta-item a.value:hover { color: var(--cyan); }
 .contact-direct {
   margin-top: 40px;
   padding-top: 32px;
@@ -316,41 +303,6 @@ a.contact-meta-item-link,
   color: var(--stone-inverse-soft);
   font-size: 15px;
   margin: 0;
-}
-
-.contact-card {
-  background: var(--form-bg);
-  border: 1px solid var(--border-inverse);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-}
-.contact-card h4 {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: 22px;
-  letter-spacing: -0.015em;
-  margin-bottom: 24px;
-}
-.contact-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border-inverse);
-  font-size: 15px;
-  color: var(--fg-inverse);
-  transition: color 0.2s;
-}
-.contact-row:last-child { border-bottom: none; }
-a.contact-row:hover { color: var(--cyan); }
-.contact-row svg { width: 18px; height: 18px; color: var(--stone-inverse-soft); flex-shrink: 0; }
-.contact-row .label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--stone-inverse-soft);
-  margin-left: auto;
 }
 
 /* Contact backdrop motif */
