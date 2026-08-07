@@ -1,5 +1,19 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (fin de journée · SEO manuel + carte de visite)
+
+### Fait par Nico (guidé en session)
+- **Search Console** : propriété domaine vérifiée (DNS chez IONOS, un jeton google-site-verification préexistait), sitemap soumis (contient les 2 articles), indexation demandée pour les 4 URLs clés. Données attendues sous ~2 jours, **contrôler la couverture vers le 14/08**.
+- **Google Business Profile** : fiche créée en entreprise de services (adresse masquée, zone Grenoble/Voiron/Saint-Marcellin/Isère), validation Google en cours (délai jusqu'à 5 j ouvrés).
+
+### Diagnostic « ancien titre visible » (3 causes distinctes)
+1. **SERP Google « Ton idée devient une application »** : index périmé (la prod a servi l'ancien positionnement jusqu'au 07/08). Aucune occurrence dans le repo. Se résorbe seul avec le re-crawl (accéléré par les demandes d'indexation), 2 à 10 jours.
+2. **Aperçus de partage du site** : la prod est correcte, c'est le cache des messageries. Purge : LinkedIn Post Inspector, Facebook Sharing Debugger ; WhatsApp sans outil (astuce `?v=2`).
+3. **Carte de visite `public/card/`** : vrai problème de code, jamais touchée par la refonte. **Corrigé en local** : title/meta/og alignés sur le jobTitle du JSON-LD, og:image passe de nicolas.png (488 Ko) au visuel OG 1200×630 signature (+ dimensions + twitter:card), tagline recto = signature H1, verso = les 3 offres, texte navigator.share, **vCard TITLE et NOTE** (ce qui entre dans les répertoires), tirets longs retirés. Build vert, zéro occurrence restante du jargon banni (grep SaaS/MVP/Apps Web vide).
+
+### En attente
+- **Commit + push du correctif carte** (add ciblé : `public/card/index.html`, `public/card/nicolas-tinnirello.vcf`, `HANDOFF.md`) : validation Nico requise. Tant que ce n'est pas poussé, la carte en ligne reste sur l'ancien wording. Après déploiement : purger l'aperçu de nitrello.com/card (Post Inspector / Sharing Debugger).
+
 ## Session du 2026-08-07 (découpage globals.css · phases 1 et 2)
 
 ### Réalisé (validé par Nico le 07/08, contrôle visuel light/dark desktop + mobile sur serveur de prod local)
