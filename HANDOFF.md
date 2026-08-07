@@ -22,8 +22,9 @@
 - Voix de l'article 1 (tutoiement, direct), wording aligné sur la home (30 min/jour · 2h30/semaine · 110h/an, ventes perdues, charge mentale), méthode 5 étapes et 6 familles de /automatisation-ia, 2 preuves internes (veille du matin, pipeline de prospection, **zéro mention LinkedIn**), FAQ 6 questions SEO, chute « On en parle ? » (mailto + carte). Doctrine respectée : aucun prix (formule « je te montre combien tu économises »), IA = moteur jamais promesse, aucun tiret long, meta_title 55 car., meta_description 150 car.
 - Vérifié en prod : `/blog` liste l'article, la page répond 200 avec H1 et meta conformes.
 
-### Reste à faire sur cet article
-- **Cover** : re-capture « Veille IA quotidienne » par Nico (nœuds renommés FR), retraitement type lot 4, upload bucket `blog-images`, puis `UPDATE blog_posts SET cover_image_url, cover_image_alt WHERE slug = 'automatisation-ia-tpe-pme-taches-repetitives'`.
+### Cover (fait le 07/08 en fin de session)
+- **Cover en ligne** : `cover-veille-ia-quotidienne.webp` (1280×720, 35 Ko) dans le bucket `blog-images`, `cover_image_url`/`cover_image_alt` posés sur l'article. Produite depuis la re-capture de Nico (nœuds partiellement renommés FR : « Nouveaux mails », « Envoie du résumé » ; restent Schedule Trigger/Code in JavaScript/Basic LLM Chain/Anthropic Chat Model en anglais, régénérable en 2 min si Nico renomme). Traitement sharp : inpainting du bouton Execute + barres d'outils, fenêtre sans chrome, bande de canvas alignée grille pour compléter le 16:9. Vérifiée sur la page article, /blog et la home.
+- **`vercel redeploy` exécuté après la pose de la cover** : la home statique ne montre un nouvel article (ou sa cover) qu'après un rebuild, le redeploy à l'identique suffit.
 - `reading_time_min` NULL comme l'article 1 (comportement du site inchangé).
 
 ### Pièges notés
