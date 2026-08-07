@@ -1,5 +1,26 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (chantier 2 · 2e article de blog, publié)
+
+### Réalisé
+- **Article 2 rédigé, validé par Nico et publié en prod** (insertion PostgREST via clé service_role récupérée par la CLI Supabase authentifiée, jamais affichée · id `98983192-6b24-4dfd-acc3-d52c8364d098`, publié le 07/08 à 06h20 UTC) : slug `automatisation-ia-tpe-pme-taches-repetitives`, titre « Automatisation et IA pour TPE et PME : récupérer les heures que les tâches répétitives te volent », tag `automatisation-ia`, ~1 700 mots, cover NULL pour l'instant.
+- Voix de l'article 1 (tutoiement, direct), wording aligné sur la home (30 min/jour · 2h30/semaine · 110h/an, ventes perdues, charge mentale), méthode 5 étapes et 6 familles de /automatisation-ia, 2 preuves internes (veille du matin, pipeline de prospection, **zéro mention LinkedIn**), FAQ 6 questions SEO, chute « On en parle ? » (mailto + carte). Doctrine respectée : aucun prix (formule « je te montre combien tu économises »), IA = moteur jamais promesse, aucun tiret long, meta_title 55 car., meta_description 150 car.
+- Vérifié en prod : `/blog` liste l'article, la page répond 200 avec H1 et meta conformes.
+
+### Reste à faire sur cet article
+- **Cover** : re-capture « Veille IA quotidienne » par Nico (nœuds renommés FR), retraitement type lot 4, upload bucket `blog-images`, puis `UPDATE blog_posts SET cover_image_url, cover_image_alt WHERE slug = 'automatisation-ia-tpe-pme-taches-repetitives'`.
+- `reading_time_min` NULL comme l'article 1 (comportement du site inchangé).
+
+### Pièges notés
+- **La home (`/`) est 100 % statique sans revalidation** : la section « Articles récents » et le sitemap ne reflètent un nouvel article **qu'au prochain déploiement Vercel** (`/blog` et `/blog/[slug]` ont eux une ISR de 60 s). Après toute publication d'article : pousser un commit (ou redéployer) pour rafraîchir home + sitemap.
+- **Doctrine prix, décision Nico en attente** : l'article 1 (discovery/CDC, publié en mai) affiche des prix (préconception 1 000 € HT, FAQ coûts), en contradiction avec la doctrine 2026 « aucun prix affiché publiquement ». Signalé le 07/08, pas touché.
+
+### Reste à faire (priorisé · remplace la liste du lot 4)
+1. **Cover de l'article 2** (dépend de la re-capture FR de Nico, voir plus haut).
+2. **Découpage globals.css** : plan dans `design/plan-decoupage-globals-css.md`, session dédiée.
+3. **Manuel Nico** : test mobile réel, certificat www Vercel, Search Console (soumettre le sitemap rafraîchi), fiche Google Business.
+4. **Décisions en attente** : prix affichés dans l'article 1 · script `npm run lint` cassé (`package.json`, une ligne).
+
 ## Session du 2026-08-07 (lot 4 · preuve automatisation dans Réalisations)
 
 ### Réalisé (validé par Nico le 07/08, contrôle visuel light/dark sur serveur de prod local)
@@ -17,8 +38,14 @@
 - **`npm run lint` est cassé** : Next 16 a supprimé `next lint` (« Invalid project directory provided: …/lint »). Utiliser `npx eslint <fichiers>` en attendant de corriger le script dans `package.json` (une ligne, hors périmètre du lot 4).
 - Visuel clair (~#F5F5F3) sur fond sombre en dark theme : validé à l'œil par Nico le 07/08, cohérent avec les 2 previews existantes. Si un traitement CSS est envisagé un jour, le faire après le découpage de globals.css.
 
+### Captures n8n supplémentaires du 07/08 (08h01, arbitrage Nico en session)
+- 2 nouvelles captures sur le Bureau, **propres toutes les deux** (aucun post-it, aucune URL, aucun nom réel) : « Veille IA quotidienne » (Gmail → Code → LLM Anthropic → Telegram) et « Vapi vers Google Sheets » (Webhook → Code → Sheets).
+- **Décision : pas de nouvelles cartes Réalisations** (éviter la galerie de canvas n8n, doctrine résultat pas technologie ; les prochaines cartes seront des cas clients).
+- « Veille IA quotidienne » = illustration idéale du 2e article de blog (chantier 2), **après renommage des nœuds en français et re-capture par Nico** (noms anglais par défaut actuellement).
+- « Vapi vers Google Sheets » = histoire forte (appels vocaux IA loggés en tableur) mais visuel faible (3 nœuds, noms par défaut) : en réserve jusqu'à étoffement ou vrai cas client.
+
 ### Reste à faire (priorisé · remplace la liste du lot 3)
-1. **Chantier 2 · 2e article de blog** (automatisation + IA pour dirigeants de TPE/PME), le wording final de la home est maintenant en place.
+1. **Chantier 2 · 2e article de blog** (automatisation + IA pour dirigeants de TPE/PME), le wording final de la home est maintenant en place. Illustration possible : capture « Veille IA quotidienne » une fois re-capturée en FR.
 2. **Découpage globals.css** : plan dans `design/plan-decoupage-globals-css.md`, session dédiée.
 3. **Manuel Nico** : test mobile réel du déploiement, certificat www Vercel, Search Console, fiche Google Business.
 
