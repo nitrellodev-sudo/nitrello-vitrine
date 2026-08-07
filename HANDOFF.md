@@ -1,5 +1,27 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-07 (lot 4 · preuve automatisation dans Réalisations)
+
+### Réalisé (validé par Nico le 07/08, contrôle visuel light/dark sur serveur de prod local)
+- **3e carte `.work-item` en tête de #work** (`src/app/page.tsx`) : pipeline de prospection interne Nitrello. Choix Nico : position en tête de liste · tags « Automatisation · Outil interne · n8n ». Liens internes vers `/automatisation-ia` (pas de `target="_blank"`, flèche diagonale conservée, précédent du `.work-link` du hero). Copy cadrée résultat, sans mention LinkedIn ni prix. Lede de section amendé : « …chez mes clients et dans mes propres outils. » Commentaires Projet 1/2/3 renumérotés. **Zéro CSS ajouté** (le chantier de découpage de globals.css reste propre).
+- **Visuel `public/pipelinepreview.webp`** (1280×640, ratio 2:1 exact du `.work-visual`, 34 Ko, convention nom+preview respectée).
+
+### Provenance et sécurité du visuel
+- Source : capture n8n « Alimenter le pipeline » du 07/08 (angle registre/Pappers). Les **2 post-its (codes NAF, logique métier) et le fragment d'ID « Workflow- YemAj0a… » ont été inpaintés** par patchs de canvas alignés sur la grille de points (script sharp one-shot, pas de grille mesuré 7,40 px, décalages pris entre pics réellement détectés). Vérification pixel : zéro résidu jaune dans les zones élargies, stats des zones conformes au canvas de référence, zooms ×3 sans couture. Piège rencontré : le 1er patch de l'ID tranchait le mot « rapprochement » du label, recalé après mesure des lignes de texte au pixel.
+- Les **4 autres captures du Bureau (angle LinkedIn/Unipile) sont définitivement exclues** : zone grise CGU LinkedIn, URL API Unipile en clair, nom d'une personne réelle. La source Desktop n'est plus nécessaire (seul le webp est versionné).
+
+### Vérifié
+- Build vert (15 routes), ESLint silencieux (`npx eslint src/app/page.tsx`), HTML pré-rendu : 3 `<article class="work-item reveal">`, les 3 webp servis, non-régression des cartes Esprit Auto et TSG. Diff limité à `page.tsx` + webp + HANDOFF.
+
+### Pièges notés
+- **`npm run lint` est cassé** : Next 16 a supprimé `next lint` (« Invalid project directory provided: …/lint »). Utiliser `npx eslint <fichiers>` en attendant de corriger le script dans `package.json` (une ligne, hors périmètre du lot 4).
+- Visuel clair (~#F5F5F3) sur fond sombre en dark theme : validé à l'œil par Nico le 07/08, cohérent avec les 2 previews existantes. Si un traitement CSS est envisagé un jour, le faire après le découpage de globals.css.
+
+### Reste à faire (priorisé · remplace la liste du lot 3)
+1. **Chantier 2 · 2e article de blog** (automatisation + IA pour dirigeants de TPE/PME), le wording final de la home est maintenant en place.
+2. **Découpage globals.css** : plan dans `design/plan-decoupage-globals-css.md`, session dédiée.
+3. **Manuel Nico** : test mobile réel du déploiement, certificat www Vercel, Search Console, fiche Google Business.
+
 ## Session du 2026-08-07 (lot 3 · fusion hero + bloc phare)
 
 ### Réalisé (local, NON COMMITÉ · en attente de validation Nico)

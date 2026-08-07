@@ -286,12 +286,32 @@ export default function Home() {
             <div>
               <div className="eyebrow">Réalisations</div>
               <h2 className="h-section">En ligne. En production. Pas dans un portfolio.</h2>
-              <p className="lede">Chaque projet répond à un contexte précis. Voici ce qui tourne actuellement chez mes clients.</p>
+              <p className="lede">Chaque projet répond à un contexte précis. Voici ce qui tourne actuellement, chez mes clients et dans mes propres outils.</p>
             </div>
           </div>
 
           <div className="work-list">
-            {/* Projet 1 : Esprit Auto */}
+            {/* Projet 1 : pipeline de prospection interne (preuve automatisation) */}
+            <article className="work-item reveal">
+              <div className="work-meta">
+                <div className="work-tags">
+                  <span className="work-tag">Automatisation</span>
+                  <span className="work-tag">Outil interne</span>
+                  <span className="work-tag">n8n</span>
+                </div>
+                <h3 className="work-title">Pipeline de prospection <em>, outil interne Nitrello</em></h3>
+                <p className="work-desc">Mon propre pipeline commercial se remplit tout seul : les entreprises qui correspondent aux critères sont repérées dans le registre national, vérifiées, puis créées dans le CRM avec une fiche complète, sans doublon. Zéro saisie manuelle : la prospection avance pendant que je travaille pour mes clients.</p>
+                <Link href="/automatisation-ia" className="work-link">
+                  Voir ce que j&apos;automatise pour toi
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                </Link>
+              </div>
+              <Link href="/automatisation-ia" className="work-visual">
+                <Image src="/pipelinepreview.webp" alt="Workflow n8n du pipeline de prospection automatisé de Nitrello" width={1280} height={640} sizes="(max-width: 900px) 100vw, 50vw" />
+              </Link>
+            </article>
+
+            {/* Projet 2 : Esprit Auto */}
             <article className="work-item reveal">
               <div className="work-meta">
                 <div className="work-tags">
@@ -311,7 +331,7 @@ export default function Home() {
               </a>
             </article>
 
-            {/* Projet 2 : Team Solution Garage */}
+            {/* Projet 3 : Team Solution Garage */}
             <article className="work-item reveal">
               <div className="work-meta">
                 <div className="work-tags">
