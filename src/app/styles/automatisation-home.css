@@ -1,0 +1,38 @@
+/* ============================================================
+   AUTOMATISATION (home) · aperçu de l'offre phare, placé entre le
+   ticker et le CTA intermédiaire. Le workflow lui-même est stylé
+   par ia-page.css (.wf-*), importé plus haut dans le manifeste :
+   ici, uniquement l'habillage de section.
+   Fond laissé au fond de page, pour que #services garde juste en
+   dessous son alternance en --stone-pale.
+   ============================================================ */
+#automatisation {
+  padding: var(--gap-section) 0;
+  position: relative;
+  overflow: hidden;
+}
+#automatisation::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: -12%;
+  width: 38%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(123,47,255,0.10), transparent 65%);
+  filter: blur(46px);
+  pointer-events: none;
+  z-index: 0;
+}
+#automatisation .container { position: relative; z-index: 1; }
+/* Le head respire moins qu'ailleurs : la démo qui suit porte déjà la section */
+#automatisation .section-head { margin-bottom: 48px; }
+
+/* Chute + lien de sortie, centrés sous la démo */
+.automatisation-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  margin-top: 26px;
+}
+.automatisation-foot .work-link { align-self: center; }

@@ -9,7 +9,17 @@ import PhareTypewriter from "@/components/PhareTypewriter";
 import HologramPortrait from "@/components/HologramPortrait";
 import RecentBlogPostsSection from "@/components/RecentBlogPostsSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import WorkflowAnimation from "@/components/WorkflowAnimation";
+import WorkflowDemo from "@/components/WorkflowDemo";
 
+// La home liste les 3 derniers articles, mais elle était prérendue une fois
+// pour toutes au build : un article publié n'y apparaissait qu'au prochain
+// déploiement, et le cache de fetch de Next pouvait même resservir une liste
+// périmée à travers plusieurs builds (article 2 absent de la home locale, cas
+// diagnostiqué le 09/08). Une heure de fraîcheur suffit pour un blog et ne
+// coûte rien de perceptible : la page continue d'être servie depuis le cache,
+// la régénération se fait en arrière-plan.
+export const revalidate = 3600;
 
 export default function Home() {
   return (
@@ -19,6 +29,7 @@ export default function Home() {
       <FaqAccordion />
       <FloatingCTA />
       <HologramPortrait />
+      <WorkflowAnimation />
       <CalEmbedScript />
 
       {/* ============================================================
@@ -118,6 +129,39 @@ export default function Home() {
       </div>
 
       {/* ============================================================
+           AUTOMATISATION · l'offre phare, montrée sur la home
+           Le hero pose le constat (ce que les tâches répétitives
+           coûtent), cette section montre la réponse. Sans elle, la
+           section Services qui suit ouvrait sur « Pas que de l'IA »
+           alors qu'aucune IA n'avait été montrée : l'objection était
+           levée avant l'argument.
+           Le titre et la chute diffèrent volontairement de ceux de
+           /automatisation-ia : même démo, deux cadrages. Ici l'aperçu
+           de l'offre, là-bas l'exemple détaillé.
+           ============================================================ */}
+      <section id="automatisation">
+        <div className="container">
+          <div className="section-head reveal">
+            <div className="eyebrow">Automatisation</div>
+            <h2 className="h-section">Ce que tes outils peuvent faire <em>sans toi.</em></h2>
+            <p className="lede">Prends une demande client qui arrive par mail. Voilà tout ce qui s&apos;enchaîne derrière, sans une seule manipulation de ta part.</p>
+          </div>
+
+          <WorkflowDemo />
+
+          <div className="automatisation-foot">
+            <p className="wf-caption reveal">
+              De la réception du mail à la relance, <strong>zéro intervention humaine</strong>. Toi, tu fais ton métier.
+            </p>
+            <Link href="/automatisation-ia" className="work-link reveal">
+              Voir tout ce que j&apos;automatise
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M9 7h8v8" /></svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
            CTA INTERMÉDIAIRE
            ============================================================ */}
       <section className="cta-mid">
@@ -140,7 +184,7 @@ export default function Home() {
         <div className="container">
           <div className="section-head reveal">
             <div className="eyebrow">Aussi au catalogue</div>
-            <h2 className="h-section">Pas que de l&apos;IA. <em>Des outils qui durent.</em></h2>
+            <h2 className="h-section">Pas que de l&apos;IA. <em>Les outils qu&apos;elle fait tourner.</em></h2>
             <p className="lede">L&apos;automatisation, c&apos;est la partie visible. En dessous, il y a le socle : les outils de gestion et les sites que je construis depuis le début, sur mesure.</p>
           </div>
 
@@ -181,10 +225,14 @@ export default function Home() {
           <div className="method-grid">
             <div className="section-head reveal">
               <div className="eyebrow">Méthode</div>
-              <h2 className="h-section">Un projet, <em>quatre temps.</em></h2>
+              <h2 className="h-section">Un projet, <em>cinq temps.</em></h2>
               <p className="lede">Je travaille en cycles courts, avec des livraisons régulières. Tu vois ton projet prendre forme au fur et à mesure , pas à la fin.</p>
             </div>
 
+            {/* Même séquence en cinq temps que sur /automatisation-ia : un seul
+                discours de méthode sur tout le site, décliné au contexte de
+                chaque page. Ici la version projet, là-bas la version
+                automatisation. */}
             <div className="method-steps">
               <div className="method-step reveal">
                 <div className="method-num">01 · Contact</div>
@@ -194,10 +242,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="method-step reveal r-1">
-                <div className="method-num">02 · Cadrage</div>
+                <div className="method-num">02 · Étude</div>
                 <div className="method-body">
-                  <h4>On dessine <em>ensemble.</em></h4>
-                  <p>Je formalise un plan : ce qu&apos;on fait, ce qu&apos;on ne fait pas, les maquettes des écrans clés, le planning et le prix. Tu valides avant qu&apos;on démarre.</p>
+                  <h4>J&apos;étudie, je chiffre, <em>tu valides.</em></h4>
+                  <p>Je regarde comment tu travailles et où passent tes heures. Je formalise un plan : ce qu&apos;on fait, ce qu&apos;on ne fait pas, les maquettes des écrans clés, le planning, le chiffrage et ce que tu vas récupérer en échange. Tu valides avant qu&apos;on démarre.</p>
                 </div>
               </div>
               <div className="method-step reveal r-2">
@@ -210,8 +258,15 @@ export default function Home() {
               <div className="method-step reveal r-3">
                 <div className="method-num">04 · Livraison</div>
                 <div className="method-body">
-                  <h4>On met en ligne, <em>et après ?</em></h4>
-                  <p>Mise en production, formation si besoin, documentation. Et un mois de suivi inclus pour être sûr que tout roule.</p>
+                  <h4>On met en ligne, <em>je te forme.</em></h4>
+                  <p>Mise en production, formation, documentation. Un outil ne sert à rien si tu ne sais pas t&apos;en servir : tu repars autonome.</p>
+                </div>
+              </div>
+              <div className="method-step reveal r-3">
+                <div className="method-num">05 · Suivi</div>
+                <div className="method-body">
+                  <h4>Ton outil vit, <em>je reste joignable.</em></h4>
+                  <p>Un mois de suivi inclus pour être sûr que tout roule. Ensuite, pour les outils qui évoluent comme les automatisations, un contrat de maintenance mensuel prend le relais.</p>
                 </div>
               </div>
             </div>
