@@ -43,9 +43,11 @@
   transition: background 0.2s, color 0.2s;
 }
 .nav-links a:hover { background: rgba(17,17,17,0.05); color: var(--ink); }
-/* Entrée Contact du menu burger : masquée en nav horizontale (voir la
-   media query 1080px qui la réaffiche en mode burger) */
-.nav-link-contact { display: none; }
+/* Entrées réservées au menu burger : masquées en nav horizontale (voir la
+   media query 1080px qui les réaffiche en mode burger). La barre du haut
+   garde 6 entrées pour que l'offre phare pèse plus qu'une entrée parmi
+   neuf ; le burger, lui, n'a pas cette contrainte de place. */
+.nav-link-burger { display: none; }
 .nav-cta { display: flex; align-items: center; gap: 12px; }
 .nav-toggle { display: none; padding: 8px; border-radius: 8px; }
 .nav-toggle svg { width: 24px; height: 24px; }
@@ -112,10 +114,10 @@
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px 14px; font-size: 16px; }
   .nav-toggle { display: inline-flex; }
-  /* L'entrée Contact n'existe que dans le menu burger : en nav horizontale
-     le bouton "En discuter" joue ce rôle (et une 9e entrée ferait déborder
-     la nav avant le point de bascule à 1080px). */
-  .nav-link-contact { display: list-item; }
+  /* Chiffrage, À propos et Contact n'existent que dans le menu burger : en
+     nav horizontale le bouton "En discuter" couvre Contact, et les deux
+     autres restent atteignables au scroll et depuis le footer. */
+  .nav-link-burger { display: list-item; }
 }
 
 /* En mode burger la barre n'a plus que logo + toggle + bouton + burger :

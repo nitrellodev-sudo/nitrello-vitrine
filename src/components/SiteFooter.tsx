@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+// Le footer porte les 9 liens, y compris les 3 que la barre du haut réserve
+// au burger. Libellés alignés sur ceux de la nav : un seul vocabulaire.
 const NAV_LINKS = [
-  { label: "Automatisation IA", href: "/automatisation-ia" },
-  { label: "Services", href: "/#services" },
+  { label: "Automatisation & IA", href: "/automatisation-ia" },
+  { label: "Outils & sites", href: "/#services" },
   { label: "Méthode", href: "/#method" },
   { label: "Chiffrage", href: "/#pricing" },
   { label: "Réalisations", href: "/#work" },

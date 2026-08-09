@@ -21,18 +21,20 @@ export default function SiteHeader() {
             </svg>
             <span>Nitrello</span>
           </Link>
+          {/* 6 entrées en nav horizontale : au-delà, l'offre phare ne pèse pas
+              plus lourd qu'une entrée de service. Chiffrage, À propos et Contact
+              basculent dans le burger (CSS .nav-link-burger) et restent dans le
+              footer, qui porte les 9 liens. */}
           <ul className="nav-links" id="nav-links">
-            <li><Link href="/automatisation-ia">Automatisation IA</Link></li>
-            <li><Link href="/#services">Services</Link></li>
+            <li><Link href="/automatisation-ia">Automatisation &amp; IA</Link></li>
+            <li><Link href="/#services">Outils &amp; sites</Link></li>
             <li><Link href="/#method">Méthode</Link></li>
-            <li><Link href="/#pricing">Chiffrage</Link></li>
             <li><Link href="/#work">Réalisations</Link></li>
             <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/#about">À propos</Link></li>
             <li><Link href="/#faq">FAQ</Link></li>
-            {/* Visible uniquement dans le menu burger (CSS .nav-link-contact) :
-                en nav horizontale le bouton "En discuter" couvre déjà Contact */}
-            <li className="nav-link-contact"><Link href="/#contact">Contact</Link></li>
+            <li className="nav-link-burger"><Link href="/#pricing">Chiffrage</Link></li>
+            <li className="nav-link-burger"><Link href="/#about">À propos</Link></li>
+            <li className="nav-link-burger"><Link href="/#contact">Contact</Link></li>
           </ul>
           <div className="nav-cta">
             <ThemeToggle />
