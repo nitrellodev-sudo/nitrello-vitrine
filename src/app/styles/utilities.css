@@ -58,3 +58,15 @@
   max-width: 56ch;
 }
 
+
+/* En-tête de section, partagée par services, method, work, chiffrage,
+   automatisation et la page IA. Les deux seuls sélecteurs concurrents,
+   `.method-grid > .section-head` (method.css) et `#automatisation .section-head`
+   (automatisation-home.css), gagnent par spécificité et non par ordre : la
+   remonter ici depuis services-legacy.css ne change donc aucune cascade. */
+.section-head {
+  max-width: 720px;
+  margin-bottom: 72px;
+}
+.section-head .eyebrow { margin-bottom: 24px; }
+.section-head h2 { margin-bottom: 24px; }

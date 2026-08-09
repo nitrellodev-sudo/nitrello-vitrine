@@ -178,3 +178,10 @@
   .faq-a-text { grid-column: 1; }
 }
 
+
+/* Delta rapatrié d'overrides.css en phase 3 (le fichier a disparu du manifeste).
+   Les réponses se sont allongées : l'accordéon passe de 600 à 700px de hauteur
+   d'ouverture. Doit rester APRÈS la règle 600px ci-dessus, même sélecteur et
+   même spécificité, c'est l'ordre seul qui départage. Aucun autre fichier du
+   manifeste ne touche `.faq-item.is-open .faq-a` : le rapatriement est sûr. */
+.faq-item.is-open .faq-a { max-height: 700px; }

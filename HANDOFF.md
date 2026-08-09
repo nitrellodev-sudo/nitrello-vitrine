@@ -43,7 +43,22 @@ Correctif ponctuel : `rm -rf .next/cache/fetch-cache` puis rebuild. Correctif du
 ### Prochaines étapes
 1. Validation visuelle de Nico (desktop et mobile, clair et sombre), puis commit en 4 temps : nav · home · page IA · HANDOFF. La page IA doit être commitée **après** la home, qui crée `WorkflowDemo`.
 2. Après déploiement : vérifier la prod au DOM dans Chrome (pas de curl répétés, Security Checkpoint Vercel).
-3. Reste ouvert d'avant : phase 3 CSS optionnelle, décision adresse postale dans le JSON-LD. ~~Bug `--ash` FAQ~~ et ~~script `npm run lint` cassé~~ réglés le 09/08, voir ci-dessous.
+3. Reste ouvert d'avant : décision adresse postale dans le JSON-LD. ~~Bug `--ash` FAQ~~, ~~script `npm run lint` cassé~~ et ~~phase 3 CSS~~ réglés le 09/08, voir ci-dessous.
+
+### Phase 3 CSS faite le 09/08 (validée par Nico) · le manifeste passe de 28 à 26 fichiers
+Les 4 regroupements de confort du plan, exécutés un par un avec rebuild et vérification entre chaque :
+1. `@keyframes blink` : hero.css → **base.css**. Les keyframes ne participent pas à la cascade, seule l'unicité du nom compte. `.phare-caret` (phare.css) le consommait depuis le fichier du hero, dépendance supprimée.
+2. `.section-head` : services-legacy.css → **utilities.css**. Elle sert services, method, work, chiffrage, automatisation et la page IA. Ses deux seuls concurrents, `.method-grid > .section-head` et `#automatisation .section-head`, gagnent par spécificité et non par ordre.
+3. **pricing-base.css fusionné dans chiffrage.css** (en tête de fichier) et supprimé du manifeste. `#pricing.chiffrage` et `.chiffrage-foot-row .dot-mono` l'emportent par spécificité.
+4. **overrides.css dissous et supprimé** : delta FAQ 700px en fin de faq.css, bloc hero refonte en fin de hero.css.
+
+**⚠️ La contrainte C du plan (« overrides.css doit rester le dernier import ») n'a plus d'objet** : le fichier n'existe plus. La priorité du delta FAQ repose désormais sur sa **position en fin de faq.css**, après la règle 600px : ne jamais trier ni remonter ce bloc. Idem pour la MQ 600 du bloc hero, qui doit rester après sa règle desktop. Les deux sont documentés en commentaire sur place.
+
+**Piège que le plan avait manqué** : il annonçait ces déplacements « vérifiés sans conflit », mais ses numéros de ligne dataient d'avant les lots 3 et 4. Réaudit complet fait sur le code actuel. Point non listé par le plan : **`phare.css` mentionne `#hero` et est importé après hero.css**, ce qui aurait pu inverser le bloc hero en le remontant. Vérifié, ce n'est qu'un commentaire, pas un sélecteur.
+
+**Méthode de preuve, à réutiliser pour tout refactor CSS** : un diff textuel ne prouve rien ici, déplacer des règles change l'ordre du fichier compilé par construction. Le script **`scripts/cmp-css-cascade.py`** compare deux CSS compilés sur deux critères : conservation de l'ensemble des règles, et pour chaque duel (même contexte, même sélecteur, même propriété), identité de la règle gagnante. Usage : `python3 scripts/cmp-css-cascade.py avant.css apres.css`, la référence se prend avant tout changement via `cp "$(find .next -name '*.css' -path '*static*' | head -1)" /tmp/avant.css`. **Il est dans `scripts/` et non dans `design/`, qui est ignoré par git** (maquettes locales) : un outil de vérification doit survivre au poste de travail. **Le valider dans les deux sens avant de s'y fier** : sur deux fichiers identiques il doit dire EQUIVALENT, sur un fichier saboté à la main il doit dire DIVERGENCE.
+
+**Seule divergence constatée, bénigne** : la règle `.faq-item.is-open .faq-a { max-height: 600px }` disparaît du CSS compilé. Réunie dans le même fichier que la 700px, le minifieur la déduplique puisqu'elle perdait déjà. Zéro inversion de cascade, valeur appliquée inchangée, CSS 44 octets plus léger. C'est le miroir exact du delta noté en phase 1 : le monolithe la dédupliquait, le découpage l'avait fait réapparaître, la fusion la redéduplique.
 
 ### Bug `--ash` de la FAQ, réglé le 09/08 (validé par Nico)
 `faq.css` déclarait `.faq-a-text { color: var(--ash) }` avec une variable qui n'a jamais existé : déclaration invalide, la couleur héritait donc de `--ink`. Conséquence invisible mais réelle, **le texte des réponses et ses passages en gras avaient exactement la même couleur**, seule la graisse les distinguait, et la règle `.faq-a-text strong { color: var(--ink) }` juste en dessous ne servait à rien. C'est cette règle qui prouve l'intention d'origine : le paragraphe devait être atténué.
@@ -120,7 +135,7 @@ Push → déploiement Vercel Ready en 22 s → **prod vérifiée au DOM dans Chr
 - **Aucun composant ne doit importer un fichier de `styles/` directement** : `globals.css` est l'unique point d'entrée, les `@import` ses seules lignes, leur ordre EST la cascade.
 - Les contraintes d'ordre du plan (A : dark-neon avant contact · B : responsive-mobile après ses bases · C : overrides.css dernier · G : blog avant recent-posts) sont documentées en section 2 du plan, à relire avant tout réordonnancement.
 
-### Reste à faire (phase 3, optionnelle, non faite exprès)
+### ~~Reste à faire (phase 3, optionnelle, non faite exprès)~~ · FAITE le 09/08, détail en tête de ce fichier
 - Regroupements de confort du plan (fusion overrides dans faq/hero, `@keyframes blink` vers base.css, `.section-head` vers utilities.css, pricing-base dans chiffrage).
 - ~~**Bug `--ash` (FAQ)**~~ : **réglé le 09/08**, passé en `var(--fg-muted)` après validation de Nico. Détail dans la section du 2026-08-09 en tête de ce fichier.
 

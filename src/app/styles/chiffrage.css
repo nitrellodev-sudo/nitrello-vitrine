@@ -2,6 +2,28 @@
 /* Remplace la section Tarifs (aucun montant). L'id #pricing est conservé sur
    la section pour les liens /#pricing de la navbar et du footer.
    Réf. maquette : chiffrage-v4.html */
+
+/* Socle de la section, remonté de pricing-base.css en phase 3 (le fichier a
+   disparu du manifeste). Il reste en tête : les deux sélecteurs de ce fichier
+   qui le recoupent, `#pricing.chiffrage` et `.chiffrage-foot-row .dot-mono`,
+   l'emportent par spécificité, jamais par ordre. */
+#pricing {
+  padding: var(--gap-section) 0;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+/* .dot-mono survit au carrousel pricing supprimé : la section chiffrage
+   l'utilise dans .chiffrage-foot-row (page.tsx). */
+.dot-mono {
+  font-size: 10px;
+  color: var(--cyan-dark);
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 #pricing.chiffrage { background: var(--mist); }
 .chiffrage::before {
   content: "";

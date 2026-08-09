@@ -22,10 +22,7 @@
   z-index: 0;
 }
 #services .container { position: relative; z-index: 1; }
-.section-head {
-  max-width: 720px;
-  margin-bottom: 72px;
-}
-.section-head .eyebrow { margin-bottom: 24px; }
-.section-head h2 { margin-bottom: 24px; }
+/* .section-head vivait ici par accident d'historique alors qu'elle sert method,
+   work, chiffrage, la section automatisation et la page IA : partie dans
+   utilities.css en phase 3. */
 

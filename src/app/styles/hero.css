@@ -148,11 +148,11 @@
   white-space: nowrap;
   /* width set by JS to the widest phrase, plafonnée à la largeur du parent — prevents jump sans déborder */
 }
-/* blink : utilisé par .phare-caret (le typewriter du hero). Les règles
-   #typed-text et .caret de l'ancien H1 animé ont été retirées (lot 3),
-   ainsi que le lede du hero (le typewriter est sa ligne d'appui, le
-   ticker déroule déjà les 3 offres). */
-@keyframes blink { 50% { opacity: 0; } }
+/* Les règles #typed-text et .caret de l'ancien H1 animé ont été retirées
+   (lot 3), ainsi que le lede du hero (le typewriter est sa ligne d'appui, le
+   ticker déroule déjà les 3 offres). @keyframes blink, qui vivait ici et que
+   .phare-caret consomme depuis phare.css, est parti dans base.css en phase 3 :
+   une animation partagée n'a pas à dépendre du fichier du hero. */
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
 
 /* ── Teaser du constat (fusion lot 3 · v2 après retour design) ──
@@ -196,3 +196,48 @@ h2.hero-cost-kicker { margin-bottom: 28px; }
   #hero { min-height: auto; }
 }
 
+
+/* ═══ HERO REFONTE, rapatrié d'overrides.css en phase 3 ═══ */
+/* H1 fixe (typewriter retiré du hero). Deux correctifs :
+   1. jambage du "g" de "gagner" : avec background-clip: text + fill
+      transparent, le dégradé n'est peint QUE dans la boîte de l'inline-block
+      .accent ; le jambage d'Instrument Serif italique (~0.2em) descend sous
+      cette boîte et devient invisible. Fix : line-height 1.2 sur la ligne
+      accent + padding-bottom 0.18em pour étendre la zone peinte sous le
+      jambage, margin-bottom négatif équivalent pour ne rien décaler ;
+   2. hiérarchie mobile : H1 toujours nettement plus grand que le lede. */
+/* Sélecteur préfixé #hero : spécificité (1,2,1), gagne durablement sur
+   .h-display (utilities.css) et .hero-copy h1.h-display (plus haut dans ce
+   fichier) sans !important. C'est le PARENT qui doit loger la descendante : sa
+   line-box coupait le "g" malgré le padding du span .accent.
+   Ces sélecteurs l'emportent par spécificité et non par position : le bloc peut
+   donc quitter la fin du manifeste sans rien changer. Vérifié, phare.css ne
+   mentionne #hero que dans un commentaire. */
+#hero .hero-copy h1.h-display {
+  font-size: clamp(60px, 8vw, 108px);
+  line-height: 1.3;
+  min-height: 0;
+  overflow: visible;
+}
+/* VRAI FIX du "g" coupé : la règle de base demande font-weight 300 alors
+   qu'Instrument Serif n'est chargée qu'en 400 (layout.tsx, next/font). Le
+   navigateur synthétisait un faux light qui cassait le rendu du jambage.
+   Sélecteur préfixé #hero (1,2,2) : gagne durablement sur la règle de base. */
+#hero .hero-copy h1 .accent {
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.3;
+  -webkit-background-clip: text;
+  background-clip: text;
+  white-space: normal;
+  overflow-wrap: normal;
+}
+@media (max-width: 600px) {
+  /* même spécificité (1,2,1) que la règle desktop, déclarée après : gagne.
+     Ne jamais remonter ce bloc au-dessus de la règle desktop ci-dessus. */
+  #hero .hero-copy h1.h-display {
+    font-size: clamp(44px, 12vw, 64px);
+    /* même logique que desktop : la line-box loge la descendante */
+    line-height: 1.3;
+  }
+}
