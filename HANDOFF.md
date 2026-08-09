@@ -43,7 +43,14 @@ Correctif ponctuel : `rm -rf .next/cache/fetch-cache` puis rebuild. Correctif du
 ### Prochaines étapes
 1. Validation visuelle de Nico (desktop et mobile, clair et sombre), puis commit en 4 temps : nav · home · page IA · HANDOFF. La page IA doit être commitée **après** la home, qui crée `WorkflowDemo`.
 2. Après déploiement : vérifier la prod au DOM dans Chrome (pas de curl répétés, Security Checkpoint Vercel).
-3. Reste ouvert d'avant : phase 3 CSS optionnelle, bug `--ash` FAQ (décision visuelle Nico), script `npm run lint` cassé (Next 16 a retiré `next lint`), décision adresse postale dans le JSON-LD.
+3. Reste ouvert d'avant : phase 3 CSS optionnelle, script `npm run lint` cassé (Next 16 a retiré `next lint`), décision adresse postale dans le JSON-LD. ~~Bug `--ash` FAQ~~ réglé le 09/08, voir ci-dessous.
+
+### Bug `--ash` de la FAQ, réglé le 09/08 (validé par Nico)
+`faq.css` déclarait `.faq-a-text { color: var(--ash) }` avec une variable qui n'a jamais existé : déclaration invalide, la couleur héritait donc de `--ink`. Conséquence invisible mais réelle, **le texte des réponses et ses passages en gras avaient exactement la même couleur**, seule la graisse les distinguait, et la règle `.faq-a-text strong { color: var(--ink) }` juste en dessous ne servait à rien. C'est cette règle qui prouve l'intention d'origine : le paragraphe devait être atténué.
+
+Corrigé en `var(--fg-muted)`, le token du texte secondaire partout ailleurs sur le site. Effet visible : `#111111` → `#4a4a4a` en clair, `#F2F0EA` → `#B8B5AB` en sombre, les gras ressortent enfin. Contraste conforme dans les deux thèmes. Vérifié dans le CSS compilé, pas seulement dans la source.
+
+Audit fait au passage sur les 35 `var()` sans valeur de repli des 28 fichiers de `styles/` : **`--ash` était la seule variable fantôme**. Attention au faux positif `--hologram-angle` (about.css), déclarée via `@property` et non par une affectation classique : tout script d'audit doit tenir compte de `@property`.
 
 ## Session du 2026-08-07 (propagation du positionnement · revue Nico faite, EN ATTENTE DE COMMIT)
 
@@ -108,7 +115,7 @@ Push → déploiement Vercel Ready en 22 s → **prod vérifiée au DOM dans Chr
 
 ### Reste à faire (phase 3, optionnelle, non faite exprès)
 - Regroupements de confort du plan (fusion overrides dans faq/hero, `@keyframes blink` vers base.css, `.section-head` vers utilities.css, pricing-base dans chiffrage).
-- **Bug `--ash` (FAQ)** : `var(--ash)` n'existe pas, la couleur des réponses FAQ est un accident qui rend `var(--ink)`. Le corriger en `var(--fg-muted)` CHANGERAIT la couleur visible : décision visuelle de Nico requise.
+- ~~**Bug `--ash` (FAQ)**~~ : **réglé le 09/08**, passé en `var(--fg-muted)` après validation de Nico. Détail dans la section du 2026-08-09 en tête de ce fichier.
 
 ## Session du 2026-08-07 (chantier 2 · 2e article de blog, publié)
 
