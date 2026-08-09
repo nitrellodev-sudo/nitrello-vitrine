@@ -6,6 +6,7 @@ import FloatingCTA from "@/components/FloatingCTA";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import WorkflowAnimation from "@/components/WorkflowAnimation";
 import MethodProgress from "@/components/MethodProgress";
+import WorkflowDemo from "@/components/WorkflowDemo";
 
 export const metadata: Metadata = {
   title: {
@@ -45,18 +46,9 @@ export default function AutomatisationIaPage() {
         style={{ position: "absolute" }}
         aria-hidden="true"
       >
-        <symbol id="i-mail" viewBox="0 0 24 24">
-          <rect width="20" height="16" x="2" y="4" rx="2" />
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-        </symbol>
-        <symbol id="i-sparkles" viewBox="0 0 24 24">
-          <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z" />
-        </symbol>
-        <symbol id="i-database" viewBox="0 0 24 24">
-          <ellipse cx="12" cy="5" rx="9" ry="3" />
-          <path d="M3 5v14a9 3 0 0 0 18 0V5" />
-          <path d="M3 12a9 3 0 0 0 18 0" />
-        </symbol>
+        {/* i-mail, i-sparkles et i-database ont suivi le workflow dans
+            <WorkflowDemo />, qui porte désormais son propre sprite `wf-i-`.
+            i-file et i-bell restent ici : les cap-cards les utilisent. */}
         <symbol id="i-file" viewBox="0 0 24 24">
           <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
           <path d="M14 2v4a2 2 0 0 0 2 2h4" />
@@ -229,90 +221,7 @@ export default function AutomatisationIaPage() {
               tourner.
             </p>
           </div>
-          <div className="wf-stage reveal">
-            <div className="wf-grid-bg" aria-hidden="true"></div>
-            <div className="wf-inner">
-              <div className="wf-track" id="wf-track">
-                <div className="wf-node">
-                  <div className="wf-node-box">
-                    <div className="wf-node-tag">Déclencheur</div>
-                    <div className="wf-ico">
-                      <svg className="ia-icon" aria-hidden="true">
-                        <use href="#i-mail" />
-                      </svg>
-                    </div>
-                    <div className="wf-label">Mail reçu</div>
-                    <div className="wf-sublabel">une demande arrive</div>
-                  </div>
-                </div>
-                <div className="wf-connector">
-                  <span className="spark"></span>
-                </div>
-                <div className="wf-node">
-                  <div className="wf-node-box">
-                    <div className="wf-node-tag">IA</div>
-                    <div className="wf-ico">
-                      <svg className="ia-icon" aria-hidden="true">
-                        <use href="#i-sparkles" />
-                      </svg>
-                    </div>
-                    <div className="wf-label">L&apos;IA lit le mail</div>
-                    <div className="wf-sublabel">nom, besoin, contact</div>
-                  </div>
-                </div>
-                <div className="wf-connector">
-                  <span className="spark"></span>
-                </div>
-                <div className="wf-node">
-                  <div className="wf-node-box">
-                    <div className="wf-node-tag">Données</div>
-                    <div className="wf-ico">
-                      <svg className="ia-icon" aria-hidden="true">
-                        <use href="#i-database" />
-                      </svg>
-                    </div>
-                    <div className="wf-label">CRM rempli</div>
-                    <div className="wf-sublabel">fiche créée seule</div>
-                  </div>
-                </div>
-                <div className="wf-connector">
-                  <span className="spark"></span>
-                </div>
-                <div className="wf-node">
-                  <div className="wf-node-box">
-                    <div className="wf-node-tag">Document</div>
-                    <div className="wf-ico">
-                      <svg className="ia-icon" aria-hidden="true">
-                        <use href="#i-file" />
-                      </svg>
-                    </div>
-                    <div className="wf-label">Devis généré</div>
-                    <div className="wf-sublabel">prêt à envoyer</div>
-                  </div>
-                </div>
-                <div className="wf-connector">
-                  <span className="spark"></span>
-                </div>
-                <div className="wf-node">
-                  <div className="wf-node-box">
-                    <div className="wf-node-tag">Auto</div>
-                    <div className="wf-ico">
-                      <svg className="ia-icon" aria-hidden="true">
-                        <use href="#i-bell" />
-                      </svg>
-                    </div>
-                    <div className="wf-label">Relance programmée</div>
-                    <div className="wf-sublabel">si pas de réponse</div>
-                  </div>
-                </div>
-              </div>
-              <div className="wf-legend">
-                <span className="pill">
-                  <span className="led"></span> Workflow actif · tourne 24h/24
-                </span>
-              </div>
-            </div>
-          </div>
+          <WorkflowDemo />
           <p className="wf-caption reveal">
             De la réception du mail à la relance,{" "}
             <strong>zéro intervention humaine</strong>. Toi, tu fais autre
@@ -326,10 +235,11 @@ export default function AutomatisationIaPage() {
         <div className="container">
           <div className="ia-head reveal">
             <div className="eyebrow">Ma méthode</div>
-            <h2 className="h-section">5 étapes claires.</h2>
+            <h2 className="h-section">Une automatisation, <em>cinq temps.</em></h2>
             <p className="lede">
-              Pas de promesse magique. Tu sais exactement ce que je fais, et
-              pourquoi, à chaque étape.
+              La même méthode que pour tout projet que je livre, appliquée à
+              l&apos;automatisation. Pas de promesse magique : tu sais
+              exactement ce que je fais, et pourquoi, à chaque étape.
             </p>
           </div>
           <div className="ia-method-wrap" id="ia-method-wrap">
@@ -342,55 +252,63 @@ export default function AutomatisationIaPage() {
             <div className="ia-method-step reveal">
               <div className="ia-method-num">01</div>
               <div className="ia-method-body">
-                <h3>J&apos;étudie ton fonctionnement</h3>
+                <div className="ia-method-tag">Contact</div>
+                <h3>On se parle, sans engagement</h3>
                 <p>
-                  On échange. Je vois comment tu bosses, où passent tes heures,
-                  quels outils tu utilises. Je repère les tâches répétitives qui
-                  pèsent sur ton quotidien.
+                  Un appel de 45 minutes. Je vois comment tu bosses, où passent
+                  tes heures, quels outils tu utilises. Je te dis honnêtement si
+                  je suis le bon interlocuteur.
                 </p>
               </div>
             </div>
             <div className="ia-method-step reveal">
               <div className="ia-method-num">02</div>
               <div className="ia-method-body">
-                <h3>Je repère ce qui peut être automatisé</h3>
+                <div className="ia-method-tag">Étude</div>
+                <h3>Je repère, je chiffre, tu valides</h3>
                 <p>
                   Toutes les tâches ne se valent pas. Je trouve les points de
-                  ton process où l&apos;automatisation apporte un vrai gain, et
-                  j&apos;écarte ce qui n&apos;en vaut pas la peine.
+                  ton process où l&apos;automatisation apporte un vrai gain,
+                  j&apos;écarte ce qui n&apos;en vaut pas la peine, et je te
+                  montre combien de temps et d&apos;argent tu vas récupérer. Tu
+                  décides en connaissance de cause.
                 </p>
               </div>
             </div>
             <div className="ia-method-step reveal">
               <div className="ia-method-num">03</div>
               <div className="ia-method-body">
-                <h3>Je chiffre tes économies</h3>
+                <div className="ia-method-tag">Build</div>
+                <h3>Je construis l&apos;automatisation</h3>
                 <p>
-                  Avant de construire quoi que ce soit, je te montre combien de
-                  temps et d&apos;argent tu vas récupérer. Tu décides en
-                  connaissance de cause.
+                  Je développe sur mesure, adapté à ton métier et à tes outils
+                  existants. Tu vois avancer au fur et à mesure, pas à la fin.
                 </p>
               </div>
             </div>
             <div className="ia-method-step reveal">
               <div className="ia-method-num">04</div>
               <div className="ia-method-body">
-                <h3>Je construis et j&apos;installe l&apos;outil</h3>
+                <div className="ia-method-tag">Livraison</div>
+                <h3>J&apos;installe et je te forme</h3>
                 <p>
-                  Je développe l&apos;automatisation sur mesure, adaptée à ton
-                  métier et à tes outils existants. Je l&apos;installe, je la
-                  teste, je m&apos;assure qu&apos;elle tourne.
+                  Je l&apos;installe, je la teste, je m&apos;assure
+                  qu&apos;elle tourne. Puis je te forme et je documente :
+                  l&apos;outil ne sert à rien si tu ne sais pas t&apos;en
+                  servir. Tu es autonome.
                 </p>
               </div>
             </div>
             <div className="ia-method-step reveal">
               <div className="ia-method-num">05</div>
               <div className="ia-method-body">
-                <h3>Je te forme</h3>
+                <div className="ia-method-tag">Suivi</div>
+                <h3>Ton outil vit, je reste joignable</h3>
                 <p>
-                  L&apos;outil ne sert à rien si tu ne sais pas t&apos;en
-                  servir. Je te forme, je documente, je reste joignable. Tu es
-                  autonome.
+                  Une automatisation tourne tous les jours, branchée à tes
+                  outils. Je garde un œil dessus et je l&apos;ajuste quand ton
+                  besoin bouge, dans le cadre du contrat de maintenance détaillé
+                  plus bas.
                 </p>
               </div>
             </div>
@@ -509,10 +427,12 @@ export default function AutomatisationIaPage() {
             </div>
             <div className="why-card reveal r-1">
               <div className="why-num">02</div>
-              <h3>Je chiffre avant de vendre</h3>
+              <h3>Rien ne part sans ta validation</h3>
               <p>
-                Tu ne signes jamais à l&apos;aveugle. Le gain est calculé et
-                présenté avant que tu t&apos;engages.
+                Une machine qui écrit à tes clients à ta place, ça inquiète, et
+                c&apos;est légitime. Je conçois les flux pour que tu gardes la
+                main : ce qui sort de chez toi passe par toi, tant que tu
+                n&apos;as pas décidé le contraire.
               </p>
             </div>
             <div className="why-card reveal r-2">
@@ -535,18 +455,14 @@ export default function AutomatisationIaPage() {
             <div className="price-glow" aria-hidden="true"></div>
             <h2>Combien ça coûte ?</h2>
             <p>
-              Honnêtement, je ne peux pas te donner un prix maintenant. Et
-              c&apos;est normal.
+              Automatiser une relance mail ou toute une chaîne de production, ce
+              n&apos;est pas le même chantier : te donner un « à partir de X € »
+              serait te mentir.
             </p>
             <p>
-              Automatiser une relance mail ou automatiser toute une chaîne de
-              production, ce n&apos;est pas le même chantier. Te donner un « à
-              partir de X € » serait te mentir.
-            </p>
-            <p>
-              Ma logique est différente : j&apos;étudie ton cas, je chiffre tes
-              économies. Un outil se construit une fois, puis il travaille sans
-              salaire, là où une tâche faite à la main te coûte chaque mois.{" "}
+              J&apos;étudie ton cas et je chiffre tes économies. Un outil se
+              construit une fois, puis il travaille sans salaire, là où une tâche
+              faite à la main te coûte chaque mois.{" "}
               <strong>
                 Tu n&apos;investis que si le calcul est rentable pour toi.
               </strong>
@@ -557,7 +473,7 @@ export default function AutomatisationIaPage() {
               rel="noopener"
               className="btn btn-primary"
             >
-              Discutons de ton cas · 30{" "}min, gratuit
+              Discutons de ton cas · 45{" "}min, gratuit
               <svg
                 className="arrow"
                 width="16"
@@ -570,6 +486,11 @@ export default function AutomatisationIaPage() {
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </a>
+            {/* Le détail de la logique de chiffrage vit sur la home, une seule
+                fois : ici on renvoie plutôt que de la recopier. */}
+            <p className="price-more">
+              <Link href="/#pricing">Comment je chiffre un projet</Link>
+            </p>
           </div>
         </div>
       </section>
