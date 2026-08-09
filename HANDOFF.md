@@ -43,7 +43,7 @@ Correctif ponctuel : `rm -rf .next/cache/fetch-cache` puis rebuild. Correctif du
 ### Prochaines étapes
 1. Validation visuelle de Nico (desktop et mobile, clair et sombre), puis commit en 4 temps : nav · home · page IA · HANDOFF. La page IA doit être commitée **après** la home, qui crée `WorkflowDemo`.
 2. Après déploiement : vérifier la prod au DOM dans Chrome (pas de curl répétés, Security Checkpoint Vercel).
-3. Reste ouvert d'avant : phase 3 CSS optionnelle, script `npm run lint` cassé (Next 16 a retiré `next lint`), décision adresse postale dans le JSON-LD. ~~Bug `--ash` FAQ~~ réglé le 09/08, voir ci-dessous.
+3. Reste ouvert d'avant : phase 3 CSS optionnelle, décision adresse postale dans le JSON-LD. ~~Bug `--ash` FAQ~~ et ~~script `npm run lint` cassé~~ réglés le 09/08, voir ci-dessous.
 
 ### Bug `--ash` de la FAQ, réglé le 09/08 (validé par Nico)
 `faq.css` déclarait `.faq-a-text { color: var(--ash) }` avec une variable qui n'a jamais existé : déclaration invalide, la couleur héritait donc de `--ink`. Conséquence invisible mais réelle, **le texte des réponses et ses passages en gras avaient exactement la même couleur**, seule la graisse les distinguait, et la règle `.faq-a-text strong { color: var(--ink) }` juste en dessous ne servait à rien. C'est cette règle qui prouve l'intention d'origine : le paragraphe devait être atténué.
@@ -51,6 +51,13 @@ Correctif ponctuel : `rm -rf .next/cache/fetch-cache` puis rebuild. Correctif du
 Corrigé en `var(--fg-muted)`, le token du texte secondaire partout ailleurs sur le site. Effet visible : `#111111` → `#4a4a4a` en clair, `#F2F0EA` → `#B8B5AB` en sombre, les gras ressortent enfin. Contraste conforme dans les deux thèmes. Vérifié dans le CSS compilé, pas seulement dans la source.
 
 Audit fait au passage sur les 35 `var()` sans valeur de repli des 28 fichiers de `styles/` : **`--ash` était la seule variable fantôme**. Attention au faux positif `--hologram-angle` (about.css), déclarée via `@property` et non par une affectation classique : tout script d'audit doit tenir compte de `@property`.
+
+### Script `npm run lint` réparé le 09/08 (validé par Nico)
+`package.json` appelait encore `next lint`, supprimé par Next 16 : `next` prenait « lint » pour un dossier de projet (« Invalid project directory provided, no such directory: …/lint »). **Une seule ligne à changer, `"lint": "eslint ."`** : la flat config `eslint.config.mjs` était déjà correcte (réécrite sur les exports natifs lors d'une session précédente), il n'y avait rien à migrer. `.next` et `node_modules` sont exclus nativement par ESLint 9, d'où une exécution en 2,5 s.
+
+**Méthode de vérification à réutiliser** : un script de lint qui ne parcourt aucun fichier sort en succès, donc « exit 0 » ne prouve rien. Contrôles faits : `npx eslint . -f json` pour compter la couverture réelle (37 fichiers, `src/app` 10 · `src/components` 21 · `src/lib` 4 · 2 configs racine), puis un fichier témoin jetable (`src/lint-temoin.tsx`, supprimé depuis) portant une variable inutilisée **et** un hook conditionnel, pour confirmer que la règle personnalisée du fichier de config s'applique et que le script sort bien en code 1 sur une vraie erreur.
+
+Non fait volontairement : les warnings ne font pas échouer le lint. Pour une CI ou un hook de pré-commit il faudrait `eslint . --max-warnings 0`, écarté pour un usage manuel car ça bloquerait sur des avertissements bénins.
 
 ## Session du 2026-08-07 (propagation du positionnement · revue Nico faite, EN ATTENTE DE COMMIT)
 
@@ -153,7 +160,7 @@ Push → déploiement Vercel Ready en 22 s → **prod vérifiée au DOM dans Chr
 - Build vert (15 routes), ESLint silencieux (`npx eslint src/app/page.tsx`), HTML pré-rendu : 3 `<article class="work-item reveal">`, les 3 webp servis, non-régression des cartes Esprit Auto et TSG. Diff limité à `page.tsx` + webp + HANDOFF.
 
 ### Pièges notés
-- **`npm run lint` est cassé** : Next 16 a supprimé `next lint` (« Invalid project directory provided: …/lint »). Utiliser `npx eslint <fichiers>` en attendant de corriger le script dans `package.json` (une ligne, hors périmètre du lot 4).
+- ~~**`npm run lint` est cassé**~~ : **réparé le 09/08** (`"lint": "eslint ."`). Détail dans la section du 2026-08-09 en tête de ce fichier.
 - Visuel clair (~#F5F5F3) sur fond sombre en dark theme : validé à l'œil par Nico le 07/08, cohérent avec les 2 previews existantes. Si un traitement CSS est envisagé un jour, le faire après le découpage de globals.css.
 
 ### Captures n8n supplémentaires du 07/08 (08h01, arbitrage Nico en session)
