@@ -1,5 +1,50 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-09 (restructuration de la home autour de l'offre phare · EN ATTENTE DE COMMIT)
+
+### Le diagnostic de départ (constat Nico, confirmé au code)
+Nico signale trois choses : l'onglet « Services » mène à ses anciens services, la méthode de la home affiche 4 étapes contre 5 sur /automatisation-ia, et il doute que les visiteurs aillent d'eux-mêmes dans l'onglet Automatisation IA.
+
+Cause unique derrière les trois symptômes : **la home ne présentait jamais l'offre phare**. Elle la teasait (bande de coût du hero, typewriter, ticker, 1re carte Réalisations) sans jamais la montrer. Conséquence en cascade : la section `#services` ouvrait sur « Aussi au catalogue · Pas que de l'IA » alors qu'aucune IA n'avait été montrée au-dessus, soit une objection levée avant l'argument. Et l'offre qui porte la prospection et le positionnement 2026 vivait derrière un clic facultatif, dans une nav de 9 entrées où elle pesait autant que la FAQ.
+
+Décision retenue : la home reçoit une **version courte** de l'automatisation, /automatisation-ia reste l'approfondissement (landing de prospection + page SEO). Pas un déplacement, un dédoublement maîtrisé.
+
+### Arbitrages Nico (posés en début de session)
+- Section home = **le workflow animé** plus une chute courte, pas les 6 cartes de capacités.
+- **Une seule méthode en cinq temps** sur tout le site, pas deux méthodes concurrentes.
+- Navbar **réduite**, mais libellé **« Automatisation & IA »** (son choix explicite, pas « Automatisation » seul).
+
+### Réalisé (build vert 16 routes, ESLint 0 erreur, AUCUN COMMIT)
+1. **Lot 0** · `automatisation-ia/page.tsx` : CTA du bloc prix encore à « 30 min », résidu de la bascule du 07/08, passé à 45 min. Seul « 30 min » restant sur le site = la stat « 30 min par jour », volontaire.
+2. **Lot 1** · nouvelle section `#automatisation` sur la home, **entre le ticker et le CTA intermédiaire** (et non entre le CTA et Services comme prévu au plan : le constat doit précéder la démonstration, qui doit précéder l'invitation). Titre et chute volontairement différents de ceux de /automatisation-ia : même démo, deux cadrages.
+3. **Lot 1 bis** · `src/components/WorkflowDemo.tsx` créé, **partagé par la home et /automatisation-ia** pour ne pas maintenir 60 lignes de markup en double. La page IA a basculé dessus et son sprite a perdu `i-mail`, `i-sparkles`, `i-database` (devenus inutilisés).
+4. **Lot 2** · section Services : « Pas que de l'IA. ~~Des outils qui durent.~~ » → « **Les outils qu'elle fait tourner.** ». Enchaînée juste après la démo, l'ancienne formule disait en creux que l'automatisation, elle, ne dure pas.
+5. **Lot 3** · navbar réduite à 6 entrées (Automatisation & IA · Outils & sites · Méthode · Réalisations · Blog · FAQ). Chiffrage, À propos et Contact basculent dans le burger : `.nav-link-contact` **renommée `.nav-link-burger`** et généralisée aux 3 entrées. Le footer garde les 9 liens, libellés alignés sur la nav.
+6. **Lot 4** · **méthode unique en cinq temps** des deux côtés : Contact · Étude · Build · Livraison · Suivi. Le cadrage de l'ancienne étape 02 n'est pas perdu, il vit dans Étude (plan, maquettes, planning, chiffrage). Home : « Un projet, cinq temps. » Page IA : « Une automatisation, cinq temps. » plus un lede qui rend la parenté explicite. Nouvelle classe `.ia-method-tag` (la pastille ronde de 56 px ne peut pas porter le nom de l'étape).
+7. **Lot 5** · dédoublonnage : bloc prix de la page IA passé de 3 à 2 paragraphes (le « Honnêtement, je ne peux pas te donner un prix maintenant » sautait) plus un renvoi `.price-more` vers `/#pricing`, où la logique de chiffrage vit une seule fois. Carte « Pourquoi moi » 02 « Je chiffre avant de vendre » (3e redite du chiffrage sur la même page après l'étape 02 et le bloc prix) remplacée par **« Rien ne part sans ta validation »**, argument de la promesse canonique jamais porté par le site. Section Maintenance conservée entière : l'étape 05 y renvoie plutôt que de la répéter.
+8. **`export const revalidate = 3600` sur la home** (voir le piège ci-dessous). La home passe de statique pure à ISR 1 h : `/ 1h 1y` dans la sortie du build. Le sitemap était déjà en ISR 1 min, il n'y avait que la home à traiter.
+
+### Piège majeur élucidé : « mon 2e article a disparu »
+Symptôme : la home locale n'affichait qu'un article, `/blog` les deux, la prod les deux. **La prod n'a jamais rien perdu.**
+
+Cause : la home était prérendue au build, et Next avait mis en cache la réponse Supabase dans `.next/cache/fetch-cache` **avant** la publication de l'article 2. Chaque rebuild reservait cette réponse périmée. `/blog` y échappait grâce à son ISR 60 s, et les pages d'articles aussi car `getAllPublishedSlugs()` est une requête distincte, donc une entrée de cache distincte et plus fraîche.
+
+Correctif ponctuel : `rm -rf .next/cache/fetch-cache` puis rebuild. Correctif durable : le `revalidate = 3600` du point 8. **À retenir : Vercel réutilise lui aussi le cache de build entre déploiements**, le piège pouvait donc frapper la prod au prochain article publié.
+
+### Autres pièges appris
+- **`npm start` échoue en silence si le port 3000 est occupé** : `EADDRINUSE` part dans le log, mais l'ancien serveur continue de répondre et sert **l'ancien build**. On croit alors que la modification n'est pas prise en compte. `pkill -f "next start"` ne suffit pas : utiliser `kill -9 $(lsof -ti:3000)` avant de relancer.
+- **Espaces insécables dans le JSX** : `30{" "}min` contenait un NBSP, l'outil d'édition littérale échouait. Vérifier avec `od -c` et passer par un `sed` ciblé sur la ligne.
+- **Sprites SVG partagés** : `WorkflowDemo` embarque ses 5 icônes préfixées `wf-i-` pour ne jamais entrer en collision avec le sprite `i-` de /automatisation-ia, dont `i-file` et `i-bell` restent nécessaires aux cap-cards.
+- Les `<section>` de la home n'ont pas de règle de padding générique : chaque section porte la sienne via son id (`#automatisation` a donc son propre fichier).
+
+### Fichiers touchés (10, dont 2 créés)
+`src/app/page.tsx` · `src/app/automatisation-ia/page.tsx` · `src/app/globals.css` · `src/app/styles/header.css` · `src/app/styles/ia-page.css` · `src/components/SiteHeader.tsx` · `src/components/SiteFooter.tsx` · `HANDOFF.md` · **créés** : `src/components/WorkflowDemo.tsx`, `src/app/styles/automatisation-home.css` (importé dans le manifeste juste avant `services.css`, dans l'ordre du DOM).
+
+### Prochaines étapes
+1. Validation visuelle de Nico (desktop et mobile, clair et sombre), puis commit en 4 temps : nav · home · page IA · HANDOFF. La page IA doit être commitée **après** la home, qui crée `WorkflowDemo`.
+2. Après déploiement : vérifier la prod au DOM dans Chrome (pas de curl répétés, Security Checkpoint Vercel).
+3. Reste ouvert d'avant : phase 3 CSS optionnelle, bug `--ash` FAQ (décision visuelle Nico), script `npm run lint` cassé (Next 16 a retiré `next lint`), décision adresse postale dans le JSON-LD.
+
 ## Session du 2026-08-07 (propagation du positionnement · revue Nico faite, EN ATTENTE DE COMMIT)
 
 ### Arbitrage Nico (07/08, en revue)
@@ -28,9 +73,12 @@ Le CTA est bien rendu sur le build local (DOM 748×122 px, bouton stylé, opacit
 - **Article 2 PATCHÉ en base** (blog_posts, service_role via CLI, jamais affichée) : `[rendez-vous de 45 minutes](https://cal.com/nicolas-2j0lvm/echange)` + « prenons 45 minutes ». Vérifié en base et via ISR locale. ⚠️ Effet immédiat en prod aussi (même base) : cohérent, le nouvel évènement est actif. Article 1 : rien à faire (aucun lien cal.com, durées déjà 45, son « appel de 30 minutes » est une pique rhétorique à laisser).
 - **Voix Nitrello (Notion) à jour** : « Obtenir quarante-cinq minutes », les 2 placeholders {Cal.com} du pitch/email remplacés par le lien réel, avertissement final remplacé par la note ✅ évènement créé.
 
+### COMMITÉ ET DÉPLOYÉ le 07/08 (commit `bf3c714`, validé par Nico)
+Push → déploiement Vercel Ready en 22 s → **prod vérifiée au DOM dans Chrome** (méthode anti-checkpoint, pas de curl répétés) : home (eyebrow généraliste, 9 FAQ dont « Un freelance seul, c'est fiable ? », uniquement des liens `/echange`, seul « 30 min » restant = la stat de l'extrait d'article), article 2 (CTA « Réserver un échange » → `/echange`, tag « Automatisation IA », lien contenu « rendez-vous de 45 minutes » → `/echange`, « prenons 45 minutes »), mentions légales (activité à jour). Le CLAUDE.md global a été amendé le même jour (promesse canonique = profils/prospection/pitch, site généraliste).
+
 ### Prochaines étapes
-1. Feu vert Nico sur les 10 fichiers modifiés → commit (git status avant add, add ciblé, + HANDOFF.md). La home est statique : le déploiement Vercel du push suffit.
-2. Après déploiement vérifié : **Nico désactive l'ancien évènement `/30min`** dans Cal.com.
+1. ~~Ancien évènement Cal.com `/30min`~~ : **SUPPRIMÉ par Nico le 07/08, vérifié 404** (`/echange` toujours 200). ⚠️ Piège Cal.com documenté au passage : « Masquer » ne retire l'évènement que de la page profil, le lien direct reste réservable · seule la suppression rend le lien inerte. Purge des aperçus de la carte faite le 07/08. Bios externes (LinkedIn, Malt, Instagram, Google Business) vérifiées par Nico le 07/08 : aucune ne pointait vers l'ancien lien. **Transition Cal.com 100 % terminée.**
+2. Ce fichier HANDOFF (cette section) est modifié localement, à commiter avec le prochain commit validé.
 3. Hors repo, backlog restant : profil LinkedIn (contenus prêts dans la page Notion « Profil LinkedIn — audit et corrections », attention aux affirmations invalidées de cette page d'audit), vault Obsidian en retard (4 fichiers).
 
 ## Session du 2026-08-07 (fin de journée · SEO manuel + carte de visite)
