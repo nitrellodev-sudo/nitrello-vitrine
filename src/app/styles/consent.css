@@ -1,0 +1,87 @@
+/* ============================================================
+   CONSENT BANNER — bannière cookies Google Ads
+   Exigence CNIL : Refuser et Accepter strictement identiques,
+   une seule classe .consent-banner__btn pour les deux.
+   ============================================================ */
+.consent-banner {
+  position: fixed;
+  left: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 90; /* au-dessus du float-cta (50), sous le header (100) */
+  max-width: 420px;
+  padding: 18px 20px;
+  background: var(--paper);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.08),
+    0 18px 36px -14px rgba(0,0,0,0.35);
+  font-family: var(--sans);
+  animation: consentIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes consentIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .consent-banner { animation: none; }
+}
+.consent-banner__text {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.consent-banner__text a {
+  color: var(--cyan-dark);
+  text-decoration: underline;
+}
+[data-theme="dark"] .consent-banner__text a { color: var(--cyan); }
+.consent-banner__actions {
+  display: flex;
+  gap: 10px;
+}
+.consent-banner__btn {
+  flex: 1 1 0;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--mist);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.25s;
+}
+.consent-banner__btn:hover {
+  transform: translateY(-1px);
+}
+.consent-banner__btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Lien "Gérer mes cookies" du footer : même style que .site-footer__legal a */
+.consent-manage-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--stone-inverse-soft);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.consent-manage-link:hover,
+.consent-manage-link:focus-visible { color: var(--mist); }
+
+@media (max-width: 640px) {
+  .consent-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+}

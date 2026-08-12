@@ -1,5 +1,31 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-12 (balise Google Ads + bannière de consentement CNIL · commitée avec cette entrée)
+
+### Contexte
+Nico crée une campagne Google Ads liée à sa fiche Google Business Profile. Google demande la balise gtag.js `AW-18381393904`. Impossible de la coller telle quelle : la politique de confidentialité affirmait « aucun cookie publicitaire, aucune bannière », et un cookie publicitaire exige un consentement préalable (art. 82 loi Informatique et Libertés). Arbitrages Nico : **bannière maison** (pas de CMP tierce), **balise de base seule** (les conversions formulaire/Cal.com = chantier ultérieur), **texte de bannière adouci** (« un cookie pour mesurer l'efficacité de ses publicités », ni « Google Ads » ni « campagne » au premier niveau : la finalité suffit à la CNIL, le détail vit derrière « En savoir plus »).
+
+### Architecture (Consent Mode « basic », le plus sûr côté CNIL)
+**gtag.js n'est JAMAIS chargé avant acceptation** : aucun appel réseau vers Google tant que le visiteur n'a pas cliqué Accepter. `ConsentBanner` (client, monté dans layout.tsx entre SiteFooter et Analytics) est le seul propriétaire de l'état : il lit le choix (localStorage `nitrello-consent-ads`) via **useSyncExternalStore** et ne monte `<GoogleAdsTag />` que si « granted ». Le lien « Gérer mes cookies » du footer (ManageCookiesLink, feuille cliente, SiteFooter reste Server Component) rouvre la bannière par CustomEvent `nitrello:consent-open`. Refus après acceptation : purge best-effort des cookies `_gcl_*` + reload (gtag ne se décharge pas). Dans GoogleAdsTag, `analytics_storage: 'denied'` en dur (Vercel Analytics cookieless, pas de GA) ; le snippet inline pousse consent/config PUIS append le script externe (pattern CalEmbedScript), ordre garanti.
+
+### Fichiers touchés (10, dont 5 créés)
+`src/app/layout.tsx` · `src/app/globals.css` (consent.css importé après floating-cta.css) · `src/components/SiteFooter.tsx` · `src/app/politique-confidentialite/page.tsx` · `HANDOFF.md` · **créés** : `src/lib/consent.ts`, `src/components/ConsentBanner.tsx`, `src/components/GoogleAdsTag.tsx`, `src/components/ManageCookiesLink.tsx`, `src/app/styles/consent.css`.
+
+Politique de confidentialité : 5e traitement « Mesure publicitaire Google Ads » (base légale 6.1.a, cookies `_gcl_*` ~90 jours, Google Ireland/LLC), section « Cookies et traceurs » réécrite (la bannière existe désormais), Google ajouté aux sous-traitants et aux transferts DPF, dates passées au 12 août 2026.
+
+### Vérifié dans Chrome sur le build de prod local
+Réseau filtré `googletagmanager` : **zéro requête avant consentement** ; après Accepter, `gtag/js?id=AW-18381393904` en 200 et ping `page_view` avec **`gcs=G110`** (pub accordée, analytics refusé) ; persistance au rechargement ; « Gérer mes cookies » rouvre la bannière ; Refuser après acceptation = `denied`, zéro script, zéro cookie `_gcl_*` ; thèmes clair et sombre OK.
+
+### Pièges appris
+- **Le lint du repo (React Compiler) refuse `setState` direct dans un `useEffect`** (`react-hooks/set-state-in-effect`). Pattern imposé pour lire localStorage sans mismatch d'hydratation : `useSyncExternalStore` avec `getServerSnapshot` qui renvoie null (rien rendu au SSR ni au premier rendu client).
+- **Le vérificateur automatique de Google Ads dira « balise non détectée »** : son robot ne consent pas, donc ne voit jamais gtag.js. C'est attendu et voulu (conformité CNIL). Vérifier en acceptant la bannière sur nitrello.com puis tagassistant.google.com, ou attendre les premières données (48-72 h). La campagne GBP peut tourner sans la balise (appels et itinéraires mesurés nativement).
+- Les deux boutons de la bannière partagent la classe unique `.consent-banner__btn` : **ne jamais mettre Accepter en avant** (exigence CNIL), et la bannière reste non bloquante (`role="region"`, pas d'overlay).
+
+### Prochaines étapes
+1. Côté Google Ads (Nico) : « Installer manuellement » puis ignorer l'avertissement de détection ; créer les **actions de conversion** (formulaire envoyé, RDV Cal.com) pour obtenir les labels.
+2. Chantier suivant court : brancher `gtag('event','conversion',...)` dans ContactForm et autour de Cal.com avec ces labels (`GOOGLE_ADS_ID` déjà exporté).
+3. Reste ouvert d'avant : décision adresse postale dans le JSON-LD.
+
 ## Session du 2026-08-09 (restructuration de la home autour de l'offre phare · EN ATTENTE DE COMMIT)
 
 ### Le diagnostic de départ (constat Nico, confirmé au code)

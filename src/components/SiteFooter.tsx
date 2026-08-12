@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ManageCookiesLink from "@/components/ManageCookiesLink";
 
 // Le footer porte les 9 liens, y compris les 3 que la barre du haut réserve
 // au burger. Libellés alignés sur ceux de la nav : un seul vocabulaire.
@@ -134,6 +135,7 @@ export default function SiteFooter() {
           <ul className="site-footer__legal">
             <li><Link href="/mentions-legales">Mentions légales</Link></li>
             <li><Link href="/politique-confidentialite">Politique de confidentialité</Link></li>
+            <li><ManageCookiesLink /></li>
           </ul>
         </div>
       </div>

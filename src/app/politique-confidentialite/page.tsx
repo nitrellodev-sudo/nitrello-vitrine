@@ -24,7 +24,7 @@ export default function PolitiqueConfidentialitePage() {
 
       <div className="blog-article__content">
         <p>
-          <em>Dernière mise à jour&nbsp;: 16&nbsp;mai&nbsp;2026.</em>
+          <em>Dernière mise à jour&nbsp;: 12&nbsp;août&nbsp;2026.</em>
         </p>
 
         <h2>Préambule</h2>
@@ -40,7 +40,9 @@ export default function PolitiqueConfidentialitePage() {
         <p>
           Elle s&apos;applique à l&apos;ensemble des traitements réalisés via
           le site nitrello.com&nbsp;: consultation des pages, soumission du
-          formulaire de contact, prise de rendez-vous, mesure d&apos;audience.
+          formulaire de contact, prise de rendez-vous, mesure d&apos;audience,
+          mesure de l&apos;efficacité publicitaire (uniquement avec votre
+          consentement).
         </p>
 
         <h2>Responsable du traitement</h2>
@@ -213,29 +215,72 @@ export default function PolitiqueConfidentialitePage() {
           </li>
         </ul>
 
+        <h3>Mesure publicitaire Google Ads (avec votre consentement)</h3>
+        <ul>
+          <li>
+            <strong>Données collectées</strong>&nbsp;: identifiant de clic
+            publicitaire (GCLID) transmis lorsque vous arrivez sur le site
+            depuis une annonce Google, cookies first-party _gcl_aw, _gcl_gs
+            et le cas échéant _gcl_au, pages consultées.
+          </li>
+          <li>
+            <strong>Finalité</strong>&nbsp;: mesurer l&apos;efficacité des
+            campagnes publicitaires Google Ads de Nitrello, notamment celles
+            liées à sa fiche d&apos;établissement Google (savoir si une
+            visite ou un contact provient d&apos;une annonce).
+          </li>
+          <li>
+            <strong>Base légale</strong>&nbsp;: article 6.1.a du RGPD —
+            votre consentement, recueilli via la bannière de cookies. La
+            balise Google (gtag.js) n&apos;est jamais chargée avant votre
+            accord. Vous pouvez retirer votre consentement à tout moment via
+            le lien «&nbsp;Gérer mes cookies&nbsp;» en bas de page.
+          </li>
+          <li>
+            <strong>Durée de conservation</strong>&nbsp;: cookies _gcl_*
+            conservés environ 90&nbsp;jours. Votre choix de consentement est
+            conservé dans le localStorage de votre navigateur jusqu&apos;à
+            modification ou effacement.
+          </li>
+          <li>
+            <strong>Cookies</strong>&nbsp;: cookies first-party déposés par
+            la balise Google, uniquement après votre acceptation.
+          </li>
+          <li>
+            <strong>Sous-traitant</strong>&nbsp;: Google Ireland Limited
+            (Irlande) et Google LLC (États-Unis).
+          </li>
+        </ul>
+
         <h2>Cookies et traceurs</h2>
         <p>
-          Le site nitrello.com ne pose <strong>aucun cookie publicitaire</strong>,
-          <strong> aucun cookie de mesure d&apos;audience tiers</strong>,
-          <strong> aucun tracker comportemental</strong> (heatmap, session
-          replay, pixel publicitaire).
+          Le site nitrello.com ne dépose <strong>aucun traceur soumis à
+          consentement sans votre accord préalable</strong>. Le seul traceur
+          publicitaire utilisé est la balise Google Ads (gtag.js), décrite
+          ci-dessus&nbsp;: elle n&apos;est chargée qu&apos;après votre
+          acceptation via la bannière de cookies. Aucun cookie de mesure
+          d&apos;audience tiers, aucune heatmap, aucun session replay.
         </p>
         <p>
-          Les seuls cookies susceptibles d&apos;être posés relèvent du service
-          Cal.com, et uniquement après votre action explicite (clic sur
-          «&nbsp;Réserver un appel&nbsp;»).
+          Les cookies du service Cal.com ne sont posés qu&apos;après votre
+          action explicite (clic sur «&nbsp;Réserver un appel&nbsp;»).
         </p>
         <p>
           Le localStorage de votre navigateur est utilisé pour mémoriser
-          votre préférence de thème (mode sombre / clair). Il s&apos;agit
-          d&apos;une donnée fonctionnelle non personnelle, stockée
-          exclusivement côté navigateur.
+          votre préférence de thème (mode sombre / clair) et votre choix de
+          consentement aux cookies publicitaires. Il s&apos;agit de données
+          fonctionnelles exemptées de consentement, stockées exclusivement
+          côté navigateur.
         </p>
         <p>
-          Aucune bannière de consentement n&apos;est affichée, dans la mesure
-          où aucune technologie soumise au recueil de consentement préalable
-          (article 82 de la loi Informatique et Libertés) n&apos;est utilisée
-          par défaut sur le site.
+          Une bannière de consentement s&apos;affiche lors de votre première
+          visite. Elle vous permet d&apos;accepter ou de refuser le traceur
+          publicitaire Google Ads, les deux choix étant présentés avec le
+          même niveau de facilité. Refuser n&apos;altère en rien la
+          navigation sur le site. Vous pouvez modifier votre choix à tout
+          moment via le lien «&nbsp;Gérer mes cookies&nbsp;» présent en pied
+          de page. La mesure d&apos;audience (Vercel Analytics), sans cookie,
+          reste exemptée de consentement.
         </p>
 
         <h2>Liste des sous-traitants</h2>
@@ -248,6 +293,13 @@ export default function PolitiqueConfidentialitePage() {
             <strong>Vercel Inc.</strong> — États-Unis — hébergement web et
             mesure d&apos;audience cookieless — mécanisme&nbsp;:
             <em> Data Privacy Framework (DPF) UE-US</em>.
+          </li>
+          <li>
+            <strong>Google Ireland Limited / Google LLC</strong> — Irlande /
+            États-Unis — mesure publicitaire Google Ads, activée uniquement
+            après votre consentement — mécanisme&nbsp;:
+            <em> Data Privacy Framework (DPF) UE-US</em> (certification de
+            Google LLC).
           </li>
           <li>
             <strong>Supabase Pte. Ltd.</strong> — Singapour — base de données
@@ -289,8 +341,8 @@ export default function PolitiqueConfidentialitePage() {
         <ul>
           <li>
             Les sous-traitants établis aux <strong>États-Unis</strong> (Vercel
-            Inc., Cal.com Inc., Railway Corp., Notion Labs Inc.) sont
-            certifiés au titre du <strong>Data Privacy Framework (DPF)</strong>,
+            Inc., Cal.com Inc., Railway Corp., Notion Labs Inc., Google LLC)
+            sont certifiés au titre du <strong>Data Privacy Framework (DPF)</strong>,
             cadre d&apos;adéquation adopté par la Commission européenne le
             10&nbsp;juillet 2023.
           </li>
@@ -361,7 +413,7 @@ export default function PolitiqueConfidentialitePage() {
 
         <hr />
         <p>
-          <em>Dernière mise à jour&nbsp;: 16&nbsp;mai&nbsp;2026.</em>
+          <em>Dernière mise à jour&nbsp;: 12&nbsp;août&nbsp;2026.</em>
         </p>
       </div>
     </main>

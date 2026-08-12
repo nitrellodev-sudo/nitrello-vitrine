@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import ConsentBanner from "@/components/ConsentBanner";
 import HeaderScrollState from "@/components/HeaderScrollState";
 import MobileNav from "@/components/MobileNav";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -224,6 +225,7 @@ export default function RootLayout({
         <SiteHeader />
         <div id="contenu">{children}</div>
         <SiteFooter />
+        <ConsentBanner />
         <Analytics />
       </body>
     </html>
