@@ -21,10 +21,14 @@ Réseau filtré `googletagmanager` : **zéro requête avant consentement** ; apr
 - **Le vérificateur automatique de Google Ads dira « balise non détectée »** : son robot ne consent pas, donc ne voit jamais gtag.js. C'est attendu et voulu (conformité CNIL). Vérifier en acceptant la bannière sur nitrello.com puis tagassistant.google.com, ou attendre les premières données (48-72 h). La campagne GBP peut tourner sans la balise (appels et itinéraires mesurés nativement).
 - Les deux boutons de la bannière partagent la classe unique `.consent-banner__btn` : **ne jamais mettre Accepter en avant** (exigence CNIL), et la bannière reste non bloquante (`role="region"`, pas d'overlay).
 
+### Suite du 12/08 après-midi · conversion « Envoi de formulaire de lead » branchée
+Nico a créé l'action dans Google Ads (assistant Recommandations, chemin « Créer manuellement avec du code » : le mode « paramètres personnalisés » exigeait une URL, inadapté à un formulaire React sans changement de page). Label : `AW-18381393904/le-8CIjFsuAcEPCf97xE` (transcrit depuis capture, vérifié au zoom, puis confirmé par un hit accepté par Google). Nouveau fichier **`src/lib/google-ads.ts`** : source unique de `GOOGLE_ADS_ID` (déplacé depuis GoogleAdsTag.tsx) + `GOOGLE_ADS_LEAD_FORM_LABEL` + `trackLeadFormConversion()` (silencieux si gtag absent, donc silencieux sans consentement). `ContactForm.tsx` appelle la conversion UNIQUEMENT sur `response.ok && result.success === true`, jamais sur échec ni sur clic. **Prouvé de bout en bout en local** : fetch `/api/contact` stubé en `{success:true}` (zéro envoi réel n8n/Brevo/Notion), vraie soumission du formulaire → hit `googleadservices.com/pagead/conversion/18381393904/...label=le-8CIjFsuAcEPCf97xE` en 200. Méthode de test à réutiliser pour toute conversion future. Au passage, gtag envoie seul des événements `form_start`/`form_submit` (mesure améliorée, sans label) : ne pas les confondre avec la conversion.
+
 ### Prochaines étapes
-1. Côté Google Ads (Nico) : « Installer manuellement » puis ignorer l'avertissement de détection ; créer les **actions de conversion** (formulaire envoyé, RDV Cal.com) pour obtenir les labels.
-2. Chantier suivant court : brancher `gtag('event','conversion',...)` dans ContactForm et autour de Cal.com avec ces labels (`GOOGLE_ADS_ID` déjà exporté).
-3. Reste ouvert d'avant : décision adresse postale dans le JSON-LD.
+1. Google Ads sous 24-48 h : l'action doit passer de « Inactive » à « Enregistre des conversions » à la première vraie soumission consentie.
+2. **Composants limités** (campagne Experts informatiques, Performance Max) : motif « Allégations exagérées ou inexactes », restriction YouTube + Discover uniquement, rien de refusé. Attente : capture de la liste des composants marqués « Limité » pour proposer des reformulations factuelles. Ne pas faire appel avant lecture.
+3. Optionnel : 2e action de conversion « Prise de rendez-vous » (Cal.com) via le même assistant, puis branchement du label.
+4. Reste ouvert d'avant : décision adresse postale dans le JSON-LD.
 
 ## Session du 2026-08-09 (restructuration de la home autour de l'offre phare · EN ATTENTE DE COMMIT)
 

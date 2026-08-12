@@ -2,6 +2,8 @@
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
 
+import { trackLeadFormConversion } from "@/lib/google-ads";
+
 const CONTACT_API_URL = "/api/contact";
 
 type SubmitStatus = "idle" | "sending" | "success" | "error";
@@ -102,6 +104,9 @@ export default function ContactForm() {
         | { success?: boolean }
         | null;
       if (response.ok && result?.success === true) {
+        // Conversion Google Ads : uniquement sur succès confirmé par l'API,
+        // et seulement si le visiteur a consenti (gtag absent sinon).
+        trackLeadFormConversion();
         setStatus("success");
       } else {
         setStatus("error");

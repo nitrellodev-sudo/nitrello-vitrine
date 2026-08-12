@@ -2,8 +2,7 @@
 
 import Script from "next/script";
 
-// ID public de la balise Google Ads (visible dans le HTML servi, pas un secret).
-export const GOOGLE_ADS_ID = "AW-18381393904";
+import { GOOGLE_ADS_ID } from "@/lib/google-ads";
 
 // Consent Mode v2 en mode "basic" : ce composant n'est monté par ConsentBanner
 // QU'APRÈS consentement explicite, donc l'état "default" reflète un
