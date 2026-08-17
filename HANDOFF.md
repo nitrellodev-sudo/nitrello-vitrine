@@ -1,5 +1,35 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-17 bis (campagne Search livrée prête à importer)
+
+### Contexte
+Suite du diagnostic ci-dessous : Nico valide la remarque sur Performance Max et demande de créer la campagne alternative. **Aucun accès Google Ads depuis l'environnement** (pas de MCP ni d'API Google Ads) : impossible de créer la campagne dans le compte. Livré à la place le paquet complet d'import — ce qui ramène l'opération à quelques minutes de clic dans Google Ads Editor.
+
+### Nouveau dossier `google-ads/`
+`campagne-search.json` est la **source unique** (4 groupes, 28 mots clés, 37 exclusions, 6 liens annexes, 6 accroches, extraits structurés, extension d'appel). `build.mjs` génère 6 CSV d'import et **valide toutes les limites Google** (titre 30, description 90, chemin 15, lien annexe 25/35, accroche 25). Le générateur a immédiatement gagné sa place : il a attrapé une description à **91/90 caractères** que Google aurait rejetée à l'import sans dire laquelle. Ne jamais éditer les CSV à la main, tout passe par le JSON puis `node google-ads/build.mjs`.
+
+Structure : un groupe = un thème = une annonce dédiée (Automatisation → `/automatisation-ia`, CRM/outils → `/#services`, Freelance local → `/`, Site vitrine → `/#services`). **Le tutoiement du site n'est pas repris dans les annonces** : titres à l'infinitif ou vouvoiement neutre, choix assumé et documenté (sur du trafic froid le tutoiement est un pari ; à l'infinitif la question ne se pose pas). Toutes les formulations restent factuelles, vu les composants déjà limités pour « Allégations exagérées ou inexactes ».
+
+### Piège majeur trouvé et corrigé : ancre + paramètres d'URL
+Plusieurs URL finales de la campagne pointent vers une ancre (`/#services`, `/#contact`). Un **modèle de suivi** en `{lpurl}?utm_...` colle les paramètres **après le `#`**, où `location.search` est vide : l'attribution qu'on venait d'écrire aurait été perdue **silencieusement**. Deux parades posées :
+
+1. Le README impose le **suffixe d'URL finale** (inséré au bon endroit par Google) et interdit le modèle de suivi ; `build.mjs` **échoue** si un `{lpurl}` apparaît dans ce champ.
+2. `src/lib/attribution.ts` gagne `readParams()`, qui fusionne les paramètres de `location.search` **et** ceux trouvés derrière le `#` (la query réelle gardant la priorité). Le système tient donc même si la plateforme compose mal l'URL.
+
+Vérifié en Chromium sur les deux compositions : `/?utm_...#services` et `/#services?utm_...` produisent **la même origine**, `gclid=ABC · utm_source=google · utm_medium=cpc · utm_term=crm sur mesure`. Le mot clé exact remonte donc jusqu'à l'email de notification.
+
+### Piège d'environnement (m'a fait perdre du temps, à connaître)
+Rebuild pendant que `next start` tourne = le serveur sert des chunks périmés, un `_next/static/chunks/*.js` part en **500** avec un MIME `text/plain`, React n'hydrate jamais et **tous les tests d'interaction échouent silencieusement** (formulaire qui ne poste pas, aucune erreur JS visible). Symptôme trompeur : la page s'affiche normalement. Réflexe : `pkill next-server` → `rm -rf .next` → rebuild → relancer, puis retester.
+
+### Vérifié
+Suite complète rejouée sur build propre : zéro cookie `_gcl_*` sans consentement, dataLayer dans l'ordre, refus après acceptation sans rechargement, conversion formulaire poussée sur succès API stubé, clics silencieux labels vides, attribution correcte sur les deux formes d'URL à ancre. `node google-ads/build.mjs` vert. Build 14 routes, tsc et ESLint sans erreur.
+
+### Prochaines étapes
+1. Importer les CSV dans Google Ads Editor (`google-ads/README.md` §3), régler à la main ce qui ne s'importe pas (§4) — budget 15 €/j, Maximiser les clics CPC 1,80 €, Recherche seule, **option de zone « Présence »** et surtout le **suffixe d'URL finale**.
+2. Toujours en attente : les 3 libellés de conversion (rendez-vous / clic tél / clic email).
+3. Ne pas couper la PMax au lancement : elle vient d'obtenir une mesure qui marche, elle n'a jamais été jugée dans des conditions correctes. Comparer au **coût par demande reçue** après deux semaines.
+4. Surveiller les termes de recherche tous les 2-3 jours : les 37 exclusions sont un point de départ, pas une liste complète.
+
 ## Session du 2026-08-17 (campagne Google Ads : la mesure était aveugle · déblocage)
 
 ### Le constat de départ

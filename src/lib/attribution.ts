@@ -35,12 +35,39 @@ const MAX_VALUE_LENGTH = 200;
 
 let captured: string | null = null;
 
+/**
+ * Paramètres de l'URL, en regardant AUSSI derrière le fragment.
+ *
+ * Les annonces pointent vers des ancres (`/#contact`, `/#services`). Selon la
+ * façon dont la plateforme publicitaire compose l'URL finale, les paramètres
+ * peuvent se retrouver du mauvais côté du `#` :
+ *   attendu  → nitrello.com/?utm_source=google#contact   (location.search OK)
+ *   observé  → nitrello.com/#contact?utm_source=google   (location.search VIDE)
+ * Dans le second cas, se fier au seul `location.search` perdrait toute
+ * l'attribution sans le moindre signe extérieur. On fusionne donc les deux
+ * sources, la query réelle ayant la priorité.
+ */
+function readParams(): URLSearchParams {
+  const params = new URLSearchParams(window.location.search);
+
+  const hash = window.location.hash;
+  const queryStart = hash.indexOf("?");
+  if (queryStart !== -1) {
+    const fromHash = new URLSearchParams(hash.slice(queryStart + 1));
+    for (const [key, value] of fromHash) {
+      if (!params.has(key)) params.set(key, value);
+    }
+  }
+
+  return params;
+}
+
 function capture(): string {
   if (typeof window === "undefined") return "";
 
   const parts: string[] = [];
   try {
-    const params = new URLSearchParams(window.location.search);
+    const params = readParams();
 
     for (const key of AD_CLICK_PARAMS) {
       const value = params.get(key);

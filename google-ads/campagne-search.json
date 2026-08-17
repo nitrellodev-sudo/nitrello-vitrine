@@ -1,0 +1,245 @@
+{
+  "_comment": "Source unique de la campagne Search Nitrello. Les CSV d'import Google Ads Editor sont GÉNÉRÉS depuis ce fichier par `node google-ads/build.mjs`, qui valide au passage toutes les limites de caractères. Modifier ici, jamais les CSV à la main.",
+
+  "campagne": {
+    "nom": "Nitrello · Search · Isère",
+    "budgetQuotidien": "15.00",
+    "devise": "EUR",
+    "strategieEncheres": "Maximiser les clics",
+    "cpcPlafond": "1.80",
+    "reseaux": "Recherche uniquement, partenaires du Réseau de Recherche DÉSACTIVÉS, Display DÉSACTIVÉ",
+    "langues": ["Français"],
+    "zones": [
+      "Grenoble (et 30 km autour)",
+      "Voiron / Pays Voironnais",
+      "Saint-Marcellin",
+      "Isère (département)"
+    ],
+    "optionZone": "Présence : personnes se trouvant régulièrement dans la zone ciblée (JAMAIS 'ou manifestant de l'intérêt' — ça fait sortir le budget du département)",
+    "suffixeUrlFinale": "utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_content={creative}&utm_term={keyword}"
+  },
+
+  "groupes": [
+    {
+      "nom": "Automatisation des tâches",
+      "urlFinale": "https://nitrello.com/automatisation-ia",
+      "chemin1": "Automatisation",
+      "chemin2": "IA",
+      "motsCles": [
+        { "texte": "automatisation des tâches", "type": "Phrase" },
+        { "texte": "automatiser tâches répétitives", "type": "Phrase" },
+        { "texte": "automatisation entreprise", "type": "Phrase" },
+        { "texte": "automatiser processus entreprise", "type": "Phrase" },
+        { "texte": "logiciel automatisation tâches", "type": "Phrase" },
+        { "texte": "automatisation ia pme", "type": "Phrase" },
+        { "texte": "automatisation des tâches entreprise", "type": "Exact" },
+        { "texte": "automatiser devis facture", "type": "Phrase" }
+      ],
+      "titres": [
+        "Automatiser vos tâches",
+        "Automatisation sur mesure",
+        "Fin des tâches répétitives",
+        "Automatisation pour TPE PME",
+        "Vos outils enfin connectés",
+        "Développeur en Isère",
+        "Devis après étude",
+        "Premier échange gratuit",
+        "Réponse sous 24h",
+        "Un seul interlocuteur",
+        "Freelance, pas une agence",
+        "Sans engagement"
+      ],
+      "descriptions": [
+        "Vos outils communiquent entre eux et traitent les tâches répétitives sans manipulation.",
+        "Étude de votre fonctionnement, puis chiffrage. Premier échange de 45 min, sans engagement.",
+        "Automatisations reliées à vos mails, votre agenda, votre CRM et votre facturation.",
+        "Développeur freelance en Isère. Un interlocuteur unique, du cadrage à la maintenance."
+      ]
+    },
+
+    {
+      "nom": "CRM et outils de gestion",
+      "urlFinale": "https://nitrello.com/#services",
+      "chemin1": "Outils-gestion",
+      "chemin2": "CRM",
+      "motsCles": [
+        { "texte": "crm sur mesure", "type": "Phrase" },
+        { "texte": "créer un crm", "type": "Phrase" },
+        { "texte": "logiciel de gestion sur mesure", "type": "Phrase" },
+        { "texte": "outil de gestion sur mesure", "type": "Phrase" },
+        { "texte": "tableau de bord sur mesure", "type": "Phrase" },
+        { "texte": "développement crm sur mesure", "type": "Exact" },
+        { "texte": "logiciel gestion tpe", "type": "Phrase" },
+        { "texte": "remplacer excel entreprise", "type": "Phrase" }
+      ],
+      "titres": [
+        "CRM sur mesure",
+        "Outil de gestion dédié",
+        "Remplacer vos fichiers Excel",
+        "Développé pour votre métier",
+        "Tableaux de bord sur mesure",
+        "Développeur freelance Isère",
+        "Formation et doc incluses",
+        "Devis après étude",
+        "Premier échange gratuit",
+        "Réponse sous 24h",
+        "Un seul interlocuteur",
+        "Vos accès vous appartiennent"
+      ],
+      "descriptions": [
+        "CRM, back-office, tableaux de bord : un outil construit pour votre façon de travailler.",
+        "Livraisons régulières, vous testez au fur et à mesure. Formation et doc incluses.",
+        "Étude de votre fonctionnement avant tout chiffrage. Premier échange de 45 min, gratuit.",
+        "Vos accès vous appartiennent, la documentation est livrée. Aucune dépendance imposée."
+      ]
+    },
+
+    {
+      "nom": "Développeur freelance local",
+      "urlFinale": "https://nitrello.com/",
+      "chemin1": "Freelance",
+      "chemin2": "Isere",
+      "motsCles": [
+        { "texte": "développeur freelance grenoble", "type": "Exact" },
+        { "texte": "développeur freelance isère", "type": "Phrase" },
+        { "texte": "développeur web freelance grenoble", "type": "Phrase" },
+        { "texte": "développeur freelance voiron", "type": "Phrase" },
+        { "texte": "développeur next js freelance", "type": "Phrase" },
+        { "texte": "développeur application sur mesure", "type": "Phrase" }
+      ],
+      "titres": [
+        "Développeur freelance",
+        "Basé en Isère",
+        "Grenoble et Pays Voironnais",
+        "Un interlocuteur unique",
+        "Applications web et mobile",
+        "Sites, outils, automatisation",
+        "Projets en production",
+        "Freelance, pas une agence",
+        "Premier échange gratuit",
+        "Réponse sous 24h",
+        "Devis après étude",
+        "Sans engagement"
+      ],
+      "descriptions": [
+        "Développeur freelance en Isère : outils de gestion, sites et automatisations sur mesure.",
+        "Vous parlez à la personne qui construit votre outil. Pas de standard, pas de dossier.",
+        "Premier échange de 45 min pour cadrer votre besoin. Gratuit et sans engagement.",
+        "Documentation livrée, accès à votre nom. Votre projet reste transmissible."
+      ]
+    },
+
+    {
+      "nom": "Site vitrine",
+      "urlFinale": "https://nitrello.com/#services",
+      "chemin1": "Site-vitrine",
+      "chemin2": "Sur-mesure",
+      "motsCles": [
+        { "texte": "création site vitrine", "type": "Phrase" },
+        { "texte": "site vitrine sur mesure", "type": "Phrase" },
+        { "texte": "création site internet grenoble", "type": "Exact" },
+        { "texte": "création site internet isère", "type": "Phrase" },
+        { "texte": "site vitrine entreprise", "type": "Phrase" },
+        { "texte": "créer site vitrine professionnel", "type": "Phrase" }
+      ],
+      "titres": [
+        "Site vitrine sur mesure",
+        "Pas un template",
+        "Livré en 1 à 2 semaines",
+        "Optimisé pour le référencement",
+        "Design personnalisé",
+        "Développeur en Isère",
+        "Formulaire de contact inclus",
+        "Sites déjà en production",
+        "Premier échange gratuit",
+        "Réponse sous 24h",
+        "Devis après étude",
+        "Un seul interlocuteur"
+      ],
+      "descriptions": [
+        "Un site conçu pour votre activité, pas un modèle repris. Rapide et optimisé pour le SEO.",
+        "Design personnalisé, livraison en 1 à 2 semaines selon le contenu à produire.",
+        "Voir les sites en ligne : Esprit Auto à Saint-Marcellin, Team Solution Garage.",
+        "Premier échange de 45 min pour cadrer le projet. Gratuit, sans engagement."
+      ]
+    }
+  ],
+
+  "_commentExclusions": "Exclusions au niveau CAMPAGNE. Elles couvrent les quatre familles qui vident un budget sans jamais convertir : la recherche gratuite, la formation/emploi, le bricolage no-code, et la recherche d'information pure.",
+  "exclusions": [
+    { "texte": "gratuit", "type": "Negative Broad" },
+    { "texte": "gratuitement", "type": "Negative Broad" },
+    { "texte": "open source", "type": "Negative Broad" },
+    { "texte": "formation", "type": "Negative Broad" },
+    { "texte": "cours", "type": "Negative Broad" },
+    { "texte": "tutoriel", "type": "Negative Broad" },
+    { "texte": "tuto", "type": "Negative Broad" },
+    { "texte": "apprendre", "type": "Negative Broad" },
+    { "texte": "emploi", "type": "Negative Broad" },
+    { "texte": "offre emploi", "type": "Negative Broad" },
+    { "texte": "recrutement", "type": "Negative Broad" },
+    { "texte": "salaire", "type": "Negative Broad" },
+    { "texte": "stage", "type": "Negative Broad" },
+    { "texte": "alternance", "type": "Negative Broad" },
+    { "texte": "cv", "type": "Negative Broad" },
+    { "texte": "freelance devenir", "type": "Negative Broad" },
+    { "texte": "openclassrooms", "type": "Negative Broad" },
+    { "texte": "udemy", "type": "Negative Broad" },
+    { "texte": "définition", "type": "Negative Broad" },
+    { "texte": "c est quoi", "type": "Negative Broad" },
+    { "texte": "signification", "type": "Negative Broad" },
+    { "texte": "wikipedia", "type": "Negative Broad" },
+    { "texte": "avis", "type": "Negative Broad" },
+    { "texte": "comparatif", "type": "Negative Broad" },
+    { "texte": "meilleur logiciel", "type": "Negative Phrase" },
+    { "texte": "template", "type": "Negative Broad" },
+    { "texte": "wordpress", "type": "Negative Broad" },
+    { "texte": "wix", "type": "Negative Broad" },
+    { "texte": "shopify", "type": "Negative Broad" },
+    { "texte": "prestashop", "type": "Negative Broad" },
+    { "texte": "zapier", "type": "Negative Broad" },
+    { "texte": "make com", "type": "Negative Broad" },
+    { "texte": "chatgpt", "type": "Negative Broad" },
+    { "texte": "telecharger", "type": "Negative Broad" },
+    { "texte": "crack", "type": "Negative Broad" },
+    { "texte": "pas cher", "type": "Negative Broad" },
+    { "texte": "auto entrepreneur devenir", "type": "Negative Broad" }
+  ],
+
+  "_commentLiensAnnexes": "Les six liens annexes de la recommandation Google, partagés par toute la campagne.",
+  "liensAnnexes": [
+    { "texte": "Automatisation IA", "desc1": "Ce que vos outils font sans vous", "desc2": "Exemple de workflow détaillé", "url": "https://nitrello.com/automatisation-ia" },
+    { "texte": "Réserver un échange", "desc1": "45 min au téléphone, gratuit", "desc2": "Sans engagement", "url": "https://nitrello.com/#contact" },
+    { "texte": "Comment je chiffre", "desc1": "Devis après étude de votre cas", "desc2": "Pas de grille tarifaire toute faite", "url": "https://nitrello.com/#pricing" },
+    { "texte": "Réalisations", "desc1": "Sites et outils en production", "desc2": "Chez des TPE et PME en Isère", "url": "https://nitrello.com/#work" },
+    { "texte": "Outils de gestion", "desc1": "CRM, tableaux de bord, back-office", "desc2": "Développés sur mesure", "url": "https://nitrello.com/#services" },
+    { "texte": "Questions fréquentes", "desc1": "Délais, budget, données", "desc2": "Les réponses avant l'appel", "url": "https://nitrello.com/#faq" }
+  ],
+
+  "accroches": [
+    "Réponse sous 24h",
+    "Premier échange gratuit",
+    "Développeur en Isère",
+    "Un seul interlocuteur",
+    "Sans engagement",
+    "Devis après étude"
+  ],
+
+  "extraitsStructures": {
+    "enTete": "Services",
+    "valeurs": [
+      "Automatisation",
+      "CRM sur mesure",
+      "Sites vitrine",
+      "Tableaux de bord",
+      "Applications web",
+      "Intégration API"
+    ]
+  },
+
+  "extensionAppel": {
+    "numero": "+33688649584",
+    "pays": "FR",
+    "note": "Activer le suivi des appels Google. L'appel est mesuré nativement, sans code sur le site."
+  }
+}
