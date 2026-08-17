@@ -1,5 +1,42 @@
 # HANDOFF — État du repo nitrello-vitrine
 
+## Session du 2026-08-17 (campagne Google Ads : la mesure était aveugle · déblocage)
+
+### Le constat de départ
+Nico : la campagne tourne, **zéro demande** — ni formulaire, ni Cal.com, ni appel. Il transmet une capture de l'onglet Recommandations (« Ajouter au moins six liens annexes, +2,9 % »). La recommandation est bonne à prendre mais ne pouvait pas expliquer zéro lead : la cause est structurelle et elle est dans notre code du 12/08.
+
+### Cause première : le mode « basic » privait Google Ads de tout signal
+La balise n'était injectée qu'après un clic sur « Accepter ». La grande majorité des visiteurs ne cliquent jamais sur une bannière → Google Ads ne recevait ni page vue, ni conversion, ni audience. Une campagne Performance Max fonctionne aux enchères intelligentes : **sans conversions, elle n'a rien pour apprendre**, elle dépense sans converger. Le budget partait dans une campagne incapable de savoir ce qui marchait. Le choix « basic » du 12/08 était le plus sûr côté CNIL, il était aussi le plus coûteux côté résultats — arbitrage à connaître, pas à regretter.
+
+Cause secondaire du même ordre : sur les trois chemins de contact du site (formulaire, Cal.com, contact direct), **un seul était mesuré**. Un visiteur d'annonce qui appelle depuis son mobile — le cas le plus fréquent en prestation locale — n'existait pas dans Google Ads.
+
+### Bascule en Consent Mode v2 « avancé »
+`GoogleAdsTag` est désormais monté dans **layout.tsx pour tout le monde** (plus par ConsentBanner sous condition), et démarre avec **tous les consentements refusés**. La garantie juridique qui a motivé la bannière est intacte : `ad_storage: 'denied'` au chargement = **aucun cookie lu ni écrit** avant acceptation (article 82 vise le terminal, pas la requête réseau). S'ajoutent `ads_data_redaction: true` (identifiants de clic expurgés tant que le refus est actif) et `url_passthrough: true` (gclid dans l'URL plutôt qu'en cookie). Ce qui change : Google reçoit des pings sans cookie qui alimentent la **modélisation** des conversions et les enchères.
+
+Répartition des rôles après bascule : `ConsentBanner` reste le **propriétaire du choix** (il écrit le store localStorage), `GoogleAdsTag` en est le **relais vers gtag** (il s'abonne au store et pousse `consent update`). Le refus après acceptation **ne recharge plus la page** : l'update `denied` suffit, seule la purge des cookies `_gcl_*` reste nécessaire. Retour au mode strict = un seul endroit, documenté dans l'en-tête de `GoogleAdsTag.tsx`.
+
+### Trois conversions ajoutées + attribution
+`src/lib/google-ads.ts` réécrit autour d'une table `GOOGLE_ADS_LABELS` (leadForm / booking / phoneClick / emailClick) et d'un `trackConversion(action, {once})` générique. **Un label vide = envoi silencieux**, donc le code se déploie avant que les actions existent dans Google Ads. Branchements : `CalEmbedScript.tsx` écoute `bookingSuccessful` de Cal.com (le snippet inline émet un CustomEvent `nitrello:cal-booked`, un effet React le relaie) ; **`ContactClickTracking.tsx`** (créé, monté dans layout) délègue un listener unique sur `document` pour les liens `tel:` et `mailto:`, une conversion par page.
+
+**`src/lib/attribution.ts`** (créé) capture gclid/gbraid/wbraid/msclkid, UTM ou domaine référent — **en mémoire uniquement**, aucun stockage navigateur, donc aucun consentement requis. Transmis par `ContactForm` en champ `origine`, l'API l'affiche dans l'email de notification avec la mention **Google Ads** en clair si c'est un clic payant. Sans ça, impossible de juger la campagne sur des demandes reçues plutôt que sur des clics.
+
+### Fichiers touchés (10, dont 3 créés)
+`src/lib/google-ads.ts` (réécrit) · `src/components/GoogleAdsTag.tsx` (réécrit) · `src/components/ConsentBanner.tsx` · `src/components/CalEmbedScript.tsx` · `src/components/ContactForm.tsx` · `src/app/layout.tsx` · `src/app/api/contact/route.ts` · `src/app/politique-confidentialite/page.tsx` · **créés** : `src/lib/attribution.ts`, `src/components/ContactClickTracking.tsx`, `google-ads-optimisation.md`.
+
+### Vérifié en Chromium sur le build de prod local
+Sans aucun choix : gtag.js requêté, **zéro cookie `_gcl_*`** (la garantie tient), bannière affichée. dataLayer dans l'ordre exact `consent default (tout denied) → set ads_data_redaction → set url_passthrough → js → config → consent update granted` à l'acceptation. Refus après acceptation : update `denied` poussé, **zéro navigation supplémentaire** (plus de reload). Formulaire avec `/api/contact` stubé `{success:true}` (zéro envoi Brevo/Notion) : succès affiché, `event conversion send_to AW-18381393904/le-8CIjFsuAcEPCf97xE` poussé, `origine` transmise = `gclid=TEST_ABC123 · utm_source=google · utm_campaign=pmax`. Clics tel/mailto avec labels vides : **zéro appel gtag**, aucune erreur JS. Build 14 routes vert, tsc et ESLint sans erreur.
+
+### Limite de vérification à connaître
+**Les domaines Google sont bloqués depuis l'environnement de dev** (`googletagmanager.com` et `googleadservices.com` en timeout). Le vrai gtag.js ne se charge donc jamais ici : tout ce qui précède a été observé via `window.dataLayer`, où le shim `gtag()` pousse fidèlement chaque appel. **Les requêtes réseau réelles vers Google restent à vérifier en production** (Tag Assistant) — procédure en 5 points dans `google-ads-optimisation.md` §4.
+
+### Prochaines étapes
+1. **Nico, dans Google Ads** : créer les 3 actions de conversion (rendez-vous / clic tél / clic email) et transmettre les labels → les 3 emplacements sont prêts et commentés dans `src/lib/google-ads.ts`. Passer rendez-vous + formulaire en **principales**, les clics en **secondaires** (un clic sur un numéro n'est pas un appel décroché).
+2. Coller les **6 liens annexes** de `google-ads-optimisation.md` §3 étape 2 (limites 25/35 caractères validées par script, formulations volontairement factuelles vu les composants déjà « Limité » pour allégations).
+3. Extension d'appel + accroches + extraits structurés : plus rentables que les liens annexes pour du local.
+4. Revoir le type de campagne : PMax sur compte neuf sans historique = le pire des cas. Search en expression exacte + liste d'exclusions, `Maximiser les clics` tant qu'il n'y a pas ~15 conversions/30 j.
+5. Si toujours zéro dans deux semaines **avec** une mesure fiable : le sujet devient la page d'arrivée (le CTA du hero renvoie à un formulaire situé après 7 sections de scroll) et les termes de recherche réels. Décisions de design, non appliquées.
+6. Reste ouvert d'avant : composants limités « Allégations exagérées ou inexactes » (attente de la capture), décision adresse postale dans le JSON-LD.
+
 ## Session du 2026-08-12 (balise Google Ads + bannière de consentement CNIL · commitée avec cette entrée)
 
 ### Contexte

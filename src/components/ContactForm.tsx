@@ -2,6 +2,7 @@
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
 
+import { getVisitorOrigin } from "@/lib/attribution";
 import { trackLeadFormConversion } from "@/lib/google-ads";
 
 const CONTACT_API_URL = "/api/contact";
@@ -92,6 +93,10 @@ export default function ContactForm() {
           company,
           raw_message: rawMessage,
           source: "formulaire-contact-nitrello",
+          // Origine du visiteur (gclid, UTM ou domaine référent), capturée à
+          // son arrivée. Reprise telle quelle dans l'email de notification :
+          // sans elle, impossible de savoir si un lead vient de la campagne.
+          origine: getVisitorOrigin(),
           submitted_at: new Date().toISOString(),
           // Honeypot transmis au serveur pour validation côté API.
           field_misc: typeof honeypot === "string" ? honeypot : "",

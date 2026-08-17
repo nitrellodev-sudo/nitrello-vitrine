@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import ConsentBanner from "@/components/ConsentBanner";
+import ContactClickTracking from "@/components/ContactClickTracking";
+import GoogleAdsTag from "@/components/GoogleAdsTag";
 import HeaderScrollState from "@/components/HeaderScrollState";
 import MobileNav from "@/components/MobileNav";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -225,6 +227,12 @@ export default function RootLayout({
         <SiteHeader />
         <div id="contenu">{children}</div>
         <SiteFooter />
+        {/* Balise Google Ads : montée pour tous, consentements refusés par
+            défaut (Consent Mode v2 avancé). Elle n'écrit aucun cookie tant
+            que la bannière n'a pas été acceptée · voir GoogleAdsTag.tsx.
+            ConsentBanner reste propriétaire du choix, GoogleAdsTag le relaie. */}
+        <GoogleAdsTag />
+        <ContactClickTracking />
         <ConsentBanner />
         <Analytics />
       </body>

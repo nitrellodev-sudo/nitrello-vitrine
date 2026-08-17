@@ -24,7 +24,7 @@ export default function PolitiqueConfidentialitePage() {
 
       <div className="blog-article__content">
         <p>
-          <em>Dernière mise à jour&nbsp;: 12&nbsp;août&nbsp;2026.</em>
+          <em>Dernière mise à jour&nbsp;: 17&nbsp;août&nbsp;2026.</em>
         </p>
 
         <h2>Préambule</h2>
@@ -142,7 +142,12 @@ export default function PolitiqueConfidentialitePage() {
           <li>
             <strong>Données collectées</strong>&nbsp;: nom, adresse email, type
             de projet, entreprise (optionnel), message libre, date
-            d&apos;envoi.
+            d&apos;envoi, ainsi que l&apos;origine de votre visite lorsque
+            celle-ci figure dans l&apos;adresse par laquelle vous êtes arrivé
+            (identifiant de clic publicitaire, paramètres de campagne, ou nom
+            de domaine du site référent). Cette dernière information sert
+            uniquement à savoir quel canal a mené à votre demande&nbsp;; elle
+            n&apos;est ni lue ni écrite sur votre terminal.
           </li>
           <li>
             <strong>Finalité</strong>&nbsp;: répondre à votre demande de
@@ -231,10 +236,22 @@ export default function PolitiqueConfidentialitePage() {
           </li>
           <li>
             <strong>Base légale</strong>&nbsp;: article 6.1.a du RGPD —
-            votre consentement, recueilli via la bannière de cookies. La
-            balise Google (gtag.js) n&apos;est jamais chargée avant votre
-            accord. Vous pouvez retirer votre consentement à tout moment via
-            le lien «&nbsp;Gérer mes cookies&nbsp;» en bas de page.
+            votre consentement, recueilli via la bannière de cookies.
+            <strong>
+              {" "}
+              Aucun cookie publicitaire n&apos;est déposé ni lu sur votre
+              terminal tant que vous n&apos;avez pas accepté.
+            </strong>{" "}
+            La balise Google est présente sur le site mais démarre avec tous
+            les consentements refusés&nbsp;: dans cet état, elle se limite à
+            des mesures agrégées sans cookie et sans identifiant publicitaire
+            (les identifiants de clic sont expurgés des requêtes). Elle
+            n&apos;active le dépôt de cookies et la personnalisation
+            qu&apos;après votre acceptation. Vous pouvez retirer votre
+            consentement à tout moment via le lien «&nbsp;Gérer mes
+            cookies&nbsp;» en bas de page&nbsp;: la balise repasse
+            immédiatement en mode refusé et les cookies déjà posés sont
+            supprimés.
           </li>
           <li>
             <strong>Durée de conservation</strong>&nbsp;: cookies _gcl_*
@@ -257,8 +274,10 @@ export default function PolitiqueConfidentialitePage() {
           Le site nitrello.com ne dépose <strong>aucun traceur soumis à
           consentement sans votre accord préalable</strong>. Le seul traceur
           publicitaire utilisé est la balise Google Ads (gtag.js), décrite
-          ci-dessus&nbsp;: elle n&apos;est chargée qu&apos;après votre
-          acceptation via la bannière de cookies. Aucun cookie de mesure
+          ci-dessus&nbsp;: elle est chargée sur le site mais reste en mode
+          refusé tant que vous n&apos;avez pas accepté, c&apos;est-à-dire
+          qu&apos;elle n&apos;écrit ni ne lit aucun cookie et n&apos;exploite
+          aucun identifiant publicitaire. Aucun cookie de mesure
           d&apos;audience tiers, aucune heatmap, aucun session replay.
         </p>
         <p>
@@ -413,7 +432,7 @@ export default function PolitiqueConfidentialitePage() {
 
         <hr />
         <p>
-          <em>Dernière mise à jour&nbsp;: 12&nbsp;août&nbsp;2026.</em>
+          <em>Dernière mise à jour&nbsp;: 17&nbsp;août&nbsp;2026.</em>
         </p>
       </div>
     </main>

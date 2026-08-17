@@ -48,6 +48,7 @@ const MAX = {
   type_label: 100,
   company: 200,
   telephone: 40,
+  origine: 500,
 } as const;
 
 /** Limite Notion : un bloc rich_text n'accepte que 2000 caractères. */
@@ -109,6 +110,12 @@ type ContactPayload = {
   type_label: string;
   company: string;
   telephone: string;
+  /**
+   * Origine publicitaire du visiteur (gclid / UTM / domaine référent), capturée
+   * côté client à l'arrivée sur le site. Champ facultatif et purement
+   * informatif : il ne conditionne jamais l'acceptation du lead.
+   */
+  origine: string;
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────
@@ -147,6 +154,9 @@ function parsePayload(
   const type_label = asString(raw.type_label);
   const company = asString(raw.company);
   const telephone = asString(raw.telephone);
+  // Tronqué plutôt que rejeté : une origine trop longue (URL bricolée, bot)
+  // ne doit jamais faire perdre un lead par ailleurs valide.
+  const origine = asString(raw.origine).slice(0, MAX.origine);
 
   if (!nom || !email || !message) {
     return { ok: false, error: "Champs nom, email et message requis." };
@@ -168,7 +178,7 @@ function parsePayload(
 
   return {
     ok: true,
-    data: { nom, email, message, type, type_label, company, telephone },
+    data: { nom, email, message, type, type_label, company, telephone, origine },
   };
 }
 
@@ -235,6 +245,15 @@ async function sendBrevoTemplateEmail(params: {
 /** Corps HTML de la notification interne (vers Nico). */
 function buildNotificationHtml(data: ContactPayload): string {
   const projet = data.type_label || data.type || "—";
+
+  // Origine : un lead issu d'un clic sur une annonce est signalé en clair et
+  // en évidence. C'est la seule façon de juger la campagne sur ce qui compte
+  // (des demandes reçues) plutôt que sur des clics.
+  const fromAds = /(^|\s)(gclid|gbraid|wbraid)=/.test(data.origine);
+  const origine = data.origine
+    ? `${fromAds ? "<strong>Google Ads</strong> — " : ""}<span style="font-family:monospace;font-size:12px;color:#666;">${escapeHtml(data.origine)}</span>`
+    : "Accès direct ou origine inconnue";
+
   const row = (label: string, value: string): string =>
     `<tr>
       <td style="padding:6px 12px;color:#888;font-size:13px;vertical-align:top;white-space:nowrap;">${label}</td>
@@ -249,6 +268,7 @@ function buildNotificationHtml(data: ContactPayload): string {
       ${row("Téléphone", data.telephone ? escapeHtml(data.telephone) : "—")}
       ${row("Entreprise", data.company ? escapeHtml(data.company) : "—")}
       ${row("Type de projet", escapeHtml(projet))}
+      ${row("Origine", origine)}
     </table>
     <div style="margin:16px 0 0;padding:14px 16px;background:#fff;border:1px solid #eee;border-radius:8px;">
       <div style="color:#888;font-size:13px;margin-bottom:6px;">Message</div>
