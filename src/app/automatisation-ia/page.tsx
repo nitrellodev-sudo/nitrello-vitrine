@@ -115,7 +115,7 @@ export default function AutomatisationIaPage() {
               formation comprises.
             </p>
             <div className="ia-hero-actions reveal r-3">
-              <a
+              <CalButton
                 href={CAL_URL}
                 target="_blank"
                 rel="noopener"
@@ -133,7 +133,7 @@ export default function AutomatisationIaPage() {
                 >
                   <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
-              </a>
+              </CalButton>
               <a href="#wf-anchor" className="btn btn-ghost">
                 Voir un exemple concret
                 <svg
@@ -467,7 +467,7 @@ export default function AutomatisationIaPage() {
                 Tu n&apos;investis que si le calcul est rentable pour toi.
               </strong>
             </p>
-            <a
+            <CalButton
               href={CAL_URL}
               target="_blank"
               rel="noopener"
@@ -485,7 +485,7 @@ export default function AutomatisationIaPage() {
               >
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </a>
+            </CalButton>
             {/* Le détail de la logique de chiffrage vit sur la home, une seule
                 fois : ici on renvoie plutôt que de la recopier. */}
             <p className="price-more">
@@ -544,7 +544,7 @@ export default function AutomatisationIaPage() {
               pistes. Gratuit, sans engagement. Tu repars avec des idées
               concrètes, que tu travailles avec moi ou non.
             </p>
-            <a
+            <CalButton
               href={CAL_URL}
               target="_blank"
               rel="noopener"
@@ -562,7 +562,7 @@ export default function AutomatisationIaPage() {
               >
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </a>
+            </CalButton>
           </div>
         </div>
       </section>
@@ -570,7 +570,7 @@ export default function AutomatisationIaPage() {
       {/* Floating CTA : reste visible pendant le scroll, même chemin de
           conversion que la home (modal Cal.com, fallback lien direct) */}
       <CalButton
-        href="https://cal.com/nicolas-2j0lvm/echange"
+        href={CAL_URL}
         className="float-cta"
         id="float-cta"
         ariaLabel="Réserver un appel de 45 minutes"

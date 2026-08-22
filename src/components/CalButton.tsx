@@ -2,11 +2,15 @@
 
 import { MouseEvent, ReactNode } from "react";
 
+import { trackCalClickConversion } from "@/lib/google-ads";
+
 interface CalButtonProps {
   href: string;
   className?: string;
   id?: string;
   ariaLabel?: string;
+  target?: string;
+  rel?: string;
   children: ReactNode;
 }
 
@@ -26,9 +30,16 @@ export default function CalButton({
   className,
   id,
   ariaLabel,
+  target,
+  rel,
   children,
 }: CalButtonProps) {
   const handleClick = (e: MouseEvent<HTMLAnchorElement>): void => {
+    // Mesure d'abord, avant tout preventDefault : le visiteur a manifesté
+    // l'intention de réserver, qu'il aille au bout ou non. Action secondaire
+    // côté Google Ads, elle n'enchérit pas, elle sert à lire le tunnel.
+    trackCalClickConversion();
+
     // Si Cal.com est chargé et le namespace "echange" initialisé → popup
     if (typeof window !== "undefined" && window.Cal?.ns?.["echange"]) {
       e.preventDefault();
@@ -43,6 +54,8 @@ export default function CalButton({
       className={className}
       id={id}
       aria-label={ariaLabel}
+      target={target}
+      rel={rel}
       onClick={handleClick}
     >
       {children}
